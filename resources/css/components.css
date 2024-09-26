@@ -1,0 +1,81 @@
+.screen-default{
+    @apply w-full min-h-[80vh] p-10 bg-white dark:bg-[#1f1f1f] rounded-3xl
+}
+
+.dark-true{
+    @apply transition-colors duration-500
+}
+
+/* Buttons */
+.btn-black{
+    @apply items-center h-[45px] gap-2 px-5 rounded-full text-white bg-slate-950 hover:bg-slate-900 dark:bg-white dark:text-black dark:hover:bg-slate-200 row outline-none
+}
+
+.btn-logout{
+    @apply items-center py-3 gap-2 px-5 rounded-full text-white bg-black dark:bg-white dark:text-black dark:hover:bg-red-500 hover:bg-red-500 row outline-none text-sm
+}
+
+/* Inputs */
+.input-simple{
+    @apply rounded-full bg-[#e6e7e7] dark:bg-[#333333] border-none h-[45px] placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-blue-500
+}
+
+/* Flex box */
+.center-content{
+    @apply flex justify-center items-center
+}
+
+.row{
+    @apply flex flex-row
+}
+
+.col{
+    @apply flex flex-col
+}
+
+.row-reverse{
+    @apply flex flex-row-reverse
+}
+
+.col-reverse{
+    @apply flex flex-col-reverse
+}
+
+.m-center-mov{
+    @apply mx-auto lg:mx-0
+}
+
+/* Position */
+.absolute-center-x{
+    @apply absolute left-1/2 -translate-x-1/2
+}
+
+.absolute-center-y{
+    @apply absolute top-1/2 -translate-y-1/2
+}
+
+.absolute-center-{
+    @apply absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2
+}
+
+/* Table */
+.tr{
+    @apply border-b border-gray-300 dark:border-zinc-800 text-sm
+}
+
+.th{
+    @apply px-2 py-2 font-bold
+}
+
+.td{
+    @apply px-2 py-3.5 text-center
+}
+
+/* Otros */
+.br-hidden{
+    @apply hidden lg:block
+}
+
+.size-screen{
+    @apply max-w-4xl mx-auto px-4 lg:px-0
+}

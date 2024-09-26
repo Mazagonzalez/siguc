@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,27 +10,18 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.cdnfonts.com/css/poppins" rel="stylesheet">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <!-- Styles -->
         @livewireStyles
+        <style>[x-cloak] { display: none; }</style>
     </head>
-    <body class="font-sans antialiased">
-        <x-banner />
-
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
-
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+    <body class="scrollbar" style="font-family: 'Poppins', sans-serif;">
+        <div class="w-full min-h-screen overflow-hidden bg-body-light dark:bg-body-dark dark:text-white">
+            <x-nav />
 
             <!-- Page Content -->
             <main>
@@ -41,5 +32,37 @@
         @stack('modals')
 
         @livewireScripts
+
+        <script>
+            (function () {
+                const darkStyles = document.querySelector('style[data-theme="dark"]')?.textContent
+                const lightStyles = document.querySelector('style[data-theme="light"]')?.textContent
+
+                const removeStyles = () => {
+                    document.querySelector('style[data-theme="dark"]')?.remove()
+                    document.querySelector('style[data-theme="light"]')?.remove()
+                }
+
+                removeStyles()
+
+                setDarkClass = () => {
+                    removeStyles()
+
+                    const isDark = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+
+                    isDark ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark')
+
+                    if (isDark) {
+                        document.head.insertAdjacentHTML('beforeend', `<style data-theme="dark">${darkStyles}</style>`)
+                    } else {
+                        document.head.insertAdjacentHTML('beforeend', `<style data-theme="light">${lightStyles}</style>`)
+                    }
+                }
+
+                setDarkClass()
+
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setDarkClass)
+            })();
+        </script>
     </body>
 </html>

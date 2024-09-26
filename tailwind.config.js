@@ -11,13 +11,37 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
+    darkMode: 'class',
+
     theme: {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            backgroundColor: {
+                'body-light' : '#dfe2eb',
+                'body-dark' : '#121212'
+            },
+            colors: {
+                'body-light' : '#dfe2eb',
+                'body-dark' : '#121212'
+            },
+            borderColor: {
+                'body-light' : '#dfe2eb',
+                'body-dark' : '#121212'
+            },
+            fill: {
+                'body-light' : '#dfe2eb',
+                'body-dark' : '#121212'
+            },
+            stroke: {
+                'body-light' : '#dfe2eb',
+                'body-dark' : '#121212'
+            }
         },
     },
 
-    plugins: [forms, typography],
+    plugins: [require('daisyui'), forms, typography],
+
+    daisyui: { themes: ["corporate"] },
 };
