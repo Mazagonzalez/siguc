@@ -3,15 +3,10 @@
         <div class="items-center gap-2 mb-6 row">
             <input
                 type="text"
-                wire:model="orderId"
+                wire:model.live="orderId"
                 placeholder="Buscar por id"
                 class="input-simple w-[300px]"
             >
-
-            <button wire:click='filterOrders' class="btn-black">
-                <span>Buscar</span>
-                <x-icons.search class="stroke-white dark:stroke-black size-4" />
-            </button>
         </div>
 
         <table class="w-full">

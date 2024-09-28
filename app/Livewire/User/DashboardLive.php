@@ -24,11 +24,10 @@ class DashboardLive extends Component
         }
     }
 
-    /*public function updatedOrderId($value)
+    public function updatedOrderId($value)
     {
-        //Log::info('updatedOrderId called with value: ' . $value);
         $this->filterOrders();
-    }*/
+    }
 
     public function filterOrders()
     {
