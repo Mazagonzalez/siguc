@@ -36,7 +36,7 @@ class DashboardLive extends Component
             if ($response->successful()) {
                 $orders = $response->json();
                 $this->orders = array_filter($orders, function ($order) {
-                    return $order['id'] == $this->orderId;
+                    return $order['order_number'] == $this->orderId;
                 });
             }
         } else {
