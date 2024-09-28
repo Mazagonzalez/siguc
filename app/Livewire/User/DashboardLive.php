@@ -18,7 +18,7 @@ class DashboardLive extends Component
 
     public function fetchOrders()
     {
-        $response = Http::get('https://apimocha.com/sigucapi/orders');
+        $response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData');
         if ($response->successful()) {
             $this->orders = $response->json();
         }
@@ -32,7 +32,7 @@ class DashboardLive extends Component
     public function filterOrders()
     {
         if ($this->orderId) {
-            $response = Http::get('https://apimocha.com/sigucapi/orders');
+            $response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData');
             if ($response->successful()) {
                 $orders = $response->json();
                 $this->orders = array_filter($orders, function ($order) {

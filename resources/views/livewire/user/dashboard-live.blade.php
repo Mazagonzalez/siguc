@@ -26,8 +26,8 @@
                         <td class="td">#{{ $order['id'] }}</td>
                         <td class="td">{{ $order['target_customer'] }}</td>
                         <td class="td">{{ $order['order_number'] }}</td>
-                        <td class="td">{{ $order['total_weight'] }} kg</td>
-                        <td class="td">{{ $order['address'] }}</td>
+                        <td class="td">{{ $order['total_weighht'] }} kg</td>
+                        <td class="td">{{ $order['client_address'] }}</td>
                         <td class="td">{{ $order['container'] }}</td>
                     </tr>
                 @empty
