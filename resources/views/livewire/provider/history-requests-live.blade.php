@@ -36,9 +36,7 @@
                     <td class="td">{{ $request->updated_at }}</td>
 
                     <td class="flex justify-center td">
-                        <button wire:click="showRequest({{ $request->id }})" class="btn-acept-modal tooltip tooltip-top" data-tip="Más información">
-                            <x-icons.info class="w-6 h-6 stroke-white" />
-                        </button>
+                        @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
                     </td>
                 </tr>
             @empty

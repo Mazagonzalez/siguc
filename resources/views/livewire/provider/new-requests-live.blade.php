@@ -24,9 +24,8 @@
                     <td class="td">{{ $request->created_at }}</td>
 
                     <td class="items-center justify-center gap-2 td row" style="text-align: start">
-                        <button wire:click="showRequest({{ $request->id }})" class="btn-acept-modal tooltip tooltip-top" data-tip="Más información">
-                            <x-icons.info class="size-6 stroke-white" />
-                        </button>
+
+                        @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
                         @livewire('provider.accept-request-live', ['request' => $request], key('accept-request-'.$request->id))
 
