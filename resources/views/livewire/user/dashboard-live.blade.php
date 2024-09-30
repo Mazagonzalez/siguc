@@ -7,6 +7,7 @@
                 placeholder="Buscar por numero de orden"
                 class="input-simple w-[300px]"
             >
+            @livewire('user.modal-created-requests-live')
         </div>
 
         <table class="w-full">
