@@ -11,6 +11,8 @@ class PendingRequestsLive extends Component
 {
     public $requests = [];
 
+    protected $listeners = ['request' => 'mount'];
+
     public function mount()
     {
         if (Auth::check()) {
@@ -31,6 +33,7 @@ class PendingRequestsLive extends Component
         $request->status = 2;
         $request->save();
         $this->requests = Request::where('provider_id', Auth::id())->where('status',1)->get();
+        $this->dispatch('request');
     }
 
     public function render()

@@ -10,6 +10,8 @@ class NewRequestsLive extends Component
 {
     public $requests = [];
 
+    protected $listeners = ['request' => 'mount'];
+
     public function mount()
     {
         if (Auth::check()) {
@@ -24,20 +26,13 @@ class NewRequestsLive extends Component
         //modal de detalles
     }
 
-    public function acceptRequest($requestId)
-    {
-        $request = Request::find($requestId);
-        $request->status = 1;
-        $request->save();
-        $this->requests = Request::where('provider_id', Auth::id())->where('status',0)->get();
-    }
-
     public function rejectRequest($requestId)
     {
         $request = Request::find($requestId);
         $request->status = 2;
         $request->save();
         $this->requests = Request::where('provider_id', Auth::id())->where('status',0)->get();
+        $this->dispatch('request');
     }
 
     public function render()

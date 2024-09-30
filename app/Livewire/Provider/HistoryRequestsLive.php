@@ -10,6 +10,8 @@ class HistoryRequestsLive extends Component
 {
     public $requests = [];
 
+    protected $listeners = ['request' => 'mount'];
+
     public function mount()
     {
         if (Auth::check()) {

@@ -29,7 +29,7 @@
                         </button>
 
                         <button wire:click="acceptRequest({{ $request->id }})" class="btn-acept tooltip tooltip-top" data-tip="Aceptar">
-                            <x-icons.checked class="w-6 h-6 stroke-white" />
+                            @livewire('provider.accept-request-live', ['request' => $request], key('accept-request-'.$request->id))
                         </button>
 
                         <button wire:click="rejectRequest({{ $request->id }})" class="btn-decline tooltip tooltip-top" data-tip="Rechazar">
