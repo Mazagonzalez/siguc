@@ -1,6 +1,6 @@
 <div>
-    <button wire:click="showModal" class="">
-            Crear nueva orden
+    <button wire:click="showModal" class="btn-black">
+        Crear Solicitud
     </button>
 
     <x-dialog-modal wire:model='open' maxWidth="md" title="Solicitud" >
