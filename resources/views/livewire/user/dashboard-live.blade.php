@@ -25,7 +25,11 @@
             <tbody>
                 @forelse($orders as $order)
                     <tr wire:key='orden-{{ $order['id'] }}' class="tr">
-                        <td class="td" style="text-align: start">{{ $order['target_customer'] }}</td>
+                        <td class="td" style="text-align: start">
+                            <p class="tooltip tooltip-top" data-tip="{{ $order['target_customer'] }}">
+                                {{ auth()->user()->short($order['target_customer'], 20) }}
+                            </p>
+                        </td>
                         <td class="td">{{ $order['order_number'] }}</td>
                         <td class="td">{{ $order['net_weight'] }} kg</td>
                         <td class="td">{{ $order['gross_weight'] }} kg</td>
