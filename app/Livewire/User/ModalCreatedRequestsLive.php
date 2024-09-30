@@ -36,6 +36,11 @@ class ModalCreatedRequestsLive extends Component
         $this->proveedores = Provider::pluck('company_name')->toArray();
     }
 
+    public function updated($value)
+    {
+       $this->resetErrorBag();
+    }
+
     public function store()
     {
         $this->validate([

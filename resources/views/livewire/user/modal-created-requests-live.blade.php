@@ -24,7 +24,7 @@
                 <div>
                     <label for="nombreCliente">{{ __('nombreCliente') }}</label>
                     <div class="flex">
-                        <input wire:model="nombreCliente" type="text" id="nombreCliente" class="block w-full mt-1 form-input" />
+                        <input wire:model.live="nombreCliente" type="text" id="nombreCliente" class="block w-full mt-1 form-input" />
                     </div>
                     @error('nombreCliente')
                         <span class="err">
@@ -36,7 +36,7 @@
                 <div>
                     <label for="direccionCliente">{{ __('direccionCliente') }}</label>
                     <div class="flex">
-                        <input wire:model="direccionCliente" type="text" id="direccionCliente" class="block w-full mt-1 form-input" />
+                        <input wire:model.live="direccionCliente" type="text" id="direccionCliente" class="block w-full mt-1 form-input" />
                     </div>
                     @error('direccionCliente')
                         <span class="err">
@@ -48,7 +48,7 @@
                 <div>
                     <label for="telefonoCliente">{{ __('telefonoCliente') }}</label>
                     <div class="flex">
-                        <input wire:model="telefonoCliente" type="text" id="telefonoCliente" class="block w-full mt-1 form-input" />
+                        <input wire:model.live="telefonoCliente" type="text" id="telefonoCliente" class="block w-full mt-1 form-input" />
                     </div>
                     @error('telefonoCliente')
                         <span class="err">
@@ -60,7 +60,7 @@
                 <div>
                     <label for="tipoContenedor">{{ __('tipoContenedor') }}</label>
                     <div class="flex">
-                        <input wire:model="tipoContenedor" type="text" id="tipoContenedor" class="block w-full mt-1 form-input" />
+                        <input wire:model.live="tipoContenedor" type="text" id="tipoContenedor" class="block w-full mt-1 form-input" />
                     </div>
                     @error('tipoContenedor')
                         <span class="err">
@@ -72,7 +72,7 @@
                 <div>
                     <label for="pesoOrden">{{ __('pesoOrden') }}</label>
                     <div class="flex">
-                        <input wire:model="pesoOrden" type="text" id="pesoOrden" class="block w-full mt-1 form-input" />
+                        <input wire:model.live="pesoOrden" type="text" id="pesoOrden" class="block w-full mt-1 form-input" />
                     </div>
                     @error('pesoOrden')
                         <span class="err">
@@ -85,7 +85,7 @@
                     <label for="fechaCita">{{ __('Fecha de la cita') }}</label>
                     <input
                         type="date"
-                        wire:model.lazy="fechaCita"
+                        wire:model.live="fechaCita"
                         class="block w-full mt-1 form-input"
                     />
                     @error('fechaCita')
@@ -100,7 +100,7 @@
                     <textarea
                         class="block w-full mt-1 form-control"
                         rows="5"
-                        wire:model.lazy="comentario"
+                        wire:model.live="comentario"
                     ></textarea>
                     @error('comentario')
                         <span class="err">
