@@ -19,8 +19,16 @@ class Request extends Model
         'order_weight',
         'date_quotation',
         'comment',
+        'type_vehicle',
+        'license_plate',
+        'driver_name',
+        'identification',
+        'date_acceptance',
+        'date_loading',
         'status',
     ];
+
+    //status 0: pendiente, 1: aceptado, 2: rechazado 3: finalizado
 
     public function provider()
     {
