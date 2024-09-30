@@ -50,7 +50,7 @@ class ProviderSeeder extends Seeder
                 $userNit = limpiarNit($providerData['nit']);
 
                 $user = User::create([
-                    'name'              => $providerData['contact'],
+                    'name'              => $providerData['company_name'],
                     'email'             => $userNit,
                     'password'          => bcrypt('1234'),
                     'email_verified_at' => Carbon::now(),
