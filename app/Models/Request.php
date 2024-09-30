@@ -11,6 +11,7 @@ class Request extends Model
 
     protected $fillable = [
         'provider',
+        'provider_id',
         'client_name',
         'client_address',
         'client_phone',
@@ -20,4 +21,9 @@ class Request extends Model
         'comment',
         'status',
     ];
+
+    public function provider()
+    {
+        return $this->belongsTo(Provider::class, 'provider_id');
+    }
 }

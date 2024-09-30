@@ -67,8 +67,11 @@ class ModalCreatedRequestsLive extends Component
             'fechaCita.required' => 'El campo fecha de la cita es obligatorio',
         ]);
 
+        $provider_id = Provider::where('company_name', $this->proveedor)->first()->id;
+
         $request = Request::create([
             'provider' => $this->proveedor,
+            'provider_id' => $provider_id,
             'client_name' => $this->nombreCliente,
             'client_address' => $this->direccionCliente,
             'client_phone' => $this->telefonoCliente,

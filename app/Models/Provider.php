@@ -16,4 +16,9 @@ class Provider extends Model
         'contact',
         'email',
     ];
+
+    public function request()
+    {
+        return $this->hasMany(Request::class, 'provider_id');
+    }
 }
