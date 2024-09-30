@@ -79,3 +79,7 @@
 .size-screen{
     @apply max-w-4xl mx-auto px-4 lg:px-0
 }
+
+.err{
+    @apply text-xs font-light text-red-500
+}
