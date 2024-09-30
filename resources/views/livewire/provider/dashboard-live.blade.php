@@ -5,7 +5,6 @@
         inactiveClass: '',
         showFilter: false,
     }">
-    <p>Hola Provider</p>
 
     <div class="mb-4 row">
         <a class="w-1/2 py-2 text-sm font-light text-center cursor-pointer" @click="typeRequest = 1" :class="typeRequest === 1 ? activeClass : inactiveClass">

@@ -22,8 +22,8 @@
                         <td class="td">
                             <button wire:click="showRequest({{ $request->id }})" class="btn btn-info">Mas informacion</button>
                         </td>
-                        <td class="td">
-                            <button wire:click="acceptRequest({{ $request->id }})" class="btn btn-primary">Aceptar</button>
+                        <td class="td" style="text-align: start">
+                            @livewire('provider.accept-request-live', ['request' => $request], key('accept-request-'.$request->id))
                         </td>
                         <td class="td">
                             <button wire:click="rejectRequest({{ $request->id }})" class="btn btn-danger">Rechazar</button>
