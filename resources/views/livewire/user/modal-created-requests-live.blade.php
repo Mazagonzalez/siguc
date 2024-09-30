@@ -7,7 +7,7 @@
         <x-slot name="content">
             <div class="gap-3 col">
                 <div>
-                    <select wire:model="proveedor" class="input-simple max-w-[400px]">
+                    <select wire:model.live="proveedor" class="input-simple max-w-[400px]">
                         <option value="">Seleccionar Proveedor</option>
                         @foreach ($proveedores as $nombre)
                             <option value="{{ $nombre }}">{{ $nombre }}</option>
