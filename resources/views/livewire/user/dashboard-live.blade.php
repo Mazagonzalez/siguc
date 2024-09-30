@@ -14,9 +14,10 @@
         <table class="w-full">
             <thead>
                 <tr class="tr">
-                    <th class="th">Cliente</th>
+                    <th class="th" style="text-align: start">Cliente</th>
                     <th class="th">Orden</th>
                     <th class="th">Peso Total</th>
+                    <th class="th">Peso Bruto</th>
                     <th class="th">Dirección</th>
                     <th class="th">Contenedor</th>
                 </tr>
@@ -24,15 +25,16 @@
             <tbody>
                 @forelse($orders as $order)
                     <tr wire:key='orden-{{ $order['id'] }}' class="tr">
-                        <td class="td">{{ $order['target_customer'] }}</td>
+                        <td class="td" style="text-align: start">{{ $order['target_customer'] }}</td>
                         <td class="td">{{ $order['order_number'] }}</td>
-                        <td class="td">{{ $order['total_weighht'] }} kg</td>
+                        <td class="td">{{ $order['net_weight'] }} kg</td>
+                        <td class="td">{{ $order['gross_weight'] }} kg</td>
                         <td class="td">
                             <p class="tooltip tooltip-top" data-tip="{{ $order['client_address'] }}">
                                 {{ auth()->user()->short($order['client_address'], 30) }}
                             </p>
                         </td>
-                        <td class="td">{{ $order['container'] }}</td>
+                        <td class="td">{{ $order['unit_load'] }}</td>
                     </tr>
                 @empty
                     <tr>

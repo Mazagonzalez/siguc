@@ -11,6 +11,14 @@
     @apply items-center h-[45px] gap-2 px-5 rounded-full text-white bg-slate-950 hover:bg-slate-900 dark:bg-white dark:text-black dark:hover:bg-slate-200 row outline-none
 }
 
+.btn-acept{
+    @apply px-5 py-2 font-semibold text-white bg-emerald-500 rounded-full hover:bg-emerald-600
+}
+
+.btn-decline{
+    @apply px-5 py-2 font-semibold text-white bg-red-500 rounded-full hover:bg-red-600
+}
+
 .btn-logout{
     @apply items-center py-3 gap-2 px-5 rounded-full text-white bg-black dark:bg-white dark:text-black dark:hover:bg-red-500 hover:bg-red-500 row outline-none text-sm
 }

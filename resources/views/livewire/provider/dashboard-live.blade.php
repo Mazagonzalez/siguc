@@ -1,20 +1,19 @@
 <div
     x-data="{
-        typeRequest:1,
-        activeClass: 'font-semibold border-b-[3px] border-indigo-1',
+        typeRequest: 1,
+        activeClass: 'bg-[#ebecec] dark:bg-[#333333] font-semibold',
         inactiveClass: '',
         showFilter: false,
-    }">
-    <p>Hola Provider</p>
-
-    <div class="mb-4 row">
-        <a class="w-1/2 py-2 text-sm font-light text-center cursor-pointer" @click="typeRequest = 1" :class="typeRequest === 1 ? activeClass : inactiveClass">
+    }" class="gap-5 screen-default col"
+>
+    <div class="items-center mb-5 row">
+        <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 1" :class="typeRequest === 1 ? activeClass : inactiveClass">
             {{ __('Nuevas Solicitudes')}}
         </a>
-        <a class="w-1/2 py-2 text-sm font-light text-center cursor-pointer" @click="typeRequest = 2" :class="typeRequest === 2 ? activeClass : inactiveClass">
+        <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 2" :class="typeRequest === 2 ? activeClass : inactiveClass">
             {{ __('Solicitudes en Proceso')}}
         </a>
-        <a class="w-1/2 py-2 text-sm font-light text-center cursor-pointer" @click="typeRequest = 3" :class="typeRequest === 3 ? activeClass : inactiveClass">
+        <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 3" :class="typeRequest === 3 ? activeClass : inactiveClass">
             {{ __('Historial de Solicitudes')}}
         </a>
     </div>
