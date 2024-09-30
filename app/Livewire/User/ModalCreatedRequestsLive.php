@@ -5,6 +5,7 @@ namespace App\Livewire\User;
 use App\Models\Request;
 use Livewire\Component;
 use App\Models\Provider;
+use Illuminate\Support\Facades\DB;
 
 class ModalCreatedRequestsLive extends Component
 {
@@ -22,17 +23,6 @@ class ModalCreatedRequestsLive extends Component
     public function showModal()
     {
         $this->open = true;
-        $this->reset([
-            'proveedor',
-            'nombreCliente',
-            'direccionCliente',
-            'telefonoCliente',
-            'tipoContenedor',
-            'pesoOrden',
-            'fechaCita',
-            'comentario',
-        ]);
-        $this->resetErrorBag();
         $this->proveedores = Provider::pluck('company_name')->toArray();
     }
 
@@ -59,7 +49,8 @@ class ModalCreatedRequestsLive extends Component
                 },
             ],
             'fechaCita' => 'required',
-        ], [
+        ],
+        [
             'proveedor.required' => 'El campo proveedor es obligatorio',
             'nombreCliente.required' => 'El campo nombre del cliente es obligatorio',
             'direccionCliente.required' => 'El campo dirección del cliente es obligatorio',
@@ -72,9 +63,11 @@ class ModalCreatedRequestsLive extends Component
             'fechaCita.required' => 'El campo fecha de la cita es obligatorio',
         ]);
 
+        DB::beginTransaction();
+
         $provider_id = Provider::where('company_name', $this->proveedor)->first()->id;
 
-        $request = Request::create([
+        Request::create([
             'provider' => $this->proveedor,
             'provider_id' => $provider_id,
             'client_name' => $this->nombreCliente,
@@ -86,7 +79,7 @@ class ModalCreatedRequestsLive extends Component
             'comment' => $this->comentario,
         ]);
 
-        //$this->emit('requestCreated');
+        DB::commit();
 
         $this->reset([
             'proveedor',
@@ -98,12 +91,27 @@ class ModalCreatedRequestsLive extends Component
             'fechaCita',
             'comentario',
         ]);
-        $this->resetErrorBag();
+
         $this->open = false;
+
+        $this->dispatch('successful-toast', message: '¡Solicitud creada exitosamente!');
     }
 
     public function close()
     {
+        $this->reset([
+            'proveedor',
+            'nombreCliente',
+            'direccionCliente',
+            'telefonoCliente',
+            'tipoContenedor',
+            'pesoOrden',
+            'fechaCita',
+            'comentario',
+        ]);
+
+        $this->resetErrorBag();
+
         $this->open = false;
     }
 

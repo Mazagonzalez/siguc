@@ -64,4 +64,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function short($text, $range)
+    {
+        if (strlen($text) > $range) {
+            return substr($text, 0, $range) . '...';
+        } else {
+            return $text;
+        }
+    }
 }

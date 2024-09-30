@@ -3,8 +3,8 @@
 namespace App\Livewire\User;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class DashboardLive extends Component
 {
@@ -42,6 +42,12 @@ class DashboardLive extends Component
         } else {
             $this->fetchOrders();
         }
+    }
+
+    #[On('successful-toast')]
+    public function seeToast($message)
+    {
+        session()->flash('message', $message);
     }
 
     public function render()

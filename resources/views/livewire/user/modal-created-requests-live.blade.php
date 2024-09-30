@@ -7,9 +7,8 @@
         <x-slot name="content">
             <div class="gap-3 col">
                 <div>
-                    <label for="proveedor">{{ __('Elegir proveedor') }}</label>
-                    <select wire:model="proveedor"">
-                        <option value="">{{ __('Seleccionar Proveedor') }}</option>
+                    <select wire:model="proveedor" class="input-simple max-w-[400px]">
+                        <option value="">Seleccionar Proveedor</option>
                         @foreach ($proveedores as $nombre)
                             <option value="{{ $nombre }}">{{ $nombre }}</option>
                         @endforeach
@@ -22,10 +21,8 @@
                 </div>
 
                 <div>
-                    <label for="nombreCliente">{{ __('nombreCliente') }}</label>
-                    <div class="flex">
-                        <input wire:model.live="nombreCliente" type="text" id="nombreCliente" class="block w-full mt-1 form-input" />
-                    </div>
+                    <span class="title-input">Nombre del cliente</span>
+                    <input wire:model.live="nombreCliente" type="text" class="w-full input-simple" />
                     @error('nombreCliente')
                         <span class="err">
                             {{ $message }}
@@ -34,10 +31,8 @@
                 </div>
 
                 <div>
-                    <label for="direccionCliente">{{ __('direccionCliente') }}</label>
-                    <div class="flex">
-                        <input wire:model.live="direccionCliente" type="text" id="direccionCliente" class="block w-full mt-1 form-input" />
-                    </div>
+                    <span class="title-input">Dirección del cliente</span>
+                    <input wire:model.live="direccionCliente" type="text" class="w-full input-simple" />
                     @error('direccionCliente')
                         <span class="err">
                             {{ $message }}
@@ -46,10 +41,8 @@
                 </div>
 
                 <div>
-                    <label for="telefonoCliente">{{ __('telefonoCliente') }}</label>
-                    <div class="flex">
-                        <input wire:model.live="telefonoCliente" type="text" id="telefonoCliente" class="block w-full mt-1 form-input" />
-                    </div>
+                    <span class="title-input">Teléfono</span>
+                    <input wire:model.live="telefonoCliente" type="text" class="w-full input-simple" />
                     @error('telefonoCliente')
                         <span class="err">
                             {{ $message }}
@@ -58,10 +51,8 @@
                 </div>
 
                 <div>
-                    <label for="tipoContenedor">{{ __('tipoContenedor') }}</label>
-                    <div class="flex">
-                        <input wire:model.live="tipoContenedor" type="text" id="tipoContenedor" class="block w-full mt-1 form-input" />
-                    </div>
+                    <span class="title-input">Tipo de contenedor</span>
+                    <input wire:model.live="tipoContenedor" type="text" class="w-full input-simple" />
                     @error('tipoContenedor')
                         <span class="err">
                             {{ $message }}
@@ -70,10 +61,8 @@
                 </div>
 
                 <div>
-                    <label for="pesoOrden">{{ __('pesoOrden') }}</label>
-                    <div class="flex">
-                        <input wire:model.live="pesoOrden" type="text" id="pesoOrden" class="block w-full mt-1 form-input" />
-                    </div>
+                    <span class="title-input">Peso de orden</span>
+                    <input wire:model.live="pesoOrden" type="text" class="w-full input-simple" />
                     @error('pesoOrden')
                         <span class="err">
                             {{ $message }}
@@ -82,11 +71,11 @@
                 </div>
 
                 <div>
-                    <label for="fechaCita">{{ __('Fecha de la cita') }}</label>
+                    <span class="title-input">Fecha de la cita</span>
                     <input
                         type="date"
                         wire:model.live="fechaCita"
-                        class="block w-full mt-1 form-input"
+                        class="w-full input-simple"
                     />
                     @error('fechaCita')
                         <span class="err">
@@ -96,9 +85,10 @@
                 </div>
 
                 <div>
-                    <label for="comentario">Comentario</label>
+                    <span class="title-input">Comentarios (opcial)</span>
                     <textarea
-                        class="block w-full mt-1 form-control"
+                        class="w-full input-simple min-h-[140px]"
+                        style="border-radius: 10px"
                         rows="5"
                         wire:model.live="comentario"
                     ></textarea>
@@ -111,10 +101,11 @@
             </div>
         </x-slot>
         <x-slot name="footer">
-            <button wire:click="close">
+            <button wire:click="close" class="btn-close-modal">
                 <p>Cancelar</p>
             </button>
-            <button wire:click="store">
+
+            <button wire:click="store" class="btn-acept-modal">
                 <p>Solicitar</p>
             </button>
         </x-slot>

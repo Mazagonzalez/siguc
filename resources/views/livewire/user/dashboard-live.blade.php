@@ -27,7 +27,11 @@
                         <td class="td">{{ $order['target_customer'] }}</td>
                         <td class="td">{{ $order['order_number'] }}</td>
                         <td class="td">{{ $order['total_weighht'] }} kg</td>
-                        <td class="td">{{ $order['client_address'] }}</td>
+                        <td class="td">
+                            <p class="tooltip tooltip-top" data-tip="{{ $order['client_address'] }}">
+                                {{ auth()->user()->short($order['client_address'], 30) }}
+                            </p>
+                        </td>
                         <td class="td">{{ $order['container'] }}</td>
                     </tr>
                 @empty
@@ -40,4 +44,19 @@
             </tbody>
         </table>
     </div>
+
+    @if (session('message'))
+        <div
+            x-data="{ show: true }"
+            x-init="setTimeout(() => show = false, 3000)"
+            x-show="show"
+            x-transition:leave.duration.400ms
+            wire:transition
+            class="fixed z-40 items-center gap-3 px-4 py-2 text-sm font-light text-white rounded-lg bg-emerald-500 row bottom-4 right-4"
+        >
+            <x-icons.checked class="stroke-white size-5" />
+
+            {{ session('message') }}
+        </div>
+    @endif
 </div>

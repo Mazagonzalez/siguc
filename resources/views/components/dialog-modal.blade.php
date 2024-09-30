@@ -9,7 +9,7 @@
         {{ $content }}
     </div>
 
-    <div class="items-center gap-2 px-6 pb-4 row">
+    <div class="items-center justify-end gap-2 px-6 pb-4 row">
         {{ $footer }}
     </div>
 </x-modal>
