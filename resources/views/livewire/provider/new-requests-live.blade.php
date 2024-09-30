@@ -23,17 +23,15 @@
                     <td class="td">{{ $request->date_quotation }}</td>
                     <td class="td">{{ $request->created_at }}</td>
 
-                    <td class="items-center justify-center gap-2 td row">
+                    <td class="items-center justify-center gap-2 td row" style="text-align: start">
                         <button wire:click="showRequest({{ $request->id }})" class="btn-acept-modal tooltip tooltip-top" data-tip="Más información">
-                            <x-icons.info class="w-6 h-6 stroke-white" />
+                            <x-icons.info class="size-6 stroke-white" />
                         </button>
 
-                        <button wire:click="acceptRequest({{ $request->id }})" class="btn-acept tooltip tooltip-top" data-tip="Aceptar">
-                            @livewire('provider.accept-request-live', ['request' => $request], key('accept-request-'.$request->id))
-                        </button>
+                        @livewire('provider.accept-request-live', ['request' => $request], key('accept-request-'.$request->id))
 
                         <button wire:click="rejectRequest({{ $request->id }})" class="btn-decline tooltip tooltip-top" data-tip="Rechazar">
-                            <x-icons.x-mark class="w-6 h-6 stroke-white" />
+                            <x-icons.x-mark class="size-6 stroke-white" />
                         </button>
                     </td>
                 </tr>

@@ -1,6 +1,6 @@
 <div>
-    <button wire:click="showModal" class="btn-black" wire:key="show-accept-{{ $request->id }}">
-        Aceptar
+    <button wire:key="show-accept-{{ $request->id }}" wire:click="showModal" class="btn-acept tooltip tooltip-top" data-tip="Aceptar">
+        <x-icons.checked class="size-6 stroke-white" />
     </button>
 
     <x-dialog-modal wire:model='open' maxWidth="md" title="Datos para aceptar solicitud" >
