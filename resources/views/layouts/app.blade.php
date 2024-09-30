@@ -20,7 +20,7 @@
         <style>[x-cloak] { display: none; }</style>
     </head>
     <body class="scrollbar" style="font-family: 'Poppins', sans-serif;">
-        <div class="w-full min-h-screen overflow-hidden bg-body-light dark:bg-body-dark dark:text-white">
+        <div class="w-full min-h-screen overflow-hidden bg-body-light text-slate-900 dark:bg-body-dark dark:text-white">
             <x-nav />
 
             <!-- Page Content -->

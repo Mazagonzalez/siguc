@@ -1,4 +1,6 @@
-<div class="screen-default">
+<div class="gap-5 screen-default col">
+    @livewire('user.modal-created-requests-live')
+
     <div class="w-full">
         <div class="items-center gap-2 mb-6 row">
             <input
@@ -7,7 +9,6 @@
                 placeholder="Buscar por numero de orden"
                 class="input-simple w-[300px]"
             >
-            @livewire('user.modal-created-requests-live')
         </div>
 
         <table class="w-full">

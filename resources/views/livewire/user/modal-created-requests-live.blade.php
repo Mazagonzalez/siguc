@@ -1,15 +1,9 @@
 <div>
-    <button
-            class="btn btn-primary"
-            wire:click="showModal"
-        >
+    <button wire:click="showModal" class="">
             Crear nueva orden
     </button>
 
-    <x-dialog-modal wire:model='open' maxWidth="md" >
-        <x-slot name="title">
-            <h2 class="text-xl font-semibold">Solicitud</h2>
-        </x-slot>
+    <x-dialog-modal wire:model='open' maxWidth="md" title="Solicitud" >
         <x-slot name="content">
             <p>Todos los campos son obligatorios</p>
                 <div>
