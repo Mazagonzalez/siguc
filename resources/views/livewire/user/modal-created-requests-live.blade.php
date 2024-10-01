@@ -64,9 +64,19 @@
                 </div>
 
                 <div>
-                    <span class="title-input">Peso de orden</span>
+                    <span class="title-input">Peso neto</span>
                     <input wire:model.live="pesoOrden" type="number" class="w-full input-simple" />
                     @error('pesoOrden')
+                        <span class="err">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <div>
+                    <span class="title-input">Peso bruto</span>
+                    <input wire:model.live="gross_weight" type="number" class="w-full input-simple" />
+                    @error('gross_weight')
                         <span class="err">
                             {{ $message }}
                         </span>

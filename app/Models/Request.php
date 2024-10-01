@@ -17,6 +17,7 @@ class Request extends Model
         'client_phone',
         'container_type',
         'order_weight',
+        'gross_weight',
         'flete',
         'date_quotation',
         'comment',

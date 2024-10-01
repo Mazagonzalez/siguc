@@ -17,6 +17,7 @@ class ModalCreatedRequestsLive extends Component
     public $telefonoCliente;
     public $tipoContenedor;
     public $pesoOrden;
+    public $gross_weight;
     public $flete;
     public $fechaCita;
     public $comentario;
@@ -41,6 +42,7 @@ class ModalCreatedRequestsLive extends Component
             'telefonoCliente' => 'required|min_digits:7',
             'tipoContenedor' => 'required',
             'pesoOrden' => 'required',
+            'gross_weight' => 'required',
             'flete' => 'nullable',
             'fechaCita' => 'required',
         ],
@@ -52,6 +54,7 @@ class ModalCreatedRequestsLive extends Component
             'telefonoCliente.min_digits' => 'El campo teléfono del cliente debe tener al menos 7 caracteres',
             'tipoContenedor.required' => 'El campo tipo de contenedor es obligatorio',
             'pesoOrden.required' => 'El campo peso de la orden es obligatorio',
+            'gross_weight.required' => 'El campo peso bruto es obligatorio',
             'fechaCita.required' => 'El campo fecha de la cita es obligatorio',
         ]);
 
@@ -67,6 +70,7 @@ class ModalCreatedRequestsLive extends Component
             'client_phone' => $this->telefonoCliente,
             'container_type' => $this->tipoContenedor,
             'order_weight' => $this->pesoOrden,
+            'gross_weight' => $this->gross_weight,
             'flete' => $this->flete ? $this->flete : null,
             'date_quotation' => $this->fechaCita,
             'comment' => $this->comentario,
@@ -95,6 +99,7 @@ class ModalCreatedRequestsLive extends Component
             'telefonoCliente',
             'tipoContenedor',
             'pesoOrden',
+            'gross_weight',
             'flete',
             'fechaCita',
             'comentario',
