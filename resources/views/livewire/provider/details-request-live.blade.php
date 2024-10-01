@@ -49,7 +49,7 @@
                     <p class="font-light">{{ $request->date_quotation }}</p>
                 </div>
 
-                @if ($request->status != 0)
+                @if ($request->status != 0 && $request->type_vehicle != null)
                     <div class="py-2 col">
                         <span class="text-base font-semibold">Tipo de vehiculo</span>
                         <p class="font-light">{{ $request->type_vehicle }}</p>
@@ -76,7 +76,7 @@
                     </div>
                 @endif
 
-                @if ($request->status == 2 || $request->status == 3)
+                @if ($request->status == 3)
                     <div class="py-2 col">
                         <span class="text-base font-semibold">Fecha de entrega del pedido</span>
                         <p class="font-light">{{ $request->date_loading }}</p>
