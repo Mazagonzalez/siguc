@@ -17,6 +17,7 @@ class ModalCreatedRequestsLive extends Component
     public $telefonoCliente;
     public $tipoContenedor;
     public $pesoOrden;
+    public $flete;
     public $fechaCita;
     public $comentario;
 
@@ -37,17 +38,10 @@ class ModalCreatedRequestsLive extends Component
             'proveedor' => 'required',
             'nombreCliente' => 'required',
             'direccionCliente' => 'required',
-            'telefonoCliente' => 'required|numeric|min_digits:7',
+            'telefonoCliente' => 'required|min_digits:7',
             'tipoContenedor' => 'required',
-            'pesoOrden' => [
-                'required',
-                'numeric',
-                function ($attribute, $value, $fail) {
-                    if (strpos($value, '.') !== false || strpos($value, ',') !== false) {
-                        $fail('El campo peso de la orden no debe contener puntos ni comas.');
-                    }
-                },
-            ],
+            'pesoOrden' => 'required',
+            'flete' => 'nullable',
             'fechaCita' => 'required',
         ],
         [
@@ -55,11 +49,9 @@ class ModalCreatedRequestsLive extends Component
             'nombreCliente.required' => 'El campo nombre del cliente es obligatorio',
             'direccionCliente.required' => 'El campo dirección del cliente es obligatorio',
             'telefonoCliente.required' => 'El campo teléfono del cliente es obligatorio',
-            'telefonoCliente.numeric' => 'El campo teléfono del cliente debe ser numérico',
             'telefonoCliente.min_digits' => 'El campo teléfono del cliente debe tener al menos 7 caracteres',
             'tipoContenedor.required' => 'El campo tipo de contenedor es obligatorio',
             'pesoOrden.required' => 'El campo peso de la orden es obligatorio',
-            'pesoOrden.numeric' => 'El campo peso de la orden debe ser numérico',
             'fechaCita.required' => 'El campo fecha de la cita es obligatorio',
         ]);
 
@@ -75,29 +67,26 @@ class ModalCreatedRequestsLive extends Component
             'client_phone' => $this->telefonoCliente,
             'container_type' => $this->tipoContenedor,
             'order_weight' => $this->pesoOrden,
+            'flete' => $this->flete ? $this->flete : null,
             'date_quotation' => $this->fechaCita,
             'comment' => $this->comentario,
         ]);
 
         DB::commit();
 
-        $this->reset([
-            'proveedor',
-            'nombreCliente',
-            'direccionCliente',
-            'telefonoCliente',
-            'tipoContenedor',
-            'pesoOrden',
-            'fechaCita',
-            'comentario',
-        ]);
-
+        $this->resetRequest();
         $this->open = false;
-
         $this->dispatch('successful-toast', message: '¡Solicitud creada exitosamente!');
     }
 
     public function close()
+    {
+        $this->resetRequest();
+
+        $this->open = false;
+    }
+
+    public function resetRequest()
     {
         $this->reset([
             'proveedor',
@@ -106,13 +95,12 @@ class ModalCreatedRequestsLive extends Component
             'telefonoCliente',
             'tipoContenedor',
             'pesoOrden',
+            'flete',
             'fechaCita',
             'comentario',
         ]);
 
         $this->resetErrorBag();
-
-        $this->open = false;
     }
 
     public function render()
