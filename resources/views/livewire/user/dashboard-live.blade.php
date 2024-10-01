@@ -48,7 +48,8 @@
                                 'netWeight' => $order['net_weight'],
                                 'grossWeight' => $order['gross_weight'],
                                 'clientAddress' => $order['client_address'],
-                                'unitLoad' => $order['unit_load']
+                                'unitLoad' => $order['unit_load'],
+                                'orderNumber' => $order['order_number'],
                             ], key($order['id'] . 'request'))
                         </td>
                     </tr>

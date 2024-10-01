@@ -12,6 +12,7 @@ class Request extends Model
     protected $fillable = [
         'provider',
         'provider_id',
+        'order_number',
         'client_name',
         'client_address',
         'client_phone',
