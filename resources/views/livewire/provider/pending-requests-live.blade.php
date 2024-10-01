@@ -23,9 +23,7 @@
                     <td class="items-center justify-center gap-2 td row">
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
-                        <button wire:click="rejectRequest({{ $request->id }})" class="btn-decline tooltip tooltip-top" data-tip="Cancelar Pedido">
-                            <x-icons.x-mark class="w-6 h-6 stroke-white" />
-                        </button>
+                        @livewire('provider.decline-request-live', ['request' => $request], key('reject-request-'.$request->id))
                     </td>
                 </tr>
             @empty

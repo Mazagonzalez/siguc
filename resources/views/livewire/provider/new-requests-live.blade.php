@@ -21,14 +21,11 @@
                     <td class="td">{{ $request->created_at }}</td>
 
                     <td class="items-center justify-center gap-2 td row" style="text-align: start">
-
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
                         @livewire('provider.accept-request-live', ['request' => $request], key('accept-request-'.$request->id))
 
-                        <button wire:click="rejectRequest({{ $request->id }})" class="btn-decline tooltip tooltip-top" data-tip="Rechazar">
-                            <x-icons.x-mark class="size-6 stroke-white" />
-                        </button>
+                        @livewire('provider.decline-request-live', ['request' => $request], key('reject-request-'.$request->id))
                     </td>
                 </tr>
             @empty
