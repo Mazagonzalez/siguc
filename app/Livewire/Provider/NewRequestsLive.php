@@ -21,11 +21,6 @@ class NewRequestsLive extends Component
         }
     }
 
-    public function showRequest($requestId)
-    {
-        //modal de detalles
-    }
-
     public function rejectRequest($requestId)
     {
         $request = Request::find($requestId);

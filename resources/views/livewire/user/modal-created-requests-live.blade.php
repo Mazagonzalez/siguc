@@ -22,7 +22,7 @@
 
                 <div>
                     <span class="title-input">Nombre del cliente</span>
-                    <input wire:model.live="nombreCliente" type="text" class="w-full input-simple" />
+                    <input wire:model.live="nombreCliente" type="text" class="w-full input-simple" readonly/>
                     @error('nombreCliente')
                         <span class="err">
                             {{ $message }}
@@ -53,8 +53,8 @@
                 <div>
                     <select name="tipoContenedor" id="tipoContenedor" class="w-full input-simple" wire:model.live="tipoContenedor">
                         <option value="0">Seleccionar contenedor</option>
-                        <option value="40">Contenedor de 40</option>
-                        <option value="45">Contenedor de 45</option>
+                        <option value="Contenedor de 40">Contenedor de 40</option>
+                        <option value="Contenedor de 45">Contenedor de 45</option>
                     </select>
                     @error('tipoContenedor')
                         <span class="err">

@@ -22,6 +22,19 @@ class ModalCreatedRequestsLive extends Component
     public $fechaCita;
     public $comentario;
 
+    public function mount($targetCustomer, $netWeight, $grossWeight, $clientAddress, $unitLoad)
+    {
+        $this->nombreCliente = $targetCustomer;
+        $this->pesoOrden = $netWeight;
+        $this->gross_weight = $grossWeight;
+        $this->direccionCliente = $clientAddress;
+        $this->tipoContenedor = $unitLoad;
+
+        //eliminacion de letra en apartados de pesos
+        $this->pesoOrden = preg_replace('/\D/', '', $this->pesoOrden);
+        $this->gross_weight = preg_replace('/\D/', '', $this->gross_weight);
+    }
+
     public function showModal()
     {
         $this->open = true;
