@@ -3,79 +3,92 @@
         <x-icons.info class="size-6 stroke-white" />
     </button>
 
-    <x-dialog-modal wire:model='open' maxWidth="md" title="Detalles de la solicitud" >
+    <x-dialog-modal wire:model='open' maxWidth="md" >
+        <x-slot name="title">
+            <div class="items-center col">
+                <p class="text-xl font-semibold text-center">Detalles de la solicitud</p>
+                <x-utils.status status="{{ $request->status }}" />
+            </div>
+        </x-slot>
         <x-slot name="content">
-            <div class="gap-3 col">
+            <div class="divide-y divide-gray-300 col dark:divide-zinc-800">
                 @if ($request->status != 0)
-                    <div class="flex items-end justify-between">
-                        <span class="font-semibold">Cliente</span>
-                        <p>{{ $request->client_name }}</p>
+                    <div class="py-2 col">
+                        <span class="text-base font-semibold">Cliente</span>
+                        <p class="font-light">{{ $request->client_name }}</p>
                     </div>
                 @endif
-                <div class="flex items-end justify-between">
-                    <span class="font-semibold">Direccion del Cliente</span>
-                    <p>{{ $request->client_address }}</p>
+
+                <div class="py-2 col">
+                    <span class="text-base font-semibold">Direccion del Cliente</span>
+                    <p class="font-light">{{ $request->client_address }}</p>
                 </div>
-                <div class="flex items-end justify-between">
-                    <span class="font-semibold">Tipo de contenedor</span>
-                    <p>{{ $request->container_type }}</p>
+
+                <div class="py-2 col">
+                    <span class="text-base font-semibold">Tipo de contenedor</span>
+                    <p class="font-light">{{ $request->container_type }}</p>
                 </div>
-                <div class="flex items-end justify-between">
-                    <span class="font-semibold">Peso de la solicitud</span>
-                    <p>{{ $request->order_weight }}</p>
+
+                <div class="py-2 col">
+                    <span class="text-base font-semibold">Peso neto de la solictud</span>
+                    <p class="font-light">{{ $request->order_weight }}</p>
                 </div>
-                <div class="flex items-end justify-between">
-                    <span class="font-semibold">Fecha de solicitud</span>
-                    <p>{{ $request->date_quotation }}</p>
+
+                <div class="py-2 col">
+                    <span class="text-base font-semibold">Peso bruto de la solictud</span>
+                    <p class="font-light">{{ $request->gross_weight }}</p>
                 </div>
+
+                <div class="py-2 col">
+                    <span class="text-base font-semibold">Fecha de solicitud</span>
+                    <p class="font-light">{{ $request->date_quotation }}</p>
+                </div>
+
                 @if ($request->status != 0)
-                    <div class="flex items-end justify-between">
-                        <span class="font-semibold">Tipo de vehiculo</span>
-                        <p>{{ $request->type_vehicle }}</p>
+                    <div class="py-2 col">
+                        <span class="text-base font-semibold">Tipo de vehiculo</span>
+                        <p class="font-light">{{ $request->type_vehicle }}</p>
                     </div>
-                    <div class="flex items-end justify-between">
-                        <span class="font-semibold">Placa del vehiculo</span>
-                        <p>{{ $request->license_plate }}</p>
+
+                    <div class="py-2 col">
+                        <span class="text-base font-semibold">Placa del vehiculo</span>
+                        <p class="font-light">{{ $request->license_plate }}</p>
                     </div>
-                    <div class="flex items-end justify-between">
-                        <span class="font-semibold">Nombre del conductor</span>
-                        <p>{{ $request->driver_name }}</p>
+
+                    <div class="py-2 col">
+                        <span class="text-base font-semibold">Nombre del conductor</span>
+                        <p class="font-light">{{ $request->driver_name }}</p>
                     </div>
-                    <div class="flex items-end justify-between">
-                        <span class="font-semibold">Identificacion del conductor</span>
-                        <p>{{ $request->identification }}</p>
+
+                    <div class="py-2 col">
+                        <span class="text-base font-semibold">Identificacion del conductor</span>
+                        <p class="font-light">{{ $request->identification }}</p>
                     </div>
-                    <div class="flex items-end justify-between">
-                        <span class="font-semibold">Fecha de aceptacion del pedido</span>
-                        <p>{{ $request->date_acceptance }}</p>
+
+                    <div class="py-2 col">
+                        <span class="text-base font-semibold">Fecha de aceptacion del pedido</span>
+                        <p class="font-light">{{ $request->date_acceptance }}</p>
                     </div>
                 @endif
 
                 @if ($request->status == 2 || $request->status == 3)
-                    <div class="flex items-end justify-between">
-                        <span class="font-semibold">Fecha de entrega del pedido</span>
-                        <p>{{ $request->date_loading }}</p>
-                    </div>
-                    <div class="flex items-end justify-between">
-                        <span class="font-semibold">estado</span>
-                        @if ($request->status == 2)
-                            <p>Cancelado</p>
-                        @elseif ($request->status == 3)
-                            <p>Finalizado</p>
-                        @endif
+                    <div class="py-2 col">
+                        <span class="text-base font-semibold">Fecha de entrega del pedido</span>
+                        <p class="font-light">{{ $request->date_loading }}</p>
                     </div>
                 @endif
+
                 @if ($request->comment)
-                    <div class="flex items-end justify-between">
-                        <span class="font-semibold">Comentario</span>
-                        <p>{{ $request->comment }}</p>
+                    <div class="py-2 col">
+                        <span class="text-base font-semibold">Comentario</span>
+                        <p class="font-light">{{ $request->comment }}</p>
                     </div>
                 @endif
             </div>
         </x-slot>
         <x-slot name="footer">
             <button wire:click="close" class="btn-close-modal">
-                <p>Atras</p>
+                <p class="font-light">Atras</p>
             </button>
         </x-slot>
     </x-dialog-modal>

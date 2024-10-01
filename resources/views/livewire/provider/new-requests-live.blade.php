@@ -13,10 +13,7 @@
             @forelse($requests as $request)
                 <tr wire:key='orden-{{ $request->id }}' class="tr">
                     <td class="td">
-                        <div class="items-center justify-center gap-2 row">
-                            <div class="bg-yellow-500 rounded-full size-2"></div>
-                            <span>En espera</span>
-                        </div>
+                        <x-utils.status status="{{ $request->status }}" />
                     </td>
 
                     <td class="td">{{ $request->container_type }}</td>

@@ -13,22 +13,7 @@
             @forelse($requests as $request)
                 <tr wire:key='orden-{{ $request->id }}' class="tr">
                     <td class="td">
-                        @if($request->status == 2)
-                            <div class="items-center justify-center gap-2 row">
-                                <div class="bg-red-500 rounded-full size-2"></div>
-                                <span>Rechazado</span>
-                            </div>
-                        @elseif($request->status == 3)
-                            <div class="items-center justify-center gap-2 row">
-                                <div class="rounded-full bg-emerald-500 size-2"></div>
-                                <span>Finalizado</span>
-                            </div>
-                        @else
-                            <div class="items-center justify-center gap-2 row">
-                                <div class="bg-yellow-500 rounded-full size-2"></div>
-                                <span>Pendiente</span>
-                            </div>
-                        @endif
+                        <x-utils.status status="{{ $request->status }}" />
                     </td>
 
                     <td class="td">{{ $request->container_type }}</td>
