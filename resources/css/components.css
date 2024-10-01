@@ -11,12 +11,16 @@
     @apply items-center h-[45px] gap-2 px-5 rounded-full text-white bg-slate-950 hover:bg-slate-900 dark:bg-white dark:text-black dark:hover:bg-slate-200 row outline-none
 }
 
-.btn-acept{
-    @apply px-5 py-2 font-semibold text-white bg-emerald-500 rounded-full hover:bg-emerald-600
+.btn-info{
+    @apply flex justify-center items-center size-10 text-white bg-blue-500 rounded-full hover:bg-blue-600
+}
+
+.btn-confirm{
+    @apply flex justify-center items-center size-10 text-white bg-emerald-500 rounded-full hover:bg-emerald-600
 }
 
 .btn-decline{
-    @apply px-5 py-2 font-semibold text-white bg-red-500 rounded-full hover:bg-red-600
+    @apply flex justify-center items-center size-10 text-white bg-red-500 rounded-full hover:bg-red-600
 }
 
 .btn-logout{
@@ -27,7 +31,7 @@
     @apply px-5 py-2 font-semibold rounded-full bg-[#f2f3f5] hover:bg-[#e8e9eb] dark:bg-zinc-800 dark:hover:bg-[#1f1f22] dark:text-white
 }
 
-.btn-acept-modal{
+.btn-confirm-modal{
     @apply px-5 py-2 font-semibold text-white bg-blue-500 rounded-full hover:bg-blue-600
 }
 

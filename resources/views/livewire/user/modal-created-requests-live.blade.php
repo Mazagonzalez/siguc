@@ -1,6 +1,6 @@
 <div>
-    <button wire:click="showModal" class="btn-black">
-        Crear Solicitud
+    <button wire:click="showModal" class="btn-info">
+        <x-icons.more class="size-6 stroke-white" />
     </button>
 
     <x-dialog-modal wire:model='open' maxWidth="md" title="Solicitud" >
@@ -125,7 +125,7 @@
                 <p>Cancelar</p>
             </button>
 
-            <button wire:click="store" class="btn-acept-modal">
+            <button wire:click="store" class="btn-confirm-modal">
                 <p>Solicitar</p>
             </button>
         </x-slot>

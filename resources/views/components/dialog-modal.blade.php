@@ -5,7 +5,7 @@
         <p class="px-6 pt-6 text-xl font-semibold text-center">{{ $title }}</p>
     @endisset
 
-    <div class="px-6 py-4 text-sm">
+    <div class="px-6 py-4 text-sm text-start">
         {{ $content }}
     </div>
 

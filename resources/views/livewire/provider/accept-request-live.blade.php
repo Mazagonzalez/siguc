@@ -1,5 +1,10 @@
 <div>
-    <button wire:key="show-accept-{{ $request->id }}" wire:click="showModal" class="btn-acept tooltip tooltip-top" data-tip="Aceptar">
+    <button
+        wire:key="show-accept-{{ $request->id }}"
+        wire:click="showModal"
+        class="btn-confirm tooltip tooltip-top"
+        data-tip="Aceptar"
+    >
         <x-icons.checked class="size-6 stroke-white" />
     </button>
 
@@ -56,7 +61,7 @@
                 <p>Cancelar</p>
             </button>
 
-            <button wire:click="store" class="btn-acept-modal">
+            <button wire:click="store" class="btn-confirm-modal">
                 <p>Aceptar solicitud</p>
             </button>
         </x-slot>

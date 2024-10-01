@@ -1,5 +1,10 @@
 <div>
-    <button wire:click="showModal" class="btn-acept-modal" wire:key="show-accept-{{ $request->id }}">
+    <button
+        wire:key="show-accept-{{ $request->id }}"
+        wire:click="showModal"
+        class="btn-info tooltip tooltip-top"
+        data-tip="Más información"
+    >
         <x-icons.info class="size-6 stroke-white" />
     </button>
 
