@@ -42,7 +42,7 @@
 
                 <div>
                     <span class="title-input">Teléfono</span>
-                    <input wire:model.live="telefonoCliente" type="text" class="w-full input-simple" />
+                    <input wire:model.live="telefonoCliente" type="number" class="w-full input-simple" />
                     @error('telefonoCliente')
                         <span class="err">
                             {{ $message }}
@@ -53,8 +53,8 @@
                 <div>
                     <select name="tipoContenedor" id="tipoContenedor" class="w-full input-simple" wire:model.live="tipoContenedor">
                         <option value="0">Seleccionar contenedor</option>
-                        <option value="1">Contenedor de 40</option>
-                        <option value="2">Contenedor de 45</option>
+                        <option value="40">Contenedor de 40</option>
+                        <option value="45">Contenedor de 45</option>
                     </select>
                     @error('tipoContenedor')
                         <span class="err">
@@ -65,8 +65,18 @@
 
                 <div>
                     <span class="title-input">Peso de orden</span>
-                    <input wire:model.live="pesoOrden" type="text" class="w-full input-simple" />
+                    <input wire:model.live="pesoOrden" type="number" class="w-full input-simple" />
                     @error('pesoOrden')
+                        <span class="err">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <div>
+                    <span class="title-input">Flete (opcial)</span>
+                    <input wire:model.live="flete" type="number" class="w-full input-simple" />
+                    @error('flete')
                         <span class="err">
                             {{ $message }}
                         </span>

@@ -37,23 +37,13 @@ class AcceptRequestLive extends Component
             'type_vehicle' => 'required',
             'license_plate' => 'required',
             'driver_name' => 'required',
-            'identification' => [
-                'required',
-                'min_digits:6',
-                'numeric',
-                function ($attribute, $value, $fail) {
-                    if (strpos($value, '.') !== false || strpos($value, ',') !== false) {
-                        $fail('El campo identificacion del conductor no debe contener puntos ni comas.');
-                    }
-                },
-            ],
+            'identification' => 'required|min_digits:6',
         ],
         [
             'type_vehicle.required' => 'El campo tipo de vehículo es obligatorio',
             'license_plate.required' => 'El campo placa del vehiculo es obligatorio',
             'driver_name.required' => 'El campo nombre del conductor es obligatorio',
             'identification.required' => 'El campo identificación del conductor es obligatorio',
-            'identification.numeric' => 'El campo identificación del conductor debe ser numérico',
             'identification.min_digits' => 'El campo identificación del conductor debe tener al menos 6 caracteres',
         ]);
 

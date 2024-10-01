@@ -42,7 +42,7 @@
 
                 <div>
                     <span class="title-input">Identificacion del conductor</span>
-                    <input wire:model.live="identification" type="text" class="w-full input-simple" />
+                    <input wire:model.live="identification" type="number" class="w-full input-simple" />
                     @error('identification')
                         <span class="err">
                             {{ $message }}
