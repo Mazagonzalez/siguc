@@ -32,7 +32,7 @@
 
                 <div>
                     <span class="title-input">Dirección del cliente</span>
-                    <input wire:model.live="direccionCliente" type="text" class="w-full input-simple" />
+                    <input wire:model.live="direccionCliente" type="text" class="w-full input-simple" readonly />
                     @error('direccionCliente')
                         <span class="err">
                             {{ $message }}
@@ -51,11 +51,8 @@
                 </div>
 
                 <div>
-                    <select name="tipoContenedor" id="tipoContenedor" class="w-full input-simple" wire:model.live="tipoContenedor">
-                        <option value="0">Seleccionar contenedor</option>
-                        <option value="Contenedor de 40">Contenedor de 40</option>
-                        <option value="Contenedor de 45">Contenedor de 45</option>
-                    </select>
+                    <span class="title-input">Tipo contenedor</span>
+                    <input wire:model.live="tipoContenedor" type="text" class="w-full input-simple" readonly />
                     @error('tipoContenedor')
                         <span class="err">
                             {{ $message }}
@@ -65,7 +62,7 @@
 
                 <div>
                     <span class="title-input">Peso neto</span>
-                    <input wire:model.live="pesoOrden" type="number" class="w-full input-simple" />
+                    <input wire:model.live="pesoOrden" type="number" class="w-full input-simple" readonly />
                     @error('pesoOrden')
                         <span class="err">
                             {{ $message }}
@@ -75,7 +72,7 @@
 
                 <div>
                     <span class="title-input">Peso bruto</span>
-                    <input wire:model.live="gross_weight" type="number" class="w-full input-simple" />
+                    <input wire:model.live="gross_weight" type="number" class="w-full input-simple" readonly />
                     @error('gross_weight')
                         <span class="err">
                             {{ $message }}
