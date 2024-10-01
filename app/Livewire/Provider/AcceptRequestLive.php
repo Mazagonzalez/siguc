@@ -63,7 +63,6 @@ class AcceptRequestLive extends Component
         $this->resetRequest();
 
         $this->dispatch('request');
-        //$this->dispatch('successful-toast', message: '¡Solicitud aceptada exitosamente!');
     }
 
     public function resetRequest()
@@ -81,7 +80,6 @@ class AcceptRequestLive extends Component
     {
         $this->resetRequest();
         $this->open = false;
-
     }
 
     public function render()

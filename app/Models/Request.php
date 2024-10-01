@@ -27,6 +27,9 @@ class Request extends Model
         'identification',
         'date_acceptance',
         'date_loading',
+        'decline_comment',
+        'double_order',
+        'id_request_double',
         'status',
     ];
 
@@ -35,5 +38,11 @@ class Request extends Model
     public function provider()
     {
         return $this->belongsTo(Provider::class, 'provider_id');
+    }
+
+    //relacion uno a mucho inversa
+    public function request_double()
+    {
+        return $this->belongsTo(Request::class, 'id_request_double');
     }
 }
