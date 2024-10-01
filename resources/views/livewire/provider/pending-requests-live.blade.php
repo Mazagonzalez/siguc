@@ -15,7 +15,7 @@
                     <td class="td">
                         <div class="items-center justify-center gap-2 row">
                             <div class="rounded-full bg-emerald-500 size-2"></div>
-                            <span>En espera</span>
+                            <span>En proceso</span>
                         </div>
                     </td>
 
