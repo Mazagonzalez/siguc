@@ -3,13 +3,13 @@
         <x-icons.x-mark class="size-6 stroke-white" />
     </button>
 
-    <x-dialog-modal wire:model='open' maxWidth="md" title="Motivos de la cancelacion del servicio" >
+    <x-dialog-modal wire:model='open' maxWidth="md" title="Cancelacion del servicio" >
         <x-slot name="content">
             <div class="gap-3 col">
                 <div>
-                    <span class="title-input">Explicacion por la cual se rechazara el servicio</span>
+                    <span class="title-input">Razón por la cual se esta cancelando el servicio</span>
                     <textarea
-                        class="w-full input-simple min-h-[140px]"
+                        class="w-full input-simple min-h-[150px]"
                         style="border-radius: 10px"
                         rows="5"
                         wire:model.live="decline_comment"
@@ -27,7 +27,7 @@
                 <p>Atras</p>
             </button>
 
-            <button wire:click="store" class="btn-acept-modal">
+            <button wire:click="store" class="btn-confirm-modal">
                 <p>Cancelar servicio</p>
             </button>
         </x-slot>
