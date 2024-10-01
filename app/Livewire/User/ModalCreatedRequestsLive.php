@@ -47,6 +47,16 @@ class ModalCreatedRequestsLive extends Component
        $this->resetErrorBag();
     }
 
+    public function updatedFechaCita($value)
+    {
+        $fechaHoy = Carbon::now()->format('Y-m-d');
+        if ($value < $fechaHoy) {
+            $this->addError('fechaCita', 'La fecha de la orden no puede ser menor a la fecha de hoy');
+        } else {
+            $this->resetErrorBag('fechaCita');
+        }
+    }
+
     public function store()
     {
         $this->validate([
