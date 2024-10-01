@@ -22,14 +22,16 @@ class ModalCreatedRequestsLive extends Component
     public $flete;
     public $fechaCita;
     public $comentario;
+    public $orderNumber;
 
-    public function mount($targetCustomer, $netWeight, $grossWeight, $clientAddress, $unitLoad)
+    public function mount($targetCustomer, $netWeight, $grossWeight, $clientAddress, $unitLoad, $orderNumber)
     {
         $this->nombreCliente = $targetCustomer;
         $this->pesoOrden = $netWeight;
         $this->gross_weight = $grossWeight;
         $this->direccionCliente = $clientAddress;
         $this->tipoContenedor = $unitLoad;
+        $this->orderNumber = $orderNumber;
 
         //eliminacion de letra en apartados de pesos
         $this->pesoOrden = preg_replace('/\D/', '', $this->pesoOrden);
@@ -89,6 +91,7 @@ class ModalCreatedRequestsLive extends Component
         Request::create([
             'provider' => $this->proveedor,
             'provider_id' => $provider_id,
+            'order_number' => $this->orderNumber,
             'client_name' => $this->nombreCliente,
             'client_address' => $this->direccionCliente,
             'client_phone' => $this->telefonoCliente,
