@@ -57,7 +57,7 @@
             </button>
 
             <button wire:click="store" class="btn-acept-modal">
-                <p>Solicitar</p>
+                <p>Aceptar solicitud</p>
             </button>
         </x-slot>
     </x-dialog-modal>

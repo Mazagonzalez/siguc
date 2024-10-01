@@ -3,20 +3,18 @@
         <x-icons.info class="size-6 stroke-white" />
     </button>
 
-    <x-dialog-modal wire:model='open' maxWidth="md" title="Datos para aceptar solicitud" >
+    <x-dialog-modal wire:model='open' maxWidth="md" title="Detalles de la solicitud" >
         <x-slot name="content">
             <div class="gap-3 col">
-                <div class="flex items-end justify-between">
-                    <span class="font-semibold">Cliente</span>
-                    <p>{{ $request->client_name }}</p>
-                </div>
+                @if ($request->status != 0)
+                    <div class="flex items-end justify-between">
+                        <span class="font-semibold">Cliente</span>
+                        <p>{{ $request->client_name }}</p>
+                    </div>
+                @endif
                 <div class="flex items-end justify-between">
                     <span class="font-semibold">Direccion del Cliente</span>
                     <p>{{ $request->client_address }}</p>
-                </div>
-                <div class="flex items-end justify-between">
-                    <span class="font-semibold">Telefono del cliente</span>
-                    <p>{{ $request->client_phone }}</p>
                 </div>
                 <div class="flex items-end justify-between">
                     <span class="font-semibold">Tipo de contenedor</span>
@@ -30,8 +28,7 @@
                     <span class="font-semibold">Fecha de solicitud</span>
                     <p>{{ $request->date_quotation }}</p>
                 </div>
-
-                @if ($request->status == 1 || $request->status == 2 || $request->status == 3)
+                @if ($request->status != 0)
                     <div class="flex items-end justify-between">
                         <span class="font-semibold">Tipo de vehiculo</span>
                         <p>{{ $request->type_vehicle }}</p>
@@ -68,19 +65,17 @@
                         @endif
                     </div>
                 @endif
-                <div class="flex items-end justify-between">
-                    <span class="font-semibold">Comentario</span>
-                    <p>{{ $request->comment }}</p>
-                </div>
+                @if ($request->comment)
+                    <div class="flex items-end justify-between">
+                        <span class="font-semibold">Comentario</span>
+                        <p>{{ $request->comment }}</p>
+                    </div>
+                @endif
             </div>
         </x-slot>
         <x-slot name="footer">
             <button wire:click="close" class="btn-close-modal">
-                <p>Cancelar</p>
-            </button>
-
-            <button wire:click="store" class="btn-acept-modal">
-                <p>Solicitar</p>
+                <p>Atras</p>
             </button>
         </x-slot>
     </x-dialog-modal>
