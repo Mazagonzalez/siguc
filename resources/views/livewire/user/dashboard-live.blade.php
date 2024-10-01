@@ -1,6 +1,4 @@
 <div class="gap-5 screen-default col">
-    @livewire('user.modal-created-requests-live')
-
     <div class="w-full">
         <div class="items-center gap-2 mb-6 row">
             <input
@@ -20,6 +18,7 @@
                     <th class="th">Peso Bruto</th>
                     <th class="th">Dirección</th>
                     <th class="th">Contenedor</th>
+                    <th class="th"></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,15 +29,28 @@
                                 {{ auth()->user()->short($order['target_customer'], 20) }}
                             </p>
                         </td>
+
                         <td class="td">{{ $order['order_number'] }}</td>
                         <td class="td">{{ $order['net_weight'] }} kg</td>
                         <td class="td">{{ $order['gross_weight'] }} kg</td>
+
                         <td class="td">
                             <p class="tooltip tooltip-top" data-tip="{{ $order['client_address'] }}">
                                 {{ auth()->user()->short($order['client_address'], 30) }}
                             </p>
                         </td>
+
                         <td class="td">{{ $order['unit_load'] }}</td>
+
+                        <td class='td'>
+                            @livewire('user.modal-created-requests-live', [
+                                'targetCustomer' => $order['target_customer'],
+                                'netWeight' => $order['net_weight'],
+                                'grossWeight' => $order['gross_weight'],
+                                'clientAddress' => $order['client_address'],
+                                'unitLoad' => $order['unit_load']
+                            ], key($order['id'] . 'request'))
+                        </td>
                     </tr>
                 @empty
                     <tr>
