@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Provider;
 
+use App\Models\User;
 use app\Models\Users;
 use App\Models\Request;
 use Livewire\Component;
+use App\Models\Provider;
 use Illuminate\Support\Facades\Auth;
 
 class PendingRequestsLive extends Component
@@ -16,7 +18,9 @@ class PendingRequestsLive extends Component
     public function mount()
     {
         if (Auth::check()) {
-            $this->requests = Request::where('provider_id', Auth::id())->where('status',1)->get();
+            $idUser = User::find(Auth::id());
+            $provider = Provider::where('company_name', $idUser->name)->first();
+            $this->requests = Request::where('provider_id', $provider->id)->where('status',1)->get();
         } else {
             $this->requests = [];
         }

@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Provider;
 
+use App\Models\Provider;
+use App\Models\User;
 use App\Models\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +17,9 @@ class NewRequestsLive extends Component
     public function mount()
     {
         if (Auth::check()) {
-            $this->requests = Request::where('provider_id', Auth::id())->where('status',0)->get();
+            $idUser = User::find(Auth::id());
+            $provider = Provider::where('company_name', $idUser->name)->first();
+            $this->requests = Request::where('provider_id', $provider->id)->where('status',0)->get();
         } else {
             $this->requests = [];
         }

@@ -39,7 +39,7 @@ class ProviderSeeder extends Seeder
                     continue;
                 }
 
-                Provider::create([
+                $provider = Provider::create([
                     'nit'                 => $providerData['nit'],
                     'company_name'        => $providerData['company_name'],
                     'operational_contact' => $providerData['operational_contact'],
@@ -56,6 +56,10 @@ class ProviderSeeder extends Seeder
                     'email_verified_at' => Carbon::now(),
                     'remember_token'    => Str::random(10),
                 ]);
+
+                /*$provider->updated([
+                    'user_id' => $user->id,
+                ]);*/
 
                 $user->assignRole('Provider');
             }
