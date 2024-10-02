@@ -82,6 +82,7 @@ class ModalCreatedRequestsLive extends Component
                     $this->orderSecond = true;
                 } else {
                     $this->orderNumber2 = null;
+                    $this->orderSecond = false;
                     $this->addError('searchOrderId', 'No se encontró ninguna orden con ese número');
                 }
             }
