@@ -2,11 +2,12 @@
 
 namespace App\Livewire\User;
 
+use Carbon\Carbon;
 use App\Models\Request;
 use Livewire\Component;
 use App\Models\Provider;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class ModalCreatedRequestsLive extends Component
 {
@@ -23,6 +24,11 @@ class ModalCreatedRequestsLive extends Component
     public $fechaCita;
     public $comentario;
     public $orderNumber;
+
+    //2da orden
+    public $searchOrderId;
+    public $orderNumber2 = [];
+    public $orderSecond = false;
 
     public function mount($targetCustomer, $netWeight, $grossWeight, $clientAddress, $unitLoad, $orderNumber)
     {
@@ -59,6 +65,31 @@ class ModalCreatedRequestsLive extends Component
         }
     }
 
+    public function updatedSearchOrderId($value)
+    {
+        $this->resetErrorBag('searchOrderId');
+
+        if ($this->searchOrderId) {
+            $response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData');
+            if ($response->successful()) {
+                $orders = $response->json();
+                $filteredOrders = array_filter($orders, function ($order) {
+                    return $order['order_number'] == $this->searchOrderId;
+                });
+
+                if (!empty($filteredOrders)) {
+                    $this->orderNumber2 = reset($filteredOrders);
+                    $this->orderSecond = true;
+                } else {
+                    $this->orderNumber2 = null;
+                    $this->addError('searchOrderId', 'No se encontró ninguna orden con ese número');
+                }
+            }
+        } else {
+            $this->resetErrorBag('searchOrderId');
+        }
+    }
+
     public function store()
     {
         $this->validate([
@@ -71,6 +102,15 @@ class ModalCreatedRequestsLive extends Component
             'gross_weight' => 'required',
             'flete' => 'nullable',
             'fechaCita' => 'required',
+            'searchOrderId' => [
+                function ($attribute, $value, $fail) {
+                    if ($this->searchOrderId && empty($this->orderNumber2)) {
+                        $fail('No se encontró ninguna orden con ese número');
+                    } elseif (!$this->searchOrderId) {
+                        return 'nullable';
+                    }
+                }
+            ],
         ],
         [
             'proveedor.required' => 'El campo proveedor es obligatorio',
@@ -88,7 +128,7 @@ class ModalCreatedRequestsLive extends Component
 
         $provider_id = Provider::where('company_name', $this->proveedor)->first()->id;
 
-        Request::create([
+        $request = Request::create([
             'provider' => $this->proveedor,
             'provider_id' => $provider_id,
             'order_number' => $this->orderNumber,
@@ -102,6 +142,26 @@ class ModalCreatedRequestsLive extends Component
             'date_quotation' => $this->fechaCita,
             'comment' => $this->comentario,
         ]);
+
+        if ($this->searchOrderId && !empty($this->orderNumber2)) {
+            $order2 = Request::create([
+                'provider' => $this->proveedor,
+                'provider_id' => $provider_id,
+                'order_number' => $this->orderNumber2['order_number'],
+                'client_name' => $this->orderNumber2['target_customer'],
+                'client_address' => $this->orderNumber2['client_address'],
+                'client_phone' => $this->telefonoCliente,
+                'container_type' => $this->orderNumber2['unit_load'],
+                'order_weight' => $this->orderNumber2['net_weight'],
+                'gross_weight' => $this->orderNumber2['gross_weight'],
+                'flete' => $this->flete ? $this->flete : null,
+                'date_quotation' => $this->fechaCita,
+                'comment' => $this->comentario,
+                'double_order' => 1,
+            ]);
+
+            $request->update(['id_request_double' => $order2->id]);
+        }
 
         DB::commit();
 
@@ -121,22 +181,18 @@ class ModalCreatedRequestsLive extends Component
     {
         $this->reset([
             'proveedor',
-            'nombreCliente',
-            'direccionCliente',
             'telefonoCliente',
-            'tipoContenedor',
-            'pesoOrden',
-            'gross_weight',
             'flete',
             'fechaCita',
             'comentario',
+            'searchOrderId',
         ]);
 
         $this->resetErrorBag();
     }
 
     public function render()
-    {
-        return view('livewire.user.modal-created-requests-live');
-    }
+{
+    return view('livewire.user.modal-created-requests-live');
+}
 }

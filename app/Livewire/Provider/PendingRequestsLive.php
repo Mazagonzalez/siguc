@@ -26,15 +26,6 @@ class PendingRequestsLive extends Component
         }
     }
 
-    public function rejectRequest($requestId)
-    {
-        $request = Request::find($requestId);
-        $request->status = 2;
-        $request->save();
-        $this->requests = Request::where('provider_id', Auth::id())->where('status',1)->get();
-        $this->dispatch('request');
-    }
-
     public function render()
     {
         return view('livewire.provider.pending-requests-live', ['requests' => $this->requests]);

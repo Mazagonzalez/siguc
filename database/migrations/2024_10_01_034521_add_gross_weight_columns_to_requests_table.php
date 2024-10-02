@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('requests', function (Blueprint $table) {
-            $table->integer('gross_weight')->after('order_weight')->nullable();
+            $table->decimal('gross_weight',60,17)->after('order_weight')->nullable();
         });
     }
 

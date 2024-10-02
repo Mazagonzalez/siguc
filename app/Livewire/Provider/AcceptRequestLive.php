@@ -49,13 +49,27 @@ class AcceptRequestLive extends Component
 
         DB::beginTransaction();
 
-        $this->request->type_vehicle = $this->type_vehicle;
-        $this->request->license_plate = strtoupper($this->license_plate);
-        $this->request->driver_name = $this->driver_name;
-        $this->request->identification = $this->identification;
-        $this->request->date_acceptance = Carbon::now();
-        $this->request->status = 1;
-        $this->request->save();
+
+        $this->request->update([
+            'type_vehicle' => $this->type_vehicle,
+            'license_plate' => strtoupper($this->license_plate),
+            'driver_name' => $this->driver_name,
+            'identification' => $this->identification,
+            'date_acceptance' => Carbon::now(),
+            'status' => 1,
+        ]);
+
+        if ($this->request->id_request_double) {
+            $requestDouble = Request::find($this->request->id_request_double);
+            $requestDouble->update([
+                'type_vehicle' => $this->type_vehicle,
+                'license_plate' => strtoupper($this->license_plate),
+                'driver_name' => $this->driver_name,
+                'identification' => $this->identification,
+                'date_acceptance' => Carbon::now(),
+                'status' => 1,
+            ]);
+        }
 
         DB::commit();
 

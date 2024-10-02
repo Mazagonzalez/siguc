@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('client_address')->nullable();
             $table->string('client_phone')->nullable();
             $table->string('container_type')->nullable();
-            $table->integer('order_weight')->nullable();
+            $table->decimal('order_weight',60,17)->nullable();
             $table->date('date_quotation')->nullable();
             $table->text('comment')->nullable();
             $table->boolean('status')->default(0);

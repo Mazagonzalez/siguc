@@ -118,6 +118,28 @@
                         </span>
                     @enderror
                 </div>
+
+                <div>
+                    <span class="title-input">Segunda Orden</span>
+                    <input wire:model.live="searchOrderId" type="number" class="w-full input-simple" />
+                    @error('searchOrderId')
+                        <span class="err">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+                <div>
+                    @if ($orderSecond)
+                        @livewire('user.details-second-order-live', [
+                            'order_number' => $orderNumber2['order_number'],
+                            'target_customer' => $orderNumber2['target_customer'],
+                            'client_address' => $orderNumber2['client_address'],
+                            'unit_load' => $orderNumber2['unit_load'],
+                            'net_weight' => $orderNumber2['net_weight'],
+                            'gross_weight' => $orderNumber2['gross_weight'],
+                        ], key($orderNumber2['order_number'] . 'request'))
+                    @endif
+                </div>
             </div>
         </x-slot>
         <x-slot name="footer">

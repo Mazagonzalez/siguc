@@ -6,6 +6,7 @@
                 <th class="th">Tipo de contenedor</th>
                 <th class="th">Fecha de entrega</th>
                 <th class="th">Fecha de la solicitud</th>
+                <th class="th">Cantidad de ordenes</th>
                 <th class="th"></th>
             </tr>
         </thead>
@@ -19,7 +20,13 @@
                     <td class="td">{{ $request->container_type }}</td>
                     <td class="td">{{ $request->date_quotation }}</td>
                     <td class="td">{{ $request->created_at }}</td>
-
+                    <td class="td">
+                        @if ($request->id_request_double)
+                            <p>2</p>
+                        @else
+                            <p>1</p>
+                        @endif
+                    </td>
                     <td class="items-center justify-center gap-2 td row" style="text-align: start">
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 

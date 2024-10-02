@@ -19,19 +19,10 @@ class NewRequestsLive extends Component
         if (Auth::check()) {
             $idUser = User::find(Auth::id());
             $provider = Provider::where('company_name', $idUser->name)->first();
-            $this->requests = Request::where('provider_id', $provider->id)->where('status',0)->get();
+            $this->requests = Request::where('provider_id', $provider->id)->where('status', 0)->where('double_order', 0)->get();
         } else {
             $this->requests = [];
         }
-    }
-
-    public function rejectRequest($requestId)
-    {
-        $request = Request::find($requestId);
-        $request->status = 2;
-        $request->save();
-        $this->requests = Request::where('provider_id', Auth::id())->where('status',0)->get();
-        $this->dispatch('request');
     }
 
     public function render()
