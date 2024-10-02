@@ -34,6 +34,20 @@
         @livewireScripts
 
         <script>
+            /* Formatear a numeros a monto */
+            function formatNumber(input) {
+                let value = input.value.replace(/\D/g, '');
+                value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+                input.value = value;
+            }
+
+            /* Validar solo numeros */
+            function validateNumber(input) {
+                input.value = input.value.replace(/[^0-9]/g, '');
+            }
+
+            /* Control theme */
             (function () {
                 const darkStyles = document.querySelector('style[data-theme="dark"]')?.textContent
                 const lightStyles = document.querySelector('style[data-theme="light"]')?.textContent

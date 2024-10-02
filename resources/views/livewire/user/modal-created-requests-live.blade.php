@@ -42,7 +42,7 @@
 
                 <div>
                     <span class="title-input">Teléfono</span>
-                    <input wire:model.live="telefonoCliente" type="number" class="w-full input-simple" />
+                    <input wire:model.live="telefonoCliente" oninput="validateNumber(this)" type="text" class="w-full input-simple" />
                     @error('telefonoCliente')
                         <span class="err">
                             {{ $message }}
@@ -62,7 +62,7 @@
 
                 <div>
                     <span class="title-input">Peso neto</span>
-                    <input wire:model.live="pesoOrden" type="number" class="w-full input-simple" readonly />
+                    <input wire:model.live="pesoOrden" type="text" class="w-full input-simple" readonly />
                     @error('pesoOrden')
                         <span class="err">
                             {{ $message }}
@@ -72,7 +72,7 @@
 
                 <div>
                     <span class="title-input">Peso bruto</span>
-                    <input wire:model.live="gross_weight" type="number" class="w-full input-simple" readonly />
+                    <input wire:model.live="gross_weight" type="text" class="w-full input-simple" readonly />
                     @error('gross_weight')
                         <span class="err">
                             {{ $message }}
@@ -82,7 +82,7 @@
 
                 <div>
                     <span class="title-input">Flete (opcial)</span>
-                    <input wire:model.live="flete" type="number" class="w-full input-simple" />
+                    <input wire:model.live="flete" oninput="formatNumber(this)" type="text" class="w-full input-simple" />
                     @error('flete')
                         <span class="err">
                             {{ $message }}
@@ -121,7 +121,7 @@
 
                 <div>
                     <span class="title-input">Segunda Orden</span>
-                    <input wire:model.live="searchOrderId" type="number" class="w-full input-simple" />
+                    <input wire:model.live="searchOrderId" type="text" class="w-full input-simple" />
                     @error('searchOrderId')
                         <span class="err">
                             {{ $message }}
