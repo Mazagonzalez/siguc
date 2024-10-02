@@ -70,21 +70,23 @@ class ModalCreatedRequestsLive extends Component
         $this->resetErrorBag('searchOrderId');
 
         if ($this->searchOrderId) {
-            $response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData');
+            $response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $this->searchOrderId);
             if ($response->successful()) {
-                $orders = $response->json();
-                $filteredOrders = array_filter($orders, function ($order) {
-                    return $order['order_number'] == $this->searchOrderId;
-                });
+                $order = $response->json();
 
-                if (!empty($filteredOrders)) {
-                    $this->orderNumber2 = reset($filteredOrders);
+                if ($order) {
+                    $this->orderNumber2 = $order;
                     $this->orderSecond = true;
+                    $this->resetErrorBag('searchOrderId');
                 } else {
                     $this->orderNumber2 = null;
                     $this->orderSecond = false;
                     $this->addError('searchOrderId', 'No se encontró ninguna orden con ese número');
                 }
+            } else {
+                $this->orderNumber2 = null;
+                $this->orderSecond = false;
+                $this->addError('searchOrderId', 'No se encontró ninguna orden con ese número');
             }
         } else {
             $this->resetErrorBag('searchOrderId');
