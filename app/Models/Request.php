@@ -30,6 +30,7 @@ class Request extends Model
         'date_acceptance',
         'date_loading',
         'decline_comment',
+        'decline_comment_user',
         'double_order',
         'id_request_double',
         'status',
