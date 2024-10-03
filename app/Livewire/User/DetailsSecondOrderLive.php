@@ -6,8 +6,6 @@ use Livewire\Component;
 
 class DetailsSecondOrderLive extends Component
 {
-    public $open = false;
-
     public $order_number;
 
     public $target_customer;
@@ -28,16 +26,6 @@ class DetailsSecondOrderLive extends Component
         $this->unit_load = $unit_load;
         $this->net_weight = $net_weight;
         $this->gross_weight = $gross_weight;
-    }
-
-    public function showModal()
-    {
-        $this->open = true;
-    }
-
-    public function close()
-    {
-        $this->open = false;
     }
 
     public function render()

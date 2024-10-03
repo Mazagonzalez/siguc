@@ -37,7 +37,7 @@
 
 /* Inputs */
 .input-simple{
-    @apply rounded-full bg-[#ebecec] dark:bg-[#333333] border-none h-[45px] placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-blue-500
+    @apply rounded-full bg-[#f0f1f1] dark:bg-[#333333] border-none h-[45px] placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-blue-500
 }
 
 /* Flex box */

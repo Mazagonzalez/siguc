@@ -50,9 +50,9 @@ class ModalCreatedRequestsLive extends Component
         $this->proveedores = Provider::pluck('company_name')->toArray();
     }
 
-    public function updated($value)
+    public function updated($field)
     {
-       $this->resetErrorBag();
+        $this->resetErrorBag($field);
     }
 
     public function updatedFechaCita($value)
@@ -178,7 +178,6 @@ class ModalCreatedRequestsLive extends Component
     public function close()
     {
         $this->resetRequest();
-
         $this->open = false;
     }
 
