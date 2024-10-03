@@ -73,4 +73,15 @@ class User extends Authenticatable
             return $text;
         }
     }
+
+    // relacion uno a mucho
+    public function provider()
+    {
+        return $this->hasMany(Provider::class);
+    }
+
+    public function request()
+    {
+        return $this->hasMany(Request::class);
+    }
 }

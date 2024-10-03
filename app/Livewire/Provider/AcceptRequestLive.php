@@ -28,6 +28,7 @@ class AcceptRequestLive extends Component
 
     public function showModal()
     {
+        $this->resetRequest();
         $this->open = true;
     }
 
@@ -55,7 +56,7 @@ class AcceptRequestLive extends Component
             'license_plate' => strtoupper($this->license_plate),
             'driver_name' => $this->driver_name,
             'identification' => $this->identification,
-            'date_acceptance' => Carbon::now(),
+            'date_acceptance' => Carbon::now()->toDateTimeString(),
             'status' => 1,
         ]);
 
@@ -66,7 +67,7 @@ class AcceptRequestLive extends Component
                 'license_plate' => strtoupper($this->license_plate),
                 'driver_name' => $this->driver_name,
                 'identification' => $this->identification,
-                'date_acceptance' => Carbon::now(),
+                'date_acceptance' => Carbon::now()->toDateTimeString(),
                 'status' => 1,
             ]);
         }

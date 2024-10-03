@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Livewire\Provider;
+namespace App\Livewire\User;
 
-use App\Models\User;
 use App\Models\Request;
 use Livewire\Component;
 use App\Models\Provider;
@@ -17,8 +16,7 @@ class HistoryRequestsLive extends Component
     public function mount()
     {
         if (Auth::check()) {
-            $provider = Provider::where('user_id', Auth::id())->first();
-            $this->requests = Request::where('provider_id', $provider->id)->whereIn('status', [2, 3])->orderBy('updated_at', 'desc')->get();
+            $this->requests = Request::where('user_id', Auth::id())->where('status', 3)->orderBy('updated_at', 'desc')->get();
         } else {
             $this->requests = [];
         }
@@ -26,6 +24,6 @@ class HistoryRequestsLive extends Component
 
     public function render()
     {
-        return view('livewire.provider.history-requests-live', ['requests' => $this->requests]);
+        return view('livewire.user.history-requests-live', ['requests' => $this->requests]);
     }
 }

@@ -10,6 +10,7 @@ class Provider extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'nit',
         'company_name',
         'operational_contact',
@@ -20,5 +21,10 @@ class Provider extends Model
     public function request()
     {
         return $this->hasMany(Request::class, 'provider_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

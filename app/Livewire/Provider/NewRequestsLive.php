@@ -17,8 +17,7 @@ class NewRequestsLive extends Component
     public function mount()
     {
         if (Auth::check()) {
-            $idUser = User::find(Auth::id());
-            $provider = Provider::where('company_name', $idUser->name)->first();
+            $provider = Provider::where('user_id', Auth::id())->first();
             $this->requests = Request::where('provider_id', $provider->id)->where('status', 0)->where('double_order', 0)->get();
         } else {
             $this->requests = [];

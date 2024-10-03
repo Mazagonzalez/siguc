@@ -39,14 +39,6 @@ class ProviderSeeder extends Seeder
                     continue;
                 }
 
-                $provider = Provider::create([
-                    'nit'                 => $providerData['nit'],
-                    'company_name'        => $providerData['company_name'],
-                    'operational_contact' => $providerData['operational_contact'],
-                    'contact'             => $providerData['contact'],
-                    'email'               => $providerData['email'],
-                ]);
-
                 $userNit = limpiarNit($providerData['nit']);
 
                 $user = User::create([
@@ -57,9 +49,14 @@ class ProviderSeeder extends Seeder
                     'remember_token'    => Str::random(10),
                 ]);
 
-                /*$provider->updated([
-                    'user_id' => $user->id,
-                ]);*/
+                Provider::create([
+                    'user_id'             => $user->id,
+                    'nit'                 => $providerData['nit'],
+                    'company_name'        => $providerData['company_name'],
+                    'operational_contact' => $providerData['operational_contact'],
+                    'contact'             => $providerData['contact'],
+                    'email'               => $providerData['email'],
+                ]);
 
                 $user->assignRole('Provider');
             }

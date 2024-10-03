@@ -7,6 +7,7 @@ use App\Models\Request;
 use Livewire\Component;
 use App\Models\Provider;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class ModalCreatedRequestsLive extends Component
@@ -79,11 +80,13 @@ class ModalCreatedRequestsLive extends Component
                     $this->orderSecond = true;
                     $this->resetErrorBag('searchOrderId');
                 } else {
+                    $this->resetErrorBag('searchOrderId');
                     $this->orderNumber2 = null;
                     $this->orderSecond = false;
                     $this->addError('searchOrderId', 'No se encontró ninguna orden con ese número');
                 }
             } else {
+                $this->resetErrorBag('searchOrderId');
                 $this->orderNumber2 = null;
                 $this->orderSecond = false;
                 $this->addError('searchOrderId', 'No se encontró ninguna orden con ese número');
@@ -107,7 +110,9 @@ class ModalCreatedRequestsLive extends Component
             'fechaCita' => 'required',
             'searchOrderId' => [
                 function ($attribute, $value, $fail) {
-                    if ($this->searchOrderId && empty($this->orderNumber2)) {
+                    if ($this->orderNumber == $this->searchOrderId) {
+                        $fail('El número de orden ya fue ingresado en la orden principal');
+                    } elseif ($this->searchOrderId && empty($this->orderNumber2)) {
                         $fail('No se encontró ninguna orden con ese número');
                     } elseif (!$this->searchOrderId) {
                         return 'nullable';
@@ -134,6 +139,7 @@ class ModalCreatedRequestsLive extends Component
         $provider_id = Provider::where('company_name', $this->proveedor)->first()->id;
 
         $request = Request::create([
+            'user_id' => Auth::id(),
             'provider' => $this->proveedor,
             'provider_id' => $provider_id,
             'order_number' => $this->orderNumber,
@@ -150,6 +156,7 @@ class ModalCreatedRequestsLive extends Component
 
         if ($this->searchOrderId && !empty($this->orderNumber2)) {
             $order2 = Request::create([
+                'user_id' => Auth::id(),
                 'provider' => $this->proveedor,
                 'provider_id' => $provider_id,
                 'order_number' => $this->orderNumber2['order_number'],
@@ -172,6 +179,7 @@ class ModalCreatedRequestsLive extends Component
 
         $this->resetRequest();
         $this->open = false;
+        $this->dispatch('request');
         $this->dispatch('successful-toast', message: '¡Solicitud creada exitosamente!');
     }
 

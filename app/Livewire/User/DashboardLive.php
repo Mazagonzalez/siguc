@@ -10,6 +10,7 @@ class DashboardLive extends Component
 {
     public $orders = [];
     public $orderId;
+    public $serch = false;
 
     public function mount()
     {
@@ -27,6 +28,7 @@ class DashboardLive extends Component
     public function updatedOrderId($value)
     {
         $this->filterOrders();
+        $this->serch = true;
     }
 
     public function filterOrders()

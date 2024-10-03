@@ -27,7 +27,7 @@
             @empty
                 <tr>
                     <td colspan="6">
-                        <p class="py-20 text-center">No tiene historial de solicitudes</p>
+                        <p class="py-20 text-center">No tiene historial de solicitudes finalizada</p>
                     </td>
                 </tr>
             @endforelse

@@ -56,12 +56,44 @@
                 @empty
                     <tr>
                         <td colspan="6">
-                            <p class="py-10 text-center">No se ha encontrado en la base de datos</p>
+                            @if ($serch === true)
+                                <p class="py-10 text-center">No se ha encontrado en la base de datos</p>
+                            @else
+                                <p class="py-10 text-center">Aun no se ha buscado ninguna orden</p>
+                            @endif
                         </td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
+        <div
+            x-data="{
+                typeRequest: 1,
+                activeClass: 'bg-[#ebecec] dark:bg-[#333333] font-semibold',
+                inactiveClass: '',
+                showFilter: false,
+            }" class="gap-5 screen-default col"
+        >
+            <div class="items-center mb-5 row">
+                <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 1" :class="typeRequest === 1 ? activeClass : inactiveClass">
+                    {{ __('Solicitudes en Proceso')}}
+                </a>
+                <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 2" :class="typeRequest === 2 ? activeClass : inactiveClass">
+                    {{ __('Historial de Solicitudes')}}
+                </a>
+            </div>
+
+            <div class="w-full">
+                <div x-show="typeRequest === 1" x-transition:enter.duration.500ms style="display: none">
+                    @livewire('user.pending-requests-live', key('pending-request-'.auth()->user()->id))
+                </div>
+
+                <div x-show="typeRequest === 2" x-transition:enter.duration.500ms style="display: none">
+                    @livewire('user.history-requests-live', key('history-request-'.auth()->user()->id))
+                </div>
+            </div>
+
+        </div>
     </div>
 
     @if (session('message'))

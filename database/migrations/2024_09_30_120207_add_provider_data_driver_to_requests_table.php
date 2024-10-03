@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('license_plate')->after('Type_vehicle')->nullable();
             $table->string('driver_name')->after('license_plate')->nullable();
             $table->string('identification')->after('driver_name')->nullable();
-            $table->date('date_acceptance')->after('identification')->nullable();
-            $table->date('date_loading')->after('date_acceptance')->nullable();
+            $table->dateTime('date_acceptance')->after('identification')->nullable();
+            $table->dateTime('date_loading')->after('date_acceptance')->nullable();
         });
     }
 

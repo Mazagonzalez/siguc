@@ -18,9 +18,8 @@ class PendingRequestsLive extends Component
     public function mount()
     {
         if (Auth::check()) {
-            $idUser = User::find(Auth::id());
-            $provider = Provider::where('company_name', $idUser->name)->first();
-            $this->requests = Request::where('provider_id', $provider->id)->where('status',1)->get();
+            $provider = Provider::where('user_id', Auth::id())->first();
+            $this->requests = Request::where('provider_id', $provider->id)->where('status',1)->where('double_order', 0)->get();
         } else {
             $this->requests = [];
         }

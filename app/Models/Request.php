@@ -10,6 +10,7 @@ class Request extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'provider',
         'provider_id',
         'order_number',
@@ -45,5 +46,10 @@ class Request extends Model
     public function request_double()
     {
         return $this->belongsTo(Request::class, 'id_request_double');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

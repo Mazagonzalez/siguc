@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('providers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('nit')->nullable();
             $table->string('company_name')->nullable();
             $table->string('operational_contact')->nullable();
             $table->string('contact')->nullable();
             $table->string('email')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 
