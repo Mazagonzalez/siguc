@@ -16,7 +16,7 @@ class HistoryRequestsLive extends Component
     public function mount()
     {
         if (Auth::check()) {
-            $this->requests = Request::where('user_id', Auth::id())->where('status', 3)->orderBy('updated_at', 'desc')->get();
+            $this->requests = Request::where('user_id', Auth::id())->whereIn('status', [2, 3])->orderBy('updated_at', 'desc')->get();
         } else {
             $this->requests = [];
         }
