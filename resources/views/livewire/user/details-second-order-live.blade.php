@@ -1,4 +1,4 @@
-<div wire:transition class="col gap-2 p-4 rounded-3xl bg-[#f2f3f5] dark:bg-zinc-800">
+<div class="gap-2 p-4 bg-gray-100 col rounded-3xl dark:bg-zinc-800">
     <p class="font-semibold text-center">Detalles segunda orden</p>
 
     <div class="text-xs divide-y divide-gray-300 col dark:divide-zinc-800">

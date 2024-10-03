@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="gap-3 col lg:w-1/2">
-                    <div class="px-5 py-2 text-center text-blue-500 bg-blue-50 rounded-xl">
+                    <div class="px-5 py-2 text-center bg-gray-100 dark:bg-zinc-800 rounded-xl">
                         <p class="font-light"><span class="font-semibold">Nota:</span> Los siguientes campos son opcionales</p>
                     </div>
 
