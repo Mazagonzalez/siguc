@@ -51,7 +51,7 @@
                         @endif
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
-                        @livewire('provider.decline-request-live', ['request' => $request], key('reject-request-'.$request->id))
+                        @livewire('user.decline-requests-live', ['request' => $request], key('reject-request-'.$request->id))
                     </td>
                 </tr>
             @empty
