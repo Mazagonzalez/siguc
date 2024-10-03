@@ -1,6 +1,6 @@
 <div>
     <button wire:key="show-accept-{{ $request->id }}" wire:click="showModal" class="btn-decline tooltip tooltip-top" data-tip="Rechazar">
-        <x-icons.x-mark class="size-6 stroke-white" />
+        <x-icons.x-mark class="size-5 stroke-white" />
     </button>
 
     <x-dialog-modal wire:model='open' maxWidth="md" title="Cancelacion del servicio" >

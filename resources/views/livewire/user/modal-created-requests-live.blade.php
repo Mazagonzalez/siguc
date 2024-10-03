@@ -1,6 +1,6 @@
 <div>
     <button wire:click="showModal" class="btn-info tooltip tooltip-top" data-tip="Crear Solicitud">
-        <x-icons.more class="size-6 stroke-white" />
+        <x-icons.more class="size-5 stroke-white" />
     </button>
 
     <x-dialog-modal wire:model='open' maxWidth="4xl" title="Solicitud" >

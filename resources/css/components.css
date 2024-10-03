@@ -12,15 +12,15 @@
 }
 
 .btn-info{
-    @apply flex justify-center items-center size-10 text-white bg-blue-500 rounded-full hover:bg-blue-600
+    @apply flex justify-center items-center size-8 text-white bg-blue-500 rounded-full hover:bg-blue-600
 }
 
 .btn-confirm{
-    @apply flex justify-center items-center size-10 text-white bg-emerald-500 rounded-full hover:bg-emerald-600
+    @apply flex justify-center items-center size-8 text-white bg-emerald-500 rounded-full hover:bg-emerald-600
 }
 
 .btn-decline{
-    @apply flex justify-center items-center size-10 text-white bg-red-500 rounded-full hover:bg-red-600
+    @apply flex justify-center items-center size-8 text-white bg-red-500 rounded-full hover:bg-red-600
 }
 
 .btn-logout{

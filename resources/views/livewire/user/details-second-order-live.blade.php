@@ -1,7 +1,7 @@
 <div class="gap-2 p-4 bg-gray-100 col rounded-3xl dark:bg-zinc-800">
     <p class="font-semibold text-center">Detalles segunda orden</p>
 
-    <div class="text-xs divide-y divide-gray-300 col dark:divide-zinc-800">
+    <div class="text-xs divide-y divide-gray-300 col dark:divide-white/20">
         @if ($order_number)
             <div class="py-1.5 col">
                 <span class="text-sm font-semibold">Numero de orde</span>

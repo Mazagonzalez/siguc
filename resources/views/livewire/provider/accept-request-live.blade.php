@@ -5,7 +5,7 @@
         class="btn-confirm tooltip tooltip-top"
         data-tip="Aceptar"
     >
-        <x-icons.checked class="size-6 stroke-white" />
+        <x-icons.checked class="size-5 stroke-white" />
     </button>
 
     <x-dialog-modal wire:model='open' maxWidth="md" title="Datos para aceptar solicitud" >
@@ -27,7 +27,7 @@
 
                 <div>
                     <span class="title-input">Placa del vehiculo</span>
-                    <input wire:model.live="license_plate" type="text" class="w-full input-simple" />
+                    <input wire:model.live="license_plate" type="text" class="w-full uppercase input-simple" />
                     @error('license_plate')
                         <span class="err">
                             {{ $message }}
@@ -47,7 +47,7 @@
 
                 <div>
                     <span class="title-input">Identificacion del conductor</span>
-                    <input wire:model.live="identification" type="number" class="w-full input-simple" />
+                    <input wire:model.live="identification" oninput="validateNumber(this)" type="text" class="w-full input-simple" />
                     @error('identification')
                         <span class="err">
                             {{ $message }}
