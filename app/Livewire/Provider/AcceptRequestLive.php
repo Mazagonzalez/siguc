@@ -65,6 +65,9 @@ class AcceptRequestLive extends Component
         if ($diferencia->i > 0) {
             $resultado[] = $diferencia->i . ' minuto' . ($diferencia->i > 1 ? 's' : '');
         }
+        if ($diferencia->s > 0) {
+            $resultado[] = $diferencia->s . ' segundo' . ($diferencia->s > 1 ? 's' : '');
+        }
 
         // Une los resultados en un string
         $time_response = implode(' y ', $resultado);
