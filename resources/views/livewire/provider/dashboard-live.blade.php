@@ -4,7 +4,7 @@
         activeClass: 'bg-[#ebecec] dark:bg-[#333333] font-semibold',
         inactiveClass: '',
         showFilter: false,
-    }" class="gap-5 screen-default col"
+    }" class="gap-5 p-8 screen-default col card-theme"
 >
     <div class="items-center mb-5 row">
         <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 1" :class="typeRequest === 1 ? activeClass : inactiveClass">

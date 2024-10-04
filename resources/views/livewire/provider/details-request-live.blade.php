@@ -24,7 +24,7 @@
                     @endif
 
                     <div class="divide-y divide-gray-300 col dark:divide-white/20">
-                        @role('user')
+                        @role('User')
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Numero de orden</span>
                                 <p class="font-light">{{ $request->order_number }}</p>
@@ -50,12 +50,12 @@
 
                         <div class="py-2 col">
                             <span class="text-base font-semibold">Peso neto de la solictud</span>
-                            <p class="font-light">{{ number_format($request->order_weight, 2, ',') }}</p>
+                            <p class="font-light">{{ number_format($request->order_weight, 2) }}</p>
                         </div>
 
                         <div class="py-2 col">
                             <span class="text-base font-semibold">Peso bruto de la solictud</span>
-                            <p class="font-light">{{ number_format($request->gross_weight, 2, ',') }}</p>
+                            <p class="font-light">{{ number_format($request->gross_weight, 2) }}</p>
                         </div>
 
                         <div class="py-2 col">
@@ -112,6 +112,13 @@
                         <p class="text-base font-semibold text-center">Detalles de la segunda solicitud</p>
 
                         <div class="divide-y divide-gray-300 col dark:divide-white/20">
+                            @role('User')
+                                <div class="py-2 col">
+                                    <span class="text-base font-semibold">Numero de orden</span>
+                                    <p class="font-light">{{ $request->request_double?->order_number }}</p>
+                                </div>
+                            @endrole
+
                             @if ($request->request_double?->status != 0)
                                 <div class="py-2 col">
                                     <span class="text-base font-semibold">Cliente</span>
@@ -131,12 +138,12 @@
 
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Peso neto de la solictud</span>
-                                <p class="font-light">{{ $request->request_double?->order_weight }}</p>
+                                <p class="font-light">{{ number_format($request->request_double?->order_weight, 2) }}</p>
                             </div>
 
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Peso bruto de la solictud</span>
-                                <p class="font-light">{{ $request->request_Double?->gross_weight }}</p>
+                                <p class="font-light">{{ number_format($request->request_Double?->gross_weight, 2) }}</p>
                             </div>
 
                             <div class="py-2 col">
