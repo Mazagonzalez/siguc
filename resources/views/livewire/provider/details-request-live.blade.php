@@ -50,12 +50,12 @@
 
                         <div class="py-2 col">
                             <span class="text-base font-semibold">Peso neto de la solictud</span>
-                            <p class="font-light">{{ number_format($request->order_weight, 2, ',') }}</p>
+                            <p class="font-light">{{ number_format($request->order_weight, 2) }}</p>
                         </div>
 
                         <div class="py-2 col">
                             <span class="text-base font-semibold">Peso bruto de la solictud</span>
-                            <p class="font-light">{{ number_format($request->gross_weight, 2, ',') }}</p>
+                            <p class="font-light">{{ number_format($request->gross_weight, 2) }}</p>
                         </div>
 
                         <div class="py-2 col">
@@ -131,12 +131,12 @@
 
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Peso neto de la solictud</span>
-                                <p class="font-light">{{ $request->request_double?->order_weight }}</p>
+                                <p class="font-light">{{ number_format($request->request_double?->order_weight, 2) }}</p>
                             </div>
 
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Peso bruto de la solictud</span>
-                                <p class="font-light">{{ $request->request_Double?->gross_weight }}</p>
+                                <p class="font-light">{{ number_format($request->request_Double?->gross_weight, 2) }}</p>
                             </div>
 
                             <div class="py-2 col">

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 
+use App\Models\Request;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Http;
@@ -11,10 +12,23 @@ class DashboardLive extends Component
     public $orders = [];
     public $orderId;
     public $serch = false;
+    public $request_acepted;
+    public $request_pending;
+    public $request_rejected;
+    public $request_finished;
 
     public function mount()
     {
         $this->fetchOrders();
+        $this->totalRequest();
+    }
+
+    public function totalRequest()
+    {
+        $this->request_acepted = Request::where('status', 1)->where('double_order', 0)->count();
+        $this->request_pending = Request::where('status', 0)->where('double_order', 0)->count();
+        $this->request_rejected = Request::where('status', 2)->where('double_order', 0)->count();
+        $this->request_finished = Request::where('status', 3)->where('double_order', 0)->count();
     }
 
     public function fetchOrders()

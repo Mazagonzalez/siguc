@@ -1,4 +1,38 @@
 <div class="gap-5 screen-default col">
+    <div class="gap-5 row">
+        <div class="items-center gap-3 py-10 w-[200px] border col rounded-3xl">
+            <div class="bg-blue-500 rounded-md size-12 center-content">
+                <x-icons.message-check class="stroke-white size-8" />
+            </div>
+            <p class="font-semibold text-sm text-center leading-[18px]">Solictudes <br> Aceptadas</p>
+            <p class="text-xl font-semibold">{{ $request_acepted }}</p>
+        </div>
+
+        <div class="items-center gap-3 py-10 w-[200px] border col rounded-3xl">
+            <div class="bg-yellow-400 rounded-md size-12 center-content">
+                <x-icons.clock class="stroke-white size-8" />
+            </div>
+            <p class="font-semibold text-sm text-center leading-[18px]">Solictudes <br> Pendientes</p>
+            <p class="text-xl font-semibold">{{ $request_pending }}</p>
+        </div>
+
+        <div class="items-center gap-3 py-10 w-[200px] border col rounded-3xl">
+            <div class="bg-red-500 rounded-md size-12 center-content">
+                <x-icons.message-cancel class="stroke-white size-8" />
+            </div>
+            <p class="font-semibold text-sm text-center leading-[18px]">Solictudes <br> Rechazadas</p>
+            <p class="text-xl font-semibold">{{ $request_rejected }}</p>
+        </div>
+
+        <div class="items-center gap-3 py-10 w-[200px] border col rounded-3xl">
+            <div class="rounded-md bg-emerald-500 size-12 center-content">
+                <x-icons.check-circle class="stroke-white size-8" />
+            </div>
+            <p class="font-semibold text-sm text-center leading-[18px]">Solictudes <br> Finalizadas</p>
+            <p class="text-xl font-semibold">{{ $request_finished }}</p>
+        </div>
+    </div>
+
     <div class="w-full">
         <div class="items-center gap-2 mb-6 row">
             <input
