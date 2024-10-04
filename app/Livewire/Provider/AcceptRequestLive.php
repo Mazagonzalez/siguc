@@ -49,15 +49,35 @@ class AcceptRequestLive extends Component
             'identification.min_digits' => 'El campo identificación del conductor debe tener al menos 6 caracteres',
         ]);
 
-        DB::beginTransaction();
+        // Tiempo de diferencia entre la creación de la solicitud y la aceptación
+        $date_acceptance = Carbon::now();
+        $created_at = Carbon::parse($this->request->created_at);
+        $diferencia = $created_at->diff($date_acceptance);
 
+        // Formatear la diferencia en un string legible
+        $resultado = [];
+        if ($diferencia->d > 0) {
+            $resultado[] = $diferencia->d . ' día' . ($diferencia->d > 1 ? 's' : '');
+        }
+        if ($diferencia->h > 0) {
+            $resultado[] = $diferencia->h . ' hora' . ($diferencia->h > 1 ? 's' : '');
+        }
+        if ($diferencia->i > 0) {
+            $resultado[] = $diferencia->i . ' minuto' . ($diferencia->i > 1 ? 's' : '');
+        }
+
+        // Une los resultados en un string
+        $time_response = implode(' y ', $resultado);
+
+        DB::beginTransaction();
 
         $this->request->update([
             'type_vehicle' => $this->type_vehicle,
             'license_plate' => strtoupper($this->license_plate),
             'driver_name' => $this->driver_name,
             'identification' => $this->identification,
-            'date_acceptance' => Carbon::now()->toDateTimeString(),
+            'date_acceptance' => $date_acceptance->toDateTimeString(),
+            'time_response' => $time_response,
             'status' => 1,
         ]);
 
@@ -68,7 +88,8 @@ class AcceptRequestLive extends Component
                 'license_plate' => strtoupper($this->license_plate),
                 'driver_name' => $this->driver_name,
                 'identification' => $this->identification,
-                'date_acceptance' => Carbon::now()->toDateTimeString(),
+                'date_acceptance' => $date_acceptance->toDateTimeString(),
+                'time_response' => $time_response,
                 'status' => 1,
             ]);
         }

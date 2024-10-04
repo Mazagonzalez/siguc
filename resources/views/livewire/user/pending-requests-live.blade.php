@@ -6,7 +6,7 @@
                 <th class="th">Numero de orden</th>
                 <th class="th">Fecha de entrega</th>
                 <th class="th">Fecha de confirmacion</th>
-                <th class="th">Cantidad de ordenes</th>
+                <th class="th">Tiempo de respuesta</th>
                 <th class="th"></th>
             </tr>
         </thead>
@@ -24,22 +24,21 @@
                         @else
                             Order #1 {{ $request->order_number }}
                         @endif
-
                     </td>
                     <td class="td">{{ $request->date_quotation }}</td>
                     <td class="td">
                         @if ($request->status == '0')
                             <p>En espera</p>
                         @else
-                            {{ $request->updated_at }}
+                            {{ $request->date_acceptance }}
                         @endif
 
                     </td>
                     <td class="td">
-                        @if ($request->id_request_double)
-                            <p>2</p>
+                        @if ($request->status == '0')
+                            <p>En espera</p>
                         @else
-                            <p>1</p>
+                            {{ $request->time_response }}
                         @endif
                     </td>
 

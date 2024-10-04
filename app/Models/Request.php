@@ -28,6 +28,7 @@ class Request extends Model
         'driver_name',
         'identification',
         'date_acceptance',
+        'time_response',
         'date_loading',
         'date_decline',
         'decline_comment',

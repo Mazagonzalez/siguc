@@ -69,7 +69,7 @@
                             <p>Cliente</p>
                         </div>
                         <div class="items-center py-2 font-light row">
-                            <p class="w-[20%]">{{ $orders['order_number'] }}</p>
+                            <p class="w-[20%]"># {{ $orders['order_number'] }}</p>
                             <p class="tooltip tooltip-top text-start w-[70%]" data-tip="{{ $orders['target_customer'] }}">
                                 {{ auth()->user()->short($orders['target_customer'], 25) }}
                             </p>

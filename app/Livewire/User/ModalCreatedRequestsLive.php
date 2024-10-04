@@ -72,9 +72,16 @@ class ModalCreatedRequestsLive extends Component
                 $order = $response->json();
 
                 if ($order) {
-                    $this->orderNumber2 = $order;
-                    $this->orderSecond = true;
-                    $this->resetErrorBag('searchOrderId');
+                    if (isset($order['statu']) && $order['statu'] == 0) {
+                        $this->orderNumber2 = $order;
+                        $this->orderSecond = true;
+                        $this->resetErrorBag('searchOrderId');
+                    }else {
+                        $this->resetErrorBag('searchOrderId');
+                        $this->orderNumber2 = null;
+                        $this->orderSecond = false;
+                        $this->addError('searchOrderId', 'Ya se creo esta orden');
+                    }
                 } else {
                     $this->resetErrorBag('searchOrderId');
                     $this->orderNumber2 = null;
@@ -173,9 +180,25 @@ class ModalCreatedRequestsLive extends Component
 
         DB::commit();
 
+        // Cambia el estado en el EndPoint
+        $objeto = json_encode(1);
+
+        if ($request->order_number) {
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+            ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $request->order_number, $objeto);
+
+            if ($request->id_request_double) {
+                $response1 = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $order2->order_number, $objeto);
+            }
+        }
+
         $this->resetRequest();
         $this->open = false;
         $this->dispatch('request');
+        $this->dispatch('resetSearch');
         $this->dispatch('successful-toast', message: '¡Solicitud creada exitosamente!');
     }
 

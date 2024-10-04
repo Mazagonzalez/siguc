@@ -43,10 +43,10 @@ class DashboardLive extends Component
 
         if ($response->successful()) {
             $order = $response->json();
-            if ($order['statu'] == 0) {
+            if (isset($order['statu']) && $order['statu'] == 0) {
                 $this->orders = $order;
                 $this->pending = 0;
-            } else {
+            } elseif (isset($order['statu'])) {
                 $this->orders = [];
                 $this->pending = 2;
             }
@@ -54,13 +54,19 @@ class DashboardLive extends Component
             $this->orders = [];
             $this->pending = 1;
         }
-        $this->dispatch('request');
     }
 
     public function clear()
     {
         $this->orderId = '';
         $this->pending = 0;
+        $this->orders = [];
+    }
+
+    #[On('resetSearch')]
+    public function resetSearch()
+    {
+        $this->clear()  ;
     }
 
     #[On('successful-toast')]

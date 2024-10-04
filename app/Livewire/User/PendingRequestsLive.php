@@ -3,10 +3,8 @@
 namespace App\Livewire\User;
 
 use Carbon\Carbon;
-use App\Models\User;
 use App\Models\Request;
 use Livewire\Component;
-use App\Models\Provider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -55,6 +53,8 @@ class PendingRequestsLive extends Component
                 ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $requestDouble->order_number, $objeto);
             }
         }
+
+        $this->dispatch('request');
     }
 
     public function render()

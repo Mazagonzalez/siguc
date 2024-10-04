@@ -19,7 +19,7 @@
 
                     <td class="td">{{ $request->type_vehicle }}</td>
                     <td class="td">{{ $request->date_quotation }}</td>
-                    <td class="td">{{ $request->updated_at }}</td>
+                    <td class="td">{{ $request->date_acceptance }}</td>
                     <td class="td">
                         @if ($request->id_request_double)
                             <p>2</p>
@@ -27,7 +27,7 @@
                             <p>1</p>
                         @endif
                     </td>
-                    
+
                     <td class="items-center justify-center gap-2 td row">
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
