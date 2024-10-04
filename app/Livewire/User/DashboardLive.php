@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Http;
 
 class DashboardLive extends Component
 {
-    public $orders = [];
+    public $orders;
     public $orderId;
-    public $serch = false;
+    public $pending = 0;
     public $request_acepted;
     public $request_pending;
     public $request_rejected;
@@ -21,7 +21,6 @@ class DashboardLive extends Component
 
     public function mount()
     {
-        $this->fetchOrders();
         $this->totalRequest();
     }
 
@@ -33,33 +32,29 @@ class DashboardLive extends Component
         $this->request_finished = Request::where('status', 3)->where('double_order', 0)->count();
     }
 
-    public function fetchOrders()
-    {
-        $response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData');
-        if ($response->successful()) {
-            $this->orders = $response->json();
-        }
-    }
-
     public function updatedOrderId($value)
     {
+        $this->pending = 1;
         $this->filterOrders();
-        $this->serch = true;
     }
 
-    public function filterOrders()
-    {
-        if ($this->orderId) {
-            $response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData');
-            if ($response->successful()) {
-                $orders = $response->json();
-                $this->orders = array_filter($orders, function ($order) {
-                    return $order['order_number'] == $this->orderId;
-                });
+    public function filterOrders() {
+        $response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $this->orderId);
+
+        if ($response->successful()) {
+            $order = $response->json();
+            if ($order['statu'] == 0) {
+                $this->orders = $order;
+                $this->pending = 0;
+            } else {
+                $this->orders = [];
+                $this->pending = 2;
             }
         } else {
-            $this->fetchOrders();
+            $this->orders = [];
+            $this->pending = 1;
         }
+        $this->dispatch('request');
     }
 
     #[On('successful-toast')]
@@ -70,6 +65,6 @@ class DashboardLive extends Component
 
     public function render()
     {
-        return view('livewire.user.dashboard-live', ['orders' => $this->orders]);
+        return view('livewire.user.dashboard-live');
     }
 }

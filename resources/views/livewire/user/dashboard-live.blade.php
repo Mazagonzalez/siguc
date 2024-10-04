@@ -85,48 +85,50 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($orders as $order)
-                    <tr wire:key='orden-{{ $order['id'] }}' class="tr">
+                @if($orders)
+                    <tr wire:key='orden-{{ $orders['id'] }}' class="tr">
                         <td class="td" style="text-align: start">
-                            <p class="tooltip tooltip-top" data-tip="{{ $order['target_customer'] }}">
-                                {{ auth()->user()->short($order['target_customer'], 20) }}
+                            <p class="tooltip tooltip-top" data-tip="{{ $orders['target_customer'] }}">
+                                {{ auth()->user()->short($orders['target_customer'], 20) }}
                             </p>
                         </td>
 
-                        <td class="td">{{ $order['order_number'] }}</td>
-                        <td class="td">{{ $order['net_weight'] }} kg</td>
-                        <td class="td">{{ $order['gross_weight'] }} kg</td>
+                        <td class="td">{{ $orders['order_number'] }}</td>
+                        <td class="td">{{ $orders['net_weight'] }} kg</td>
+                        <td class="td">{{ $orders['gross_weight'] }} kg</td>
 
                         <td class="td">
-                            <p class="tooltip tooltip-top" data-tip="{{ $order['client_address'] }}">
-                                {{ auth()->user()->short($order['client_address'], 30) }}
+                            <p class="tooltip tooltip-top" data-tip="{{ $orders['client_address'] }}">
+                                {{ auth()->user()->short($orders['client_address'], 30) }}
                             </p>
                         </td>
 
-                        <td class="td">{{ $order['unit_load'] }}</td>
+                        <td class="td">{{ $orders['unit_load'] }}</td>
 
                         <td class='td'>
                             @livewire('user.modal-created-requests-live', [
-                                'targetCustomer' => $order['target_customer'],
-                                'netWeight' => $order['net_weight'],
-                                'grossWeight' => $order['gross_weight'],
-                                'clientAddress' => $order['client_address'],
-                                'unitLoad' => $order['unit_load'],
-                                'orderNumber' => $order['order_number'],
-                            ], key($order['id'] . 'request'))
+                                'targetCustomer' => $orders['target_customer'],
+                                'netWeight' => $orders['net_weight'],
+                                'grossWeight' => $orders['gross_weight'],
+                                'clientAddress' => $orders['client_address'],
+                                'unitLoad' => $orders['unit_load'],
+                                'orderNumber' => $orders['order_number'],
+                            ], key($orders['id'] . 'request'))
                         </td>
                     </tr>
-                @empty
+                @else
                     <tr>
-                        <td colspan="6">
-                            @if ($serch === true)
-                                <p class="py-10 text-center">No se ha encontrado en la base de datos</p>
-                            @else
+                        <td colspan="7">
+                            @if ($pending === 0)
                                 <p class="py-10 text-center">Aun no se ha buscado ninguna orden</p>
+                            @elseif ($pending === 1)
+                                <p class="py-10 text-center">No se ha encontrado en la base de datos</p>
+                            @elseif ($pending === 2)
+                                <p class="py-10 text-center">Ya se creo esta orden</p>
                             @endif
                         </td>
                     </tr>
-                @endforelse
+                @endif
             </tbody>
         </table>
     </div>
