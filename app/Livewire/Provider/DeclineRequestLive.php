@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Provider;
 
+use Carbon\Carbon;
 use App\Models\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class DeclineRequestLive extends Component
 {
@@ -37,10 +39,34 @@ class DeclineRequestLive extends Component
 
         $this->request->update([
             'decline_comment' => $this->decline_comment,
+            'date_decline' => Carbon::now()->toDateTimeString(),
             'status' => 2,
         ]);
 
+        if ($this->request->id_request_double) {
+            $this->request->request_double->update([
+                'decline_comment' => $this->decline_comment,
+                'date_decline' => Carbon::now()->toDateTimeString(),
+                'status' => 2,
+            ]);
+        }
+
         DB::commit();
+
+        // Cambia el estado en el EndPoint
+        $objeto = json_encode(0);
+
+        if ($this->request->order_number) {
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+            ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $this->request->order_number, $objeto);
+
+            if ($this->request->id_request_double) {
+                $response1 = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $this->request->request_double->order_number, $objeto);
+            }
+        }
 
         $this->open = false;
         $this->resetRequest();

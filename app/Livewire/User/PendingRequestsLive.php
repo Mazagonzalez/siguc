@@ -2,12 +2,13 @@
 
 namespace App\Livewire\User;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Request;
 use Livewire\Component;
 use App\Models\Provider;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class PendingRequestsLive extends Component
 {
@@ -32,6 +33,28 @@ class PendingRequestsLive extends Component
             'date_loading' => Carbon::now()->toDateTimeString(),
         ]);
         $this->dispatch('request');
+
+        if ($request->id_request_double) {
+            $requestDouble = Request::find($request->id_request_double);
+            $requestDouble->update([
+                'status' => 3,
+                'date_loading' => Carbon::now()->toDateTimeString(),
+            ]);
+        }
+
+        $objeto = json_encode(2);
+
+        if ($requestId) {
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+            ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $request->order_number, $objeto);
+
+            if ($request->id_request_double) {
+                $response1 = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $requestDouble->order_number, $objeto);
+            }
+        }
     }
 
     public function render()

@@ -18,7 +18,13 @@
 
                     <td class="td">{{ $request->container_type }}</td>
                     <td class="td">{{ $request->date_quotation }}</td>
-                    <td class="td">{{ $request->date_loading }}</td>
+                    <td class="td">
+                        @if ($request->status == 2)
+                            {{ $request->date_decline }}
+                        @elseif ($request->status == 3)
+                            {{ $request->date_loading }}
+                        @endif
+                    </td>
 
                     <td class="flex justify-center td">
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))

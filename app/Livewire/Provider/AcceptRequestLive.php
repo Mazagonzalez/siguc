@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class AcceptRequestLive extends Component
 {
@@ -73,6 +74,21 @@ class AcceptRequestLive extends Component
         }
 
         DB::commit();
+
+        // Cambia el estado en el EndPoint
+        $objeto = json_encode(1);
+
+        if ($this->request->order_number) {
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json',
+            ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $this->request->order_number, $objeto);
+
+            if ($this->request->id_request_double) {
+                $response1 = Http::withHeaders([
+                    'Content-Type' => 'application/json',
+                ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $requestDouble->order_number, $objeto);
+            }
+        }
 
         $this->open = false;
         $this->resetRequest();
