@@ -43,12 +43,13 @@
                         @endif
                     </td>
 
-                    <td class="items-center justify-center gap-2 td row">
+                    <td class="items-center justify-end gap-2 td row">
                         @if ($request->status == '1')
                             <button class="btn-confirm tooltip tooltip-top" data-tip="Aceptar" wire:click='confirmDelivery({{ $request->id }})' wire:key="show-accept-{{ $request->id }}">
                                 <x-icons.checked class="size-5 stroke-white" />
                             </button>
                         @endif
+
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
                         @livewire('user.decline-requests-live', ['request' => $request], key('reject-request-'.$request->id))

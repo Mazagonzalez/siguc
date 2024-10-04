@@ -17,6 +17,8 @@ class DashboardLive extends Component
     public $request_rejected;
     public $request_finished;
 
+    protected $listeners = ['request' => 'mount'];
+
     public function mount()
     {
         $this->fetchOrders();

@@ -1,6 +1,6 @@
 <div class="gap-5 screen-default col">
-    <div class="gap-5 row">
-        <div class="items-center gap-3 py-10 w-[200px] border col rounded-3xl">
+    <div class="grid w-[60%] grid-cols-4 gap-4">
+        <div class="items-center gap-3 py-10 col rounded-3xl card-theme">
             <div class="bg-blue-500 rounded-md size-12 center-content">
                 <x-icons.message-check class="stroke-white size-8" />
             </div>
@@ -8,7 +8,7 @@
             <p class="text-xl font-semibold">{{ $request_acepted }}</p>
         </div>
 
-        <div class="items-center gap-3 py-10 w-[200px] border col rounded-3xl">
+        <div class="items-center gap-3 py-10 col rounded-3xl card-theme">
             <div class="bg-yellow-400 rounded-md size-12 center-content">
                 <x-icons.clock class="stroke-white size-8" />
             </div>
@@ -16,7 +16,7 @@
             <p class="text-xl font-semibold">{{ $request_pending }}</p>
         </div>
 
-        <div class="items-center gap-3 py-10 w-[200px] border col rounded-3xl">
+        <div class="items-center gap-3 py-10 col rounded-3xl card-theme">
             <div class="bg-red-500 rounded-md size-12 center-content">
                 <x-icons.message-cancel class="stroke-white size-8" />
             </div>
@@ -24,7 +24,7 @@
             <p class="text-xl font-semibold">{{ $request_rejected }}</p>
         </div>
 
-        <div class="items-center gap-3 py-10 w-[200px] border col rounded-3xl">
+        <div class="items-center gap-3 py-10 col rounded-3xl card-theme">
             <div class="rounded-md bg-emerald-500 size-12 center-content">
                 <x-icons.check-circle class="stroke-white size-8" />
             </div>
@@ -33,7 +33,36 @@
         </div>
     </div>
 
-    <div class="w-full">
+    <div
+        x-data="{
+            typeRequest: 1,
+            activeClass: 'bg-[#ebecec] dark:bg-[#333333] font-semibold',
+            inactiveClass: '',
+            showFilter: false,
+        }" class="gap-5 p-8 col card-theme"
+    >
+        <div class="items-center mb-5 row">
+            <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 1" :class="typeRequest === 1 ? activeClass : inactiveClass">
+                {{ __('Solicitudes en Proceso')}}
+            </a>
+            <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 2" :class="typeRequest === 2 ? activeClass : inactiveClass">
+                {{ __('Historial de Solicitudes')}}
+            </a>
+        </div>
+
+        <div class="w-full">
+            <div x-show="typeRequest === 1" x-transition:enter.duration.500ms style="display: none">
+                @livewire('user.pending-requests-live', key('pending-request-'.auth()->user()->id))
+            </div>
+
+            <div x-show="typeRequest === 2" x-transition:enter.duration.500ms style="display: none">
+                @livewire('user.history-requests-live', key('history-request-'.auth()->user()->id))
+            </div>
+        </div>
+
+    </div>
+
+    <div class="w-full p-8 card-theme">
         <div class="items-center gap-2 mb-6 row">
             <input
                 type="text"
@@ -100,34 +129,6 @@
                 @endforelse
             </tbody>
         </table>
-        <div
-            x-data="{
-                typeRequest: 1,
-                activeClass: 'bg-[#ebecec] dark:bg-[#333333] font-semibold',
-                inactiveClass: '',
-                showFilter: false,
-            }" class="gap-5 screen-default col"
-        >
-            <div class="items-center mb-5 row">
-                <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 1" :class="typeRequest === 1 ? activeClass : inactiveClass">
-                    {{ __('Solicitudes en Proceso')}}
-                </a>
-                <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 2" :class="typeRequest === 2 ? activeClass : inactiveClass">
-                    {{ __('Historial de Solicitudes')}}
-                </a>
-            </div>
-
-            <div class="w-full">
-                <div x-show="typeRequest === 1" x-transition:enter.duration.500ms style="display: none">
-                    @livewire('user.pending-requests-live', key('pending-request-'.auth()->user()->id))
-                </div>
-
-                <div x-show="typeRequest === 2" x-transition:enter.duration.500ms style="display: none">
-                    @livewire('user.history-requests-live', key('history-request-'.auth()->user()->id))
-                </div>
-            </div>
-
-        </div>
     </div>
 
     @if (session('message'))
