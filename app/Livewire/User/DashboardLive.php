@@ -57,6 +57,12 @@ class DashboardLive extends Component
         $this->dispatch('request');
     }
 
+    public function clear()
+    {
+        $this->orderId = '';
+        $this->pending = 0;
+    }
+
     #[On('successful-toast')]
     public function seeToast($message)
     {
