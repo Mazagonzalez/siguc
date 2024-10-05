@@ -30,7 +30,11 @@
                     <x-icons.check-circle class="stroke-white size-8" />
                 </div>
                 <p class="font-semibold text-sm text-center leading-[18px]">Solictudes <br> Finalizadas</p>
-                <p class="text-xl font-semibold">{{ $request_finished }}</p>
+
+                <div class="items-center gap-2 row">
+                    <p class="text-xl font-semibold">{{ $request_finished }}</p>
+                    @livewire('user.ranking-live')
+                </div>
             </div>
         </div>
 
