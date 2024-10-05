@@ -18,7 +18,7 @@ class HistoryRequestsLive extends Component
     {
         if (Auth::check()) {
             $provider = Provider::where('user_id', Auth::id())->first();
-            $this->requests = Request::where('provider_id', $provider->id)->whereIn('status', [2, 3])->orderBy('updated_at', 'desc')->get();
+            $this->requests = Request::where('provider_id', $provider->id)->whereIn('status', [2, 4])->orderBy('updated_at', 'desc')->get();
         } else {
             $this->requests = [];
         }

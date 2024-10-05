@@ -29,7 +29,7 @@ class DashboardLive extends Component
         $this->request_acepted = Request::where('status', 1)->where('double_order', 0)->count();
         $this->request_pending = Request::where('status', 0)->where('double_order', 0)->count();
         $this->request_rejected = Request::where('status', 2)->where('double_order', 0)->count();
-        $this->request_finished = Request::where('status', 3)->where('double_order', 0)->count();
+        $this->request_finished = Request::where('status', 4)->where('double_order', 0)->count();
     }
 
     public function updatedOrderId($value)

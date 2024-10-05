@@ -38,7 +38,12 @@ class Request extends Model
         'status',
     ];
 
-    //status 0: pendiente, 1: aceptado, 2: rechazado 3: finalizado
+    /*status
+    0: pendiente
+    1: aceptado
+    2: rechazado
+    3: confirmacion
+    4: finalizado*/
 
     public function provider()
     {

@@ -27,7 +27,7 @@ class PendingRequestsLive extends Component
     {
         $request = Request::find($requestId);
         $request->update([
-            'status' => 3,
+            'status' => 4,
             'date_loading' => Carbon::now()->toDateTimeString(),
         ]);
         $this->dispatch('request');
@@ -35,7 +35,7 @@ class PendingRequestsLive extends Component
         if ($request->id_request_double) {
             $requestDouble = Request::find($request->id_request_double);
             $requestDouble->update([
-                'status' => 3,
+                'status' => 4,
                 'date_loading' => Carbon::now()->toDateTimeString(),
             ]);
         }
