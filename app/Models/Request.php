@@ -42,7 +42,7 @@ class Request extends Model
     0: pendiente
     1: aceptado
     2: rechazado
-    3: confirmacion
+    3: confirmado
     4: finalizado*/
 
     public function provider()
