@@ -116,7 +116,7 @@ class ConfirmDeliveryLive extends Component
                 'flete' => $this->final_flete,
             ]);
         } catch (\Exception $th) {
-            Log::info($th);
+            $th;
         }
     }
 
