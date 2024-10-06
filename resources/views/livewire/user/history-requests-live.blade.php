@@ -118,7 +118,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($requests as $request)
+            @forelse($requestsCollection as $request)
                 <tr wire:key='orden-{{ $request->id }}' class="tr">
                     <td class="td">
                         <x-utils.status status="{{ $request->status }}" />
@@ -136,7 +136,7 @@
                     <td class="td">
                         @if ($request->status == 2)
                             {{ $request->date_decline }}
-                        @elseif ($request->status == 3)
+                        @elseif ($request->status == 4)
                             {{ $request->date_loading }}
                         @endif
                     </td>

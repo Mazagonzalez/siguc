@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('requests', function (Blueprint $table) {
-            $table->decimal('flete', 60, 17)->after('order_weight')->nullable();
+            $table->string('driver_phone')->after('driver_name')->nullable();
+            $table->decimal('initial_flete', 60, 17)->after('identification')->nullable();
+            $table->decimal('final_flete', 60, 17)->after('time_response')->nullable();
         });
     }
 
@@ -22,7 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('requests', function (Blueprint $table) {
-            $table->dropColumn('flete');
+            $table->dropColumn('driver_phone');
+            $table->dropColumn('initial_flete');
+            $table->dropColumn('final_flete');
         });
     }
 };

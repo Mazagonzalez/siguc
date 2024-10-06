@@ -21,7 +21,6 @@ class ModalCreatedRequestsLive extends Component
     public $tipoContenedor;
     public $pesoOrden;
     public $gross_weight;
-    public $flete;
     public $fechaCita;
     public $comentario;
     public $orderNumber;
@@ -109,7 +108,6 @@ class ModalCreatedRequestsLive extends Component
             'tipoContenedor' => 'required',
             'pesoOrden' => 'required',
             'gross_weight' => 'required',
-            'flete' => 'nullable',
             'fechaCita' => 'required',
             'searchOrderId' => [
                 function ($attribute, $value, $fail) {
@@ -135,8 +133,6 @@ class ModalCreatedRequestsLive extends Component
             'fechaCita.required' => 'El campo fecha de la cita es obligatorio',
         ]);
 
-        $this->flete = str_replace('.', '', $this->flete);
-
         DB::beginTransaction();
 
         $provider_id = Provider::where('company_name', $this->proveedor)->first()->id;
@@ -152,7 +148,6 @@ class ModalCreatedRequestsLive extends Component
             'container_type' => $this->tipoContenedor,
             'order_weight' => $this->pesoOrden,
             'gross_weight' => $this->gross_weight,
-            'flete' => $this->flete ? $this->flete : null,
             'date_quotation' => $this->fechaCita,
             'comment' => $this->comentario,
         ]);
@@ -169,7 +164,6 @@ class ModalCreatedRequestsLive extends Component
                 'container_type' => $this->orderNumber2['unit_load'],
                 'order_weight' => $this->orderNumber2['net_weight'],
                 'gross_weight' => $this->orderNumber2['gross_weight'],
-                'flete' => $this->flete ? $this->flete : null,
                 'date_quotation' => $this->fechaCita,
                 'comment' => $this->comentario,
                 'double_order' => 1,
@@ -213,7 +207,6 @@ class ModalCreatedRequestsLive extends Component
         $this->reset([
             'proveedor',
             'telefonoCliente',
-            'flete',
             'fechaCita',
             'comentario',
             'searchOrderId',
