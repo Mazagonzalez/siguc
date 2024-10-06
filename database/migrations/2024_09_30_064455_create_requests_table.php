@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('client_name')->nullable();
             $table->string('client_address')->nullable();
             $table->string('client_phone')->nullable();
+            $table->string('type_vehicle')->nullable();
             $table->string('container_type')->nullable();
             $table->decimal('order_weight',60,17)->nullable();
             $table->date('date_quotation')->nullable();

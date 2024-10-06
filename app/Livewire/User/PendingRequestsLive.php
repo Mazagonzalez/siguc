@@ -17,7 +17,7 @@ class PendingRequestsLive extends Component
     public function mount()
     {
         if (Auth::check()) {
-            $this->requests = Request::where('user_id', Auth::id())->whereIn('status', [0, 1])->where('double_order', 0)->orderBy('status', 'desc')->get();
+            $this->requests = Request::where('user_id', Auth::id())->whereIn('status', [0, 1, 3])->where('double_order', 0)->orderBy('status', 'desc')->get();
         } else {
             $this->requests = [];
         }
@@ -28,15 +28,12 @@ class PendingRequestsLive extends Component
         $request = Request::find($requestId);
         $request->update([
             'status' => 4,
-            'date_loading' => Carbon::now()->toDateTimeString(),
         ]);
-        $this->dispatch('request');
 
         if ($request->id_request_double) {
             $requestDouble = Request::find($request->id_request_double);
             $requestDouble->update([
                 'status' => 4,
-                'date_loading' => Carbon::now()->toDateTimeString(),
             ]);
         }
 

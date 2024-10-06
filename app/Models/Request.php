@@ -31,6 +31,7 @@ class Request extends Model
         'date_acceptance',
         'time_response',
         'final_flete',
+        'delivery_commentary',
         'date_loading',
         'date_decline',
         'decline_comment',

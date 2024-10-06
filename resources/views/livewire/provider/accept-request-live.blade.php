@@ -12,20 +12,6 @@
         <x-slot name="content">
             <div class="gap-3 col">
                 <div>
-                    <select name="type_vehicle" id="type_vehicle" class="w-full input-simple" wire:model.live="type_vehicle">
-                        <option value="0">Seleccionar tipo de vehiculo</option>
-                        <option value="Camion">Camion</option>
-                        <option value="Turbo">Turbo</option>
-                        <option value="Tractomula">Tractomula</option>
-                    </select>
-                    @error('type_vehicle')
-                        <span class="err">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-
-                <div>
                     <span class="title-input">Placa del vehiculo</span>
                     <input wire:model.live="license_plate" type="text" class="w-full uppercase input-simple" />
                     @error('license_plate')
@@ -49,6 +35,26 @@
                     <span class="title-input">Identificacion del conductor</span>
                     <input wire:model.live="identification" oninput="validateNumber(this)" type="text" class="w-full input-simple" />
                     @error('identification')
+                        <span class="err">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <div>
+                    <span class="title-input">Teléfono del conductor</span>
+                    <input wire:model.live="driver_phone" oninput="validateNumber(this)" type="text" class="w-full input-simple" />
+                    @error('driver_phone')
+                        <span class="err">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <div>
+                    <span class="title-input">Flete inicial</span>
+                    <input wire:model.live="initial_flete" oninput="formatNumber(this)" type="text" class="w-full input-simple" />
+                    @error('initial_flete')
                         <span class="err">
                             {{ $message }}
                         </span>

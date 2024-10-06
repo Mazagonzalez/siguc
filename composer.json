@@ -11,6 +11,7 @@
         "laravel/jetstream": "^5.2",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
+        "league/flysystem-azure-blob-storage": "^3.28",
         "livewire/livewire": "^3.0",
         "maatwebsite/excel": "^3.1",
         "spatie/laravel-permission": "^6.9"

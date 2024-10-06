@@ -31,6 +31,8 @@
                     <td class="items-center justify-center gap-2 td row">
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
+                        @livewire('provider.confirm-delivery-live', ['request' => $request], key('confirm-request-'.$request->id))
+
                         @livewire('provider.decline-request-live', ['request' => $request], key('reject-request-'.$request->id))
                     </td>
                 </tr>

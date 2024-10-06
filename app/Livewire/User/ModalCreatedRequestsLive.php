@@ -18,6 +18,7 @@ class ModalCreatedRequestsLive extends Component
     public $nombreCliente;
     public $direccionCliente;
     public $telefonoCliente;
+    public $type_vehicle;
     public $tipoContenedor;
     public $pesoOrden;
     public $gross_weight;
@@ -105,6 +106,7 @@ class ModalCreatedRequestsLive extends Component
             'nombreCliente' => 'required',
             'direccionCliente' => 'required',
             'telefonoCliente' => 'required|min_digits:7',
+            'type_vehicle' => 'required',
             'tipoContenedor' => 'required',
             'pesoOrden' => 'required',
             'gross_weight' => 'required',
@@ -127,6 +129,7 @@ class ModalCreatedRequestsLive extends Component
             'direccionCliente.required' => 'El campo dirección del cliente es obligatorio',
             'telefonoCliente.required' => 'El campo teléfono del cliente es obligatorio',
             'telefonoCliente.min_digits' => 'El campo teléfono del cliente debe tener al menos 7 caracteres',
+            'type_vehicle.required' => 'El campo tipo de vehículo es obligatorio',
             'tipoContenedor.required' => 'El campo tipo de contenedor es obligatorio',
             'pesoOrden.required' => 'El campo peso de la orden es obligatorio',
             'gross_weight.required' => 'El campo peso bruto es obligatorio',
@@ -145,6 +148,7 @@ class ModalCreatedRequestsLive extends Component
             'client_name' => $this->nombreCliente,
             'client_address' => $this->direccionCliente,
             'client_phone' => $this->telefonoCliente,
+            'type_vehicle' => $this->type_vehicle,
             'container_type' => $this->tipoContenedor,
             'order_weight' => $this->pesoOrden,
             'gross_weight' => $this->gross_weight,
@@ -161,6 +165,7 @@ class ModalCreatedRequestsLive extends Component
                 'client_name' => $this->orderNumber2['target_customer'],
                 'client_address' => $this->orderNumber2['client_address'],
                 'client_phone' => $this->telefonoCliente,
+                'type_vehicle' => $this->type_vehicle,
                 'container_type' => $this->orderNumber2['unit_load'],
                 'order_weight' => $this->orderNumber2['net_weight'],
                 'gross_weight' => $this->orderNumber2['gross_weight'],
@@ -207,6 +212,7 @@ class ModalCreatedRequestsLive extends Component
         $this->reset([
             'proveedor',
             'telefonoCliente',
+            'type_vehicle',
             'fechaCita',
             'comentario',
             'searchOrderId',

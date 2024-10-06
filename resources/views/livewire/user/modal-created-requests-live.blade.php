@@ -3,7 +3,7 @@
         <x-icons.more class="size-5 stroke-white" />
     </button>
 
-    <x-dialog-modal wire:model='open' maxWidth="4xl" title="Solicitud" >
+    <x-dialog-modal wire:model='open' maxWidth="4xl" title="Solicitudes nacional" >
         <x-slot name="content">
             <div class="gap-3 col lg:flex-row lg:gap-5">
                 <div class="gap-3 col lg:w-1/2">
@@ -46,6 +46,20 @@
                         <span class="title-input">Teléfono</span>
                         <input wire:model.live="telefonoCliente" oninput="validateNumber(this)" type="text" class="w-full input-simple" />
                         @error('telefonoCliente')
+                            <span class="err">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <select name="type_vehicle" id="type_vehicle" class="w-full input-simple" wire:model.live="type_vehicle">
+                            <option value="0">Seleccionar tipo de vehiculo</option>
+                            <option value="Camion">Camion</option>
+                            <option value="Turbo">Turbo</option>
+                            <option value="Tractomula">Tractomula</option>
+                        </select>
+                        @error('type_vehicle')
                             <span class="err">
                                 {{ $message }}
                             </span>
