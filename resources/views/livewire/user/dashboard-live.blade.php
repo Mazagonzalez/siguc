@@ -43,7 +43,7 @@
                 <input
                     type="text"
                     wire:model.live="orderId"
-                    placeholder="Buscar por numero de orden"
+                    placeholder="Buscar por numero de orden nacional"
                     class="w-full
                     @if ($orders)
                         input-simple-success

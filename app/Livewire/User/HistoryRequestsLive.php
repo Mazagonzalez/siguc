@@ -24,15 +24,6 @@ class HistoryRequestsLive extends Component
 
     protected $listeners = ['request' => 'mount'];
 
-    public function mount()
-    {
-        /*if (Auth::check()) {
-            $this->requests = Request::where('user_id', Auth::id())->whereIn('status', [2, 4])->where('double_order', 0)->orderBy('updated_at', 'desc')->get();
-        } else {
-            $this->requests = [];
-        }*/
-    }
-
     public function exportar()
     {
         $this->validate([
@@ -75,7 +66,7 @@ class HistoryRequestsLive extends Component
         $items = Request::where('user_id', Auth::id())->whereIn('status', [2, 4])->where('double_order', 0)->orderBy('updated_at', 'desc');
 
         if (!is_null($this->start_date) and !is_null($this->end_date) and $this->end_date < $this->start_date) {
-            $this->addError('start_date', __('The fecha inicial must be a date before or equal to fecha final.'));
+            $this->addError('start_date', __('La fecha inicial debe ser una fecha anterior o igual a la fecha final.'));
         }
 
         if (!is_null($this->start_date) and !is_null($this->end_date) and $this->end_date >= $this->start_date) {
