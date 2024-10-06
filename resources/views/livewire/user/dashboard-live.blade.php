@@ -104,7 +104,7 @@
 
     <div
         x-data="{
-            typeRequest: 2,
+            typeRequest: 1,
             activeClass: 'bg-[#ebecec] dark:bg-[#333333] font-semibold',
             inactiveClass: '',
             showFilter: false,
