@@ -58,10 +58,10 @@
 
                 <button
                     wire:click='clear'
-                    class="bg-black rounded-full size-9 center-content absolute-center-y right-1.5 tooltip tooltip-top"
+                    class="bg-zinc-900 dark:bg-white rounded-xl size-9 center-content absolute-center-y right-1 tooltip tooltip-top"
                     data-tip="Limpiar buscador"
                 >
-                    <x-icons.clear class="stroke-white size-5" />
+                    <x-icons.clear class="stroke-white dark:stroke-zinc-900 size-5" />
                 </button>
             </div>
 
@@ -104,11 +104,11 @@
 
     <div
         x-data="{
-            typeRequest: 1,
+            typeRequest: 2,
             activeClass: 'bg-[#ebecec] dark:bg-[#333333] font-semibold',
             inactiveClass: '',
             showFilter: false,
-        }" class="gap-5 p-8 col card-theme"
+        }" class="relative gap-5 p-8 col card-theme"
     >
         <div class="items-center mb-5 row">
             <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 1" :class="typeRequest === 1 ? activeClass : inactiveClass">

@@ -1,108 +1,87 @@
 <div>
-    <div x-data="{ tab: 0, open: false }" x-cloak class="flex-col w-full py-4 center-content">
-        <div class="w-full lg:w-[1024px] col gap-auto">
-            <div class="card-indigo-2">
-                <div class="justify-between px-4 py-3 row" role="group">
-                    <div class="flex">
+    <div x-data="{ open: false }" @click.away="open = false">
+        <button class="size-[52px] rounded-lg border dark:border-white/20 hover:bg-[#ebecec] dark:hover:bg-[#333333] center-content absolute top-8 right-8" @click="open = !open">
+            <x-icons.filter class="stroke-black dark:stroke-white size-6" />
+        </button>
 
-                        <button
-                            class="px-6 py-2 font-bold text-center border rounded-r-2xl border-indigo-1"
-                            :class="tab === 1 ? 'bg-indigo-1 font-bold' : ''"
-                            type="button"
-                            @click="if (tab !== 1) { tab = 1; }" x-on:click="open=true"
-                        >
-                            {{ __('Export') }}
-                        </button>
-                    </div>
+        <div
+            x-show="open"
+            x-keydown.escape="open = false"
+            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 transform scale-90"
+            x-transition:enter-end="opacity-100 transform scale-100"
+            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave-start="opacity-100 transform scale-100"
+            x-transition:leave-end="opacity-0 transform scale-90"
+            class="absolute z-20 -mt-8 bg-white border shadow dark:bg-zinc-900 divide-theme dark:border-none right-4 rounded-2xl"
+            style="display: none"
+        >
+            <div class="items-center justify-between px-4 pt-4 pb-3 row">
+                <p class=font-medium">
+                    Filtrar
+                </p>
 
-                    <button @click="open=!open">
-                        <i x-show="open" class="text-2xl fa-solid fa-circle-chevron-up text-indigo-1"></i>
-                        <i x-show="!open" class="text-2xl fa-solid fa-circle-chevron-down text-indigo-1"></i>
-                    </button>
+                <button wire:click="resetAllExport" class="items-center gap-3 py-2 row tooltip tooltip-top" data-tip="Limpiar filtro">
+                    <x-icons.clear class="stroke-black dark:stroke-white size-5" />
+                </button>
+            </div>
+
+
+            <div class="px-4 py-3 col gap-1.5">
+                <div>
+                    <p class="title-input">Fecha inicial:</p>
+                    <input class="w-full input-simple" type="date" wire:model.lazy="start_date"/>
+                    @error('start_date')
+                        <span class="err">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
 
-                <div x-show="open" class="p-4">
-                    <div x-show="tab === 1" x-transition:enter.duration.500ms>
-                        <div class="gap-3 divide-y col divide-indigo-2">
-                            <div class="gap-2 row">
-                                <div class="w-1/2 gap-1 col">
-                                    <p class="text-sm italic font-light">{{ __('Date from') }}:</p>
-                                    <input class="w-full input-simple placeholder:italic" type="date" wire:model.lazy="start_date"/>
-                                    @error('start_date')
-                                        <small class="text-sm text-red-500">
-                                            {{ $message }}
-                                        </small>
-                                    @enderror
-                                </div>
-
-                                <div class="w-1/2 gap-1 col">
-                                    <p class="text-sm italic font-light">{{ __('Date until') }}:</p>
-                                    <input class="w-full input-simple placeholder:italic" type="date" wire:model.lazy="end_date" />
-                                    @error('end_date')
-                                        <small class="text-sm text-red-500">
-                                            {{ $message }}
-                                        </small>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="gap-1 py-2 col">
-                                <p class="text-sm italic font-light">{{ __('Filtro Solicitudes') }}:</p>
-                                <div class="gap-2 col lg:gap-0 lg:justify-between lg:flex-row">
-                                    <label class="flex items-center">
-                                        <input
-                                            class="mr-2 text-blue-500 border-gray-300 rounded focus:ring-blue-500"
-                                            type="checkbox"
-                                            value="true"
-                                            wire:model.lazy='finalizadas'
-                                        >
-                                        <span>{{ __('Solicitudes finalizada') }}</span>
-                                    </label>
-
-                                    <label class="flex items-center">
-                                        <input
-                                            class="mr-2 text-blue-500 border-gray-300 rounded focus:ring-blue-500"
-                                            type="checkbox"
-                                            value="true"
-                                            wire:model.lazy='rechazada'
-                                        >
-                                        <span>{{ __('Solicitudes rechazada') }}</span>
-                                    </label>
-
-                                </div>
-                            </div>
-
-                            <div class="justify-end gap-2 pt-4 row">
-                                <button class="px-6" wire:click="resetAllExport">{{ __('Reset') }}</button>
-                                <button class="px-6" wire:click="exportar">
-                                    <span wire:loading.remove wire:target="exportar">{{ __('Export') }}</span>
-                                    <span wire:loading wire:target="exportar">
-                                        <svg
-                                            wire:loading
-                                            class="w-4 h-4 mr-2 -ml-1 text-white animate-spin"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <circle
-                                                class="opacity-25"
-                                                cx="12"
-                                                cy="12"
-                                                r="10"
-                                                stroke="currentColor"
-                                                stroke-width="4"
-                                            ></circle>
-                                            <path
-                                                class="opacity-75"
-                                                fill="currentColor"
-                                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                                            ></path>
-                                        </svg> {{ __('Exporting...') }}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                <div>
+                    <p class="title-input">Fecha final:</p>
+                    <input class="w-full input-simple" type="date" wire:model.lazy="end_date" />
+                    @error('end_date')
+                        <span class="err">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
+            </div>
+
+            <div class="px-4 py-3 col gap-1.5">
+                <label class="flex items-center">
+                    <input
+                        class="input-check"
+                        type="checkbox"
+                        value="true"
+                        wire:model.lazy='finalizadas'
+                    >
+                    <span>Finalizados</span>
+                </label>
+
+                <label class="flex items-center">
+                    <input
+                        class="input-check"
+                        type="checkbox"
+                        value="true"
+                        wire:model.lazy='rechazada'
+                    >
+                    <span>Rechazados</span>
+                </label>
+            </div>
+
+            <div class="px-2 py-3 col">
+                <button class="w-full px-2 py-2 rounded-xl hover:bg-[#ebecec] dark:hover:bg-[#333333] flex items-center justify-start gap-2" wire:click="exportar">
+                    <x-icons.download class="stroke-slate-900 dark:stroke-white size-5" />
+
+                    <span wire:loading.remove wire:target="exportar">
+                        Descargar
+                    </span>
+                    <span wire:loading wire:target="exportar">
+                        <x-icons.loading />
+                    </span>
+                </button>
             </div>
         </div>
     </div>

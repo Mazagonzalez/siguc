@@ -1,81 +1,85 @@
 <table>
     <thead>
         <tr>
-            <th> Proveedor </th>
-            <th> Numero de orden </th>
-            <th> Nombre cliente </th>
-            <th> Tipo de contenedor </th>
-            <th> Peso neto </th>
-            <th> Peso bruto </th>
-            <th> Flete inicial </th>
-            <th> Flete final </th>
-            <th> Fecha de entrega </th>
-            <th> Fecha de creacion de la orden </th>
-            <th> Comentario </th>
-            <th> Tipoo de vehiculo </th>
-            <th> Placa del vehiculo </th>
-            <th> Nombre del conductor </th>
-            <th> Identificacion del conductor </th>
-            <th> Fecha de aceptacion </th>
-            <th> Tiempo de respuesta </th>
-            <th> Fecha de finalizacion</th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> # </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Proveedor </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Numero de orden </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Nombre cliente </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Tipo de contenedor </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Peso neto </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Peso bruto </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Flete inicial </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Flete final </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Fecha de entrega </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Fecha de creacion de la orden </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Comentario </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Tipoo de vehiculo </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Placa del vehiculo </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Nombre del conductor </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Identificacion del conductor </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Fecha de aceptacion </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Tiempo de respuesta </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Fecha de finalizacion</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($request as $reques)
+        @foreach ($request as $index => $reques)
             <tr>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
+                    {{ $index + 1 }}
+                </td>
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->provider }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->order_number }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->client_name }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->container_type }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->order_weight }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->gross_weight }}
                 </td>
-                <td class="text-xs font-semibold">
-                    {{ $reques->initial_flete }}
+                <td style="font-weight: 300; text-align: start">
+                    $ {{ $reques->initial_flete }}
                 </td>
-                <td class="text-xs font-semibold">
-                    {{ $reques->final_flete }}
+                <td style="font-weight: 300; text-align: start">
+                    $ {{ $reques->final_flete }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->date_quotation }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->updated_at }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->comment }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->type_vehicle }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->license_plate }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->driver_name }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->identification }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->date_acceptance }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->time_response }}
                 </td>
-                <td class="text-xs font-semibold">
+                <td style="font-weight: 300; text-align: start">
                     {{ $reques->date_loading }}
                 </td>
             </tr>
