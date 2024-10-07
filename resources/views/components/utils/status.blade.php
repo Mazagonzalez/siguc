@@ -1,18 +1,33 @@
-<div class="items-center justify-center gap-2 row">
+@php
+    switch ($status) {
+        case 0:
+            $pill = 'bg-yellow-100 text-yellow-500';
+            break;
+        case 1:
+            $pill = 'bg-blue-100 text-blue-500';
+            break;
+        case 2:
+            $pill = 'bg-red-100 text-red-500';
+            break;
+        case 3:
+            $pill = 'bg-indigo-100 text-indigo-500';
+            break;
+        case 4:
+            $pill = 'bg-emerald-100 text-emerald-500';
+            break;
+    }
+@endphp
+
+<div class="px-2 font-medium rounded-full {{ $pill }}">
     @if ($status == 0)
-        <div class="bg-yellow-500 rounded-full size-2"></div>
         <span>Pendiende</span>
     @elseif ($status == 1)
-        <div class="bg-blue-500 rounded-full size-2"></div>
         <span>Aceptado</span>
     @elseif ($status == 2)
-        <div class="bg-red-500 rounded-full size-2"></div>
         <span>Rechazado</span>
     @elseif ($status == 3)
-        <div class="bg-purple-500 rounded-full size-2"></div>
         <span>Confirmado</span>
     @elseif ($status == 4)
-        <div class="rounded-full bg-emerald-500 size-2"></div>
         <span>Finalizado</span>
     @endif
 </div>

@@ -1,5 +1,5 @@
 <div class="gap-4 p-5 card-theme col">
-    <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#333333]">
+    <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525]">
         <div class="items-center justify-between row" @click="showFilter = !showFilter">
             <p class="text-sm font-semibold">
                 Historial de solicitudes

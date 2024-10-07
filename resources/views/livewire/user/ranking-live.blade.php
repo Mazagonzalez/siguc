@@ -1,9 +1,9 @@
 <div class="gap-3 col">
     <div class="p-6 card-theme min-h-[320px]">
-        <div class="items-center gap-2 row">
-            <p class="text-lg font-semibold">Top 5</p>
+        <div>
+            <p class="text-lg font-semibold">Ranking top 5</p>
 
-            <div class="px-2 text-xs text-indigo-500 bg-indigo-100 rounded-full">
+            <div class="px-2 text-xs text-indigo-500 bg-indigo-100 rounded-full w-fit">
                 Solicitudes Finalizadas
             </div>
         </div>

@@ -35,7 +35,7 @@
     <label class="swap swap-rotate">
         <input type="checkbox" class="hidden" @click="toggleTheme" :checked="theme === 'dark'" />
 
-        <x-icons.sun class="w-10 h-10 fill-yellow-300 swap-on" />
-        <x-icons.moon class="w-10 h-10 fill-slate-700 swap-off" />
+        <x-icons.sun class="size-8 fill-yellow-300 swap-on" />
+        <x-icons.moon class="size-8 fill-slate-700 swap-off" />
     </label>
 </div>
