@@ -8,6 +8,6 @@ class RequestExporLive extends Component
 {
     public function render()
     {
-        return view('livewire.user.request-expor-live');
+        return view('livewire.user.request-expor-live')->layout('layouts.app');
     }
 }

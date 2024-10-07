@@ -8,6 +8,6 @@ class RequestThermoformedLive extends Component
 {
     public function render()
     {
-        return view('livewire.user.request-thermoformed-live');
+        return view('livewire.user.request-thermoformed-live')->layout('layouts.app');
     }
 }
