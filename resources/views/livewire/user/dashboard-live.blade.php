@@ -1,5 +1,5 @@
 <div class="gap-5 screen-default col">
-    <div class="gap-5 row">
+    <div class="gap-3 row">
         <div class="w-[65%] gap-3 col">
             {{-- Total de solicitudes por estado --}}
             <div class="grid grid-cols-4 px-3 py-5 divide-x-theme card-theme">
@@ -40,7 +40,7 @@
                         <span class="text-xl leading-[25px] font-semibold">{{ $request_rejected }}</span>
                         <div class="font-light col">
                             <span class="text-[10px] leading-[10px]">Solicitudes</span>
-                            <span class="text-[13px] leading-[13px]">Finalizadas</span>
+                            <span class="text-[13px] leading-[13px]">Rechazadas</span>
                         </div>
                     </div>
                 </div>
@@ -74,14 +74,16 @@
                     <p class="text-2xl font-semibold">0</p>
 
                     {{-- Figura --}}
-                    <div class="absolute p-4 border-2 border-blue-400 rounded-full -right-14 -bottom-14">
-                        <div class="border-2 border-blue-400 rounded-full size-20"></div>
+                    <div class="absolute p-4 border-2 border-blue-400 rounded-full -right-16 -bottom-16">
+                        <div class="p-4 border-2 border-blue-400 rounded-full">
+                            <div class="border-2 border-blue-400 rounded-full size-14"></div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="relative gap-6 p-5 overflow-hidden text-white bg-emerald-500 col rounded-2xl">
                     <div class="items-center justify-between row">
-                        <span class="text-sm">Extranjeras</span>
+                        <span class="text-sm">Exportación</span>
 
                         <div class="rounded-full bg-emerald-400 size-7 center-content">
                             <x-icons.world class="size-5 stroke-white" />
@@ -117,15 +119,27 @@
                     </div>
                 </div>
             </div>
+
+            <div class="relative gap-5 p-8 col card-theme">
+                <div class="flex">
+                    <a class="p-4 text-sm rounded-lg cursor-pointer bg-[#ebecec] dark:bg-[#333333] font-semibold">
+                        Historial de solicitudes
+                    </a>
+                </div>
+
+                <div class="w-full">
+                    @livewire('user.history-requests-live', key('history-request-'.auth()->user()->id))
+                </div>
+            </div>
         </div>
 
-        <div class="w-[35%] card-theme p-4">
-            @livewire('user.ranking-live')
+        <div class="w-[35%]">
+            @livewire('user.ranking-live', ['type' => 1])
         </div>
     </div>
 
-    <div class="gap-4 col lg:flex-row">
-        {{-- <div class="w-[40%] py-4 px-6 card-theme col gap-4">
+    {{-- <div class="gap-4 col lg:flex-row">
+        <div class="w-[40%] py-4 px-6 card-theme col gap-4">
             <div class="relative">
                 <input
                     type="text"
@@ -186,37 +200,8 @@
                     @endif
                 @endif
             </div>
-        </div> --}}
-    </div>
-
-    <div
-        x-data="{
-            typeRequest: 1,
-            activeClass: 'bg-[#ebecec] dark:bg-[#333333] font-semibold',
-            inactiveClass: '',
-            showFilter: false,
-        }" class="relative gap-5 p-8 col card-theme"
-    >
-        <div class="items-center mb-5 row">
-            <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 1" :class="typeRequest === 1 ? activeClass : inactiveClass">
-                {{ __('Solicitudes en Proceso')}}
-            </a>
-            <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 2" :class="typeRequest === 2 ? activeClass : inactiveClass">
-                {{ __('Historial de Solicitudes')}}
-            </a>
         </div>
-
-        <div class="w-full">
-            <div x-show="typeRequest === 1" x-transition:enter.duration.500ms style="display: none">
-                @livewire('user.pending-requests-live', key('pending-request-'.auth()->user()->id))
-            </div>
-
-            <div x-show="typeRequest === 2" x-transition:enter.duration.500ms style="display: none">
-                @livewire('user.history-requests-live', key('history-request-'.auth()->user()->id))
-            </div>
-        </div>
-
-    </div>
+    </div> --}}
 
     @if (session('message'))
         <div
