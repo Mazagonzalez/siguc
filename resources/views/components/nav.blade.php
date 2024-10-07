@@ -1,5 +1,5 @@
 <nav x-data="{ open: false }" class="max-w-6xl px-4 pt-4 mx-auto lg:px-0">
-    <div class="w-full px-10 py-6 bg-white dark:bg-[#1f1f1f] rounded-3xl">
+    <div class="w-full px-5 py-6 card-theme">
         <div class="items-center justify-between row">
             {{-- Logo --}}
             <a wire:navigate href="{{ route('dashboard') }}">
@@ -7,7 +7,7 @@
             </a>
 
             {{-- Rutas request()->routeIs('dashboard') --}}
-            <div class="row gap-3.5 items-center">
+            <div class="items-center gap-3 row">
                 <x-btn-theme />
 
                 {{-- Cerrar sesión --}}

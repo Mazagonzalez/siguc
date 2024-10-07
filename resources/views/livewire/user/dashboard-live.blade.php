@@ -11,7 +11,7 @@
                     <div class="col">
                         <span class="text-xl leading-[25px] font-semibold">{{ $request_acepted }}</span>
                         <div class="font-light col">
-                            <span class="text-[10px] leading-[10px]">Solicitudes</span>
+                            <span class="text-[10px] leading-[10px]">Total</span>
                             <span class="text-[13px] leading-[13px]">Aceptadas</span>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                     <div class="col">
                         <span class="text-xl leading-[25px] font-semibold">{{ $request_pending }}</span>
                         <div class="font-light col">
-                            <span class="text-[10px] leading-[10px]">Solicitudes</span>
+                            <span class="text-[10px] leading-[10px]">Total</span>
                             <span class="text-[13px] leading-[13px]">Pendiendtes</span>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                     <div class="col">
                         <span class="text-xl leading-[25px] font-semibold">{{ $request_rejected }}</span>
                         <div class="font-light col">
-                            <span class="text-[10px] leading-[10px]">Solicitudes</span>
+                            <span class="text-[10px] leading-[10px]">Total</span>
                             <span class="text-[13px] leading-[13px]">Rechazadas</span>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                     <div class="col">
                         <span class="text-xl leading-[25px] font-semibold">{{ $request_finished }}</span>
                         <div class="font-light col">
-                            <span class="text-[10px] leading-[10px]">Solicitudes</span>
+                            <span class="text-[10px] leading-[10px]">Total</span>
                             <span class="text-[13px] leading-[13px]">Finalizadas</span>
                         </div>
                     </div>
