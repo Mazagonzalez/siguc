@@ -3,7 +3,7 @@
 }
 
 .card-theme{
-    @apply bg-white dark:bg-[#1f1f1f] rounded-3xl
+    @apply bg-white dark:bg-[#1f1f1f] rounded-xl
 }
 
 .dark-true{
@@ -107,7 +107,11 @@
     @apply px-2 py-3.5 text-center
 }
 
-.divide-theme{
+.divide-x-theme{
+    @apply divide-x divide-gray-300 dark:divide-white/20
+}
+
+.divide-y-theme{
     @apply divide-y divide-gray-300 dark:divide-white/20
 }
 
