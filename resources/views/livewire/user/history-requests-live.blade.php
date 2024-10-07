@@ -1,82 +1,68 @@
-<div>
-    <div x-data="{ open: false }" @click.away="open = false">
-        <button class="size-[52px] rounded-lg border dark:border-white/20 hover:bg-[#ebecec] dark:hover:bg-[#333333] center-content absolute top-8 right-8" @click="open = !open">
-            <x-icons.filter class="stroke-black dark:stroke-white size-6" />
-        </button>
+<div class="gap-4 p-5 card-theme col">
+    <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#333333]">
+        <div class="items-center justify-between row" @click="showFilter = !showFilter">
+            <p class="text-sm font-semibold">
+                Historial de solicitudes
+            </p>
+
+            <button class="items-center gap-1 row">
+                <span class="text-sm">Filtrar</span>
+                <x-icons.arrow class="stroke-black dark:stroke-white size-4" />
+            </button>
+        </div>
 
         <div
-            x-show="open"
-            x-keydown.escape="open = false"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 transform scale-90"
-            x-transition:enter-end="opacity-100 transform scale-100"
-            x-transition:leave="transition ease-in duration-300"
-            x-transition:leave-start="opacity-100 transform scale-100"
-            x-transition:leave-end="opacity-0 transform scale-90"
-            class="absolute z-20 -mt-8 bg-white border shadow dark:bg-zinc-900 divide-theme dark:border-none right-4 rounded-2xl"
-            style="display: none"
+            x-ref="container"
+            class="gap-4 overflow-hidden transition-all duration-300 col max-h-0"
+            x-bind:style="showFilter == true ? 'max-height: ' + $refs.container.scrollHeight + 'px' : ''"
         >
-            <div class="items-center justify-between px-4 pt-4 pb-3 row">
-                <p class=font-medium">
-                    Filtrar
-                </p>
+            <div class="col">
+                <div class="items-end gap-2 px-2 mt-6 row">
+                    <div class="w-1/3">
+                        <p class="title-input">Fecha inicial:</p>
+                        <input class="w-full input-simple" type="date" wire:model.lazy="start_date"/>
+                    </div>
 
-                <button wire:click="resetAllExport" class="items-center gap-3 py-2 row tooltip tooltip-top" data-tip="Limpiar filtro">
-                    <x-icons.clear class="stroke-black dark:stroke-white size-5" />
+                    <div class="w-1/3">
+                        <p class="title-input">Fecha final:</p>
+                        <input class="w-full input-simple" type="date" wire:model.lazy="end_date" />
+                    </div>
+
+                    <div class="w-1/3">
+                        <p class="title-input">Estado:</p>
+                        <select class="w-full input-simple">
+                            <option value="">Selecciona</option>
+                            <option value="finalizadas">Finalizados</option>
+                            <option value="finalizadas">Rechazados</option>
+                        </select>
+                    </div>
+                </div>
+                @error('start_date')
+                    <span class="err">
+                        {{ $message }}
+                    </span>
+                @enderror
+                @error('end_date')
+                    <span class="err">
+                        {{ $message }}
+                    </span>
+                @enderror
+            </div>
+
+            <div class="justify-end gap-2 px-2 row">
+                <button wire:click="resetAllExport" class="items-center gap-2 btn-close-modal row">
+                    <x-icons.clear class="stroke-slate-900 dark:stroke-white size-5" />
+
+                    <span>
+                        Limpiar
+                    </span>
                 </button>
-            </div>
 
-
-            <div class="px-4 py-3 col gap-1.5">
-                <div>
-                    <p class="title-input">Fecha inicial:</p>
-                    <input class="w-full input-simple" type="date" wire:model.lazy="start_date"/>
-                    @error('start_date')
-                        <span class="err">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-
-                <div>
-                    <p class="title-input">Fecha final:</p>
-                    <input class="w-full input-simple" type="date" wire:model.lazy="end_date" />
-                    @error('end_date')
-                        <span class="err">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="px-4 py-3 col gap-1.5">
-                <label class="flex items-center">
-                    <input
-                        class="input-check"
-                        type="checkbox"
-                        value="true"
-                        wire:model.lazy='finalizadas'
-                    >
-                    <span>Finalizados</span>
-                </label>
-
-                <label class="flex items-center">
-                    <input
-                        class="input-check"
-                        type="checkbox"
-                        value="true"
-                        wire:model.lazy='rechazada'
-                    >
-                    <span>Rechazados</span>
-                </label>
-            </div>
-
-            <div class="px-2 py-3 col">
-                <button class="w-full px-2 py-2 rounded-xl hover:bg-[#ebecec] dark:hover:bg-[#333333] flex items-center justify-start gap-2" wire:click="exportar">
-                    <x-icons.download class="stroke-slate-900 dark:stroke-white size-5" />
+                <button wire:click="exportar" class="items-center gap-2 btn-confirm-modal row">
+                    <x-icons.download class="stroke-white size-5" />
 
                     <span wire:loading.remove wire:target="exportar">
-                        Descargar
+                        Exportar
                     </span>
                     <span wire:loading wire:target="exportar">
                         <x-icons.loading />
@@ -85,6 +71,7 @@
             </div>
         </div>
     </div>
+
 
     <table class="w-full">
         <thead>
@@ -126,9 +113,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6">
-                        <p class="py-20 text-center">No tiene historial de solicitudes finalizada</p>
-                    </td>
+                    <x-utils.not-search message="No hay solicitudes" colspan="5" py="py-24" />
                 </tr>
             @endforelse
         </tbody>

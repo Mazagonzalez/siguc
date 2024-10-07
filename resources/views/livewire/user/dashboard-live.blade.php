@@ -120,21 +120,13 @@
                 </div>
             </div>
 
-            <div class="relative gap-5 p-8 col card-theme">
-                <div class="flex">
-                    <a class="p-4 text-sm rounded-lg cursor-pointer bg-[#ebecec] dark:bg-[#333333] font-semibold">
-                        Historial de solicitudes
-                    </a>
-                </div>
-
-                <div class="w-full">
-                    @livewire('user.history-requests-live', key('history-request-'.auth()->user()->id))
-                </div>
+            <div class="w-full">
+                @livewire('user.history-requests-live', key('history-request-'.auth()->user()->id))
             </div>
         </div>
 
-        <div class="w-[35%]">
-            @livewire('user.ranking-live', ['type' => 1])
+        <div class="w-[35%] h-full">
+            @livewire('user.ranking-live')
         </div>
     </div>
 

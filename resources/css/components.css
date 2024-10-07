@@ -32,7 +32,7 @@
 }
 
 .btn-close-modal{
-    @apply px-5 py-2 font-semibold rounded-xl bg-[#f2f3f5] hover:bg-[#e8e9eb] dark:bg-zinc-800 dark:hover:bg-[#1f1f22] dark:text-white
+    @apply px-5 py-2 font-semibold rounded-xl bg-gray-200 hover:bg-gray-300 dark:bg-zinc-800 dark:hover:bg-[#1f1f22] dark:text-white
 }
 
 .btn-confirm-modal{
@@ -41,15 +41,15 @@
 
 /* Inputs */
 .input-simple{
-    @apply rounded-xl focus:ring-offset-[3px] focus:ring-offset-white dark:focus:ring-offset-[#1f1f1f] bg-[#f0f1f1] dark:bg-[#333333] border-none h-[45px] placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-blue-500
+    @apply rounded-xl focus:ring-offset-[3px] focus:ring-offset-white dark:focus:ring-offset-[#1f1f1f] bg-gray-200 dark:bg-[#333333] border-none h-[45px] placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-blue-500
 }
 
 .input-simple-success{
-    @apply rounded-xl focus:ring-offset-[3px] focus:ring-offset-white dark:focus:ring-offset-[#1f1f1f] bg-[#f0f1f1] dark:bg-[#333333] border-none h-[45px] placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-emerald-500
+    @apply rounded-xl focus:ring-offset-[3px] focus:ring-offset-white dark:focus:ring-offset-[#1f1f1f] bg-gray-200 dark:bg-[#333333] border-none h-[45px] placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-emerald-500
 }
 
 .input-simple-err{
-    @apply rounded-xl focus:ring-offset-[3px] focus:ring-offset-white dark:focus:ring-offset-[#1f1f1f] bg-[#f0f1f1] dark:bg-[#333333] border-none h-[45px] placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-red-500
+    @apply rounded-xl focus:ring-offset-[3px] focus:ring-offset-white dark:focus:ring-offset-[#1f1f1f] bg-gray-200 dark:bg-[#333333] border-none h-[45px] placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-red-500
 }
 
 .input-check{
