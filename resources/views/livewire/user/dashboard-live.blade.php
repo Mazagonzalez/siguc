@@ -188,7 +188,9 @@
             </div>
         </div> --}}
     </div>
-
+    <div>
+        @livewire('user.created-requests-thermoformed')
+    </div>
     <div
         x-data="{
             typeRequest: 1,

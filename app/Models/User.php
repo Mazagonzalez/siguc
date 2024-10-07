@@ -84,4 +84,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Request::class);
     }
+
+    public function requestThermoformed()
+    {
+        return $this->hasMany(RequestThermoformed::class);
+    }
 }
