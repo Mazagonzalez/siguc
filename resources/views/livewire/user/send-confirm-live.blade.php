@@ -8,11 +8,11 @@
         <x-icons.checked class="size-5 stroke-white" />
     </button>
 
-    <x-dialog-modal wire:model='open' maxWidth="md" title="Enviar correo" >
+    <x-dialog-modal wire:model='open' maxWidth="md" title="Enviar correo al cliente" >
         <x-slot name="content">
             <div class="gap-3 col">
                 <div>
-                    <span class="title-input">Correo del usuario</span>
+                    <span class="title-input">Correo del cliente</span>
                     <input wire:model.live="mail" type="email" class="w-full input-simple" />
                     @error('mail')
                         <span class="err">
