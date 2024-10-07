@@ -10,16 +10,16 @@
                     Dashboard
                 </a>
 
-                <a wire:navigate href="{{ route('request.thermoformed') }}">
-                    termoformado
-                </a>
-
                 <a wire:navigate href="{{ route('request.national') }}">
                     nacional
                 </a>
 
                 <a wire:navigate href="{{ route('request.export') }}">
                     exportacion
+                </a>
+
+                <a wire:navigate href="{{ route('request.thermoformed') }}">
+                    termoformado
                 </a>
             @endrole
 

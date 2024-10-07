@@ -32,7 +32,7 @@ class DashboardLive extends Component
         $this->request_finished = Request::where('status', 4)->where('double_order', 0)->count();
     }
 
-    public function updatedOrderId($value)
+    /*public function updatedOrderId($value)
     {
         $this->pending = 1;
         $this->filterOrders();
@@ -73,7 +73,7 @@ class DashboardLive extends Component
     public function seeToast($message)
     {
         session()->flash('message', $message);
-    }
+    }*/
 
     public function render()
     {

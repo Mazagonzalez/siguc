@@ -65,7 +65,6 @@ class CreatedRequestsThermoformedLive extends Component
             ],
             'box_quantity' => 'required',
             'date_quotation' => 'required',
-            'comment' => 'required'
         ], [
             'provider.required' => 'El campo proveedor es requerido',
             'client_name.required' => 'El campo nombre del cliente es requerido',
@@ -76,7 +75,6 @@ class CreatedRequestsThermoformedLive extends Component
             'container_type.required' => 'El campo tipo de contenedor es requerido',
             'box_quantity.required' => 'El campo cantidad de blox es requerido',
             'date_quotation.required' => 'El campo fecha de cotización es requerido',
-            'comment.required' => 'El campo comentario es requerido'
         ]);
 
         DB::beginTransaction();

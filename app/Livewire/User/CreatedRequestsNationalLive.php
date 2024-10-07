@@ -10,20 +10,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
-class ModalCreatedRequestsLive extends Component
+class CreatedRequestsNationalLive extends Component
 {
     public $open = false;
-    public $proveedores = [];
-    public $proveedor;
-    public $nombreCliente;
-    public $direccionCliente;
-    public $telefonoCliente;
+    public $providers = [];
+    public $provider;
+    public $client_name;
+    public $client_address;
+    public $client_phone;
     public $type_vehicle;
-    public $tipoContenedor;
-    public $pesoOrden;
+    public $container_type;
+    public $order_weight;
     public $gross_weight;
-    public $fechaCita;
-    public $comentario;
+    public $date_quotation;
+    public $comment;
     public $orderNumber;
 
     //2da orden
@@ -31,20 +31,10 @@ class ModalCreatedRequestsLive extends Component
     public $orderNumber2 = [];
     public $orderSecond = false;
 
-    public function mount($targetCustomer, $netWeight, $grossWeight, $clientAddress, $unitLoad, $orderNumber)
-    {
-        $this->nombreCliente = $targetCustomer;
-        $this->pesoOrden = $netWeight;
-        $this->gross_weight = $grossWeight;
-        $this->direccionCliente = $clientAddress;
-        $this->tipoContenedor = $unitLoad;
-        $this->orderNumber = $orderNumber;
-    }
-
     public function showModal()
     {
         $this->open = true;
-        $this->proveedores = Provider::pluck('company_name')->toArray();
+        $this->providers = Provider::pluck('company_name')->toArray();
     }
 
     public function updated($field)
@@ -54,8 +44,8 @@ class ModalCreatedRequestsLive extends Component
 
     public function updatedFechaCita($value)
     {
-        $fechaHoy = Carbon::now()->format('Y-m-d');
-        if ($value < $fechaHoy) {
+        $todayDate = Carbon::now()->format('Y-m-d');
+        if ($value < $todayDate) {
             $this->addError('fechaCita', 'La fecha de la orden no puede ser menor a la fecha de hoy');
         } else {
             $this->resetErrorBag('fechaCita');
@@ -102,15 +92,15 @@ class ModalCreatedRequestsLive extends Component
     public function store()
     {
         $this->validate([
-            'proveedor' => 'required',
-            'nombreCliente' => 'required',
-            'direccionCliente' => 'required',
-            'telefonoCliente' => 'required|min_digits:7',
+            'provider' => 'required',
+            'client_name' => 'required',
+            'client_address' => 'required',
+            'client_phone' => 'required',
             'type_vehicle' => 'required',
-            'tipoContenedor' => 'required',
-            'pesoOrden' => 'required',
+            'container_type' => 'required',
+            'order_weight' => 'required',
             'gross_weight' => 'required',
-            'fechaCita' => 'required',
+            'date_quotation' => 'required',
             'searchOrderId' => [
                 function ($attribute, $value, $fail) {
                     if ($this->orderNumber == $this->searchOrderId) {
@@ -124,53 +114,52 @@ class ModalCreatedRequestsLive extends Component
             ],
         ],
         [
-            'proveedor.required' => 'El campo proveedor es obligatorio',
-            'nombreCliente.required' => 'El campo nombre del cliente es obligatorio',
-            'direccionCliente.required' => 'El campo dirección del cliente es obligatorio',
-            'telefonoCliente.required' => 'El campo teléfono del cliente es obligatorio',
-            'telefonoCliente.min_digits' => 'El campo teléfono del cliente debe tener al menos 7 caracteres',
+            'provider.required' => 'El campo proveedor es obligatorio',
+            'client_name.required' => 'El campo nombre del cliente es obligatorio',
+            'client_address.required' => 'El campo dirección del cliente es obligatorio',
+            'client_phone.required' => 'El campo teléfono del cliente es obligatorio',
+            'client_phone.min_digits' => 'El campo teléfono del cliente debe tener al menos 7 caracteres',
             'type_vehicle.required' => 'El campo tipo de vehículo es obligatorio',
-            'tipoContenedor.required' => 'El campo tipo de contenedor es obligatorio',
-            'pesoOrden.required' => 'El campo peso de la orden es obligatorio',
+            'container_type.required' => 'El campo tipo de contenedor es obligatorio',
+            'order_weight.required' => 'El campo peso de la orden es obligatorio',
             'gross_weight.required' => 'El campo peso bruto es obligatorio',
-            'fechaCita.required' => 'El campo fecha de la cita es obligatorio',
+            'date_quotation.required' => 'El campo fecha de la cita es obligatorio',
         ]);
 
         DB::beginTransaction();
 
-        $provider_id = Provider::where('company_name', $this->proveedor)->first()->id;
+        $provider_id = Provider::where('company_name', $this->provider)->first()->id;
 
         $request = Request::create([
             'user_id' => Auth::id(),
-            'provider' => $this->proveedor,
+            'provider' => $this->provider,
             'provider_id' => $provider_id,
-            'order_number' => $this->orderNumber,
-            'client_name' => $this->nombreCliente,
-            'client_address' => $this->direccionCliente,
-            'client_phone' => $this->telefonoCliente,
+            'client_name' => $this->client_name,
+            'client_address' => $this->client_address,
+            'client_phone' => $this->client_phone,
             'type_vehicle' => $this->type_vehicle,
-            'container_type' => $this->tipoContenedor,
-            'order_weight' => $this->pesoOrden,
+            'container_type' => $this->container_type,
+            'order_weight' => $this->order_weight,
             'gross_weight' => $this->gross_weight,
-            'date_quotation' => $this->fechaCita,
-            'comment' => $this->comentario,
+            'date_quotation' => $this->date_quotation,
+            'comment' => $this->comment,
         ]);
 
         if ($this->searchOrderId && !empty($this->orderNumber2)) {
             $order2 = Request::create([
                 'user_id' => Auth::id(),
-                'provider' => $this->proveedor,
+                'provider' => $this->provider,
                 'provider_id' => $provider_id,
                 'order_number' => $this->orderNumber2['order_number'],
                 'client_name' => $this->orderNumber2['target_customer'],
                 'client_address' => $this->orderNumber2['client_address'],
-                'client_phone' => $this->telefonoCliente,
+                'client_phone' => $this->client_phone,
                 'type_vehicle' => $this->type_vehicle,
                 'container_type' => $this->orderNumber2['unit_load'],
                 'order_weight' => $this->orderNumber2['net_weight'],
                 'gross_weight' => $this->orderNumber2['gross_weight'],
-                'date_quotation' => $this->fechaCita,
-                'comment' => $this->comentario,
+                'date_quotation' => $this->date_quotation,
+                'comment' => $this->comment,
                 'double_order' => 1,
             ]);
 
@@ -210,12 +199,19 @@ class ModalCreatedRequestsLive extends Component
     public function resetRequest()
     {
         $this->reset([
-            'proveedor',
-            'telefonoCliente',
+            'provider',
+            'client_name',
+            'client_address',
+            'client_phone',
             'type_vehicle',
-            'fechaCita',
-            'comentario',
+            'container_type',
+            'order_weight',
+            'gross_weight',
+            'date_quotation',
+            'comment',
             'searchOrderId',
+            'orderNumber2',
+            'orderSecond'
         ]);
 
         $this->resetErrorBag();
@@ -223,6 +219,6 @@ class ModalCreatedRequestsLive extends Component
 
     public function render()
     {
-        return view('livewire.user.modal-created-requests-live');
+        return view('livewire.user.created-requests-national-live');
     }
 }
