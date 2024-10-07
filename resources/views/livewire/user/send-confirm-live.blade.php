@@ -5,7 +5,7 @@
         class="btn-confirm tooltip tooltip-top"
         data-tip="Enviar correo"
     >
-        <x-icons.checked class="size-5 stroke-white" />
+        <x-icons.checked class="size-5 stroke-black" />
     </button>
 
     <x-dialog-modal wire:model='open' maxWidth="md" title="Enviar correo al cliente" >
