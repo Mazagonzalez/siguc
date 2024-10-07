@@ -5,6 +5,23 @@
             <a wire:navigate href="{{ route('dashboard') }}">
                 <p class="text-3xl font-semibold text-blue-500" style="font-family: 'Roboto', sans-serif;">SIGUC</p>
             </a>
+            @role('User')
+                <a wire:navigate href="{{ route('dashboard') }}">
+                    Dashboard
+                </a>
+
+                <a wire:navigate href="{{ route('request.thermoformed') }}">
+                    termoformado
+                </a>
+
+                <a wire:navigate href="{{ route('request.national') }}">
+                    nacional
+                </a>
+
+                <a wire:navigate href="{{ route('request.export') }}">
+                    exportacion
+                </a>
+            @endrole
 
             {{-- Rutas request()->routeIs('dashboard') --}}
             <div class="items-center gap-3 row">

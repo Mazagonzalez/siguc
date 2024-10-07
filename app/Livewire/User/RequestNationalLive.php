@@ -8,6 +8,6 @@ class RequestNationalLive extends Component
 {
     public function render()
     {
-        return view('livewire.user.request-national-live');
+        return view('livewire.user.request-national-live')->layout('layouts.app');
     }
 }
