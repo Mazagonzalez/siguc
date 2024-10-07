@@ -1,7 +1,47 @@
 <div>
-    <button wire:click='showModal' class="mt-1 outline-none tooltip tooltip-right" data-tip="Ver Ranking">
-        <x-icons.ranking class="stroke-yellow-400 hover:stroke-yellow-500 size-5" />
-    </button>
+    <table class="w-full">
+        <tbody>
+            @forelse ($providers as $index => $provider)
+                @if ($index <= 4)
+                    <tr class="tr">
+                        <td>
+                            <div class="center-content">
+                                @if ($index == 0)
+                                    <x-icons.medal position="1" class="stroke-yellow-400 size-7" />
+                                @elseif ($index == 1)
+                                    <x-icons.medal position="2" class="stroke-gray-400 size-7" />
+                                @elseif ($index == 2)
+                                    <x-icons.medal position="3" class="stroke-orange-500 size-7" />
+                                @elseif ($index == 3 || $index == 4)
+                                    <x-icons.medal class="stroke-[#a0642c] size-7" />
+                                @else
+                                    # {{ $index }}
+                                @endif
+                            </div>
+                        </td>
+
+                        <td class="font-light td">
+                            {{ auth()->user()->short($provider->provider->company_name, 20) }}
+                        </td>
+
+                        <td class="font-light td">
+                            {{ $provider->total }}
+                        </td>
+
+                        <th class="font-semibold td">
+                            @if ($totalStates > 0)
+                                {{ number_format(($provider->total / $totalStates) * 100, 2) }}%
+                            @endif
+                        </th>
+                    </tr>
+                @endif
+            @empty
+                <tr>
+                    <x-utils.not-search message="No hay solicitudes finalizadas" colspan="4" py="20" />
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
 
     <x-dialog-modal wire:model='open' maxWidth="lg" title="Ranking de solicitudes finalizadas" >
         <x-slot name="content">
