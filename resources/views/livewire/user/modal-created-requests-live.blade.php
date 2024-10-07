@@ -32,8 +32,7 @@
                     </div>
 
                     <div>
-                        <p class="font-light"><span class="font-semibold">Nota:</span> Este campo se puede editar</p>
-                        <span class="title-input">Dirección del cliente</span>
+                        <span class="title-input">Dirección del cliente (Editable)</span>
                         <input wire:model.live="direccionCliente" type="text" class="w-full input-simple"/>
                         @error('direccionCliente')
                             <span class="err">
