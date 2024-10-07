@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExportController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -15,6 +14,8 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    /* Ruta para user */
+    require __DIR__.'/User.php';
 });
 
-Route::get('export/excel/request', [ExportController::class, 'excelRequest'])->name('export.request');

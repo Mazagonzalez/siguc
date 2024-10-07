@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class RankingLive extends Component
 {
-    public $open;
+    public $type;
     public $providers = [];
     public $totalStates;
 
@@ -26,10 +26,8 @@ class RankingLive extends Component
             ->get();
     }
 
-    public function showModal()
+    public function mount()
     {
-        $this->open = true;
-
         $this->generateRanking();
     }
 
