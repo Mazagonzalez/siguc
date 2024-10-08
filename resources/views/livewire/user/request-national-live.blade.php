@@ -1,5 +1,5 @@
-<div class="gap-3 screen-default col">
-    <div class="w-1/3 gap-3 p-4 card-theme col">
+<div class="gap-3 screen-default row">
+    <div class="w-1/3 gap-3 p-4 card-theme col h-fit">
         <div class="gap-2 row">
             <input
                 type="text"
