@@ -19,14 +19,23 @@
         @livewireStyles
         <style>[x-cloak] { display: none; }</style>
     </head>
-    <body class="scrollbar" style="font-family: 'Poppins', sans-serif;">
-        <div class="w-full min-h-screen overflow-hidden bg-body-light text-slate-900 dark:bg-body-dark dark:text-white">
-            <x-nav />
+    <body style="font-family: 'Poppins', sans-serif;">
+        <div class="h-screen overflow-hidden bg-body-light text-slate-900 dark:bg-body-dark dark:text-white">
+            <div class="flex h-full">
+                <x-sidebar />
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                <div class="w-full h-full overflow-y-auto col scrollbar">
+                    <x-nav />
+
+                    <!-- Page Content -->
+                    <div class="flex justify-center w-full h-full">
+                        <main class="w-full h-full">
+                            {{ $slot }}
+                        </main>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
         @stack('modals')
