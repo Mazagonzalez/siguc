@@ -14,9 +14,7 @@ class HistoryRequestsLive extends Component
 
     public $end_date;
 
-    public $finalizadas = null;
-
-    public $rechazada = null;
+    public $statu;
 
     public $show_modal_excel = null;
 
@@ -33,9 +31,8 @@ class HistoryRequestsLive extends Component
 
 
         return redirect()->route('export.request', ['start_date' => $this->start_date,
-            'end_date'                                                  => $this->end_date,
-            'finalizadas'                                               => $this->finalizadas,
-            'rechazada'                                                 => $this->rechazada]);
+            'end_date'                                           => $this->end_date,
+            'statu'                                              => $this->statu,]);
     }
 
     public function closeModalExport()
@@ -44,6 +41,7 @@ class HistoryRequestsLive extends Component
             'start_date',
             'end_date',
             'option_export',
+            'statu',
         ]);
         $this->resetErrorBag();
         $this->show_modal_excel = false;
@@ -54,8 +52,7 @@ class HistoryRequestsLive extends Component
         $this->reset([
             'start_date',
             'end_date',
-            'finalizadas',
-            'rechazada',
+            'statu',
         ]);
 
         $this->resetErrorBag();
@@ -77,10 +74,10 @@ class HistoryRequestsLive extends Component
         }
 
         $items->where(function ($query) {
-            if ($this->finalizadas) {
+            if ($this->statu == 1) {
                 $query->where('status', 4);
             }
-            if ($this->rechazada) {
+            if ($this->statu == 2) {
                 $query->orWhere('status', 2);
             }
         });

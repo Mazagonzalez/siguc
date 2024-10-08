@@ -20,10 +20,10 @@ class ExportController extends Controller
             );
         }
 
-        if ($request->finalizadas) {
+        if ($request->statu == 1) {
             $requestExpor = $requestExpor->where('status', 4);
         }
-        if ($request->rechazada) {
+        if ($request->statu == 2) {
             $requestExpor = $requestExpor->where('status', 2);
         }
         $requestExpor = $requestExpor->get();

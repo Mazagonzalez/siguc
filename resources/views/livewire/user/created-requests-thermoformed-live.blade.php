@@ -1,6 +1,6 @@
 <div>
-    <button wire:click="showModal" class="btn-info tooltip tooltip-top" data-tip="Crear Solicitud termoformada">
-        <x-icons.more class="size-5 stroke-white" />
+    <button wire:click="showModal" class="px-4 py-2 font-semibold text-white bg-blue-500 rounded-full" data-tip="Crear Solicitud">
+        <label for="">crear solicitud nacional</label>
     </button>
 
     <x-dialog-modal wire:model='open' maxWidth="4xl" title="Solicitudes termoformado" >

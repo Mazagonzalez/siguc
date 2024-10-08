@@ -1,10 +1,6 @@
 <div class="gap-4 p-5 card-theme col">
     <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525]">
         <div class="items-center justify-between row" @click="showFilter = !showFilter">
-            <p class="text-sm font-semibold">
-                Historial de solicitudes
-            </p>
-
             <button class="items-center gap-1 row">
                 <span class="text-sm">Filtrar</span>
                 <x-icons.arrow class="stroke-black dark:stroke-white size-4" />
@@ -30,10 +26,10 @@
 
                     <div class="w-1/3">
                         <p class="title-input">Estado:</p>
-                        <select class="w-full input-simple">
-                            <option value="">Selecciona</option>
-                            <option value="finalizadas">Finalizados</option>
-                            <option value="finalizadas">Rechazados</option>
+                        <select class="w-full input-simple" wire:model.live="statu">
+                            <option value="0">Selecciona</option>
+                            <option value="1">Finalizados</option>
+                            <option value="2">Rechazados</option>
                         </select>
                     </div>
                 </div>

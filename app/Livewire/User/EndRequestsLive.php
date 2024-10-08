@@ -11,16 +11,11 @@ class EndRequestsLive extends Component
 {
     public $requests = [];
 
-    protected $listeners = ['request' => 'mount'];
+    public $start_date;
 
-    public function mount()
-    {
-        if (Auth::check()) {
-            $this->requests = Request::where('user_id', Auth::id())->where('status', 3)->where('double_order', 0)->orderBy('status', 'desc')->get();
-        } else {
-            $this->requests = [];
-        }
-    }
+    public $end_date;
+
+    protected $listeners = ['request' => 'mount'];
 
     public function confirmDelivery($requestId)
     {
@@ -53,8 +48,42 @@ class EndRequestsLive extends Component
         $this->dispatch('request');
     }
 
+    public function closeModalExport()
+    {
+        $this->reset([
+            'start_date',
+            'end_date',
+        ]);
+        $this->resetErrorBag();
+    }
+
+    public function resetAllExport()
+    {
+        $this->reset([
+            'start_date',
+            'end_date',
+        ]);
+
+        $this->resetErrorBag();
+    }
+
     public function render()
     {
-        return view('livewire.user.end-requests-live', ['requests' => $this->requests]);
+        $items = Request::where('user_id', Auth::id())->where('status', 3)->where('double_order', 0)->orderBy('updated_at', 'desc');
+
+        if (!is_null($this->start_date) and !is_null($this->end_date) and $this->end_date < $this->start_date) {
+            $this->addError('start_date', __('La fecha inicial debe ser una fecha anterior o igual a la fecha final.'));
+        }
+
+        if (!is_null($this->start_date) and !is_null($this->end_date) and $this->end_date >= $this->start_date) {
+            $items->whereBetween(
+                'updated_at',
+                [$this->start_date . ' 00:00:00', $this->end_date . ' 23:59:59']
+            );
+        }
+
+        $requests = $items->get();
+
+        return view('livewire.user.end-requests-live', ['requestsCollection' => $requests]);
     }
 }
