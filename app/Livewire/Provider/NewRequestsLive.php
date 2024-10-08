@@ -31,6 +31,6 @@ class NewRequestsLive extends Component
     public function render()
     {
         return view('livewire.provider.new-requests-live', ['requests' => $this->requests,
-            'requestsThermoformed' => $this->requestsThermoformed]);
+                    'requestsThermoformed' => $this->requestsThermoformed]);
     }
 }

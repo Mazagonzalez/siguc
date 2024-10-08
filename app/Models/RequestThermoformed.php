@@ -56,4 +56,10 @@ class RequestThermoformed extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    //relacion uno a mucho
+    public function history()
+    {
+        return $this->hasMany(History::class);
+    }
 }
