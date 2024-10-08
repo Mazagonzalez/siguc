@@ -42,6 +42,25 @@
                     </td>
                 </tr>
             @endforelse
+            @forelse($requestsThermoformed as $request)
+                <tr wire:key='orden-{{ $request->id }}' class="tr">
+                    <td class="td">
+                        <x-utils.status status="{{ $request->status }}" />
+                    </td>
+
+                    <td class="td">{{ $request->container_type }}</td>
+                    <td class="td">{{ $request->date_quotation }}</td>
+                    <td class="td">{{ $request->created_at }}</td>
+                    <td class="td">
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="5">
+                        <p class="py-20 text-center">No tiene solicitudes pendiente</p>
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>
