@@ -1,6 +1,6 @@
 <div>
-    <button wire:click="showModal" class="px-4 py-2 font-semibold text-white bg-blue-500 rounded-full" data-tip="Crear Solicitud">
-        <label for="">crear solicitud nacional</label>
+    <button wire:click="showModal" class="w-full text-sm btn-confirm-modal" data-tip="Crear Solicitud">
+        <span>Crear solicitud Manual</span>
     </button>
 
     <x-dialog-modal wire:model='open' maxWidth="4xl" title="Solicitudes nacional" >
@@ -8,6 +8,7 @@
             <div class="gap-3 col lg:flex-row lg:gap-5">
                 <div class="gap-3 col lg:w-1/2">
                     <div>
+                        <span class="title-input">Proveedor</span>
                         <select wire:model.live="provider" class="input-simple max-w-[400px]">
                             <option value="">Seleccionar Proveedor</option>
                             @foreach ($providers as $nombre)
@@ -32,7 +33,7 @@
                     </div>
 
                     <div>
-                        <span class="title-input">Dirección del cliente (Editable)</span>
+                        <span class="title-input">Dirección del cliente</span>
                         <input wire:model.live="client_address" type="text" class="w-full input-simple"/>
                         @error('client_address')
                             <span class="err">
@@ -52,6 +53,7 @@
                     </div>
 
                     <div>
+                        <span class="title-input">Tipo de vehiculo</span>
                         <select name="type_vehicle" id="type_vehicle" class="w-full input-simple" wire:model.live="type_vehicle">
                             <option value="0">Seleccionar tipo de vehiculo</option>
                             <option value="Camion">Camion</option>

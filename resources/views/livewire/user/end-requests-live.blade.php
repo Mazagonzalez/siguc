@@ -1,5 +1,6 @@
 <div>
-    <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525]">
+    {{-- filtro --}}
+    <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525] my-5">
         <div class="items-center justify-between row" @click="showFilter = !showFilter">
             <button class="items-center gap-1 row">
                 <span class="text-sm">Filtrar</span>
@@ -59,6 +60,7 @@
             </div>
         </div>
     </div>
+
     <table class="w-full">
         <thead>
             <tr class="tr">
@@ -85,7 +87,9 @@
                             Order #1 {{ $request->order_number }}
                         @endif
                     </td>
+
                     <td class="td">{{ $request->date_quotation }}</td>
+
                     <td class="td">
                         @if ($request->status == '0')
                             <p>En espera</p>
@@ -94,6 +98,7 @@
                         @endif
 
                     </td>
+
                     <td class="td">
                         @if ($request->status == '0')
                             <p>En espera</p>
@@ -118,7 +123,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">
+                    <td colspan="6">
                         <p class="py-20 text-center">No tienes solicitudes en proceso</p>
                     </td>
                 </tr>
