@@ -1,5 +1,6 @@
-<div class="gap-4 p-5 card-theme col">
-    <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525]">
+<div>
+    {{-- filtro --}}
+    <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525] {{ $dashboard == false ? 'my-5' : 'mb-5' }}">
         <div class="items-center justify-between row" @click="showFilter = !showFilter">
             <button class="items-center gap-1 row">
                 <span class="text-sm">Filtrar</span>
@@ -68,7 +69,6 @@
         </div>
     </div>
 
-
     <table class="w-full">
         <thead>
             <tr class="tr">
@@ -94,7 +94,9 @@
                             Order #1 {{ $request->order_number }}
                         @endif
                     </td>
+
                     <td class="td">{{ $request->date_quotation }}</td>
+
                     <td class="td">
                         @if ($request->status == 2)
                             {{ $request->date_decline }}

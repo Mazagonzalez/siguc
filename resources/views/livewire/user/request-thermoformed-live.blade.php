@@ -1,25 +1,26 @@
 <div>
-    <div>
-        @livewire('user.created-requests-thermoformed-live')
-    </div>
     <div
         x-data="{
             typeRequest: 1,
             activeClass: 'bg-[#ebecec] dark:bg-[#333333] font-semibold',
             inactiveClass: '',
             showFilter: false,
-        }" class="relative gap-5 p-8 col card-theme"
+        }" class="relative p-8 col card-theme"
     >
-        <div class="items-center mb-5 row">
-            <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 1" :class="typeRequest === 1 ? activeClass : inactiveClass">
-                {{ __('Solicitudes en Proceso')}}
-            </a>
-            <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 2" :class="typeRequest === 2 ? activeClass : inactiveClass">
-                {{ __('Solicitudes por confirmar entrega')}}
-            </a>
-            <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 3" :class="typeRequest === 3 ? activeClass : inactiveClass">
-                {{ __('Historial de Solicitudes')}}
-            </a>
+        <div class="items-center justify-between row">
+            <div class="items-center row">
+                <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 1" :class="typeRequest === 1 ? activeClass : inactiveClass">
+                    {{ __('Solicitudes en Proceso')}}
+                </a>
+                <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 2" :class="typeRequest === 2 ? activeClass : inactiveClass">
+                    {{ __('Solicitudes por confirmar entrega')}}
+                </a>
+                <a class="p-4 text-sm rounded-lg cursor-pointer" @click="typeRequest = 3" :class="typeRequest === 3 ? activeClass : inactiveClass">
+                    {{ __('Historial de Solicitudes')}}
+                </a>
+            </div>
+
+            @livewire('user.created-requests-thermoformed-live')
         </div>
 
         <div class="w-full">
