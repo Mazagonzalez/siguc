@@ -114,7 +114,7 @@
                     <td class="items-center justify-end gap-2 td row">
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
-                        @livewire('user.decline-requests-live', ['request' => $request], key('reject-request-'.$request->id))
+                        @livewire('user.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('reject-request-'.$request->id))
                     </td>
                 </tr>
             @empty

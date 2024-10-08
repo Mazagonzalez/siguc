@@ -73,9 +73,9 @@
         <thead>
             <tr class="tr">
                 <th class="th">Estado</th>
-                <th class="th">Numero de orden</th>
                 <th class="th">Fecha de entrega</th>
                 <th class="th">Fecha de finalizacion</th>
+                <th class="th">Flete final</th>
                 <th class="th"></th>
             </tr>
         </thead>
@@ -85,15 +85,6 @@
                     <td class="td">
                         <x-utils.status status="{{ $request->status }}" />
                     </td>
-
-                    <td class="td">
-                        @if ($request->id_request_double)
-                            Order #1 {{ $request->order_number }} <br>
-                            Order #2 {{ $request->request_double->order_number }}
-                        @else
-                            Order #1 {{ $request->order_number }}
-                        @endif
-                    </td>
                     <td class="td">{{ $request->date_quotation }}</td>
                     <td class="td">
                         @if ($request->status == 2)
@@ -102,9 +93,16 @@
                             {{ $request->date_loading }}
                         @endif
                     </td>
-                   <td>
-                        @livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
-                   </td>
+                    <td>
+                        @if ($request->status == 2)
+                            <p>Solicitud cancelada</p>
+                        @elseif ($request->status == 4)
+                            {{ number_format($request->final_flete, 2) }}
+                        @endif
+                    </td>
+                    <td>
+                            @livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
+                    </td>
                 </tr>
             @empty
                 <tr>

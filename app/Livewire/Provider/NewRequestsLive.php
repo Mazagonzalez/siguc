@@ -21,8 +21,6 @@ class NewRequestsLive extends Component
             $provider = Provider::where('user_id', Auth::id())->first();
             $this->requests = Request::where('provider_id', $provider->id)->where('status', 0)->where('double_order', 0)->get();
             $this->requestsThermoformed = RequestThermoformed::where('provider_id', $provider->id)->where('status', 0)->get();
-
-            //$this->allRequests = $requests->merge($requestsThermoformed);
         } else {
             $this->requests = [];
         }
@@ -31,6 +29,6 @@ class NewRequestsLive extends Component
     public function render()
     {
         return view('livewire.provider.new-requests-live', ['requests' => $this->requests,
-                    'requestsThermoformed' => $this->requestsThermoformed]);
+                                                            'requestsThermoformed' => $this->requestsThermoformed]);
     }
 }

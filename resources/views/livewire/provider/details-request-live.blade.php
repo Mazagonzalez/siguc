@@ -11,7 +11,7 @@
     <x-dialog-modal wire:model='open' maxWidth="{{ $request->id_request_double ? '4xl' : 'md' }}" >
         <x-slot name="title">
             <div class="items-center col">
-                <p class="text-xl font-semibold text-center">Detalles de la solicitud</p>
+                <p class="text-xl font-semibold text-center">Detalles de solicitud nacional</p>
                 <x-utils.status status="{{ $request->status }}" />
             </div>
         </x-slot>

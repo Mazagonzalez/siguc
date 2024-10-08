@@ -72,10 +72,10 @@
         <thead>
             <tr class="tr">
                 <th class="th">Estado</th>
-                <th class="th">Numero de orden</th>
                 <th class="th">Fecha de entrega</th>
                 <th class="th">Fecha de confirmacion</th>
                 <th class="th">Tiempo de respuesta</th>
+                <th class="th">Flete inicial</th>
                 <th class="th"></th>
             </tr>
         </thead>
@@ -84,15 +84,6 @@
                 <tr wire:key='orden-{{ $request->id }}' class="tr">
                     <td class="td">
                         <x-utils.status status="{{ $request->status }}" />
-                    </td>
-
-                    <td class="td">
-                        @if ($request->id_request_double)
-                            Order #1 {{ $request->order_number }} <br>
-                            Order #2 {{ $request->request_double->order_number }}
-                        @else
-                            Order #1 {{ $request->order_number }}
-                        @endif
                     </td>
                     <td class="td">{{ $request->date_quotation }}</td>
                     <td class="td">
@@ -110,11 +101,17 @@
                             {{ $request->time_response }}
                         @endif
                     </td>
-
+                    <td>
+                        @if ($request->initial_flete)
+                            {{ number_format($request->initial_flete, 2) }}
+                        @else
+                            <p>En espera de aceptacion</p>
+                        @endif
+                    </td>
                     <td class="items-center justify-end gap-2 td row">
                         @livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
-                        @livewire('user.thermoformed.decline-requests-live', ['request' => $request], key('decline-request-'.$request->id))
+                        @livewire('user.thermoformed.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('decline-request-'.$request->id))
                     </td>
                 </tr>
             @empty

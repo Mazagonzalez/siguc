@@ -125,10 +125,10 @@
                             </div>
                         @endif
 
-                        @if ($request->status == 3)
+                        @if ($request->status == 3 || $request->status == 4)
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Flete final</span>
-                                <p class="font-light">{{ $request->final_flete }}</p>
+                                <p class="font-light">{{ number_format($request->final_flete, 2) }}</p>
                             </div>
 
                             @if ($request->delivery_commentary)

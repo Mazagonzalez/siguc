@@ -103,7 +103,7 @@
                     </td>
 
                     <td class="items-center justify-end gap-2 td row">
-                        @livewire('user.send-confirm-live', ['request' => $request, 'typeRequest => 1'], key('send-confirm-'.$request->id))
+                        @livewire('user.send-confirm-live', ['request' => $request, 'typeRequest' => 1], key('send-confirm-'.$request->id))
 
                         @if ($request->status == 3)
                             <button class="btn-confirm tooltip tooltip-top" data-tip="Aceptar" wire:click='confirmDelivery({{ $request->id }})' wire:key="show-accept-{{ $request->id }}">
@@ -113,7 +113,7 @@
 
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
-                        @livewire('user.decline-requests-live', ['request' => $request], key('reject-request-'.$request->id))
+                        @livewire('user.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('reject-request-'.$request->id))
                     </td>
                 </tr>
             @empty

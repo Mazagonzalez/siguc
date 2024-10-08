@@ -66,6 +66,7 @@
                 <th class="th">Fecha de entrega</th>
                 <th class="th">Fecha de confirmacion</th>
                 <th class="th">Tiempo de respuesta</th>
+                <th class="th">Flete final</th>
                 <th class="th"></th>
             </tr>
         </thead>
@@ -91,9 +92,12 @@
                             {{ $request->time_response }}
                         @endif
                     </td>
+                    <td>
+                        {{ number_format($request->final_flete, 2) }}
+                    </td>
 
                     <td class="items-center justify-end gap-2 td row">
-                        @livewire('user.send-confirm-live', ['request' => $request, 'typeRequest => 3'], key('send-confirm-'.$request->id))
+                        @livewire('user.send-confirm-live', ['request' => $request, 'typeRequest' => 3], key('send-confirm-'.$request->id))
 
                         @if ($request->status == 3)
                             <button class="btn-confirm tooltip tooltip-top" data-tip="Aceptar" wire:click='confirmDelivery({{ $request->id }})' wire:key="show-accept-{{ $request->id }}">
@@ -103,7 +107,7 @@
 
                         @livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
-                        @livewire('user.thermoformed.decline-requests-live', ['request' => $request], key('decline-request-'.$request->id))
+                        @livewire('user.thermoformed.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('decline-request-'.$request->id))
 
                     </td>
                 </tr>

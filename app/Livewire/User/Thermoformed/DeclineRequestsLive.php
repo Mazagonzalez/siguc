@@ -15,9 +15,12 @@ class DeclineRequestsLive extends Component
 
     public $decline_comment;
 
-    public function mount(RequestThermoformed $request)
+    public $roleDecline;
+
+    public function mount(RequestThermoformed $request, $roleDecline)
     {
         $this->request = $request;
+        $this->roleDecline = $roleDecline;
     }
 
     public function showModal()
@@ -34,11 +37,19 @@ class DeclineRequestsLive extends Component
             'decline_comment.required' => 'Es obligatorio que llene el comentario para rechazar la solicitud.',
         ]);
 
+        if ($this->roleDecline == 1) {
+            $userDecline = $this->decline_comment;
+            $providerDecline = null;
+        } elseif ($this->roleDecline == 2) {
+            $providerDecline = $this->decline_comment;
+            $userDecline = null;
+        }
+
         DB::beginTransaction();
 
-
         $this->request->update([
-            'decline_comment_user' => $this->decline_comment,
+            'decline_comment' => $providerDecline,
+            'user_decline_comment' => $userDecline,
             'date_decline' => Carbon::now()->toDateTimeString(),
             'status' => 2,
         ]);
@@ -53,7 +64,7 @@ class DeclineRequestsLive extends Component
     public function resetRequest()
     {
         $this->resetErrorBag();
-        $this->reset('decline_comment');
+        $this->reset('decline_comment', 'roleDecline');
     }
 
     public function close()

@@ -53,6 +53,13 @@
                     <td class="td">{{ $request->created_at }}</td>
                     <td class="td">
                     </td>
+                    <td class="items-center justify-center gap-2 td row" style="text-align: start">
+                        @livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
+
+                        @livewire('user.thermoformed.accept-request-live', ['request' => $request], key('accept-request-'.$request->id))
+
+                        @livewire('user.thermoformed.decline-requests-live', ['request' => $request, 'roleDecline' => 2], key('reject-request-'.$request->id))
+                    </td>
                 </tr>
             @empty
                 <tr>

@@ -21,13 +21,40 @@
                     <td class="td">
                         @if ($request->status == 2)
                             {{ $request->date_decline }}
-                        @elseif ($request->status == 3)
+                        @elseif ($request->status == 4)
                             {{ $request->date_loading }}
                         @endif
                     </td>
 
                     <td class="flex justify-center td">
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6">
+                        <p class="py-20 text-center">No tiene historial de solicitudes</p>
+                    </td>
+                </tr>
+            @endforelse
+            @forelse($requestsThermoformed as $request)
+                <tr wire:key='orden-{{ $request->id }}' class="tr">
+                    <td class="td">
+                        <x-utils.status status="{{ $request->status }}" />
+                    </td>
+
+                    <td class="td">{{ $request->container_type }}</td>
+                    <td class="td">{{ $request->date_quotation }}</td>
+                    <td class="td">
+                        @if ($request->status == 2)
+                            {{ $request->date_decline }}
+                        @elseif ($request->status == 4)
+                            {{ $request->date_loading }}
+                        @endif
+                    </td>
+
+                    <td class="flex justify-center td">
+                        @livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
                     </td>
                 </tr>
             @empty

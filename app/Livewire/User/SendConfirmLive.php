@@ -41,7 +41,6 @@ class SendConfirmLive extends Component
             'mail.required' => 'El campo correo es obligatorio',
             'mail.email' => 'El campo correo no es válido',
         ]);
-
         $mail = new CompletedOrderMail($this->request->id, $this->comment, $this->typeRequest);
         Mail::to($this->mail)->queue($mail);
 
