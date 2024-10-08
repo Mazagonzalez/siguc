@@ -26,8 +26,17 @@
                     </div>
 
                     <div class="w-1/3">
-                        <p class="title-input">Tipo de solicitud</p>
+                        <p class="title-input">Estado</p>
                         <select class="w-full input-simple" wire:model.live="statu">
+                            <option value="0">Selecciona</option>
+                            <option value="1">Finalizado</option>
+                            <option value="2">Rechazada</option>
+                        </select>
+                    </div>
+
+                    <div class="w-1/3">
+                        <p class="title-input">Tipo de solicitud</p>
+                        <select class="w-full input-simple" wire:model.live="type">
                             <option value="0">Selecciona</option>
                             <option value="1">Nacional</option>
                             <option value="2">Termoformado</option>

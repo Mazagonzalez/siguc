@@ -14,6 +14,8 @@ class HistoryDashboardLive extends Component
 
     public $end_date;
 
+    public $type;
+
     public $statu;
 
     public $show_modal_excel = null;
@@ -32,9 +34,10 @@ class HistoryDashboardLive extends Component
         ]);
 
 
-        return redirect()->route('export.request', ['start_date' => $this->start_date,
+        return redirect()->route('export.history', ['start_date' => $this->start_date,
             'end_date'                                           => $this->end_date,
-            'statu'                                              => $this->statu,]);
+            'statu'                                              => $this->statu,
+            'type'                                               => $this->type,]);
     }
 
     public function closeModalExport()
@@ -76,12 +79,19 @@ class HistoryDashboardLive extends Component
         }
 
         $items->where(function ($query) {
-            if ($this->statu == 1) {
+            if ($this->type == 1) {
                 $query->where('type_request', 'Solicitud nacional');
             }
-            if ($this->statu == 2) {
-                $query->orWhere('type_request', 'Solicitud termoformado');
+            if ($this->type == 2) {
+                $query->where('type_request', 'Solicitud termoformado');
             }
+            if ($this->statu == 1) {
+                $query->where('status', 4);
+            }
+            if ($this->statu == 2) {
+                $query->where('status', 2);
+            }
+
         });
 
         $requests = $items->get();
