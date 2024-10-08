@@ -26,10 +26,20 @@ class DashboardLive extends Component
 
     public function totalRequest()
     {
-        $this->request_acepted = Request::where('status', 1)->where('double_order', 0)->count();
-        $this->request_pending = Request::where('status', 0)->where('double_order', 0)->count();
-        $this->request_rejected = Request::where('status', 2)->where('double_order', 0)->count();
-        $this->request_finished = Request::where('status', 4)->where('double_order', 0)->count();
+        $request_aceptedN = Request::where('status', 1)->where('double_order', 0)->count();
+        $request_pendingN = Request::where('status', 0)->where('double_order', 0)->count();
+        $request_rejectedN = Request::where('status', 2)->where('double_order', 0)->count();
+        $request_finishedN = Request::where('status', 4)->where('double_order', 0)->count();
+        $request_aceptedT = RequestThermoformed::where('status', 1)->count();
+        $request_pendingT = RequestThermoformed::where('status', 0)->count();
+        $request_rejectedT = RequestThermoformed::where('status', 2)->count();
+        $request_finishedT = RequestThermoformed::where('status', 4)->count();
+
+        $this->request_acepted = $request_aceptedN + $request_aceptedT;
+        $this->request_pending = $request_pendingN + $request_pendingT;
+        $this->request_rejected = $request_rejectedN + $request_rejectedT;
+        $this->request_finished = $request_finishedN + $request_finishedT;
+
         $this->request_nationales = Request::where('status', 4)->where('double_order', 0)->count();
         $this->request_thermoformed = RequestThermoformed::where('status', 4)->count();
     }

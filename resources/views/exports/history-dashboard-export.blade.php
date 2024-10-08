@@ -57,7 +57,7 @@
                         {{ $reques->requestNational->gross_weight }}
                     </td>
                     <td style="font-weight: 300; text-align: start">
-                        <p>...</p>
+                        <p>N/A</p>
                     </td>
                     <td style="font-weight: 300; text-align: start">
                         $ {{ $reques->requestNational->initial_flete }}
@@ -103,7 +103,7 @@
                         {{ $reques->requestThermoformed->provider }}
                     </td>
                     <td style="font-weight: 300; text-align: start">
-                        <p>...</p>
+                        <p>N/A</p>
                     </td>
                     <td style="font-weight: 300; text-align: start">
                         {{ $reques->requestThermoformed->client_name }}
@@ -117,14 +117,14 @@
                         </td>
                     @else
                         <td style="font-weight: 300; text-align: start">
-                            <p>...</p>
+                            <p>N/A</p>
                         </td>
                     @endif
                     <td style="font-weight: 300; text-align: start">
-                        <p>...</p>
+                        <p>N/A</p>
                     </td>
                     <td style="font-weight: 300; text-align: start">
-                        <p>...</p>
+                        <p>N/A</p>
                     </td>
                     <td style="font-weight: 300; text-align: start">
                         {{ $reques->requestThermoformed->box_quantity }}
