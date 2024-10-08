@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 @forelse ($providers as $index => $provider)
-                    <tr class="tr">
+                    <tr class="tr" @if ($index === 4) style="border-bottom: 0px" @endif>
                         <td class="td">{{ $index + 1 }}</td>
 
                         <td class="td" style="text-align: start">

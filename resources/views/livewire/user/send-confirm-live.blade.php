@@ -2,10 +2,10 @@
     <button
         wire:key="show-send-{{ $request->id }}"
         wire:click="showModal"
-        class="btn-confirm tooltip tooltip-top"
+        class="bg-indigo-500 btn-free-color hover:bg-indigo-600 tooltip tooltip-top"
         data-tip="Enviar correo"
     >
-        <x-icons.checked class="size-5 stroke-black" />
+        <x-icons.send-mail class="size-5 stroke-white" />
     </button>
 
     <x-dialog-modal wire:model='open' maxWidth="md" title="Enviar correo al cliente" >

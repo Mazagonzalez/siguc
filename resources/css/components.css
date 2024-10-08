@@ -15,16 +15,20 @@
     @apply items-center h-[45px] gap-2 px-5 rounded-full text-white bg-slate-950 hover:bg-slate-900 dark:bg-white dark:text-black dark:hover:bg-slate-200 row outline-none
 }
 
+.btn-free-color{
+    @apply flex justify-center items-center size-8 rounded-full
+}
+
 .btn-info{
-    @apply flex justify-center items-center size-8 text-white bg-blue-500 rounded-full hover:bg-blue-600
+    @apply flex justify-center items-center size-8 bg-blue-500 rounded-full hover:bg-blue-600
 }
 
 .btn-confirm{
-    @apply flex justify-center items-center size-8 text-white bg-emerald-500 rounded-full hover:bg-emerald-600
+    @apply flex justify-center items-center size-8 bg-emerald-500 rounded-full hover:bg-emerald-600
 }
 
 .btn-decline{
-    @apply flex justify-center items-center size-8 text-white bg-red-500 rounded-full hover:bg-red-600
+    @apply flex justify-center items-center size-8 bg-red-500 rounded-full hover:bg-red-600
 }
 
 .btn-logout{

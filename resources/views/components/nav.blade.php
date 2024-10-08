@@ -1,5 +1,5 @@
 <nav x-data="{ open: false }" class="w-full px-4 pt-4 mx-auto lg:px-0">
-    <div class="max-w-6xl px-5 py-6 mx-auto card-theme">
+    <div class="max-w-6xl px-5 py-4 mx-auto card-theme">
         <div class="items-center justify-between row">
             @livewire('date-session-live', key('user-' . auth()->user()->id))
 

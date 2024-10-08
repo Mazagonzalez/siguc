@@ -1,4 +1,4 @@
-<aside class="px-6 py-4">
+<aside class="p-4">
     <div class="h-full px-5 py-6 card-theme w-[220px] col">
         <a wire:navigate href="{{ route('dashboard') }}" class="mb-6">
             <p class="text-3xl font-semibold text-blue-500" style="font-family: 'Roboto', sans-serif;">SIGUC</p>
