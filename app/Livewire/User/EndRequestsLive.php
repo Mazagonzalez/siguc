@@ -2,8 +2,10 @@
 
 namespace App\Livewire\User;
 
+use App\Models\History;
 use App\Models\Request;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -19,9 +21,15 @@ class EndRequestsLive extends Component
 
     public function confirmDelivery($requestId)
     {
+        DB::beginTransaction();
         $request = Request::find($requestId);
         $request->update([
             'status' => 4,
+        ]);
+
+        History::create([
+            'type_request' => 'Solicitud nacional',
+            'request_id' => $request->id,
         ]);
 
         if ($request->id_request_double) {
@@ -45,7 +53,8 @@ class EndRequestsLive extends Component
             }
         }
 
-        $this->dispatch('request');
+        DB::commit();
+
     }
 
     public function closeModalExport()

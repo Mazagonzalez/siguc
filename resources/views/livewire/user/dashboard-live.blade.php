@@ -121,7 +121,7 @@
             </div>
 
             <div class="w-full p-8 card-theme">
-                @livewire('user.history-requests-live', ['dashboard' => true], key('history-request-'.auth()->user()->id))
+                @livewire('user.history-dashboard-live', ['dashboard' => true], key('history-request-'.auth()->user()->id))
             </div>
         </div>
 

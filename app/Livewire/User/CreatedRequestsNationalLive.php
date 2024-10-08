@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 
+use App\Models\History;
 use Carbon\Carbon;
 use App\Models\Request;
 use Livewire\Component;

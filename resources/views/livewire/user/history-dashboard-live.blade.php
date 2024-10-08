@@ -1,6 +1,6 @@
 <div>
-    {{-- Filtro --}}
-    <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525] my-5">
+    {{-- filtro --}}
+    <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525] {{ $dashboard == false ? 'my-5' : 'mb-5' }}">
         <div class="items-center justify-between row" @click="showFilter = !showFilter">
             <button class="items-center gap-1 row">
                 <span class="text-sm">Filtrar</span>
@@ -26,11 +26,11 @@
                     </div>
 
                     <div class="w-1/3">
-                        <p class="title-input">Estado:</p>
+                        <p class="title-input">Tipo de solicitud</p>
                         <select class="w-full input-simple" wire:model.live="statu">
                             <option value="0">Selecciona</option>
-                            <option value="1">Pendiente</option>
-                            <option value="2">Aceptado</option>
+                            <option value="1">Nacional</option>
+                            <option value="2">Termoformado</option>
                         </select>
                     </div>
                 </div>
@@ -55,8 +55,7 @@
                     </span>
                 </button>
 
-                {{-- export por si futuro --}}
-                {{-- <button wire:click="exportar" class="items-center gap-2 btn-confirm-modal row">
+                <button wire:click="exportar" class="items-center gap-2 btn-confirm-modal row">
                     <x-icons.download class="stroke-white size-5" />
 
                     <span wire:loading.remove wire:target="exportar">
@@ -65,7 +64,7 @@
                     <span wire:loading wire:target="exportar">
                         <x-icons.loading />
                     </span>
-                </button> --}}
+                </button>
             </div>
         </div>
     </div>
@@ -74,63 +73,46 @@
         <thead>
             <tr class="tr">
                 <th class="th">Estado</th>
-                <th class="th">Numero de orden</th>
+                <th class="th">Tipo de orden</th>
                 <th class="th">Fecha de entrega</th>
-                <th class="th">Fecha de confirmacion</th>
-                <th class="th">Tiempo de respuesta</th>
+                <th class="th">Fecha de finalizacion/cancelacion</th>
                 <th class="th"></th>
             </tr>
         </thead>
         <tbody>
             @forelse($requestsCollection as $request)
                 <tr wire:key='orden-{{ $request->id }}' class="tr">
-                    <td class="td">
-                        <x-utils.status status="{{ $request->status }}" />
-                    </td>
-
-                    <td class="td">
-                        @if ($request->id_request_double)
-                            #1 {{ $request->order_number }} <br>
-                            #2 {{ $request->request_double->order_number }}
-                        @else
-                            @if ($request->order_number)
-                                #{{ $request->order_number }}
-                            @else
-                                Sin numero de orden
+                    @if ($request->type_request == 'Solicitud nacional')
+                        <td class="td">
+                            <x-utils.status status="{{ $request->requestNational->status }}" />
+                        </td>
+                        <td class="td">{{ $request->type_request }}</td>
+                        <td class="td">{{ $request->requestNational->date_quotation }}</td>
+                        <td class="td">
+                            @if ($request->requestNational->status == 2)
+                                {{ $request->requestNational->date_decline }}
+                            @elseif ($request->requestNational->status == 4)
+                                {{ $request->requestNational->date_loading }}
                             @endif
-                        @endif
-                    </td>
-
-                    <td class="td">{{ $request->date_quotation }}</td>
-
-                    <td class="td">
-                        @if ($request->status == '0')
-                            <p>En espera</p>
-                        @else
-                            {{ $request->date_acceptance }}
-                        @endif
-
-                    </td>
-
-                    <td class="td">
-                        @if ($request->status == '0')
-                            <p>En espera</p>
-                        @else
-                            {{ $request->time_response }}
-                        @endif
-                    </td>
-
-                    <td class="items-center justify-end gap-2 td row">
-                        @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
-
-                        @livewire('user.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('reject-request-'.$request->id))
-                    </td>
+                        </td>
+                    @elseif ($request->type_request == 'Solicitud termoformado')
+                        <td class="td">
+                            <x-utils.status status="{{ $request->requestThermoformed->status }}" />
+                        </td>
+                        <td class="td">{{ $request->type_request }}</td>
+                        <td class="td">{{ $request->requestThermoformed->date_quotation }}</td>
+                        <td class="td">
+                            @if ($request->requestThermoformed->status == 2)
+                                {{ $request->requestThermoformed->date_decline }}
+                            @elseif ($request->requestThermoformed->status == 4)
+                                {{ $request->requestThermoformed->date_loading }}
+                            @endif
+                        </td>
+                    @endif
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6">
-                        <p class="py-20 text-center">No tienes solicitudes en proceso</p>
-                    </td>
+                    <x-utils.not-search message="No hay solicitudes finalizadas" colspan="5" py="py-24" />
                 </tr>
             @endforelse
         </tbody>

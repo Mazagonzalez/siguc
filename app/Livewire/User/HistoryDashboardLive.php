@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Livewire\User\Thermoformed;
+namespace App\Livewire\User;
 
 use App\Models\History;
 use Livewire\Component;
-use Illuminate\Support\Facades\DB;
-use App\Models\RequestThermoformed;
 use Illuminate\Support\Facades\Auth;
 
-class EndRequestsLive extends Component
+class HistoryDashboardLive extends Component
 {
     public $requests = [];
 
@@ -16,25 +14,27 @@ class EndRequestsLive extends Component
 
     public $end_date;
 
+    public $statu;
+
+    public $show_modal_excel = null;
+
+    public $option_export = null;
+
+    public $dashboard = false;
+
     protected $listeners = ['request' => 'mount'];
 
-    public function confirmDelivery($requestId)
+    public function exportar()
     {
-        DB::beginTransaction();
-
-        $request = RequestThermoformed::find($requestId);
-        $request->update([
-            'status' => 4,
+        $this->validate([
+            'start_date' => 'nullable|before_or_equal:end_date',
+            'end_date'   => 'nullable',
         ]);
 
-        History::create([
-            'type_request' => 'Solicitud termoformado',
-            'request_thermoformed_id' => $request->id,
-        ]);
 
-        DB::commit();
-
-        $this->dispatch('request');
+        return redirect()->route('export.request', ['start_date' => $this->start_date,
+            'end_date'                                           => $this->end_date,
+            'statu'                                              => $this->statu,]);
     }
 
     public function closeModalExport()
@@ -42,8 +42,11 @@ class EndRequestsLive extends Component
         $this->reset([
             'start_date',
             'end_date',
+            'option_export',
+            'statu',
         ]);
         $this->resetErrorBag();
+        $this->show_modal_excel = false;
     }
 
     public function resetAllExport()
@@ -51,6 +54,7 @@ class EndRequestsLive extends Component
         $this->reset([
             'start_date',
             'end_date',
+            'statu',
         ]);
 
         $this->resetErrorBag();
@@ -58,7 +62,7 @@ class EndRequestsLive extends Component
 
     public function render()
     {
-        $items = RequestThermoformed::where('user_id', Auth::id())->where('status', 3)->orderBy('updated_at', 'desc');
+        $items = History::orderBy('updated_at', 'desc');
 
         if (!is_null($this->start_date) and !is_null($this->end_date) and $this->end_date < $this->start_date) {
             $this->addError('start_date', __('La fecha inicial debe ser una fecha anterior o igual a la fecha final.'));
@@ -71,8 +75,17 @@ class EndRequestsLive extends Component
             );
         }
 
+        $items->where(function ($query) {
+            if ($this->statu == 1) {
+                $query->where('type_request', 'Solicitud nacional');
+            }
+            if ($this->statu == 2) {
+                $query->orWhere('type_request', 'Solicitud termoformado');
+            }
+        });
+
         $requests = $items->get();
 
-        return view('livewire.user.thermoformed.end-requests-live', ['requestsCollection' => $requests]);
+        return view('livewire.user.history-dashboard-live', ['requestsCollection' => $requests]);
     }
 }

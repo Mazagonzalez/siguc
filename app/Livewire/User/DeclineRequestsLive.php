@@ -3,6 +3,7 @@
 namespace App\Livewire\User;
 
 use Carbon\Carbon;
+use App\Models\History;
 use App\Models\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -55,6 +56,11 @@ class DeclineRequestsLive extends Component
             'status' => 2,
         ]);
 
+        History::create([
+            'type_request' => 'Solicitud nacional',
+            'request_id' => $this->request->id,
+        ]);
+
         if ($this->request->id_request_double) {
             $this->request->request_double->update([
                 'decline_comment' => $providerDecline,
@@ -82,8 +88,9 @@ class DeclineRequestsLive extends Component
         }
 
         $this->open = false;
-        $this->resetRequest();
         $this->dispatch('request');
+        $this->resetRequest();
+
     }
 
     public function resetRequest()

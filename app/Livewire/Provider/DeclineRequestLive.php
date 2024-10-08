@@ -3,6 +3,7 @@
 namespace App\Livewire\Provider;
 
 use Carbon\Carbon;
+use App\Models\History;
 use App\Models\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -41,6 +42,11 @@ class DeclineRequestLive extends Component
             'decline_comment' => $this->decline_comment,
             'date_decline' => Carbon::now()->toDateTimeString(),
             'status' => 2,
+        ]);
+
+        History::create([
+            'type_request' => 'Solicitud nacional',
+            'request_id' => $this->request->id,
         ]);
 
         if ($this->request->id_request_double) {

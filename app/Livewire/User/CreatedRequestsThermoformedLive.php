@@ -3,6 +3,7 @@
 namespace App\Livewire\User;
 
 use Carbon\Carbon;
+use App\Models\History;
 use Livewire\Component;
 use App\Models\Provider;
 use Illuminate\Support\Facades\DB;
@@ -81,7 +82,7 @@ class CreatedRequestsThermoformedLive extends Component
 
         $provider_id = Provider::where('company_name', $this->provider)->first()->id;
 
-        RequestThermoformed::create([
+        $request = RequestThermoformed::create([
             'user_id' => Auth::id(),
             'provider' => $this->provider,
             'provider_id' => $provider_id,
@@ -101,7 +102,7 @@ class CreatedRequestsThermoformedLive extends Component
 
         $this->resetRequest();
         $this->open = false;
-         $this->dispatch('request');
+        $this->dispatch('request');
     }
 
     function close()

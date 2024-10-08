@@ -3,6 +3,7 @@
 namespace App\Livewire\User\Thermoformed;
 
 use Carbon\Carbon;
+use App\Models\History;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use App\Models\RequestThermoformed;
@@ -52,6 +53,11 @@ class DeclineRequestsLive extends Component
             'user_decline_comment' => $userDecline,
             'date_decline' => Carbon::now()->toDateTimeString(),
             'status' => 2,
+        ]);
+
+        History::create([
+            'type_request' => 'Solicitud termoformado',
+            'request_thermoformed_id' => $this->request->id,
         ]);
 
         DB::commit();
