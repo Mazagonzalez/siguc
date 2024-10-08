@@ -103,7 +103,7 @@
                     </td>
                     <td>
                         @if ($request->initial_flete)
-                            {{ number_format($request->initial_flete, 2) }}
+                            {{ number_format($request->initial_flete) }}
                         @else
                             <p>En espera de aceptacion</p>
                         @endif

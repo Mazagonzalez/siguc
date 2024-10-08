@@ -93,7 +93,7 @@
 
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Flete inicial</span>
-                                <p class="font-light">{{ number_format($request->initial_flete, 2) }}</p>
+                                <p class="font-light">{{ number_format($request->initial_flete) }}</p>
                             </div>
 
                             <div class="py-2 col">
@@ -128,7 +128,7 @@
                         @if ($request->status == 3 || $request->status == 4)
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Flete final</span>
-                                <p class="font-light">{{ number_format($request->final_flete, 2) }}</p>
+                                <p class="font-light">{{ number_format($request->final_flete) }}</p>
                             </div>
 
                             @if ($request->delivery_commentary)

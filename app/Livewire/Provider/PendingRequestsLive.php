@@ -21,8 +21,15 @@ class PendingRequestsLive extends Component
     {
         if (Auth::check()) {
             $provider = Provider::where('user_id', Auth::id())->first();
-            $this->requests = Request::where('provider_id', $provider->id)->where('status',1)->where('double_order', 0)->get();
-            $this->requestsThermoformed = RequestThermoformed::where('provider_id', $provider->id)->where('status', 1)->get();
+            $this->requests = Request::where('provider_id', $provider->id)
+                ->where('status',1)
+                ->where('double_order', 0)
+                ->orderBy('date_quotation', 'asc')
+                ->get();
+            $this->requestsThermoformed = RequestThermoformed::where('provider_id', $provider->id)
+                ->where('status', 1)
+                ->orderBy('date_quotation', 'asc')
+                ->get();
         } else {
             $this->requests = [];
         }

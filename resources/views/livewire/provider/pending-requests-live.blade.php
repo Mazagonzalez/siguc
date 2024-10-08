@@ -3,10 +3,10 @@
         <thead>
             <tr class="tr">
                 <th class="th">Estado</th>
-                <th class="th">Tipo de vehiculo</th>
+                <th class="th">Tipo de solicitud</th>
                 <th class="th">Fecha de entrega</th>
                 <th class="th">Fecha de confirmacion</th>
-                <th class="th">Cantidad de ordenes</th>
+                <th class="th">Flete actual</th>
                 <th class="th"></th>
             </tr>
         </thead>
@@ -16,17 +16,10 @@
                     <td class="td">
                         <x-utils.status status="{{ $request->status }}" />
                     </td>
-
-                    <td class="td">{{ $request->type_vehicle }}</td>
+                    <td class="td">Solicitud nacional</td>
                     <td class="td">{{ $request->date_quotation }}</td>
                     <td class="td">{{ $request->date_acceptance }}</td>
-                    <td class="td">
-                        @if ($request->id_request_double)
-                            <p>2</p>
-                        @else
-                            <p>1</p>
-                        @endif
-                    </td>
+                    <td class="td">{{ number_format($request->initial_flete) }}</td>
 
                     <td class="items-center justify-center gap-2 td row">
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
@@ -37,11 +30,14 @@
                     </td>
                 </tr>
             @empty
-                <tr>
-                    <td colspan="5">
-                        <p class="py-20 text-center">No tienes solicitudes en proceso</p>
-                    </td>
-                </tr>
+                @forelse($requestsThermoformed as $request)
+                @empty
+                    <tr>
+                        <td colspan="5">
+                            <p class="py-20 text-center">No tienes solicitudes en proceso</p>
+                        </td>
+                    </tr>
+                @endforelse
             @endforelse
             @forelse($requestsThermoformed as $request)
                 <tr wire:key='orden-{{ $request->id }}' class="tr">
@@ -49,16 +45,10 @@
                         <x-utils.status status="{{ $request->status }}" />
                     </td>
 
-                    <td class="td">{{ $request->type_vehicle }}</td>
+                    <td class="td">Solicitudes termoformado</td>
                     <td class="td">{{ $request->date_quotation }}</td>
                     <td class="td">{{ $request->date_acceptance }}</td>
-                    <td class="td">
-                        @if ($request->id_request_double)
-                            <p>2</p>
-                        @else
-                            <p>1</p>
-                        @endif
-                    </td>
+                    <td class="td">{{ number_format($request->initial_flete) }}</td>
 
                     <td class="items-center justify-center gap-2 td row">
                         @livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
@@ -70,11 +60,14 @@
                     </td>
                 </tr>
             @empty
-                <tr>
-                    <td colspan="5">
-                        <p class="py-20 text-center">No tienes solicitudes en proceso</p>
-                    </td>
-                </tr>
+                @forelse($requests as $request)
+                @empty
+                    <tr>
+                        <td colspan="5">
+                            <p class="py-20 text-center">No tienes solicitudes en proceso</p>
+                        </td>
+                    </tr>
+                @endforelse
             @endforelse
         </tbody>
     </table>

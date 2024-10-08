@@ -71,7 +71,7 @@
                         </div>
                     </div>
 
-                    <p class="text-2xl font-semibold">0</p>
+                    <p class="text-2xl font-semibold">{{ $request_nationales }}</p>
 
                     {{-- Figura --}}
                     <div class="absolute p-4 border-2 border-blue-400 rounded-full -right-16 -bottom-16">
@@ -109,7 +109,7 @@
                         </div>
                     </div>
 
-                    <p class="text-2xl font-semibold">0</p>
+                    <p class="text-2xl font-semibold">{{ $request_thermoformed }}</p>
 
                     {{-- Figura --}}
                     <div class="absolute p-4 border-2 border-indigo-400 rounded-xl -right-16 -bottom-16">

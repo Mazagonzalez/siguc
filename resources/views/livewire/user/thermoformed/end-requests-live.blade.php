@@ -93,7 +93,7 @@
                         @endif
                     </td>
                     <td>
-                        {{ number_format($request->final_flete, 2) }}
+                        {{ number_format($request->final_flete) }}
                     </td>
 
                     <td class="items-center justify-end gap-2 td row">
