@@ -30,10 +30,11 @@
                     <!-- Page Content -->
                     <div class="flex justify-center w-full h-full">
                         <main class="w-full h-full">
-                            {{ $slot }}
+                            <div class="max-w-6xl px-4 pt-4 pb-6 mx-auto lg:px-0">
+                                {{ $slot }}
+                            </div>
                         </main>
                     </div>
-
                 </div>
             </div>
         </div>
