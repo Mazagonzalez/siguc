@@ -1,27 +1,6 @@
-<nav x-data="{ open: false }" class="max-w-6xl px-4 pt-4 mx-auto lg:px-0">
-    <div class="w-full px-5 py-6 card-theme">
-        <div class="items-center justify-between row">
-            {{-- Logo --}}
-            <a wire:navigate href="{{ route('dashboard') }}">
-                <p class="text-3xl font-semibold text-blue-500" style="font-family: 'Roboto', sans-serif;">SIGUC</p>
-            </a>
-            @role('User')
-                <a wire:navigate href="{{ route('dashboard') }}">
-                    Dashboard
-                </a>
-
-                <a wire:navigate href="{{ route('request.national') }}">
-                    nacional
-                </a>
-
-                <a wire:navigate href="{{ route('request.export') }}">
-                    exportacion
-                </a>
-
-                <a wire:navigate href="{{ route('request.thermoformed') }}">
-                    termoformado
-                </a>
-            @endrole
+<nav x-data="{ open: false }" class="w-full px-4 pt-4 mx-auto lg:px-0">
+    <div class="max-w-6xl px-5 py-6 mx-auto card-theme">
+        <div class="items-center justify-end row">
 
             {{-- Rutas request()->routeIs('dashboard') --}}
             <div class="items-center gap-3 row">
