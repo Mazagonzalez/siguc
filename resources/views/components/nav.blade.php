@@ -14,7 +14,7 @@
                     <a href="{{ route('logout') }}" @click.prevent="$root.submit();" class="text-white btn-logout">
                         <span>Cerrar Sesión</span>
 
-                        <x-icons.logout class="stroke-white dark:stroke-black size-5" />
+                        <x-icons.logout class="stroke-white size-5" />
                     </a>
                 </form>
             </div>

@@ -20,6 +20,8 @@ class HistoryRequestsLive extends Component
 
     public $option_export = null;
 
+    public $dashboard = false;
+
     protected $listeners = ['request' => 'mount'];
 
     public function exportar()
