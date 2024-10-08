@@ -28,7 +28,7 @@
             </div>
 
             <div x-show="typeRequest === 2" x-transition:enter.duration.500ms style="display: none">
-                @livewire('user.end-requests-live', key('history-request-'.auth()->user()->id))
+                @livewire('user.thermoformed.end-requests-live', key('history-request-'.auth()->user()->id))
             </div>
 
             <div x-show="typeRequest === 3" x-transition:enter.duration.500ms style="display: none">

@@ -102,10 +102,9 @@
                             {{ $request->date_loading }}
                         @endif
                     </td>
-
-                    <td class="flex justify-center td">
-                        @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
-                    </td>
+                   <td>
+                        @livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
+                   </td>
                 </tr>
             @empty
                 <tr>

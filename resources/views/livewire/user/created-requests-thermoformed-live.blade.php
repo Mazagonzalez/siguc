@@ -69,7 +69,7 @@
                         <select name="type_vehicle" id="type_vehicle" class="w-full input-simple" wire:model.live="type_vehicle">
                             <option value="0">Seleccionar tipo de vehiculo</option>
                             <option value="Minimula">Minimula</option>
-                            <option value="camion">camion</option>
+                            <option value="Camion">Camion</option>
                             <option value="Tractomula">Tractomula</option>
                         </select>
                         @error('type_vehicle')

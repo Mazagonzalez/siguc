@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Livewire\Provider;
+namespace App\Livewire\User\Thermoformed;
 
-use App\Models\Request;
+use App\Models\RequestThermoformed;
 use Livewire\Component;
 
 class DetailsRequestLive extends Component
@@ -11,7 +11,7 @@ class DetailsRequestLive extends Component
 
     public $request;
 
-    public function mount(Request $request)
+    public function mount(RequestThermoformed $request)
     {
         $this->request = $request;
     }
@@ -28,6 +28,6 @@ class DetailsRequestLive extends Component
 
     public function render()
     {
-        return view('livewire.provider.details-request-live');
+        return view('livewire.user.thermoformed.details-request-live');
     }
 }
