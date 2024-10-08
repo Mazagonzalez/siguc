@@ -2,7 +2,7 @@
     <button
         wire:key="show-send-{{ $request->id }}"
         wire:click="showModal"
-        class="bg-indigo-500 btn-free-color hover:bg-indigo-600 tooltip tooltip-top"
+        class="bg-sky-500 btn-free-color hover:bg-sky-600 tooltip tooltip-top"
         data-tip="Enviar correo"
     >
         <x-icons.send-mail class="size-5 stroke-white" />
