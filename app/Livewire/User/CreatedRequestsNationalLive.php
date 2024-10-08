@@ -103,9 +103,7 @@ class CreatedRequestsNationalLive extends Component
             'date_quotation' => 'required',
             'searchOrderId' => [
                 function ($attribute, $value, $fail) {
-                    if ($this->orderNumber == $this->searchOrderId) {
-                        $fail('El número de orden ya fue ingresado en la orden principal');
-                    } elseif ($this->searchOrderId && empty($this->orderNumber2)) {
+                    if ($this->searchOrderId && empty($this->orderNumber2)) {
                         $fail('No se encontró ninguna orden con ese número');
                     } elseif (!$this->searchOrderId) {
                         return 'nullable';

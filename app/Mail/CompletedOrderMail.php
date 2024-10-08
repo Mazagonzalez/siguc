@@ -5,6 +5,7 @@ namespace App\Mail;
 use App\Models\Request;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use App\Models\RequestThermoformed;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
@@ -17,13 +18,15 @@ class CompletedOrderMail extends Mailable
 
     public $requestId;
     public $comment;
+    public $typeRequest;
     /**
      * Create a new message instance.
      */
-    public function __construct($requestId, $comment)
+    public function __construct($requestId, $comment, $typeRequest)
     {
         $this->requestId = $requestId;
         $this->comment = $comment;
+        $this->typeRequest = $typeRequest;
     }
 
     /**
@@ -42,7 +45,11 @@ class CompletedOrderMail extends Mailable
     public function content(): Content
     {
         try {
-            $request = Request::findOrFail($this->requestId);
+            if ($this->typeRequest == 1) {
+                $request = Request::findOrFail($this->requestId);
+            } elseif ($this->typeRequest == 3) {
+                $request = RequestThermoformed::findOrFail($this->requestId);
+            }
         } catch (\Exception $e) {
             Log::error('Error al cargar la request en CompletedOrderMail: ' . $e->getMessage());
         }
