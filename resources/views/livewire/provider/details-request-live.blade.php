@@ -25,9 +25,16 @@
 
                     <div class="divide-y divide-gray-300 col dark:divide-white/20">
                         @role('User')
+                            @if ($request->order_number)
+                                <div class="py-2 col">
+                                    <span class="text-base font-semibold">Numero de orden</span>
+                                    <p class="font-light">{{ $request->order_number }}</p>
+                                </div>
+                            @endif
+
                             <div class="py-2 col">
-                                <span class="text-base font-semibold">Numero de orden</span>
-                                <p class="font-light">{{ $request->order_number }}</p>
+                                <span class="text-base font-semibold">Nombre del proveedor</span>
+                                <p class="font-light">{{ $request->provider }}</p>
                             </div>
                         @endrole
 
@@ -90,7 +97,7 @@
                             </div>
                         @endif
 
-                        @if ($request->status == 3)
+                        @if ($request->status == 4)
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Fecha de entrega del pedido</span>
                                 <p class="font-light">{{ $request->date_loading }}</p>
@@ -113,9 +120,16 @@
 
                         <div class="divide-y divide-gray-300 col dark:divide-white/20">
                             @role('User')
+                                @if ($request->request_double?->order_number)
+                                    <div class="py-2 col">
+                                        <span class="text-base font-semibold">Numero de orden</span>
+                                        <p class="font-light">{{ $request->request_double?->order_number }}</p>
+                                    </div>
+                                @endif
+
                                 <div class="py-2 col">
-                                    <span class="text-base font-semibold">Numero de orden</span>
-                                    <p class="font-light">{{ $request->request_double?->order_number }}</p>
+                                    <span class="text-base font-semibold">Nombre del proveedor</span>
+                                    <p class="font-light">{{ $request->request_double?->provider }}</p>
                                 </div>
                             @endrole
 
@@ -178,7 +192,7 @@
                                 </div>
                             @endif
 
-                            @if ($request->request_double?->status == 3)
+                            @if ($request->request_double?->status == 4)
                                 <div class="py-2 col">
                                     <span class="text-base font-semibold">Fecha de entrega del pedido</span>
                                     <p class="font-light">{{ $request->request_double?->date_loading }}</p>

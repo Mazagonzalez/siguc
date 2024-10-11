@@ -19,6 +19,13 @@
             <div class="gap-3 col">
                 <div>
                     <div class="divide-y divide-gray-300 col dark:divide-white/20">
+                        @role('User')
+                            <div class="py-2 col">
+                                <span class="text-base font-semibold">Nombre del proveedor</span>
+                                <p class="font-light">{{ $request->provider }}</p>
+                            </div>
+                        @endrole
+                        
                         @if ($request->status != 0)
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Cliente</span>
@@ -125,7 +132,7 @@
                             </div>
                         @endif
 
-                        @if ($request->status == 3 || $request->status == 4)
+                        @if ($request->status == 4 || $request->status == 5)
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Flete final</span>
                                 <p class="font-light">{{ number_format($request->final_flete) }}</p>
