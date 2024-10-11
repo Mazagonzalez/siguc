@@ -65,6 +65,6 @@ class PendingRequestsLive extends Component
 
         $requests = $items->get();
 
-        return view('livewire.user.pending-requests-live', ['requestsCollection' => $requests]);
+        return view('livewire.user.national.pending-requests-live', ['requestsCollection' => $requests]);
     }
 }

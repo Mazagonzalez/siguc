@@ -93,6 +93,6 @@ class EndRequestsLive extends Component
 
         $requests = $items->get();
 
-        return view('livewire.user.end-requests-live', ['requestsCollection' => $requests]);
+        return view('livewire.user.national.end-requests-live', ['requestsCollection' => $requests]);
     }
 }

@@ -39,7 +39,7 @@
                             {{ auth()->user()->short($orders['target_customer'], 25) }}
                         </p>
                         <div class="w">
-                            @livewire('user.modal-created-requests-live', [
+                            @livewire('user.national.search-created-requests-live', [
                                 'targetCustomer' => $orders['target_customer'],
                                 'netWeight' => $orders['net_weight'],
                                 'grossWeight' => $orders['gross_weight'],
@@ -95,11 +95,11 @@
                 </div>
 
                 <div x-show="typeRequest === 2" x-transition:enter.duration.500ms style="display: none">
-                    @livewire('user.end-requests-live', key('history-request-'.auth()->user()->id))
+                    @livewire('user.national.end-requests-live', key('history-request-'.auth()->user()->id))
                 </div>
 
                 <div x-show="typeRequest === 3" x-transition:enter.duration.500ms style="display: none">
-                    @livewire('user.history-requests-live', key('history-request-'.auth()->user()->id))
+                    @livewire('user.national.history-requests-live', key('history-request-'.auth()->user()->id))
                 </div>
             </div>
         </div>

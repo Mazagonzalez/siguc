@@ -144,7 +144,7 @@
 
                     <div>
                         @if ($orderSecond)
-                            @livewire('user.details-second-order-live', [
+                            @livewire('user.national.details-second-order-live', [
                                 'order_number' => $orderNumber2['order_number'],
                                 'target_customer' => $orderNumber2['target_customer'],
                                 'client_address' => $orderNumber2['client_address'],

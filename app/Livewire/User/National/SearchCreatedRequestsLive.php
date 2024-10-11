@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
-class ModalCreatedRequestsLive extends Component
+class SearchCreatedRequestsLive extends Component
 {
     public $open = false;
     public $proveedores = [];
@@ -223,6 +223,6 @@ class ModalCreatedRequestsLive extends Component
 
     public function render()
     {
-        return view('livewire.user.modal-created-requests-live');
+        return view('livewire.user.national.search-created-requests-live');
     }
 }

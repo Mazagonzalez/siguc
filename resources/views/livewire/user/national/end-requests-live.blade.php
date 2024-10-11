@@ -1,5 +1,5 @@
 <div>
-    {{-- Filtro --}}
+    {{-- filtro --}}
     <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525] my-5">
         <div class="items-center justify-between row" @click="showFilter = !showFilter">
             <button class="items-center gap-1 row">
@@ -23,15 +23,6 @@
                     <div class="w-1/3">
                         <p class="title-input">Fecha final:</p>
                         <input class="w-full input-simple" type="date" wire:model.lazy="end_date" />
-                    </div>
-
-                    <div class="w-1/3">
-                        <p class="title-input">Estado:</p>
-                        <select class="w-full input-simple" wire:model.live="statu">
-                            <option value="0">Selecciona</option>
-                            <option value="1">Pendiente</option>
-                            <option value="2">Aceptado</option>
-                        </select>
                     </div>
                 </div>
                 @error('start_date')
@@ -90,14 +81,10 @@
 
                     <td class="td">
                         @if ($request->id_request_double)
-                            #1 {{ $request->order_number }} <br>
-                            #2 {{ $request->request_double->order_number }}
+                            Order #1 {{ $request->order_number }} <br>
+                            Order #2 {{ $request->request_double->order_number }}
                         @else
-                            @if ($request->order_number)
-                                #{{ $request->order_number }}
-                            @else
-                                Sin numero de orden
-                            @endif
+                            Order #1 {{ $request->order_number }}
                         @endif
                     </td>
 
@@ -121,9 +108,17 @@
                     </td>
 
                     <td class="items-center justify-end gap-2 td row">
+                        @livewire('user.send-confirm-live', ['request' => $request, 'typeRequest' => 1], key('send-confirm-'.$request->id))
+
+                        @if ($request->status == 3)
+                            <button class="btn-confirm tooltip tooltip-top" data-tip="Aceptar" wire:click='confirmDelivery({{ $request->id }})' wire:key="show-accept-{{ $request->id }}">
+                                <x-icons.checked class="size-5 stroke-white" />
+                            </button>
+                        @endif
+
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
-                        @livewire('user.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('reject-request-'.$request->id))
+                        @livewire('user.national.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('reject-request-'.$request->id))
                     </td>
                 </tr>
             @empty

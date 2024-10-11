@@ -30,6 +30,6 @@ class DetailsSecondOrderLive extends Component
 
     public function render()
     {
-        return view('livewire.user.details-second-order-live');
+        return view('livewire.user.national.details-second-order-live');
     }
 }

@@ -107,6 +107,6 @@ class DeclineRequestsLive extends Component
 
     public function render()
     {
-        return view('livewire.user.decline-requests-live');
+        return view('livewire.user.national.decline-requests-live');
     }
 }
