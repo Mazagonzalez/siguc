@@ -13,6 +13,9 @@
             $pill = 'bg-indigo-100 text-indigo-500';
             break;
         case 4:
+            $pill = 'bg-white-100 text-emerald-500';
+            break;
+        case 5:
             $pill = 'bg-emerald-100 text-emerald-500';
             break;
     }
@@ -26,8 +29,10 @@
     @elseif ($status == 2)
         <span>Rechazado</span>
     @elseif ($status == 3)
-        <span>Confirmado</span>
+        <span>Facturado</span>
     @elseif ($status == 4)
+        <span>Confirmado</span>
+    @elseif ($status == 5)
         <span>Finalizado</span>
     @endif
 </div>
