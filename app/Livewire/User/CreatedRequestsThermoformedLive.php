@@ -108,6 +108,7 @@ class CreatedRequestsThermoformedLive extends Component
         $this->resetRequest();
         $this->open = false;
         $this->dispatch('request');
+        $this->dispatch('successful-toast', 'Solicitud creada exitosamente');
     }
 
     function close()
