@@ -15,17 +15,17 @@
         >
             <div class="col">
                 <div class="items-end gap-2 px-2 mt-6 row">
-                    <div class="w-1/3">
+                    <div class="w-1/4">
                         <p class="title-input">Fecha inicial:</p>
                         <input class="w-full input-simple" type="date" wire:model.lazy="start_date"/>
                     </div>
 
-                    <div class="w-1/3">
+                    <div class="w-1/4">
                         <p class="title-input">Fecha final:</p>
                         <input class="w-full input-simple" type="date" wire:model.lazy="end_date" />
                     </div>
 
-                    <div class="w-1/3">
+                    <div class="w-1/4">
                         <p class="title-input">Estado</p>
                         <select class="w-full input-simple" wire:model.live="statu">
                             <option value="0">Selecciona</option>
@@ -34,7 +34,7 @@
                         </select>
                     </div>
 
-                    <div class="w-1/3">
+                    <div class="w-1/4">
                         <p class="title-input">Tipo de solicitud</p>
                         <select class="w-full input-simple" wire:model.live="type">
                             <option value="0">Selecciona</option>
