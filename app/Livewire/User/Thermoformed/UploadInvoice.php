@@ -5,9 +5,11 @@ namespace App\Livewire\User\Thermoformed;
 use App\Models\History;
 use App\Models\Invoice;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class UploadInvoice extends Component
 {
@@ -44,7 +46,7 @@ class UploadInvoice extends Component
         ]);
 
         //pendiente codigo azure
-        //$this->saveInvoice();
+        $this->saveInvoice();
 
         $history = History::where('request_thermoformed_id', $this->request->id)
                             ->where('type_request', 'Solicitud termoformado')
@@ -69,6 +71,15 @@ class UploadInvoice extends Component
 
     public function saveInvoice()
     {
+        // Almacenar el archivo temporalmente
+        $file = $this->invoice;
+        $filePath = $file->store('temp'); // Almacena el archivo en una carpeta temporal
+        $cacheKey = 'invoice_' . $this->request->id;
+
+        // Guardar la ruta del archivo en la caché por 1 hora
+        Cache::put($cacheKey, $filePath, 10800);
+
+
         // forma generada por copilot de 0
         /*// Generar un nombre único para el archivo
         $fileName = time() . '_' . $this->invoice->getClientOriginalName();
@@ -82,7 +93,7 @@ class UploadInvoice extends Component
 
         // Obtener la extensión del archivo
 
-        try {
+        /*try {
             $extension = $this->invoice->getClientOriginalExtension();
 
             // Generar un nombre único para el archivo
@@ -102,6 +113,18 @@ class UploadInvoice extends Component
             ]);
         } catch (\Exception $th) {
             $th;
+        }*/
+    }
+
+    public function getInvoice($requestId)
+    {
+        $cacheKey = 'invoice_' . $requestId;
+        $filePath = Cache::get($cacheKey);
+
+        if ($filePath) {
+            return Storage::download($filePath);
+        } else {
+            return response()->json(['error' => 'Archivo no encontrado o ha expirado'], 404);
         }
     }
 

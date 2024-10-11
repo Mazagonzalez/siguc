@@ -24,6 +24,12 @@
                     @endif
 
                     <div class="divide-y divide-gray-300 col dark:divide-white/20">
+                        @if ($request->status == 3 || $request->status == 4 || $request->status == 5)
+                            <div class="py-2 col">
+                                <button class="text-base font-semibold" wire:click="downloadInvoice">Descargar Factura</button>
+                            </div>
+                        @endif
+                        
                         @role('User')
                             @if ($request->order_number)
                                 <div class="py-2 col">

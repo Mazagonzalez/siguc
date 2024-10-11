@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UploadInvoice;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -18,4 +19,6 @@ Route::middleware([
     /* Ruta para user */
     require __DIR__.'/User.php';
 });
+
+Route::get('/download-invoice/{id}', [UploadInvoice::class, 'getInvoice'])->name('download.invoice');
 

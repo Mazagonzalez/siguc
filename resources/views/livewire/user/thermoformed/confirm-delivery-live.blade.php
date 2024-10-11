@@ -41,7 +41,7 @@
                     x-on:livewire-upload-error="isUploading = false"
                     x-on:livewire-upload-progress="progress = $event.detail.progress">
                     <label for="file-upload">
-                        <span class="title-input">Subir factura </span>
+                        <span class="title-input">Subir cumplido  </span>
                         <div
                             class="text-sm col w-full h-[150px] center-content bg-transparent cursor-pointer border-2 border-dashed border-indigo-1 rounded-xl">
                             <div class="w-[60px] center-content h-[48px] fill-white">

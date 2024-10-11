@@ -104,6 +104,9 @@
                                 {{ $request->requestNational->date_loading }}
                             @endif
                         </td>
+                        <td class="flex justify-center td">
+                            @livewire('provider.details-request-live', ['request' => $request->requestNational], key('detail-request-'.$request->id))
+                        </td>
                     @elseif ($request->type_request == 'Solicitud termoformado')
                         <td class="td">
                             <x-utils.status status="{{ $request->requestThermoformed->status }}" />
@@ -116,6 +119,9 @@
                             @elseif ($request->requestThermoformed->status == 5)
                                 {{ $request->requestThermoformed->date_loading }}
                             @endif
+                        </td>
+                        <td class="items-center justify-end gap-2 td row">
+                            @livewire('user.thermoformed.details-request-live', ['request' => $request->requestThermoformed], key('detail-request-'.$request->id))
                         </td>
                     @endif
                 </tr>

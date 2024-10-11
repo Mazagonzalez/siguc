@@ -19,13 +19,19 @@
             <div class="gap-3 col">
                 <div>
                     <div class="divide-y divide-gray-300 col dark:divide-white/20">
+                        @if ($request->status == 3 || $request->status == 4 || $request->status == 5)
+                            <div class="py-2 col">
+                                <button class="text-base font-semibold" wire:click="downloadInvoice">Descargar Factura</button>
+                            </div>
+                        @endif
+                        
                         @role('User')
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Nombre del proveedor</span>
                                 <p class="font-light">{{ $request->provider }}</p>
                             </div>
                         @endrole
-                        
+
                         @if ($request->status != 0)
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Cliente</span>
@@ -152,7 +158,6 @@
                                 <p class="font-light">{{ $request->date_loading }}</p>
                             </div>
                         @endif
-
                     </div>
                 </div>
             </div>

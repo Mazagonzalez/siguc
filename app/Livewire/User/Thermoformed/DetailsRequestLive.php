@@ -26,6 +26,11 @@ class DetailsRequestLive extends Component
         $this->open = false;
     }
 
+    public function downloadInvoice()
+    {
+        return redirect()->route('download.invoice', ['id' => $this->request->id]);
+    }
+
     public function render()
     {
         return view('livewire.user.thermoformed.details-request-live');
