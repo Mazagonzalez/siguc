@@ -28,7 +28,7 @@ class EndRequestsLive extends Component
         ]);
 
         $history = History::where('request_id', $request->id)
-                            ->where('type_request', 'Solicitud national')
+                            ->where('type_request', 'Solicitud nacional')
                             ->first();
         $history->update([
             'status' => 5,
@@ -80,7 +80,7 @@ class EndRequestsLive extends Component
 
     public function render()
     {
-        $items = Request::where('user_id', Auth::id())->where('status', 3)->where('double_order', 0)->orderBy('updated_at', 'desc');
+        $items = Request::where('user_id', Auth::id())->where('status', 4)->where('double_order', 0)->orderBy('updated_at', 'desc');
 
         if (!is_null($this->start_date) and !is_null($this->end_date) and $this->end_date < $this->start_date) {
             $this->addError('start_date', __('La fecha inicial debe ser una fecha anterior o igual a la fecha final.'));

@@ -3,7 +3,7 @@
         wire:key="show-accept-{{ $request->id }}"
         wire:click="showModal"
         class="btn-confirm tooltip tooltip-top"
-        data-tip="Aceptar"
+        data-tip="Confirmar entrega"
     >
         <x-icons.checked class="size-5 stroke-white" />
     </button>
@@ -15,6 +15,20 @@
                     <span class="title-input">Flete Final</span>
                     <input wire:model.live="final_flete" oninput="formatNumber(this)" type="text" class="w-full input-simple" />
                     @error('final_flete')
+                        <span class="err">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <div>
+                    <span class="title-input">Fecha la entrega</span>
+                    <input
+                        type="date"
+                        wire:model.live="date_loading"
+                        class="w-full input-simple"
+                    />
+                    @error('date_loading')
                         <span class="err">
                             {{ $message }}
                         </span>
@@ -34,9 +48,9 @@
 
                             </div>
                             <span class="mt-3 font-semibold text-indigo-1">Subir Archivo</span>
-                            <input wire:model.live="invoice" type="file"
+                            <input wire:model.live="completed" type="file"
                                 class="w-[180px] font-light focus:outline-none focus:ring-0 file:text-[0px] file:bg-transparent file:border-none" />
-                            @error('invoice')
+                            @error('completed')
                                 <span class="err">
                                     {{ $message }}
                                 </span>

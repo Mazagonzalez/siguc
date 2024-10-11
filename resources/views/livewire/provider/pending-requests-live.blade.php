@@ -24,7 +24,25 @@
                     <td class="items-center justify-center gap-2 td row">
                         @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
-                        @livewire('provider.confirm-delivery-live', ['request' => $request], key('confirm-request-'.$request->id))
+                        @if ($request->status == 1)
+                            @livewire('provider.upload-invoice', ['request' => $request], key('invoice-request-'.$request->id))
+                            <button
+                                wire:key="confirm-delevery-{{ $request->id }}"
+                                class="bg-gray-500 btn-free-color tooltip tooltip-top"
+                                data-tip="Confirmar entrega"
+                            >
+                                <x-icons.checked class="size-5 stroke-white" />
+                            </button>
+                        @elseif ($request->status == 3)
+                            <button
+                                wire:key="updated-invoice-{{ $request->id }}"
+                                class="bg-gray-500 btn-free-color tooltip tooltip-top"
+                                data-tip="Subir factura"
+                            >
+                                <x-icons.message-check class="size-5 stroke-white" />
+                            </button>
+                            @livewire('provider.confirm-delivery-live', ['request' => $request], key('confirm-request-'.$request->id))
+                        @endif
 
                         @livewire('provider.decline-request-live', ['request' => $request, 'roleDecline' => 2], key('reject-request-'.$request->id))
                     </td>
@@ -53,7 +71,25 @@
                     <td class="items-center justify-center gap-2 td row">
                         @livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
-                        @livewire('user.thermoformed.confirm-delivery-live', ['request' => $request], key('confirm-request-'.$request->id))
+                        @if ($request->status == 1)
+                            @livewire('user.thermoformed.upload-invoice', ['request' => $request], key('invoice-request-'.$request->id))
+                            <button
+                                wire:key="confirm-delevery-{{ $request->id }}"
+                                class="bg-gray-500 btn-free-color tooltip tooltip-top"
+                                data-tip="Confirmar entrega"
+                            >
+                                <x-icons.checked class="size-5 stroke-white" />
+                            </button>
+                        @elseif ($request->status == 3)
+                            <button
+                                wire:key="updated-invoice-{{ $request->id }}"
+                                class="bg-gray-500 btn-free-color tooltip tooltip-top"
+                                data-tip="Subir factura"
+                            >
+                                <x-icons.message-check class="size-5 stroke-white" />
+                            </button>
+                            @livewire('user.thermoformed.confirm-delivery-live', ['request' => $request], key('confirm-request-'.$request->id))
+                        @endif
 
                         @livewire('user.thermoformed.decline-requests-live', ['request' => $request, 'roleDecline' => 2], key('reject-request-'.$request->id))
 

@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Provider;
 
-use Carbon\Carbon;
 use App\Models\History;
 use App\Models\Invoice;
 use App\Models\Request;
@@ -22,7 +21,9 @@ class ConfirmDeliveryLive extends Component
 
     public $final_flete;
 
-    public $invoice;
+    public $completed;
+
+    public $date_loading;
 
     public $delivery_commentary;
 
@@ -42,18 +43,18 @@ class ConfirmDeliveryLive extends Component
     {
         $this->validate([
             'final_flete' => 'required',
-            'invoice' => 'required|file|mimes:png,jpg,pdf|max:10240',
+            'completed' => 'required|file|mimes:png,jpg,pdf|max:10240',
         ],
         [
             'final_flete.required' => 'El campo flete final es obligatorio',
-            'invoice.required' => 'El campo factura es obligatorio',
-            'invoice.file' => 'El campo factura debe ser un archivo',
-            'invoice.mimes' => 'El campo factura debe ser un archivo de tipo: png, jpg o pdf',
-            'invoice.max' => 'El campo factura no debe pesar más de 10MB',
+            'completed.required' => 'El campo factura es obligatorio',
+            'completed.file' => 'El campo factura debe ser un archivo',
+            'completed.mimes' => 'El campo factura debe ser un archivo de tipo: png, jpg o pdf',
+            'completed.max' => 'El campo factura no debe pesar más de 10MB',
         ]);
 
         //pendiente codigo azure
-        //$this->saveInvoice();
+        //$this->saveCompleted();
         $this->final_flete = str_replace('.', '', $this->final_flete);
 
         $history = History::where('request_id', $this->request->id)
@@ -66,7 +67,7 @@ class ConfirmDeliveryLive extends Component
             'status' => 4,
             'final_flete' => $this->final_flete,
             'delivery_commentary' => $this->delivery_commentary,
-            'date_loading' => Carbon::now()->toDateTimeString(),
+            'date_loading' => $this->date_loading,
         ]);
 
         if ($this->request->id_request_double) {
@@ -75,7 +76,7 @@ class ConfirmDeliveryLive extends Component
                 'status' => 4,
                 'final_flete' => $this->final_flete,
                 'delivery_commentary' => $this->delivery_commentary,
-                'date_loading' => Carbon::now()->toDateTimeString(),
+                'date_loading' => $this->date_loading,
             ]);
         }
 
@@ -90,14 +91,14 @@ class ConfirmDeliveryLive extends Component
         $this->dispatch('request');
     }
 
-    public function saveInvoice()
+    public function saveCompleted()
     {
         // forma generada por copilot de 0
         /*// Generar un nombre único para el archivo
-        $fileName = time() . '_' . $this->invoice->getClientOriginalName();
+        $fileName = time() . '_' . $this->completed->getClientOriginalName();
 
         // Subir el archivo a Azure Blob Storage
-        $path = Storage::disk('azure')->put($fileName, file_get_contents($this->invoice->getRealPath()));
+        $path = Storage::disk('azure')->put($fileName, file_get_contents($this->completed->getRealPath()));
 
         // Retornar la ruta del archivo subido o hacer algo con ella
         session()->flash('message', 'Archivo subido exitosamente: ' . $path);*/
@@ -106,16 +107,16 @@ class ConfirmDeliveryLive extends Component
         // Obtener la extensión del archivo
 
         try {
-            $extension = $this->invoice->getClientOriginalExtension();
+            $extension = $this->completed->getClientOriginalExtension();
 
             // Generar un nombre único para el archivo
-            $fileName = md5(Str::random(5) . $this->invoice->getClientOriginalName() . time()) . '.' . $extension;
+            $fileName = md5(Str::random(5) . $this->completed->getClientOriginalName() . time()) . '.' . $extension;
 
             // Definir el path de almacenamiento
-            $path = 'invoices';
+            $path = 'completed';
 
             // Almacenar el archivo en Azure Blob Storage
-            $this->invoice->storeAs($path, $fileName, 'azure');
+            $this->completed->storeAs($path, $fileName, 'azure');
 
             // Crear un nuevo registro en la tabla invoices
             Invoice::create([
@@ -134,7 +135,7 @@ class ConfirmDeliveryLive extends Component
         $this->resetErrorBag();
         $this->reset([
             'final_flete',
-            'invoice',
+            'completed',
             'delivery_commentary',
         ]);
     }

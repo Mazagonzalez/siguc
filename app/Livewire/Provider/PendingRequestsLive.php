@@ -22,12 +22,12 @@ class PendingRequestsLive extends Component
         if (Auth::check()) {
             $provider = Provider::where('user_id', Auth::id())->first();
             $this->requests = Request::where('provider_id', $provider->id)
-                ->where('status',1)
+                ->whereIn('status', [1, 3])
                 ->where('double_order', 0)
                 ->orderBy('date_quotation', 'asc')
                 ->get();
             $this->requestsThermoformed = RequestThermoformed::where('provider_id', $provider->id)
-                ->where('status', 1)
+                ->whereIn('status', [1, 3])
                 ->orderBy('date_quotation', 'asc')
                 ->get();
         } else {

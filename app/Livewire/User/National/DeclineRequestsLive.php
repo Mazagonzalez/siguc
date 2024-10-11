@@ -48,7 +48,7 @@ class DeclineRequestsLive extends Component
         }
 
         $history = History::where('request_id', $this->request->id)
-                            ->where('type_request', 'Solicitud national')
+                            ->where('type_request', 'Solicitud nacional')
                             ->first();
 
         DB::beginTransaction();
