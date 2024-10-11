@@ -58,7 +58,7 @@ class ConfirmDeliveryLive extends Component
         DB::beginTransaction();
 
         $this->request->update([
-            'status' => 3,
+            'status' => 4,
             'final_flete' => $this->final_flete,
             'delivery_commentary' => $this->delivery_commentary,
             'date_loading' => Carbon::now()->toDateTimeString(),
@@ -67,7 +67,7 @@ class ConfirmDeliveryLive extends Component
         if ($this->request->id_request_double) {
             $requestDouble = Request::find($this->request->id_request_double);
             $requestDouble->update([
-                'status' => 3,
+                'status' => 4,
                 'final_flete' => $this->final_flete,
                 'delivery_commentary' => $this->delivery_commentary,
                 'date_loading' => Carbon::now()->toDateTimeString(),

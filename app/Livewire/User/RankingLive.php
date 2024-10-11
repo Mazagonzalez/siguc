@@ -16,10 +16,10 @@ class RankingLive extends Component
 
     public function generateRanking()
     {
-        $this->totalStates = Request::where('status', 4)->where('double_order', 0)->count();
+        $this->totalStates = Request::where('status', 5)->where('double_order', 0)->count();
 
         $this->providers = Request::select('provider_id', DB::raw('count(*) as total'))
-            ->where('status', 4)
+            ->where('status', 5)
             ->where('double_order', 0)
             ->groupBy('provider_id')
             ->orderBy('total', 'desc')

@@ -22,13 +22,13 @@ class HistoryRequestsLive extends Component
         if (Auth::check()) {
             $provider = Provider::where('user_id', Auth::id())->first();
             $this->requests = Request::where('provider_id', $provider->id)
-                ->whereIn('status', [2, 4])
+                ->whereIn('status', [2, 5])
                 ->where('double_order', 0)
-                ->orderByRaw("FIELD(status, 4, 2) asc, updated_at desc")
+                ->orderByRaw("FIELD(status, 5, 2) asc, updated_at desc")
                 ->get();
             $this->requestsThermoformed = RequestThermoformed::where('provider_id', $provider->id)
-                ->whereIn('status', [2, 4])
-                ->orderByRaw("FIELD(status, 4, 2) asc, updated_at desc")
+                ->whereIn('status', [2, 5])
+                ->orderByRaw("FIELD(status, 5, 2) asc, updated_at desc")
                 ->get();
         } else {
             $this->requests = [];

@@ -62,7 +62,7 @@ class HistoryRequestsLive extends Component
 
     public function render()
     {
-        $items = Request::where('user_id', Auth::id())->whereIn('status', [2, 4])->where('double_order', 0)->orderBy('updated_at', 'desc');
+        $items = Request::where('user_id', Auth::id())->whereIn('status', [2, 5])->where('double_order', 0)->orderBy('updated_at', 'desc');
 
         if (!is_null($this->start_date) and !is_null($this->end_date) and $this->end_date < $this->start_date) {
             $this->addError('start_date', __('La fecha inicial debe ser una fecha anterior o igual a la fecha final.'));
@@ -77,7 +77,7 @@ class HistoryRequestsLive extends Component
 
         $items->where(function ($query) {
             if ($this->statu == 1) {
-                $query->where('status', 4);
+                $query->where('status', 5);
             }
             if ($this->statu == 2) {
                 $query->orWhere('status', 2);

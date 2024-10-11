@@ -24,7 +24,7 @@ class EndRequestsLive extends Component
         DB::beginTransaction();
         $request = Request::find($requestId);
         $request->update([
-            'status' => 4,
+            'status' => 5,
         ]);
 
         History::create([
@@ -35,7 +35,7 @@ class EndRequestsLive extends Component
         if ($request->id_request_double) {
             $requestDouble = Request::find($request->id_request_double);
             $requestDouble->update([
-                'status' => 4,
+                'status' => 5,
             ]);
         }
 

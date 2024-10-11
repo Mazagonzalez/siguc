@@ -17,6 +17,14 @@ class History extends Model
         'status',
     ];
 
+    /*status
+    0: pendiente
+    1: aceptado
+    2: rechazado
+    3: facturado
+    4: confirmado o cumplido
+    5: finalizado*/
+
     public function requestNational()
     {
         return $this->belongsTo(Request::class, 'request_id');

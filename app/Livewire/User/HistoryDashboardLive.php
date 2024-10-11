@@ -86,7 +86,7 @@ class HistoryDashboardLive extends Component
                 $query->where('type_request', 'Solicitud termoformado');
             }
             if ($this->statu == 1) {
-                $query->where('status', 4);
+                $query->where('status', 5);
             }
             if ($this->statu == 2) {
                 $query->where('status', 2);

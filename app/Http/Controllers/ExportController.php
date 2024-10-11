@@ -13,7 +13,7 @@ class ExportController extends Controller
 {
     public function excelRequest(HttpRequest $request)
     {
-        $requestExpor = Request::where('user_id', Auth::id())->whereIn('status', [2, 4])->orderBy('updated_at', 'desc');
+        $requestExpor = Request::where('user_id', Auth::id())->whereIn('status', [2, 5])->orderBy('updated_at', 'desc');
 
         if (!is_null($request->start_date) and !is_null($request->end_date) and $request->end_date >= $request->start_date) {
             $requestExpor = $requestExpor->whereBetween(
@@ -23,7 +23,7 @@ class ExportController extends Controller
         }
 
         if ($request->statu == 1) {
-            $requestExpor = $requestExpor->where('status', 4);
+            $requestExpor = $requestExpor->where('status', 5);
         }
         if ($request->statu == 2) {
             $requestExpor = $requestExpor->where('status', 2);
@@ -45,7 +45,7 @@ class ExportController extends Controller
         }
 
         if ($request->statu == 1) {
-            $items = $items->where('status', 4);
+            $items = $items->where('status', 5);
         }
         if ($request->statu == 2) {
             $items = $items->where('status', 2);

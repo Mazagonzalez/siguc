@@ -24,7 +24,7 @@ class EndRequestsLive extends Component
 
         $request = RequestThermoformed::find($requestId);
         $request->update([
-            'status' => 4,
+            'status' => 5,
         ]);
 
         History::create([
@@ -58,7 +58,7 @@ class EndRequestsLive extends Component
 
     public function render()
     {
-        $items = RequestThermoformed::where('user_id', Auth::id())->where('status', 3)->orderBy('updated_at', 'desc');
+        $items = RequestThermoformed::where('user_id', Auth::id())->where('status', 4)->orderBy('updated_at', 'desc');
 
         if (!is_null($this->start_date) and !is_null($this->end_date) and $this->end_date < $this->start_date) {
             $this->addError('start_date', __('La fecha inicial debe ser una fecha anterior o igual a la fecha final.'));
