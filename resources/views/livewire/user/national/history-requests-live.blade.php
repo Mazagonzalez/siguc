@@ -100,7 +100,7 @@
                     <td class="td">
                         @if ($request->status == 2)
                             {{ $request->date_decline }}
-                        @elseif ($request->status == 4)
+                        @elseif ($request->status == 5)
                             {{ $request->date_loading }}
                         @endif
                     </td>

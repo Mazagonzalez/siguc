@@ -139,7 +139,7 @@
                             @endif
                         @endif
 
-                        @if ($request->status == 4)
+                        @if ($request->status == 5)
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Fecha de entrega del pedido</span>
                                 <p class="font-light">{{ $request->date_loading }}</p>

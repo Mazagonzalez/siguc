@@ -22,12 +22,12 @@
                     <td class="td">
                         @if ($request->status == 2)
                             {{ $request->date_decline }}
-                        @elseif ($request->status == 4)
+                        @elseif ($request->status == 5)
                             {{ $request->date_loading }}
                         @endif
                     </td>
                     <td class="td">
-                        @if ($request->status == 4)
+                        @if ($request->status == 5)
                             {{ number_format($request->final_flete) }}
                         @elseif ($request->status == 2)
                             <p>Cancelada</p>
@@ -58,12 +58,12 @@
                     <td class="td">
                         @if ($request->status == 2)
                             {{ $request->date_decline }}
-                        @elseif ($request->status == 4)
+                        @elseif ($request->status == 5)
                             {{ $request->date_loading }}
                         @endif
                     </td>
                     <td class="td">
-                        @if ($request->status == 4)
+                        @if ($request->status == 5)
                             {{ number_format($request->final_flete) }}
                         @elseif ($request->status == 2)
                             <p>Cancelada</p>

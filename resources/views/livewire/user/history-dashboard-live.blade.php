@@ -100,7 +100,7 @@
                         <td class="td">
                             @if ($request->requestNational->status == 2)
                                 {{ $request->requestNational->date_decline }}
-                            @elseif ($request->requestNational->status == 4)
+                            @elseif ($request->requestNational->status == 5)
                                 {{ $request->requestNational->date_loading }}
                             @endif
                         </td>
@@ -113,7 +113,7 @@
                         <td class="td">
                             @if ($request->requestThermoformed->status == 2)
                                 {{ $request->requestThermoformed->date_decline }}
-                            @elseif ($request->requestThermoformed->status == 4)
+                            @elseif ($request->requestThermoformed->status == 5)
                                 {{ $request->requestThermoformed->date_loading }}
                             @endif
                         </td>
