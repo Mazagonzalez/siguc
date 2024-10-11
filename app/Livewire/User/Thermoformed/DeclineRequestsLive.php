@@ -58,6 +58,7 @@ class DeclineRequestsLive extends Component
         History::create([
             'type_request' => 'Solicitud termoformado',
             'request_thermoformed_id' => $this->request->id,
+            'status' => 2,
         ]);
 
         DB::commit();

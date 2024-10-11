@@ -30,6 +30,7 @@ class EndRequestsLive extends Component
         History::create([
             'type_request' => 'Solicitud nacional',
             'request_id' => $request->id,
+            'status' => 5,
         ]);
 
         if ($request->id_request_double) {

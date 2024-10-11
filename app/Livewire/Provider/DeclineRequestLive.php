@@ -47,6 +47,7 @@ class DeclineRequestLive extends Component
         History::create([
             'type_request' => 'Solicitud nacional',
             'request_id' => $this->request->id,
+            'status' => 2,
         ]);
 
         if ($this->request->id_request_double) {

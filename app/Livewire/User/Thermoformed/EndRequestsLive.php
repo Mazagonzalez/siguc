@@ -30,6 +30,7 @@ class EndRequestsLive extends Component
         History::create([
             'type_request' => 'Solicitud termoformado',
             'request_thermoformed_id' => $request->id,
+            'status' => 5,
         ]);
 
         DB::commit();
