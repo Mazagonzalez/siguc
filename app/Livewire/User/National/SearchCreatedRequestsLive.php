@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Livewire\User;
+namespace App\Livewire\User\National;
 
 use Carbon\Carbon;
+use App\Models\History;
 use App\Models\Request;
 use Livewire\Component;
 use App\Models\Provider;
@@ -176,6 +177,11 @@ class SearchCreatedRequestsLive extends Component
 
             $request->update(['id_request_double' => $order2->id]);
         }
+
+        History::create([
+            'type_request' => 'Solicitud nacional',
+            'request_id' => $request->id,
+        ]);
 
         DB::commit();
 

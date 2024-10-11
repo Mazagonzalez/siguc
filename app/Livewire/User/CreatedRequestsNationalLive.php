@@ -165,6 +165,11 @@ class CreatedRequestsNationalLive extends Component
             $request->update(['id_request_double' => $order2->id]);
         }
 
+        History::create([
+            'type_request' => 'Solicitud nacional',
+            'request_id' => $request->id,
+        ]);
+
         DB::commit();
 
         // Cambia el estado en el EndPoint

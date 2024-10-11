@@ -3,6 +3,7 @@
 namespace App\Livewire\Provider;
 
 use Carbon\Carbon;
+use App\Models\History;
 use App\Models\Request;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -76,6 +77,10 @@ class AcceptRequestLive extends Component
         $this->initial_flete = str_replace('.', '', $this->initial_flete);
         $time_response = implode(' y ', $resultado);
 
+        $history = History::where('request_id', $this->request->id)
+                            ->where('type_request', 'Solicitud nacional')
+                            ->first();
+
         DB::beginTransaction();
 
         $this->request->update([
@@ -102,6 +107,10 @@ class AcceptRequestLive extends Component
                 'status' => 1,
             ]);
         }
+
+        $history->update([
+            'status' => 4,
+        ]);
 
         DB::commit();
 

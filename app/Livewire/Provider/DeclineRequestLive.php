@@ -36,6 +36,10 @@ class DeclineRequestLive extends Component
             'decline_comment.required' => 'Es obligatorio que llene el comentario para rechazar la solicitud.',
         ]);
 
+        $history = History::where('request_id', $this->request->id)
+                            ->where('type_request', 'Solicitud nacional')
+                            ->first();
+
         DB::beginTransaction();
 
         $this->request->update([
@@ -44,9 +48,7 @@ class DeclineRequestLive extends Component
             'status' => 2,
         ]);
 
-        History::create([
-            'type_request' => 'Solicitud nacional',
-            'request_id' => $this->request->id,
+        $history->update([
             'status' => 2,
         ]);
 

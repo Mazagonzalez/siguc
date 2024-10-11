@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\User;
+namespace App\Livewire\User\National;
 
 use Carbon\Carbon;
 use App\Models\History;
@@ -47,6 +47,10 @@ class DeclineRequestsLive extends Component
             $userDecline = null;
         }
 
+        $history = History::where('request_id', $this->request->id)
+                            ->where('type_request', 'Solicitud national')
+                            ->first();
+
         DB::beginTransaction();
 
         $this->request->update([
@@ -56,10 +60,8 @@ class DeclineRequestsLive extends Component
             'status' => 2,
         ]);
 
-        History::create([
-            'type_request' => 'Solicitud nacional',
-            'request_id' => $this->request->id,
-            'status' => 2,
+        $history->update([
+            'status' => 5,
         ]);
 
         if ($this->request->id_request_double) {

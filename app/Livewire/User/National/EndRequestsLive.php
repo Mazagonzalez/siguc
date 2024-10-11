@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\User;
+namespace App\Livewire\User\National;
 
 use App\Models\History;
 use App\Models\Request;
@@ -27,9 +27,10 @@ class EndRequestsLive extends Component
             'status' => 5,
         ]);
 
-        History::create([
-            'type_request' => 'Solicitud nacional',
-            'request_id' => $request->id,
+        $history = History::where('request_id', $request->id)
+                            ->where('type_request', 'Solicitud national')
+                            ->first();
+        $history->update([
             'status' => 5,
         ]);
 

@@ -3,12 +3,13 @@
 namespace App\Livewire\User\Thermoformed;
 
 use Carbon\Carbon;
+use App\Models\History;
 use App\Models\Invoice;
-use App\Models\RequestThermoformed;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
+use App\Models\RequestThermoformed;
 use Illuminate\Support\Facades\Log;
 
 class ConfirmDeliveryLive extends Component
@@ -55,6 +56,10 @@ class ConfirmDeliveryLive extends Component
         //$this->saveInvoice();
         $this->final_flete = str_replace('.', '', $this->final_flete);
 
+        $history = History::where('request_thermoformed_id', $this->request->id)
+                            ->where('type_request', 'Solicitud termoformado')
+                            ->first();
+
         DB::beginTransaction();
 
         $this->request->update([
@@ -73,6 +78,10 @@ class ConfirmDeliveryLive extends Component
                 'date_loading' => Carbon::now()->toDateTimeString(),
             ]);
         }
+
+        $history->update([
+            'status' => 4,
+        ]);
 
         DB::commit();
 

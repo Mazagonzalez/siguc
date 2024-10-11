@@ -91,7 +91,7 @@
 
             <div class="w-full">
                 <div x-show="typeRequest === 1" x-transition:enter.duration.500ms style="display: none">
-                    @livewire('user.pending-requests-live', key('pending-request-'.auth()->user()->id))
+                    @livewire('user.national.pending-requests-live', key('pending-request-'.auth()->user()->id))
                 </div>
 
                 <div x-show="typeRequest === 2" x-transition:enter.duration.500ms style="display: none">

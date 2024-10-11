@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User\Thermoformed;
 
+use App\Models\History;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
@@ -75,6 +76,10 @@ class AcceptRequestLive extends Component
         $this->initial_flete = str_replace('.', '', $this->initial_flete);
         $time_response = implode(' y ', $resultado);
 
+        $history = History::where('request_thermoformed_id', $this->request->id)
+                            ->where('type_request', 'Solicitud termoformado')
+                            ->first();
+
         DB::beginTransaction();
 
         $this->request->update([
@@ -85,6 +90,10 @@ class AcceptRequestLive extends Component
             'initial_flete' => $this->initial_flete,
             'date_acceptance' => $date_acceptance->toDateTimeString(),
             'time_response' => $time_response,
+            'status' => 1,
+        ]);
+
+        $history->update([
             'status' => 1,
         ]);
 

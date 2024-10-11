@@ -3,6 +3,7 @@
 namespace App\Livewire\Provider;
 
 use Carbon\Carbon;
+use App\Models\History;
 use App\Models\Invoice;
 use App\Models\Request;
 use Livewire\Component;
@@ -55,6 +56,10 @@ class ConfirmDeliveryLive extends Component
         //$this->saveInvoice();
         $this->final_flete = str_replace('.', '', $this->final_flete);
 
+        $history = History::where('request_id', $this->request->id)
+                            ->where('type_request', 'Solicitud nacional')
+                            ->first();
+
         DB::beginTransaction();
 
         $this->request->update([
@@ -73,6 +78,10 @@ class ConfirmDeliveryLive extends Component
                 'date_loading' => Carbon::now()->toDateTimeString(),
             ]);
         }
+
+        $history->update([
+            'status' => 4,
+        ]);
 
         DB::commit();
 

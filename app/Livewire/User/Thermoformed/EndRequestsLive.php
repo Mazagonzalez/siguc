@@ -27,9 +27,10 @@ class EndRequestsLive extends Component
             'status' => 5,
         ]);
 
-        History::create([
-            'type_request' => 'Solicitud termoformado',
-            'request_thermoformed_id' => $request->id,
+        $history = History::where('request_thermoformed_id', $request->id)
+                            ->where('type_request', 'Solicitud termoformado')
+                            ->first();
+        $history->update([
             'status' => 5,
         ]);
 

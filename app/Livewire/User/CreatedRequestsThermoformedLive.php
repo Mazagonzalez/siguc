@@ -97,6 +97,11 @@ class CreatedRequestsThermoformedLive extends Component
             'comment' => $this->comment,
         ]);
 
+        History::create([
+            'type_request' => 'Solicitud termoformado',
+            'request_thermoformed_id' => $request->id,
+        ]);
+
         DB::commit();
 
 

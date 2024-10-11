@@ -46,6 +46,10 @@ class DeclineRequestsLive extends Component
             $userDecline = null;
         }
 
+        $history = History::where('request_thermoformed_id', $this->request->id)
+                            ->where('type_request', 'Solicitud termoformado')
+                            ->first();
+
         DB::beginTransaction();
 
         $this->request->update([
@@ -55,9 +59,7 @@ class DeclineRequestsLive extends Component
             'status' => 2,
         ]);
 
-        History::create([
-            'type_request' => 'Solicitud termoformado',
-            'request_thermoformed_id' => $this->request->id,
+        $history->update([
             'status' => 2,
         ]);
 
