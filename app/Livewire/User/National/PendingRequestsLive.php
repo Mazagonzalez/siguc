@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\User;
+namespace App\Livewire\User\National;
 
 use App\Models\Request;
 use Livewire\Component;

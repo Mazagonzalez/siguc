@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 
+use App\Models\Request;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Http;
@@ -11,8 +12,20 @@ class RequestNationalLive extends Component
     public $orders;
     public $orderId;
     public $pending = 0;
+    public $request_acepted;
+    public $request_pending;
+    public $request_rejected;
+    public $request_finished;
 
     protected $listeners = ['request' => 'mount'];
+
+    public function mount()
+    {
+        $this->request_acepted = Request::where('status', 1)->count();
+        $this->request_pending = Request::where('status', 0)->count();
+        $this->request_rejected = Request::where('status', 2)->count();
+        $this->request_finished = Request::where('status', 5)->count();
+    }
 
     public function updatedOrderId($value)
     {

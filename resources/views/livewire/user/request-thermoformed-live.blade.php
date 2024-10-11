@@ -1,4 +1,12 @@
-<div>
+<div class="gap-3 col">
+    {{-- Total de solicitudes por estado --}}
+    <x-utils.card-request-status
+        :acepted="$request_acepted"
+        :pending="$request_pending"
+        :rejected="$request_rejected"
+        :finished="$request_finished"
+    />
+
     <div
         x-data="{
             typeRequest: 1,
@@ -38,5 +46,20 @@
         </div>
 
     </div>
+
+    @if (session('message'))
+        <div
+            x-data="{ show: true }"
+            x-init="setTimeout(() => show = false, 3000)"
+            x-show="show"
+            x-transition:leave.duration.400ms
+            wire:transition
+            class="fixed z-40 items-center gap-3 px-4 py-2 text-sm font-light text-white rounded-lg bg-emerald-500 row bottom-4 right-4"
+        >
+            <x-icons.checked class="stroke-white size-5" />
+
+            {{ session('message') }}
+        </div>
+    @endif
 </div>
 
