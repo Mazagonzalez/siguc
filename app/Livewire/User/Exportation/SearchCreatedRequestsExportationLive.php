@@ -16,7 +16,7 @@ class SearchCreatedRequestsExportationLive extends Component
 {
     public $open = false;
     public $order; //proforma completa
-    public $order_number; //numero de orden o proforma es igual
+    public $proforma_id; //numero de orden o proforma es igual
     public $providers = [];
     public $provider;
     public $client_name;
@@ -36,7 +36,7 @@ class SearchCreatedRequestsExportationLive extends Component
         $this->order = $order;
 
         if ($order) {
-            $this->order_number = $order['order_number'];
+            $this->proforma_id = $order['order_number'];
             $this->client_name = $order['target_customer'];
             $this->client_address = $order['client_address'];
             $this->total_net_weight = $order['net_weight'];
@@ -78,7 +78,7 @@ class SearchCreatedRequestsExportationLive extends Component
             'type_vehicle' => 'required',
             'total_net_weight' => 'required',
             'total_gross_weight' => 'required',
-            'vehicle_quantity' => 'required',
+            'order_quantity' => 'required',
             'date_quotation' => 'required',
         ],
         [
@@ -89,7 +89,7 @@ class SearchCreatedRequestsExportationLive extends Component
             'type_vehicle.required' => 'El campo tipo de vehículo es obligatorio',
             'total_net_weight.required' => 'El campo peso neto total es obligatorio',
             'total_gross_weight.required' => 'El campo peso bruto total es obligatorio',
-            'vehicle_quantity.required' => 'El campo cantidad de vehículos es obligatorio',
+            'order_quantity.required' => 'El campo cantidad de vehículos es obligatorio',
             'date_quotation.required' => 'El campo fecha de cita es obligatorio',
         ]);
 
@@ -101,14 +101,14 @@ class SearchCreatedRequestsExportationLive extends Component
             'user_id' => Auth::id(),
             'provider' => $this->provider,
             'provider_id' => $provider_id,
-            'order_number' => $this->order_number,
+            'proforma_id' => $this->proforma_id,
             'client_name' => $this->client_name,
             'client_address' => $this->client_address,
             'client_phone' => $this->client_phone,
             'type_vehicle' => $this->type_vehicle,
             'total_net_weight' => $this->total_net_weight,
             'total_gross_weight' => $this->total_gross_weight,
-            'vehicle_quantity' => $this->vehicle_quantity,
+            'vehicle_quantity' => $this->order_quantity,
             'date_quotation' => $this->date_quotation,
             'order_quantity' => $this->order_quantity,
             'comment' => $this->comment,
@@ -174,7 +174,7 @@ class SearchCreatedRequestsExportationLive extends Component
     public function resetRequest()
     {
         $this->reset([
-            'order_number',
+            'order_quantity',
             'provider',
             'client_name',
             'client_address',

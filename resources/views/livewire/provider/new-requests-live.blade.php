@@ -47,13 +47,13 @@
                         <td class="td">Solicitud Exportacion</td>
                         <td class="td">{{ $request->requestExportation?->date_quotation }}</td>
                         <td class="td">{{ $request->requestExportation?->created_at }}</td>
-                        {{--  <td class="items-center justify-center gap-2 td row" style="text-align: start">
-                            @livewire('user.thermoformed.details-request-live', ['request' => $request->requestThermoformed], key('detail-request-thermoformed'.$request->id))
+                        <td class="items-center justify-center gap-2 td row" style="text-align: start">
+                            {{--@livewire('user.thermoformed.details-request-live', ['request' => $request->requestThermoformed], key('detail-request-thermoformed'.$request->id)) --}}
 
-                            @livewire('user.thermoformed.accept-request-live', ['request' => $request->requestThermoformed], key('accept-request-thermoformed'.$request->id))
+                            @livewire('user.exportation.accept-request-live', ['request' => $request->requestExportation], key('accept-request-exportation'.$request->id))
 
-                            @livewire('user.thermoformed.decline-requests-live', ['request' => $request->requestThermoformed, 'roleDecline' => 2], key('reject-request-thermoformed'.$request->id))
-                        </td> --}}
+                            {{--@livewire('user.thermoformed.decline-requests-live', ['request' => $request->requestThermoformed, 'roleDecline' => 2], key('reject-request-thermoformed'.$request->id)) --}}
+                        </td>
                     @endif
                 </tr>
             @empty

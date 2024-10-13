@@ -22,8 +22,12 @@ class Proforma extends Model
         'net_weight',
         'gross_weight',
         'container_type',
-        'comment',
         'date_quotation',
+        'comment',
+        'license_plate',
+        'driver_name',
+        'driver_phone',
+        'identification',
         'status',
     ];
 }

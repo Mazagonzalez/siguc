@@ -84,8 +84,8 @@
 
                     <div>
                         <span class="title-input">Total de vehiculos requerido</span>
-                        <input wire:model.live="vehicle_quantity" type="text" class="w-full input-simple"/>
-                        @error('vehicle_quantity')
+                        <input wire:model.live="order_quantity" type="text" class="w-full input-simple" readonly />
+                        @error('order_quantity')
                             <span class="err">
                                 {{ $message }}
                             </span>

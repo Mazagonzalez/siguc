@@ -25,8 +25,12 @@ return new class extends Migration
             $table->decimal('net_weight',60,17)->nullable();
             $table->decimal('gross_weight',60,17)->nullable();
             $table->string('container_type')->nullable();
-            $table->text('comment')->nullable();
             $table->date('date_quotation')->nullable();
+            $table->text('comment')->nullable();
+            $table->string('license_plate')->nullable();
+            $table->string('driver_name')->nullable();
+            $table->string('driver_phone')->nullable();
+            $table->string('identification')->nullable();
             $table->boolean('status')->default(0);
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');

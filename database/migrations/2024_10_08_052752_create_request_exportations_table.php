@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('provider')->nullable();
             $table->unsignedBigInteger('provider_id')->nullable();
-            $table->string('order_number')->nullable();
+            $table->string('proforma_id')->nullable();
             $table->string('client_name')->nullable();
             $table->string('client_address')->nullable();
             $table->string('client_phone')->nullable();
@@ -24,8 +24,17 @@ return new class extends Migration
             $table->decimal('total_net_weight',60,17)->nullable();
             $table->decimal('total_gross_weight',60,17)->nullable();
             $table->string('vehicle_quantity')->nullable();
-            $table->text('comment')->nullable();
             $table->date('date_quotation')->nullable();
+            $table->text('comment')->nullable();
+            $table->decimal('initial_flete',60,17)->nullable();
+            $table->dateTime('date_acceptance')->nullable();
+            $table->string('time_response')->nullable();
+            $table->decimal('final_flete',60,17)->nullable();
+            $table->text('delivery_commentary')->nullable();
+            $table->dateTime('date_loading')->nullable();
+            $table->dateTime('date_decline')->nullable();
+            $table->text('decline_comment')->nullable();
+            $table->text('user_decline_comment')->nullable();
             $table->string('order_quantity')->nullable();
             $table->boolean('status')->default(0);
 
