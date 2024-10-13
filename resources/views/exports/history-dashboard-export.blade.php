@@ -4,7 +4,7 @@
             <th style="font-weight: bold; background: #3b82f6; color: white"> # </th>
             <th style="font-weight: bold; background: #3b82f6; color: white"> Tipo de orden </th>
             <th style="font-weight: bold; background: #3b82f6; color: white"> Proveedor </th>
-            <th style="font-weight: bold; background: #3b82f6; color: white"> Numero de orden </th>
+            <th style="font-weight: bold; background: #3b82f6; color: white"> Numero de orden/proforma </th>
             <th style="font-weight: bold; background: #3b82f6; color: white"> Nombre cliente </th>
             <th style="font-weight: bold; background: #3b82f6; color: white"> Tipoo de vehiculo </th>
             <th style="font-weight: bold; background: #3b82f6; color: white"> Tipo de contenedor </th>
@@ -69,7 +69,7 @@
                         {{ $reques->requestNational->date_quotation }}
                     </td>
                     <td style="font-weight: 300; text-align: start">
-                        {{ $reques->requestNational->updated_at }}
+                        {{ $reques->requestNational->created_at }}
                     </td>
                     <td style="font-weight: 300; text-align: start">
                         {{ $reques->requestNational->comment }}
@@ -139,7 +139,7 @@
                         {{ $reques->requestThermoformed->date_quotation }}
                     </td>
                     <td style="font-weight: 300; text-align: start">
-                        {{ $reques->requestThermoformed->updated_at }}
+                        {{ $reques->requestThermoformed->created_at }}
                     </td>
                     <td style="font-weight: 300; text-align: start">
                         {{ $reques->requestThermoformed->comment }}
@@ -161,6 +161,70 @@
                     </td>
                     <td style="font-weight: 300; text-align: start">
                         {{ $reques->requestThermoformed->date_loading }}
+                    </td>
+                    @elseif ($reques->type_request == 'Solicitud exportacion')
+                    <td style="font-weight: 300; text-align: start">
+                        {{ $index + 1 }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        {{ $reques->type_request }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        {{ $reques->requestExportation->provider }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        {{ $reques->requestExportation->proforma_id }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        {{ $reques->requestExportation->client_name }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        {{ $reques->requestExportation->type_vehicle }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        <p>Informacion en la proforma</p>
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        <p>Total: </p>{{ $reques->requestExportation->total_net_weight }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        <p>Total: </p>{{ $reques->requestExportation->total_net_weight }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        <p>N/A</p>
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        $ {{ $reques->requestExportation->initial_flete }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        $ {{ $reques->requestExportation->final_flete }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        {{ $reques->requestExportation->date_quotation }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        {{ $reques->requestExportation->created_at }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        {{ $reques->requestExportation->comment }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        <p>Informacion en la proforma</p>
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        <p>Informacion en la proforma</p>
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        <p>Informacion en la proforma</p>
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        {{ $reques->requestExportation->date_acceptance }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        {{ $reques->requestExportation->time_response }}
+                    </td>
+                    <td style="font-weight: 300; text-align: start">
+                        {{ $reques->requestExportation->date_loading }}
                     </td>
                 @endif
             </tr>

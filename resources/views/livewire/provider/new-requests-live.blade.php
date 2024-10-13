@@ -40,7 +40,7 @@
 
                             @livewire('user.thermoformed.decline-requests-live', ['request' => $request->requestThermoformed, 'roleDecline' => 2], key('reject-request-thermoformed'.$request->id))
                         </td>
-                    @elseif ($request->type_request == 'Solicitud Exportacion')
+                    @elseif ($request->type_request == 'Solicitud exportacion')
                         <td class="td">
                             <x-utils.status status="{{ $request->requestExportation?->status }}" />
                         </td>

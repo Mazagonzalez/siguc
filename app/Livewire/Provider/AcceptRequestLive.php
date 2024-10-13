@@ -109,7 +109,7 @@ class AcceptRequestLive extends Component
         }
 
         $history->update([
-            'status' => 4,
+            'status' => 1,
         ]);
 
         DB::commit();

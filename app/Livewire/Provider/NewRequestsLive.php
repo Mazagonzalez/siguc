@@ -4,15 +4,11 @@ namespace App\Livewire\Provider;
 
 use App\Models\History;
 use App\Models\Provider;
-use App\Models\Request;
-use App\Models\RequestThermoformed;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
 class NewRequestsLive extends Component
 {
-    public $requests = [];
-    public $requestsThermoformed = [];
     public $totalRequests = [];
 
     protected $listeners = ['request' => 'mount'];
@@ -26,7 +22,7 @@ class NewRequestsLive extends Component
                 ->orderBy('created_at', 'asc')
                 ->get();
         } else {
-            $this->requests = [];
+            $this->totalRequests = [];
         }
     }
 

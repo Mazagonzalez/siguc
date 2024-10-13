@@ -54,6 +54,9 @@ class ExportController extends Controller
             $items = $items->where('type_request', 'Solicitud nacional');
         }
         if ($request->type == 2) {
+            $items = $items->where('type_request', 'Solicitud exportacion');
+        }
+        if ($request->type == 3) {
             $items = $items->where('type_request', 'Solicitud termoformado');
         }
 

@@ -11,76 +11,83 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($requests as $request)
+            @forelse($totalRequests as $request)
                 <tr wire:key='orden-{{ $request->id }}' class="tr">
-                    <td class="td">
-                        <x-utils.status status="{{ $request->status }}" />
-                    </td>
-
-                    <td class="td">Solicitud nacional</td>
-                    <td class="td">{{ $request->date_quotation }}</td>
-                    <td class="td">
-                        @if ($request->status == 2)
-                            {{ $request->date_decline }}
-                        @elseif ($request->status == 5)
-                            {{ $request->date_loading }}
-                        @endif
-                    </td>
-                    <td class="td">
-                        @if ($request->status == 5)
-                            {{ number_format($request->final_flete) }}
-                        @elseif ($request->status == 2)
-                            <p>Cancelada</p>
-                        @endif
-                    </td>
-                    <td class="flex justify-center td">
-                        @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
-                    </td>
+                    @if ($request->type_request == 'Solicitud nacional')
+                        <td class="td">
+                            <x-utils.status status="{{ $request->requestNational?->status }}" />
+                        </td>
+                        <td class="td">Solicitud Nacional</td>
+                        <td class="td">{{ $request->requestNational?->date_quotation }}</td>
+                        <td class="td">
+                            @if ($request->requestNational?->status == 2)
+                                {{ $request->requestNational?->date_decline }}
+                            @elseif ($request->requestNational?->status == 5)
+                                {{ $request->requestNational?->date_loading }}
+                            @endif
+                        </td>
+                        <td class="td">
+                            @if ($request->requestNational?->status == 5)
+                                {{ number_format($request->requestNational?->final_flete) }}
+                            @elseif ($request->requestNational?->status == 2)
+                                <p>Cancelada</p>
+                            @endif
+                        </td>
+                        <td class="flex justify-center td">
+                            @livewire('provider.details-request-live', ['request' => $request->requestNational], key('detail-request-national-'.$request->requestNational->id))
+                        </td>
+                    @elseif ($request->type_request == 'Solicitud termoformado')
+                        <td class="td">
+                            <x-utils.status status="{{ $request->requestThermoformed?->status }}" />
+                        </td>
+                        <td class="td">Solicitud termoformado</td>
+                        <td class="td">{{ $request->requestThermoformed?->date_quotation }}</td>
+                        <td class="td">
+                            @if ($request->requestThermoformed?->status == 2)
+                                {{ $request->requestThermoformed?->date_decline }}
+                            @elseif ($request->requestThermoformed?->status == 5)
+                                {{ $request->requestThermoformed?->date_loading }}
+                            @endif
+                        </td>
+                        <td class="td">
+                            @if ($request->requestThermoformed?->status == 5)
+                                {{ number_format($request->requestThermoformed?->final_flete) }}
+                            @elseif ($request->requestThermoformed?->status == 2)
+                                <p>Cancelada</p>
+                            @endif
+                        </td>
+                        <td class="flex justify-center td">
+                            @livewire('user.thermoformed.details-request-live', ['request' => $request->requestThermoformed], key('detail-request-thermoformed-'.$request->requestThermoformed->id))
+                        </td>
+                    @elseif ($request->type_request == 'Solicitud exportacion')
+                        <td class="td">
+                            <x-utils.status status="{{ $request->requestExportation?->status }}" />
+                        </td>
+                        <td class="td">Solicitud Exportacion</td>
+                        <td class="td">{{ $request->requestExportation?->date_quotation }}</td>
+                        <td class="td">
+                            @if ($request->requestExportation?->status == 2)
+                                {{ $request->requestExportation?->date_decline }}
+                            @elseif ($request->requestExportation?->status == 5)
+                                {{ $request->requestExportation?->date_loading }}
+                            @endif
+                        </td>
+                        <td class="td">
+                            @if ($request->requestExportation?->status == 5)
+                                {{ number_format($request->requestExportation?->final_flete) }}
+                            @elseif ($request->requestExportation?->status == 2)
+                                <p>Cancelada</p>
+                            @endif
+                        </td>
+                        <td class="flex justify-center td">
+                            {{--@livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))--}}
+                        </td>
+                    @endif
                 </tr>
             @empty
-                @forelse($requestsThermoformed as $request)
-                @empty
-                    <tr>
-                        <td colspan="5">
-                            <p class="py-20 text-center">No tienes solicitudes en proceso</p>
-                        </td>
-                    </tr>
-                @endforelse
-            @endforelse
-            @forelse($requestsThermoformed as $request)
-                <tr wire:key='orden-{{ $request->id }}' class="tr">
-                    <td class="td">
-                        <x-utils.status status="{{ $request->status }}" />
-                    </td>
-
-                    <td class="td">Solicitudes termoformado</td>
-                    <td class="td">{{ $request->date_quotation }}</td>
-                    <td class="td">
-                        @if ($request->status == 2)
-                            {{ $request->date_decline }}
-                        @elseif ($request->status == 5)
-                            {{ $request->date_loading }}
-                        @endif
-                    </td>
-                    <td class="td">
-                        @if ($request->status == 5)
-                            {{ number_format($request->final_flete) }}
-                        @elseif ($request->status == 2)
-                            <p>Cancelada</p>
-                        @endif
-                    <td class="flex justify-center td">
-                        @livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
-                    </td>
+                <tr>
+                    <x-utils.not-search message="No hay solicitudes finalizadas" colspan="5" py="py-24" />
                 </tr>
-            @empty
-                @forelse($requests as $request)
-                @empty
-                    <tr>
-                        <td colspan="5">
-                            <p class="py-20 text-center">No tienes solicitudes en proceso</p>
-                        </td>
-                    </tr>
-                @endforelse
             @endforelse
         </tbody>
     </table>

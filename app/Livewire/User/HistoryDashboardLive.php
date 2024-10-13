@@ -83,6 +83,9 @@ class HistoryDashboardLive extends Component
                 $query->where('type_request', 'Solicitud nacional');
             }
             if ($this->type == 2) {
+                $query->where('type_request', 'Solicitud exportacion');
+            }
+            if ($this->type == 3) {
                 $query->where('type_request', 'Solicitud termoformado');
             }
             if ($this->statu == 1) {

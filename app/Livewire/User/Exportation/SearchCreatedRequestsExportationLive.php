@@ -135,7 +135,7 @@ class SearchCreatedRequestsExportationLive extends Component
         }
 
         History::create([
-            'type_request' => 'Solicitud Exportacion',
+            'type_request' => 'Solicitud exportacion',
             'user_id' => Auth::id(),
             'provider_id' => $provider_id,
             'request_exportation_id' => $exportation->id,

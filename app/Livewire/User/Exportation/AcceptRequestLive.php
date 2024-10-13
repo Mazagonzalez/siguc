@@ -77,7 +77,7 @@ class AcceptRequestLive extends Component
         $time_response = implode(' y ', $resultado);
 
         $history = History::where('request_exportation_id', $this->request->id)
-                            ->where('type_request', 'Solicitud Exportacion')
+                            ->where('type_request', 'Solicitud exportacion')
                             ->first();
 
         DB::beginTransaction();

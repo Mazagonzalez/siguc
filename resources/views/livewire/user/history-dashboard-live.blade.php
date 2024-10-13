@@ -39,7 +39,8 @@
                         <select class="w-full input-simple" wire:model.live="type">
                             <option value="0">Selecciona</option>
                             <option value="1">Nacional</option>
-                            <option value="2">Termoformado</option>
+                            <option value="2">Exportacion</option>
+                            <option value="3">Termoformado</option>
                         </select>
                     </div>
                 </div>

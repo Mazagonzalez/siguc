@@ -2,18 +2,14 @@
 
 namespace App\Livewire\Provider;
 
-use App\Models\User;
-use app\Models\Users;
-use App\Models\Request;
+use App\Models\History;
 use Livewire\Component;
 use App\Models\Provider;
-use App\Models\RequestThermoformed;
 use Illuminate\Support\Facades\Auth;
 
 class PendingRequestsLive extends Component
 {
-    public $requests = [];
-    public $requestsThermoformed = [];
+    public $totalRequests = [];
 
     protected $listeners = ['request' => 'mount'];
 
@@ -21,23 +17,17 @@ class PendingRequestsLive extends Component
     {
         if (Auth::check()) {
             $provider = Provider::where('user_id', Auth::id())->first();
-            $this->requests = Request::where('provider_id', $provider->id)
+            $this->totalRequests = History::where('provider_id', $provider->id)
                 ->whereIn('status', [1, 3])
-                ->where('double_order', 0)
-                ->orderBy('date_quotation', 'asc')
-                ->get();
-            $this->requestsThermoformed = RequestThermoformed::where('provider_id', $provider->id)
-                ->whereIn('status', [1, 3])
-                ->orderBy('date_quotation', 'asc')
+                ->orderBy('created_at', 'asc')
                 ->get();
         } else {
-            $this->requests = [];
+            $this->totalRequests = [];
         }
     }
 
     public function render()
     {
-        return view('livewire.provider.pending-requests-live', ['requests' => $this->requests,
-                                                                'requestsThermoformed' => $this->requestsThermoformed]);
+        return view('livewire.provider.pending-requests-live', ['totalRequests' => $this->totalRequests]);
     }
 }
