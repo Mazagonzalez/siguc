@@ -11,9 +11,11 @@ class History extends Model
 
     protected $fillable = [
         'type_request',
+        'user_id',
+        'provider_id',
         'request_id',
         'request_thermoformed_id',
-        'request_export_id',
+        'request_exportation_id',
         'status',
     ];
 
@@ -35,8 +37,8 @@ class History extends Model
         return $this->belongsTo(RequestThermoformed::class, 'request_thermoformed_id');
     }
 
-    public function requestExport()
+    public function requestExportation()
     {
-        return $this->belongsTo(RequestExport::class, 'request_export_id');
+        return $this->belongsTo(RequestExportation::class, 'request_exportation_id');
     }
 }

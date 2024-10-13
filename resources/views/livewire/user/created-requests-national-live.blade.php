@@ -163,7 +163,7 @@
             </button>
 
             <button wire:click="store" class="btn-confirm-modal">
-                <p>Solicitar</p>
+                <p>Crear solicitud</p>
             </button>
         </x-slot>
     </x-dialog-modal>

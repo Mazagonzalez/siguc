@@ -30,8 +30,8 @@
                     </x-utils.section-sidebar>
 
                     <x-utils.section-sidebar
-                        ifRoute="request.export"
-                        route="{{ route('request.export') }}"
+                        ifRoute="request.exportation"
+                        route="{{ route('request.exportation') }}"
                         name="Exportación"
                     >
                         <x-slot name="icon">

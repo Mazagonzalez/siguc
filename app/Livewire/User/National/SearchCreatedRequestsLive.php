@@ -180,6 +180,8 @@ class SearchCreatedRequestsLive extends Component
 
         History::create([
             'type_request' => 'Solicitud nacional',
+            'user_id' => Auth::id(),
+            'provider_id' => $provider_id,
             'request_id' => $request->id,
         ]);
 

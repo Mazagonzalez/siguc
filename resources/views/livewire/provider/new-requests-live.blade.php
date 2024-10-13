@@ -10,57 +10,56 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($requests as $request)
+            @forelse($totalRequests as $request)
                 <tr wire:key='orden-{{ $request->id }}' class="tr">
-                    <td class="td">
-                        <x-utils.status status="{{ $request->status }}" />
-                    </td>
-                    <td class="td">Solicitud Nacional</td>
-                    <td class="td">{{ $request->date_quotation }}</td>
-                    <td class="td">{{ $request->created_at }}</td>
-                    <td class="items-center justify-center gap-2 td row" style="text-align: start">
-                        @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
+                    @if ($request->type_request == 'Solicitud nacional')
+                        <td class="td">
+                            <x-utils.status status="{{ $request->requestNational?->status }}" />
+                        </td>
+                        <td class="td">Solicitud Nacional</td>
+                        <td class="td">{{ $request->requestNational?->date_quotation }}</td>
+                        <td class="td">{{ $request->requestNational?->created_at }}</td>
+                        <td class="items-center justify-center gap-2 td row" style="text-align: start">
+                            @livewire('provider.details-request-live', ['request' => $request->requestNational], key('detail-request-national'.$request->id))
 
-                        @livewire('provider.accept-request-live', ['request' => $request], key('accept-request-'.$request->id))
+                            @livewire('provider.accept-request-live', ['request' => $request->requestNational], key('accept-request-national'.$request->id))
 
-                        @livewire('provider.decline-request-live', ['request' => $request], key('reject-request-'.$request->id))
-                    </td>
+                            @livewire('provider.decline-request-live', ['request' => $request->requestNational], key('reject-request-national'.$request->id))
+                        </td>
+                    @elseif ($request->type_request == 'Solicitud termoformado')
+                        <td class="td">
+                            <x-utils.status status="{{ $request->requestThermoformed?->status }}" />
+                        </td>
+                        <td class="td">Solicitud termoformado</td>
+                        <td class="td">{{ $request->requestThermoformed?->date_quotation }}</td>
+                        <td class="td">{{ $request->requestThermoformed?->created_at }}</td>
+                        <td class="items-center justify-center gap-2 td row" style="text-align: start">
+                            @livewire('user.thermoformed.details-request-live', ['request' => $request->requestThermoformed], key('detail-request-thermoformed'.$request->id))
+
+                            @livewire('user.thermoformed.accept-request-live', ['request' => $request->requestThermoformed], key('accept-request-thermoformed'.$request->id))
+
+                            @livewire('user.thermoformed.decline-requests-live', ['request' => $request->requestThermoformed, 'roleDecline' => 2], key('reject-request-thermoformed'.$request->id))
+                        </td>
+                    @elseif ($request->type_request == 'Solicitud Exportacion')
+                        <td class="td">
+                            <x-utils.status status="{{ $request->requestExportation?->status }}" />
+                        </td>
+                        <td class="td">Solicitud Exportacion</td>
+                        <td class="td">{{ $request->requestExportation?->date_quotation }}</td>
+                        <td class="td">{{ $request->requestExportation?->created_at }}</td>
+                        {{--  <td class="items-center justify-center gap-2 td row" style="text-align: start">
+                            @livewire('user.thermoformed.details-request-live', ['request' => $request->requestThermoformed], key('detail-request-thermoformed'.$request->id))
+
+                            @livewire('user.thermoformed.accept-request-live', ['request' => $request->requestThermoformed], key('accept-request-thermoformed'.$request->id))
+
+                            @livewire('user.thermoformed.decline-requests-live', ['request' => $request->requestThermoformed, 'roleDecline' => 2], key('reject-request-thermoformed'.$request->id))
+                        </td> --}}
+                    @endif
                 </tr>
             @empty
-                @forelse($requestsThermoformed as $request)
-                @empty
-                    <tr>
-                        <td colspan="5">
-                            <p class="py-20 text-center">No tienes solicitudes en proceso</p>
-                        </td>
-                    </tr>
-                @endforelse
-            @endforelse
-            @forelse($requestsThermoformed as $request)
-                <tr wire:key='orden-{{ $request->id }}' class="tr">
-                    <td class="td">
-                        <x-utils.status status="{{ $request->status }}" />
-                    </td>
-                    <td class="td">Solicitud termoformado</td>
-                    <td class="td">{{ $request->date_quotation }}</td>
-                    <td class="td">{{ $request->created_at }}</td>
-                    <td class="items-center justify-center gap-2 td row" style="text-align: start">
-                        @livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
-
-                        @livewire('user.thermoformed.accept-request-live', ['request' => $request], key('accept-request-'.$request->id))
-
-                        @livewire('user.thermoformed.decline-requests-live', ['request' => $request, 'roleDecline' => 2], key('reject-request-'.$request->id))
-                    </td>
+                <tr>
+                    <x-utils.not-search message="No hay solicitudes finalizadas" colspan="5" py="py-24" />
                 </tr>
-            @empty
-                @forelse($requests as $request)
-                @empty
-                    <tr>
-                        <td colspan="5">
-                            <p class="py-20 text-center">No tienes solicitudes en proceso</p>
-                        </td>
-                    </tr>
-                @endforelse
             @endforelse
         </tbody>
     </table>

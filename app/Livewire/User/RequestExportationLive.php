@@ -2,15 +2,15 @@
 
 namespace App\Livewire\User;
 
-use App\Models\Request;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use App\Models\RequestExportation;
 use Illuminate\Support\Facades\Http;
 
-class RequestNationalLive extends Component
+class RequestExportationLive extends Component
 {
     public $orders;
-    public $orderId;
+    public $proformaId;
     public $pending = 0;
     public $request_acepted;
     public $request_pending;
@@ -21,20 +21,20 @@ class RequestNationalLive extends Component
 
     public function mount()
     {
-        $this->request_acepted = Request::where('status', 1)->count();
-        $this->request_pending = Request::where('status', 0)->count();
-        $this->request_rejected = Request::where('status', 2)->count();
-        $this->request_finished = Request::where('status', 5)->count();
+        $this->request_acepted = RequestExportation::where('status', 1)->count();
+        $this->request_pending = RequestExportation::where('status', 0)->count();
+        $this->request_rejected = RequestExportation::where('status', 2)->count();
+        $this->request_finished = RequestExportation::where('status', 5)->count();
     }
 
-    public function updatedOrderId($value)
+    public function updatedProformaId($value)
     {
         $this->pending = 1;
         $this->filterOrders();
     }
 
     public function filterOrders() {
-        $response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $this->orderId);
+        $response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/Proforma/' . $this->proformaId);
 
         if ($response->successful()) {
             $order = $response->json();
@@ -53,7 +53,7 @@ class RequestNationalLive extends Component
 
     public function clear()
     {
-        $this->orderId = '';
+        $this->proformaId = '';
         $this->pending = 0;
         $this->orders = [];
     }
@@ -69,9 +69,8 @@ class RequestNationalLive extends Component
     {
         session()->flash('message', $message);
     }
-
     public function render()
     {
-        return view('livewire.user.request-national-live')->layout('layouts.app');
+        return view('livewire.user.request-Exportation-live')->layout('layouts.app');
     }
 }

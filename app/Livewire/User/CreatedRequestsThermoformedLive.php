@@ -99,6 +99,8 @@ class CreatedRequestsThermoformedLive extends Component
 
         History::create([
             'type_request' => 'Solicitud termoformado',
+            'user_id' => Auth::id(),
+            'provider_id' => $provider_id,
             'request_thermoformed_id' => $request->id,
         ]);
 

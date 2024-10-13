@@ -16,14 +16,14 @@ return new class extends Migration
             $table->string('type_request')->nullable();
             $table->unsignedBigInteger('request_id')->nullable();
             $table->unsignedBigInteger('request_thermoformed_id')->nullable();
-            $table->unsignedBigInteger('request_export_id')->nullable();
+            $table->unsignedBigInteger('request_exportation_id')->nullable();
             $table->boolean('status')->default(0);
 
             $table->timestamps();
 
             $table->foreign('request_id')->references('id')->on('requests')->onDelete('set null');
             $table->foreign('request_thermoformed_id')->references('id')->on('request_thermoformeds')->onDelete('set null');
-            $table->foreign('request_export_id')->references('id')->on('request_exports')->onDelete('set null');
+            $table->foreign('request_exportation_id')->references('id')->on('request_exportations')->onDelete('set null');
         });
     }
 

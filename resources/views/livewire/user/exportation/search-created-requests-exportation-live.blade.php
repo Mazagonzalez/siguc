@@ -3,19 +3,19 @@
         <x-icons.more class="size-5 stroke-white" />
     </button>
 
-    <x-dialog-modal wire:model='open' maxWidth="4xl" title="Solicitudes nacional" >
+    <x-dialog-modal wire:model='open' maxWidth="4xl" title="Solicitud de exportaecion (Proforma)" >
         <x-slot name="content">
             <div class="gap-3 col lg:flex-row lg:gap-5">
                 <div class="gap-3 col lg:w-1/2">
                     <div>
                         <span class="title-input">Proveedor</span>
-                        <select wire:model.live="proveedor" class="input-simple max-w-[400px]">
+                        <select wire:model.live="provider" class="input-simple max-w-[400px]">
                             <option value="">Seleccionar Proveedor</option>
-                            @foreach ($proveedores as $nombre)
+                            @foreach ($providers as $nombre)
                                 <option value="{{ $nombre }}">{{ $nombre }}</option>
                             @endforeach
                         </select>
-                        @error('proveedor')
+                        @error('provider')
                             <span class="err">
                                 {{ $message }}
                             </span>
@@ -24,8 +24,8 @@
 
                     <div>
                         <span class="title-input">Nombre del cliente</span>
-                        <input wire:model.live="nombreCliente" type="text" class="w-full input-simple" readonly/>
-                        @error('nombreCliente')
+                        <input wire:model.live="client_name" type="text" class="w-full input-simple" readonly/>
+                        @error('client_name')
                             <span class="err">
                                 {{ $message }}
                             </span>
@@ -34,8 +34,8 @@
 
                     <div>
                         <span class="title-input">Dirección del cliente (Editable)</span>
-                        <input wire:model.live="direccionCliente" type="text" class="w-full input-simple"/>
-                        @error('direccionCliente')
+                        <input wire:model.live="client_address" type="text" class="w-full input-simple"/>
+                        @error('client_address')
                             <span class="err">
                                 {{ $message }}
                             </span>
@@ -44,8 +44,8 @@
 
                     <div>
                         <span class="title-input">Teléfono</span>
-                        <input wire:model.live="telefonoCliente" oninput="validateNumber(this)" type="text" class="w-full input-simple" />
-                        @error('telefonoCliente')
+                        <input wire:model.live="client_phone" oninput="validateNumber(this)" type="text" class="w-full input-simple" />
+                        @error('client_phone')
                             <span class="err">
                                 {{ $message }}
                             </span>
@@ -54,12 +54,7 @@
 
                     <div>
                         <span class="title-input">Tipo de vehiculo</span>
-                        <select name="type_vehicle" id="type_vehicle" class="w-full input-simple" wire:model.live="type_vehicle">
-                            <option value="0">Seleccionar tipo de vehiculo</option>
-                            <option value="Camion">Camion</option>
-                            <option value="Turbo">Turbo</option>
-                            <option value="Tractomula">Tractomula</option>
-                        </select>
+                        <input wire:model.live="type_vehicle" type="text" class="w-full input-simple" readonly/>
                         @error('type_vehicle')
                             <span class="err">
                                 {{ $message }}
@@ -68,9 +63,9 @@
                     </div>
 
                     <div>
-                        <span class="title-input">Tipo contenedor</span>
-                        <input wire:model.live="tipoContenedor" type="text" class="w-full input-simple" readonly />
-                        @error('tipoContenedor')
+                        <span class="title-input">Total peso neto</span>
+                        <input wire:model.live="total_net_weight" type="text" class="w-full input-simple" readonly />
+                        @error('total_net_weight')
                             <span class="err">
                                 {{ $message }}
                             </span>
@@ -78,9 +73,9 @@
                     </div>
 
                     <div>
-                        <span class="title-input">Peso neto</span>
-                        <input wire:model.live="pesoOrden" type="text" class="w-full input-simple" readonly />
-                        @error('pesoOrden')
+                        <span class="title-input">Total peso bruto</span>
+                        <input wire:model.live="total_gross_weight" type="text" class="w-full input-simple" readonly />
+                        @error('total_gross_weight')
                             <span class="err">
                                 {{ $message }}
                             </span>
@@ -88,9 +83,9 @@
                     </div>
 
                     <div>
-                        <span class="title-input">Peso bruto</span>
-                        <input wire:model.live="gross_weight" type="text" class="w-full input-simple" readonly />
-                        @error('gross_weight')
+                        <span class="title-input">Total de vehiculos requerido</span>
+                        <input wire:model.live="vehicle_quantity" type="text" class="w-full input-simple"/>
+                        @error('vehicle_quantity')
                             <span class="err">
                                 {{ $message }}
                             </span>
@@ -101,10 +96,10 @@
                         <span class="title-input">Fecha de la cita</span>
                         <input
                             type="date"
-                            wire:model.live="fechaCita"
+                            wire:model.live="date_quotation"
                             class="w-full input-simple"
                         />
-                        @error('fechaCita')
+                        @error('date_quotation')
                             <span class="err">
                                 {{ $message }}
                             </span>
@@ -123,9 +118,9 @@
                             class="w-full input-simple min-h-[80px]"
                             style="border-radius: 20px"
                             rows="5"
-                            wire:model.live="comentario"
+                            wire:model.live="comment"
                         ></textarea>
-                        @error('comentario')
+                        @error('comment')
                             <span class="err">
                                 {{ $message }}
                             </span>
@@ -133,27 +128,30 @@
                     </div>
 
                     <div>
-                        <span class="title-input">Segunda Orden</span>
-                        <input wire:model.live="searchOrderId" type="text" class="w-full input-simple" />
-                        @error('searchOrderId')
-                            <span class="err">
-                                {{ $message }}
-                            </span>
-                        @enderror
+                        <button wire:click="activeDetailProforma" class="btn-confirm-modal">
+                            @if ($detailProforma)
+                                <p class="title-input">Ocultar todas las ordenes de la proforma</p>
+                            @else
+                                <p class="title-input">Mostrar todas las ordenes de la proforma</p>
+                            @endif
+                        </button>
                     </div>
 
-                    <div>
-                        @if ($orderSecond)
-                            @livewire('user.national.details-second-order-live', [
-                                'order_number' => $orderNumber2['order_number'],
-                                'target_customer' => $orderNumber2['target_customer'],
-                                'client_address' => $orderNumber2['client_address'],
-                                'unit_load' => $orderNumber2['unit_load'],
-                                'net_weight' => $orderNumber2['net_weight'],
-                                'gross_weight' => $orderNumber2['gross_weight'],
-                            ], key($orderNumber2['order_number'] . 'request'))
-                        @endif
-                    </div>
+                    @if ($detailProforma)
+                        @foreach ($order['orders'] as $orderItem)
+                            <div class="gap-3 col lg:flex-row lg:gap-5">
+                                <div class="modal-content">
+                                    <h2>Información de la Orden</h2>
+                                    <p>Cliente: {{ $orderItem['target_customer'] }}</p>
+                                    <p>Dirección del Cliente: {{ $orderItem['client_address'] }}</p>
+                                    <p>Peso Neto: {{ $orderItem['net_weight'] }}</p>
+                                    <p>Peso Bruto: {{ $orderItem['gross_weight'] }}</p>
+                                    <p>Tipo de contenedor: {{ $orderItem['unit_load'] }}</p>
+                                    <p>Estado: {{ $orderItem['statu'] }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </x-slot>
@@ -168,3 +166,4 @@
         </x-slot>
     </x-dialog-modal>
 </div>
+
