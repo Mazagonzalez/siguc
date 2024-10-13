@@ -39,7 +39,7 @@
                         </div>
                     </div>
 
-                    <p class="text-2xl font-semibold">0</p>
+                    <p class="text-2xl font-semibold">{{ $request_exportation }}</p>
 
                     {{-- Figura --}}
                     <div class="absolute p-4 rotate-45 border-2 border-emerald-400 -right-20 -bottom-20">
