@@ -19,8 +19,8 @@
             </thead>
             <tbody>
                 @forelse ($providerCounts as $providerName => $total)
-                    <tr class="tr" @if ($loop->iteration == 5) style="border-bottom: 0px" @endif>
-                        @if ($loop->iteration <= 5)
+                    @if ($loop->iteration <= 5)
+                        <tr class="tr" @if ($loop->iteration == 5) style="border-bottom: 0px" @endif>
                             <td class="td">{{ $loop->iteration }}</td>
 
                             <td class="td" style="text-align: start">
@@ -29,17 +29,17 @@
                                 </p>
                             </td>
 
-                            <th class="th">
+                            <td class="font-bold td">
                                 {{ $total }}
-                            </th>
+                            </td>
 
-                            <th class="td">
+                            <td class="font-bold td">
                                 $ {{ number_format($providerFleteTotal[$providerName] ?? 0, 0) }}
-                            </th>
-                        @else
-                            @break
-                        @endif
-                    </tr>
+                            </td>
+                        </tr>
+                    @else
+                        @break
+                    @endif
                 @empty
                     <tr>
                         <x-utils.not-search message="No hay solicitudes finalizadas" colspan="4" py="py-20" />

@@ -14,7 +14,7 @@
         <tbody>
             @forelse($totalRequests as $request)
                 <tr wire:key='orden-{{ $request->id }}' class="tr">
-                    <td class="font-semibold td">{{ $loop->index + 1 }}</td>
+                    <td class="font-semibold td">{{ $loop->iteration }}</td>
                     @if ($request->type_request == 'Solicitud nacional')
                         <td class="td">
                             <x-utils.status status="{{ $request->requestNational?->status }}" />
