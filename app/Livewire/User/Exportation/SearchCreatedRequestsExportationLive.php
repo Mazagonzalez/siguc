@@ -29,7 +29,6 @@ class SearchCreatedRequestsExportationLive extends Component
     public $order_quantity;
     public $date_quotation;
     public $comment;
-    public $detailProforma = false;
 
     public function mount($order)
     {
@@ -159,11 +158,6 @@ class SearchCreatedRequestsExportationLive extends Component
        $this->dispatch('successful-toast', message: '¡Solicitud creada exitosamente!');
    }
 
-    public function activeDetailProforma()
-    {
-        $this->detailProforma = !$this->detailProforma;
-    }
-
     public function close()
     {
         $this->resetRequest();
@@ -184,7 +178,6 @@ class SearchCreatedRequestsExportationLive extends Component
             'vehicle_quantity',
             'date_quotation',
             'order_quantity',
-            'detailProforma',
             'comment',
         ]);
 

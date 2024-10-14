@@ -127,31 +127,61 @@
                         @enderror
                     </div>
 
-                    <div>
-                        <button wire:click="activeDetailProforma" class="btn-confirm-modal">
-                            @if ($detailProforma)
-                                <p class="title-input">Ocultar todas las ordenes de la proforma</p>
-                            @else
-                                <p class="title-input">Mostrar todas las ordenes de la proforma</p>
+                    <div x-data="{ currentSlide: 0, slides: {{ count($order['orders']) }} }">
+                        <div class="items-center mx-6 my-2 row {{ count($order['orders']) > 1 ? 'justify-between' : 'justify-center' }}">
+                            @if (count($order['orders']) > 1)
+                                <button class="btn-info" @click="currentSlide = (currentSlide + {{ count($order['orders']) - 1 }}) % slides">
+                                    <x-icons.arrow class="rotate-90 size-5 stroke-white" />
+                                </button>
                             @endif
-                        </button>
-                    </div>
 
-                    @if ($detailProforma)
+                            <p class="font-semibold">Orden # <span x-text="currentSlide + 1"></span> </p>
+
+                            @if (count($order['orders']) > 1)
+                                <button class="btn-info" @click="currentSlide = (currentSlide + 1) % slides">
+                                    <x-icons.arrow class="-rotate-90 size-5 stroke-white" />
+                                </button>
+                            @endif
+                        </div>
+
                         @foreach ($order['orders'] as $orderItem)
-                            <div class="gap-3 col lg:flex-row lg:gap-5">
-                                <div class="modal-content">
-                                    <h2>Información de la Orden</h2>
-                                    <p>Cliente: {{ $orderItem['target_customer'] }}</p>
-                                    <p>Dirección del Cliente: {{ $orderItem['client_address'] }}</p>
-                                    <p>Peso Neto: {{ $orderItem['net_weight'] }}</p>
-                                    <p>Peso Bruto: {{ $orderItem['gross_weight'] }}</p>
-                                    <p>Tipo de contenedor: {{ $orderItem['unit_load'] }}</p>
-                                    <p>Estado: {{ $orderItem['statu'] }}</p>
+                            <div
+                                x-transition:enter.duration.500ms
+                                x-show="currentSlide === {{ $loop->index }}"
+                                class="p-5 text-sm bg-gray-100 col rounded-3xl dark:bg-zinc-800"
+                            >
+                                <div class="py-2 col">
+                                    <span class="font-semibold">Información de la Orden</span>
+                                    <p class="font-light">{{ $orderItem['target_customer'] }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="font-semibold">Dirección del Cliente</span>
+                                    <p class="font-light">{{ $orderItem['client_address'] }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="font-semibold">Peso Neto</span>
+                                    <p class="font-light">{{ $orderItem['net_weight'] }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="font-semibold">Peso Bruto</span>
+                                    <p class="font-light">{{ $orderItem['gross_weight'] }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="font-semibold">Tipo de contenedor</span>
+                                    <p class="font-light">{{ $orderItem['unit_load'] }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="font-semibold">Estado</span>
+                                    <p class="font-light">{{ $orderItem['statu'] }}</p>
                                 </div>
                             </div>
                         @endforeach
-                    @endif
+                    </div>
                 </div>
             </div>
         </x-slot>
