@@ -22,7 +22,7 @@ class HistoryRequestsLive extends Component
 
     public $dashboard = false;
 
-    protected $listeners = ['request' => 'mount'];
+    protected $listeners = ['request-history' => 'mount'];
 
     public function exportar()
     {

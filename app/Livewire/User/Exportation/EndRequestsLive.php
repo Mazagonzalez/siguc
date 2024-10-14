@@ -18,7 +18,7 @@ class EndRequestsLive extends Component
 
     public $end_date;
 
-    protected $listeners = ['request' => 'mount'];
+    protected $listeners = ['request-end' => 'mount'];
 
     public function confirmDelivery($requestId)
     {
@@ -56,7 +56,8 @@ class EndRequestsLive extends Component
            ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/Proforma/' . $request->proforma_id, $objeto);
        }
 
-        $this->dispatch('request');
+       $this->dispatch('request-end');
+       $this->dispatch('request-history');
     }
 
     public function closeModalExport()

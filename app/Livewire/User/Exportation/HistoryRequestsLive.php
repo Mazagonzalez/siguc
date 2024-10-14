@@ -20,7 +20,7 @@ class HistoryRequestsLive extends Component
 
     public $option_export = null;
 
-    protected $listeners = ['request' => 'mount'];
+    protected $listeners = ['request-history' => 'mount'];
 
     /*public function exportar()
     {

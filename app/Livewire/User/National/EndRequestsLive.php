@@ -17,7 +17,7 @@ class EndRequestsLive extends Component
 
     public $end_date;
 
-    protected $listeners = ['request' => 'mount'];
+    protected $listeners = ['request-end' => 'mount'];
 
     public function confirmDelivery($requestId)
     {
@@ -57,6 +57,8 @@ class EndRequestsLive extends Component
 
         DB::commit();
 
+        $this->dispatch('request-end');
+        $this->dispatch('request-history');
     }
 
     public function closeModalExport()

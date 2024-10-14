@@ -109,7 +109,7 @@ class AcceptRequestLive extends Component
         $this->open = false;
         $this->resetRequest();
 
-        $this->dispatch('request');
+        $this->dispatch('request-pending');
     }
 
     public function resetRequest()
