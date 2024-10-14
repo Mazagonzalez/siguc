@@ -96,7 +96,7 @@
                         <td class="td">
                             <x-utils.status status="{{ $request->requestNational->status }}" />
                         </td>
-                        <td class="td">{{ $request->type_request }}</td>
+                        <td class="td"><p>Nacional</p></td>
                         <td class="td">{{ $request->requestNational->date_quotation }}</td>
                         <td class="td">
                             @if ($request->requestNational->status == 2)
@@ -112,7 +112,7 @@
                         <td class="td">
                             <x-utils.status status="{{ $request->requestThermoformed->status }}" />
                         </td>
-                        <td class="td">{{ $request->type_request }}</td>
+                        <td class="td"><p>Termoformado</p></td>
                         <td class="td">{{ $request->requestThermoformed->date_quotation }}</td>
                         <td class="td">
                             @if ($request->requestThermoformed->status == 2)
@@ -128,7 +128,7 @@
                         <td class="td">
                             <x-utils.status status="{{ $request->requestExportation->status }}" />
                         </td>
-                        <td class="td">{{ $request->type_request }}</td>
+                        <td class="td"><p>Exportacion</p></td>
                         <td class="td">{{ $request->requestExportation->date_quotation }}</td>
                         <td class="td">
                             @if ($request->requestExportation->status == 2)
