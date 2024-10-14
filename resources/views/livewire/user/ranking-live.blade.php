@@ -1,5 +1,5 @@
 <div class="gap-3 col">
-    <div class="p-6 card-theme min-h-[320px]">
+    <div class="p-6 card-theme min-h-[394px]">
         <div>
             <p class="text-lg font-semibold">Ranking top 5</p>
 
@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 @forelse ($providerCounts as $providerName => $total)
-                    <tr class="tr">
+                    <tr class="tr" @if ($loop->iteration == 5) style="border-bottom: 0px" @endif>
                         @if ($loop->iteration <= 5)
                             <td class="td">{{ $loop->iteration }}</td>
 
