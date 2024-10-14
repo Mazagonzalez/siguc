@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Livewire\Provider;
+namespace App\Livewire\User\Exportation;
 
 use App\Models\History;
 use Livewire\Component;
-use Illuminate\Support\Str;
+use App\Models\Proforma;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
@@ -18,12 +18,16 @@ class UploadInvoice extends Component
 
     public $request;
 
+    public $proformas;
+
     public $invoice;
 
     public function mount($request)
     {
         $this->request = $request;
         $this->resetErrorBag();
+
+        $this->proformas = Proforma::where('proforma_id', $request->proforma_id)->get();
     }
 
     public function showModal()
@@ -47,8 +51,8 @@ class UploadInvoice extends Component
         //pendiente codigo azure
         $this->saveInvoice();
 
-        $history = History::where('request_id', $this->request->id)
-                            ->where('type_request', 'Solicitud nacional')
+        $history = History::where('request_exportation_id', $this->request->id)
+                            ->where('type_request', 'Solicitud exportacion')
                             ->first();
 
         DB::beginTransaction();
@@ -56,6 +60,12 @@ class UploadInvoice extends Component
         $this->request->update([
             'status' => 3,
         ]);
+
+        foreach ($this->proformas as $proforma) {
+            $proforma->update([
+                'status' => 3,
+            ]);
+        }
 
         $history->update([
             'status' => 3,
@@ -141,6 +151,6 @@ class UploadInvoice extends Component
 
     public function render()
     {
-        return view('livewire.provider.upload-invoice');
+        return view('livewire.user.exportation.upload-invoice');
     }
 }

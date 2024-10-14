@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Livewire\User\Thermoformed;
+namespace App\Livewire\User\Exportation;
 
 use App\Models\History;
-use App\Models\Invoice;
 use Livewire\Component;
-use Illuminate\Support\Str;
+use App\Models\Proforma;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
-use App\Models\RequestThermoformed;
 
 class ConfirmDeliveryLive extends Component
 {
@@ -17,6 +15,8 @@ class ConfirmDeliveryLive extends Component
     public $open = false;
 
     public $request;
+
+    public $proformas;
 
     public $final_flete;
 
@@ -30,6 +30,8 @@ class ConfirmDeliveryLive extends Component
     {
         $this->request = $request;
         $this->resetErrorBag();
+
+        $this->proformas = Proforma::where('proforma_id', $request->proforma_id)->get();
     }
 
     public function showModal()
@@ -56,8 +58,8 @@ class ConfirmDeliveryLive extends Component
         //$this->saveCompleted();
         $this->final_flete = str_replace('.', '', $this->final_flete);
 
-        $history = History::where('request_thermoformed_id', $this->request->id)
-                            ->where('type_request', 'Solicitud termoformado')
+        $history = History::where('request_exportation_id', $this->request->id)
+                            ->where('type_request', 'Solicitud exportacion')
                             ->first();
 
         DB::beginTransaction();
@@ -68,6 +70,12 @@ class ConfirmDeliveryLive extends Component
             'delivery_commentary' => $this->delivery_commentary,
             'date_loading' => $this->date_loading,
         ]);
+
+        foreach ($this->proformas as $proforma) {
+            $proforma->update([
+                'status' => 4,
+            ]);
+        }
 
         $history->update([
             'status' => 4,
@@ -137,6 +145,6 @@ class ConfirmDeliveryLive extends Component
 
     public function render()
     {
-        return view('livewire.user.thermoformed.confirm-delivery-live');
+        return view('livewire.user.exportation.confirm-delivery-live');
     }
 }
