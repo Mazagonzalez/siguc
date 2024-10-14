@@ -19,15 +19,15 @@ class RankingLive extends Component
 
         foreach ($history as $record) {
             if ($record->requestNational) {
-                $providerNames[] = $record->requestNational->provider->company_name;
+                $providerNames[] = $record->requestNational->provider;
             }
 
             if ($record->requestThermoformed) {
-                $providerNames[] = $record->requestThermoformed->provider->company_name;
+                $providerNames[] = $record->requestThermoformed->provider;
             }
 
             if ($record->requestExportation) {
-                $providerNames[] = $record->requestExportation->provider->company_name;
+                $providerNames[] = $record->requestExportation->provider;
             }
         }
 
