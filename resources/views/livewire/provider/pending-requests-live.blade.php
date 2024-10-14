@@ -88,32 +88,32 @@
                         <td class="td">{{ $request->requestExportation?->date_quotation }}</td>
                         <td class="td">{{ $request->requestExportation?->date_acceptance }}</td>
                         <td class="td">{{ number_format($request->requestExportation?->initial_flete) }}</td>
-                        {{--<td class="items-center justify-center gap-2 td row">
-                            @livewire('user.thermoformed.details-request-live', ['request' => $request->requestThermoformed], key('detail-request-'.$request->requestThermoformed->id))
+                        <td class="items-center justify-center gap-2 td row">
+                           @livewire('user.exportation.details-request-live', ['request' => $request->requestExportation], key('detail-request-'.$request->requestExportation->id))
 
-                            @if ($request->requestThermoformed?->status == 1)
-                                @livewire('user.thermoformed.upload-invoice', ['request' => $request->requestThermoformed], key('invoice-request-'.$request->requestThermoformed->id))
+                            @if ($request->requestExportation?->status == 1)
+                                @livewire('user.exportation.upload-invoice', ['request' => $request->requestExportation], key('invoice-request-'.$request->requestExportation->id))
                                 <button
-                                    wire:key="confirm-delevery-{{ $request->requestThermoformed?->id }}"
+                                    wire:key="confirm-delevery-{{ $request->requestExportation?->id }}"
                                     class="bg-gray-500 btn-free-color tooltip tooltip-top"
                                     data-tip="Confirmar entrega"
                                 >
                                     <x-icons.checked class="size-5 stroke-white" />
                                 </button>
-                            @elseif ($request->requestThermoformed?->status == 3)
+                            @elseif ($request->requestExportation?->status == 3)
                                 <button
-                                    wire:key="updated-invoice-{{ $request->requestThermoformed?->id }}"
+                                    wire:key="updated-invoice-{{ $request->requestExportation?->id }}"
                                     class="bg-gray-500 btn-free-color tooltip tooltip-top"
                                     data-tip="Subir factura"
                                 >
                                     <x-icons.message-check class="size-5 stroke-white" />
                                 </button>
-                                @livewire('user.thermoformed.confirm-delivery-live', ['request' => $request->requestThermoformed], key('confirm-request-'.$request->requestThermoformed->id))
+                                @livewire('user.exportation.confirm-delivery-live', ['request' => $request->requestExportation], key('confirm-request-'.$request->requestExportation->id))
                             @endif
 
-                            @livewire('user.thermoformed.decline-requests-live', ['request' => $request->requestThermoformed, 'roleDecline' => 2], key('reject-request-'.$request->requestThermoformed->id))
+                            @livewire('user.exportation.decline-requests-live', ['request' => $request->requestExportation, 'roleDecline' => 2], key('reject-request-'.$request->requestExportation->id))
 
-                        </td> --}}
+                        </td>
                     @endif
                 </tr>
             @empty
