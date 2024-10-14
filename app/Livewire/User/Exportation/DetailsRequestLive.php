@@ -16,8 +16,6 @@ class DetailsRequestLive extends Component
 
     public $providers = [];
 
-    public $detailProforma = false;
-
     public function mount(RequestExportation $request)
     {
         $this->request = $request;
@@ -27,11 +25,6 @@ class DetailsRequestLive extends Component
     public function showModal()
     {
         $this->open = true;
-    }
-
-    public function activeDetailProforma()
-    {
-        $this->detailProforma = !$this->detailProforma;
     }
 
     public function close()

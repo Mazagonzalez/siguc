@@ -43,6 +43,10 @@
     @apply px-5 py-2 font-semibold text-white bg-blue-500 rounded-xl hover:bg-blue-600
 }
 
+.btn-confirm-free{
+    @apply px-5 py-2 font-semibold text-white rounded-xl
+}
+
 /* Inputs */
 .input-simple{
     @apply rounded-xl focus:ring-offset-[3px] focus:ring-offset-white dark:focus:ring-offset-[#1f1f1f] bg-gray-200 dark:bg-[#333333] border-none h-[45px] placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-blue-500
