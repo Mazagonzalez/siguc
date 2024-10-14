@@ -74,8 +74,10 @@
             </div>
         </div>
 
-        <div class="w-[35%] h-full">
+        <div class="w-[35%] h-full col gap-3">
             @livewire('user.ranking-live')
+
+            @livewire('user.chart-live')
         </div>
     </div>
 
