@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Models\Proforma;
 use App\Models\RequestExportation;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class AcceptRequestLive extends Component
 {

@@ -80,7 +80,7 @@
                             @endif
                         </td>
                         <td class="flex justify-center td">
-                            {{--@livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))--}}
+                            @livewire('user.exportation.details-request-live', ['request' => $request->requestExportation], key('detail-request-exportation-'.$request->requestExportation->id))
                         </td>
                     @endif
                 </tr>

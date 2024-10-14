@@ -144,14 +144,13 @@ class SearchCreatedRequestsExportationLive extends Component
         Db::commit();
 
        // Cambia el estado en el EndPoint
-       /*$objeto = json_encode(1);
+       $objeto = json_encode(1);
 
-       if ($exportation->order_number) {
+       if ($exportation->proforma_id) {
            $response = Http::withHeaders([
                'Content-Type' => 'application/json',
-           ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $exportation->order_number, $objeto);
-
-       }*/
+           ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/Proforma/' . $exportation->proforma_id, $objeto);
+       }
 
        $this->resetRequest();
        $this->open = false;
