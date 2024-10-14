@@ -124,6 +124,22 @@
                         <td class="items-center justify-end gap-2 td row">
                             @livewire('user.thermoformed.details-request-live', ['request' => $request->requestThermoformed], key('detail-request-'.$request->id))
                         </td>
+                    @elseif ($request->type_request == 'Solicitud exportacion')
+                        <td class="td">
+                            <x-utils.status status="{{ $request->requestExportation->status }}" />
+                        </td>
+                        <td class="td">{{ $request->type_request }}</td>
+                        <td class="td">{{ $request->requestExportation->date_quotation }}</td>
+                        <td class="td">
+                            @if ($request->requestExportation->status == 2)
+                                {{ $request->requestExportation->date_decline }}
+                            @elseif ($request->requestExportation->status == 5)
+                                {{ $request->requestExportation->date_loading }}
+                            @endif
+                        </td>
+                        <td class="items-center justify-end gap-2 td row">
+                            @livewire('user.exportation.details-request-live', ['request' => $request->requestExportation], key('detail-request-'.$request->id))
+                        </td>
                     @endif
                 </tr>
             @empty
