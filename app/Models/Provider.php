@@ -28,6 +28,11 @@ class Provider extends Model
         return $this->hasMany(RequestThermoformed::class, 'provider_id');
     }
 
+    public function requestExportation()
+    {
+        return $this->hasMany(RequestExportation::class, 'provider_id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

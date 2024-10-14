@@ -25,6 +25,10 @@ class RankingLive extends Component
             if ($record->requestThermoformed) {
                 $providerNames[] = $record->requestThermoformed->provider->company_name;
             }
+
+            if ($record->requestExportation) {
+                $providerNames[] = $record->requestExportation->provider->company_name;
+            }
         }
 
         $providerCounts = array_count_values($providerNames);

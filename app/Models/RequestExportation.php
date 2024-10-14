@@ -36,6 +36,18 @@ class RequestExportation extends Model
         'status',
     ];
 
+    public function provider()
+    {
+        return $this->belongsTo(Provider::class, 'provider_id');
+    }
+
+    //relacion uno a mucho inversa
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function history()
     {
         return $this->hasMany(History::class);
