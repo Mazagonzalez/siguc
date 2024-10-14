@@ -2,6 +2,7 @@
     <table class="w-full">
         <thead>
             <tr class="tr">
+                <th class="th">#</th>
                 <th class="th">Estado</th>
                 <th class="th">Tipo de solicitud</th>
                 <th class="th">Fecha de entrega</th>
@@ -13,6 +14,7 @@
         <tbody>
             @forelse($totalRequests as $request)
                 <tr wire:key='orden-{{ $request->id }}' class="tr">
+                    <td class="font-semibold td">{{ $loop->index + 1 }}</td>
                     @if ($request->type_request == 'Solicitud nacional')
                         <td class="td">
                             <x-utils.status status="{{ $request->requestNational?->status }}" />

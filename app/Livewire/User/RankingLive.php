@@ -44,6 +44,8 @@ class RankingLive extends Component
 
         $providerCounts = array_count_values($providerData);
 
+        arsort($providerCounts);
+
         return view('livewire.user.ranking-live', [
             'providerCounts' => $providerCounts,
             'providerFleteTotal' => $providerFleteTotal,
