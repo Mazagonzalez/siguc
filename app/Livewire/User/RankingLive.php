@@ -13,32 +13,41 @@ class RankingLive extends Component
 
     public function render()
     {
-        $history = History::where('status', 5)->get();
+        $history = History::where('status', 5)->with([
+            'requestNational.provider',
+            'requestThermoformed.provider',
+            'requestExportation.provider'
+        ])->get();
 
-        $providerNames = [];
+        $providerData = [];
+        $providerFleteTotal = [];
 
         foreach ($history as $record) {
             if ($record->requestNational) {
-                $providerNames[] = $record->requestNational->provider;
+                $provider = $record->requestNational->provider;
+                $providerData[] = $provider;
+                $providerFleteTotal[$provider] = ($providerFleteTotal[$provider] ?? 0) + $record->requestNational->final_flete;
             }
 
             if ($record->requestThermoformed) {
-                $providerNames[] = $record->requestThermoformed->provider;
+                $provider = $record->requestThermoformed->provider;
+                $providerData[] = $provider;
+                $providerFleteTotal[$provider] = ($providerFleteTotal[$provider] ?? 0) + $record->requestThermoformed->final_flete;
             }
 
             if ($record->requestExportation) {
-                $providerNames[] = $record->requestExportation->provider;
+                $provider = $record->requestExportation->provider;
+                $providerData[] = $provider;
+                $providerFleteTotal[$provider] = ($providerFleteTotal[$provider] ?? 0) + $record->requestExportation->final_flete;
             }
         }
 
-        $providerCounts = array_count_values($providerNames);
-
-        // Calcular el total de estados
-        $this->totalStates = array_sum($providerCounts);
+        $providerCounts = array_count_values($providerData);
 
         return view('livewire.user.ranking-live', [
-            'totalStates' => $this->totalStates,
             'providerCounts' => $providerCounts,
+            'providerFleteTotal' => $providerFleteTotal,
         ]);
     }
+
 }

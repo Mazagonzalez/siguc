@@ -14,31 +14,31 @@
                     <th class="th">#</th>
                     <th class="th text-start">Proveedor</th>
                     <th class="th">Total</th>
-                    <th class="th">Porcentage</th>
+                    <th class="th">Flete Total</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($providerCounts as $providerName => $total)
                     <tr class="tr">
-                        <td class="td">{{ $loop->iteration }}</td>
+                        @if ($loop->iteration <= 5)
+                            <td class="td">{{ $loop->iteration }}</td>
 
-                        <td class="td" style="text-align: start">
-                            <p class="text-sm tooltip tooltip-top" data-tip="{{ $providerName }}">
-                                {{ auth()->user()->short($providerName, 15) }}
-                            </p>
-                        </td>
+                            <td class="td" style="text-align: start">
+                                <p class="text-sm tooltip tooltip-top" data-tip="{{ $providerName }}">
+                                    {{ auth()->user()->short($providerName, 15) }}
+                                </p>
+                            </td>
 
-                        <th class="th">
-                            {{ $total }}
-                        </th>
+                            <th class="th">
+                                {{ $total }}
+                            </th>
 
-                        <th class="td">
-                            @if ($totalStates > 0)
-                                {{ number_format(($total / $totalStates) * 100, 2) }}%
-                            @else
-                                0%
-                            @endif
-                        </th>
+                            <th class="td">
+                                $ {{ number_format($providerFleteTotal[$providerName] ?? 0, 0) }}
+                            </th>
+                        @else
+                            @break
+                        @endif
                     </tr>
                 @empty
                     <tr>
@@ -47,5 +47,6 @@
                 @endforelse
             </tbody>
         </table>
+
     </div>
 </div>
