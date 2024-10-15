@@ -149,7 +149,7 @@
                                 <x-icons.arrow class="rotate-90 size-5 stroke-white" />
                             </button>
 
-                            <p class="text-lg font-semibold">Vehiculo # <span x-text="currentSlide + 1"></span> </p>
+                            <p class="text-lg font-semibold">Vehiculo # <span x-text="currentSlide + 1"></span> / {{ $providers->count() }} </p>
 
                             <button class="btn-info" @click="currentSlide = (currentSlide + 1) % slides">
                                 <x-icons.arrow class="-rotate-90 size-5 stroke-white" />

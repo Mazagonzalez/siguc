@@ -85,7 +85,9 @@
                     <td class="td">
                         <x-utils.status status="{{ $request->status }}" />
                     </td>
+
                     <td class="td">{{ $request->date_quotation }}</td>
+
                     <td class="td">
                         @if ($request->status == '0')
                             <p>En espera</p>
@@ -94,6 +96,7 @@
                         @endif
 
                     </td>
+
                     <td class="td">
                         @if ($request->status == '0')
                             <p>En espera</p>
@@ -101,6 +104,7 @@
                             {{ $request->time_response }}
                         @endif
                     </td>
+
                     <td>
                         @if ($request->initial_flete)
                             {{ number_format($request->initial_flete) }}
@@ -108,6 +112,7 @@
                             <p>En espera de aceptacion</p>
                         @endif
                     </td>
+
                     <td class="items-center justify-end gap-2 td row">
                         @livewire('user.exportation.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
@@ -116,9 +121,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5">
-                        <p class="py-20 text-center">No tienes solicitudes en proceso</p>
-                    </td>
+                    <x-utils.not-search message="No hay solicitudes finalizadas" colspan="5" py="py-24" />
                 </tr>
             @endforelse
         </tbody>
