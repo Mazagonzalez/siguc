@@ -20,12 +20,27 @@
                         </span>
                     @enderror
                 </div>
-                <div>
+
+                <div x-data="{ currentSlide: 0, slides: {{ $proformas->count() }} }" class="mt-6">
+                    <div class="items-center justify-between mx-6 row">
+                        <button class="btn-info" @click="currentSlide = (currentSlide + {{ $proformas->count() - 1 }}) % slides">
+                            <x-icons.arrow class="rotate-90 size-5 stroke-white" />
+                        </button>
+
+                        <p class="text-lg font-semibold">Vehiculo # <span x-text="currentSlide + 1"></span> / {{ $proformas->count() }} </p>
+
+                        <button class="btn-info" @click="currentSlide = (currentSlide + 1) % slides">
+                            <x-icons.arrow class="-rotate-90 size-5 stroke-white" />
+                        </button>
+                    </div>
+
                     @foreach ($proformas as $index => $proforma)
-                        <div class="p-4 mt-4 bg-white rounded-lg shadow-2xl">
-                            <div>
-                                <span class="title-input">Vehículo {{ $loop->iteration }}</span>
-                            </div>
+                        <div
+                            x-transition:enter.duration.500ms
+                            x-show="currentSlide === {{ $loop->index }}"
+                            class="gap-3 px-5 py-10 mt-4 col rounded-xl bg-gray-50 dark:bg-zinc-800"
+                            style="display: none;"
+                        >
                             <div>
                                 <span class="title-input">Placa del vehiculo</span>
                                 <input wire:model.live="license_plates.{{ $index }}" type="text" class="w-full uppercase input-simple" />

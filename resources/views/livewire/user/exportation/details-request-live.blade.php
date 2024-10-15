@@ -8,7 +8,7 @@
         <x-icons.info class="size-5 stroke-white" />
     </button>
 
-    <x-dialog-modal wire:model='open' maxWidth='4xl'>
+    <x-dialog-modal wire:model='open' maxWidth="{{ $request->status != 0 ? '4xl' : 'md' }}" >
         <x-slot name="title">
             <div class="items-center col">
                 <p class="text-xl font-semibold text-center">Detalles de la solicitud de exportacion</p>
@@ -30,7 +30,7 @@
         </x-slot>
         <x-slot name="content">
             <div class="gap-5 row">
-                <div class="w-1/2">
+                <div class="{{ $request->status != 0 ? 'w-1/2' : 'w-full' }}">
                     <div class="divide-y divide-gray-300 col dark:divide-white/20">
                         @role('User')
                             <div class="py-2 col">
@@ -142,20 +142,20 @@
                     </div>
                 </div>
 
-                <div x-data="{ currentSlide: 0, slides: {{ $providers->count() }} }" class="w-1/2">
-                    <div class="items-center justify-between mx-6 mb-10 row">
-                        <button class="btn-info" @click="currentSlide = (currentSlide + {{ $providers->count() - 1 }}) % slides">
-                            <x-icons.arrow class="rotate-90 size-5 stroke-white" />
-                        </button>
+                @if ($request->status != 0 && $request->vehicle_quantity)
+                    <div x-data="{ currentSlide: 0, slides: {{ $providers->count() }} }" class="w-1/2">
+                        <div class="items-center justify-between mx-6 mb-10 row">
+                            <button class="btn-info" @click="currentSlide = (currentSlide + {{ $providers->count() - 1 }}) % slides">
+                                <x-icons.arrow class="rotate-90 size-5 stroke-white" />
+                            </button>
 
-                        <p class="text-lg font-semibold">Vehiculo # <span x-text="currentSlide + 1"></span> </p>
+                            <p class="text-lg font-semibold">Vehiculo # <span x-text="currentSlide + 1"></span> / {{ $providers->count() }} </p>
 
-                        <button class="btn-info" @click="currentSlide = (currentSlide + 1) % slides">
-                            <x-icons.arrow class="-rotate-90 size-5 stroke-white" />
-                        </button>
-                    </div>
+                            <button class="btn-info" @click="currentSlide = (currentSlide + 1) % slides">
+                                <x-icons.arrow class="-rotate-90 size-5 stroke-white" />
+                            </button>
+                        </div>
 
-                    @if ($request->status != 0 && $request->vehicle_quantity)
                         @foreach ($providers as $orderItem)
                             <div
                                 x-transition:enter.duration.500ms
@@ -204,8 +204,8 @@
                                 </div>
                             </div>
                         @endforeach
-                    @endif
-                </div>
+                    </div>
+                @endif
             </div>
         </x-slot>
         <x-slot name="footer">

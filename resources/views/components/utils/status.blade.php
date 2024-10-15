@@ -21,7 +21,7 @@
     }
 @endphp
 
-<div class="px-2 font-medium rounded-full {{ $pill }}">
+<div class="px-2 w-fit mx-auto font-medium rounded-full {{ $pill }}">
     @if ($status == 0)
         <span>Pendiende</span>
     @elseif ($status == 1)
