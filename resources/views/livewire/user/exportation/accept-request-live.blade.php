@@ -20,6 +20,7 @@
                         </span>
                     @enderror
                 </div>
+
                 <div>
                     @foreach ($proformas as $index => $proforma)
                         <div class="p-4 mt-4 bg-white rounded-lg shadow-2xl">
