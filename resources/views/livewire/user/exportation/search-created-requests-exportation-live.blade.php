@@ -174,11 +174,6 @@
                                     <span class="font-semibold">Tipo de contenedor</span>
                                     <p class="font-light">{{ $orderItem['unit_load'] }}</p>
                                 </div>
-
-                                <div class="py-2 col">
-                                    <span class="font-semibold">Estado</span>
-                                    <p class="font-light">{{ $orderItem['statu'] }}</p>
-                                </div>
                             </div>
                         @endforeach
                     </div>

@@ -170,12 +170,12 @@
 
                                 <div class="py-2 col">
                                     <span class="text-base font-semibold">Peso neto</span>
-                                    <p class="font-light">{{ $orderItem->net_weight }}</p>
+                                    <p class="font-light">{{ number_format($orderItem->net_weight) }}</p>
                                 </div>
 
                                 <div class="py-2 col">
                                     <span class="text-base font-semibold">Peso bruto</span>
-                                    <p class="font-light">{{ $orderItem->gross_weight }}</p>
+                                    <p class="font-light">{{ number_format($orderItem->gross_weight) }}</p>
                                 </div>
 
                                 <div class="py-2 col">
