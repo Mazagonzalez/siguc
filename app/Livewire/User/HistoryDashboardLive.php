@@ -4,25 +4,21 @@ namespace App\Livewire\User;
 
 use App\Models\History;
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class HistoryDashboardLive extends Component
 {
+    use WithPagination;
+
     public $requests = [];
-
     public $start_date;
-
     public $end_date;
-
     public $type;
-
     public $statu;
-
     public $show_modal_excel = null;
-
     public $option_export = null;
-
     public $dashboard = false;
+    public $i =  0;
 
     protected $listeners = ['request' => 'mount'];
 
@@ -97,7 +93,7 @@ class HistoryDashboardLive extends Component
 
         });
 
-        $requests = $items->get();
+        $requests = $items->paginate(5);
 
         return view('livewire.user.history-dashboard-live', ['requestsCollection' => $requests]);
     }
