@@ -19,7 +19,7 @@ class DetailsRequestLive extends Component
     public function mount(RequestExportation $request)
     {
         $this->request = $request;
-        $this->providers = Proforma::where('proforma_id', $this->request->proforma_id)->get();
+        $this->providers = Proforma::where('proforma_id', $this->request->proforma_id)->whereIn('status', [3,4,5])->get();
     }
 
     public function showModal()

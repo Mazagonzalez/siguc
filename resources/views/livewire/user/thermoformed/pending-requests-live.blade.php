@@ -109,6 +109,10 @@
                         @endif
                     </td>
                     <td class="items-center justify-end gap-2 td row">
+                        @if ($request->status == 1)
+                            @livewire('user.send-confirm-live', ['request' => $request], key('send-send-'.$request->id))
+                        @endif
+                        
                         @livewire('user.thermoformed.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
                         @livewire('user.thermoformed.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('decline-request-'.$request->id))

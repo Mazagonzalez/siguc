@@ -63,7 +63,7 @@
 
                         <td class="td">{{ $request->requestExportation?->date_acceptance }}</td>
 
-                        <td class="td">{{ number_format($request->requestExportation?->initial_flete) }}</td>
+                        <td class="td">{{ number_format($request->requestExportation?->total_initial_flete) }}</td>
 
                         <td class="items-center justify-center gap-2 td row">
                            @livewire('user.exportation.details-request-live', ['request' => $request->requestExportation], key('detail-request-'.$request->requestExportation->id))

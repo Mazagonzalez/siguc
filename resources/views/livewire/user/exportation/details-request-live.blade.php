@@ -86,8 +86,8 @@
                         @if ($request->status != 0 && $request->status != 1 && $request->status != 2)
 
                             <div class="py-2 col">
-                                <span class="text-base font-semibold">Flete inicial</span>
-                                <p class="font-light">{{ number_format($request->initial_flete) }}</p>
+                                <span class="text-base font-semibold">Flete inicial Total</span>
+                                <p class="font-light">{{ number_format($request->total_initial_flete) }}</p>
                             </div>
 
                             <div class="py-2 col">
@@ -122,7 +122,7 @@
                         @if ($request->status == 4 || $request->status == 5)
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Flete final</span>
-                                <p class="font-light">{{ number_format($request->final_flete) }}</p>
+                                <p class="font-light">{{ number_format($request->total_final_flete) }}</p>
                             </div>
 
                             @if ($request->delivery_commentary)
@@ -163,6 +163,11 @@
                                 class="p-5 bg-gray-100 rounded-xl dark:bg-zinc-800 col"
                                 style="display: none;"
                             >
+                                <div class="py-2 col">
+                                    <span class="text-base font-semibold">Flete inicial</span>
+                                    <p class="font-light">{{ number_format($orderItem->initial_flete) }}</p>
+                                </div>
+
                                 <div class="py-2 col">
                                     <span class="text-base font-semibold">Tipo de vehículo</span>
                                     <p class="font-light">{{ $orderItem->type_vehicle }}</p>

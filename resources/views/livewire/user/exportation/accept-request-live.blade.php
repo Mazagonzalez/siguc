@@ -11,16 +11,6 @@
     <x-dialog-modal wire:model='open' maxWidth="md" title="Datos para aceptar solicitud" >
         <x-slot name="content">
             <div class="gap-3 col">
-                <div>
-                    <span class="title-input">Flete inicial</span>
-                    <input wire:model.live="initial_flete" oninput="formatNumber(this)" type="text" class="w-full input-simple" />
-                    @error('initial_flete')
-                        <span class="err">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-
                 <div x-data="{ currentSlide: 0, slides: {{ $proformas->count() }} }" class="mt-6">
                     <div class="items-center justify-between mx-6 row">
                         <button class="btn-info" @click="currentSlide = (currentSlide + {{ $proformas->count() - 1 }}) % slides">
@@ -41,6 +31,15 @@
                             class="gap-3 px-5 py-10 mt-4 col rounded-xl bg-gray-50 dark:bg-zinc-800"
                             style="display: none;"
                         >
+                            <div>
+                                <span class="title-input">Flete inicial vehiculo {{ $loop->index + 1 }}</span>
+                                <input wire:model.live="initial_flete.{{ $index }}" oninput="formatNumber(this)" type="text" class="w-full input-simple"/>
+                                @error('initial_flete.' . $index)
+                                    <span class="err">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
                             <div>
                                 <span class="title-input">Placa del vehiculo</span>
                                 <input wire:model.live="license_plates.{{ $index }}" type="text" class="w-full uppercase input-simple" />
@@ -82,6 +81,11 @@
                             </div>
                         </div>
                     @endforeach
+                    @error('errFalta')
+                        <span class="err">
+                            {{ $message }}
+                        </span>
+                    @enderror
                 </div>
             </div>
         </x-slot>

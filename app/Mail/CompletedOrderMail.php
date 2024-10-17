@@ -18,15 +18,13 @@ class CompletedOrderMail extends Mailable
 
     public $requestId;
     public $comment;
-    public $typeRequest;
     /**
      * Create a new message instance.
      */
-    public function __construct($requestId, $comment, $typeRequest)
+    public function __construct($requestId, $comment)
     {
         $this->requestId = $requestId;
         $this->comment = $comment;
-        $this->typeRequest = $typeRequest;
     }
 
     /**
@@ -35,7 +33,7 @@ class CompletedOrderMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Orden completada',
+            subject: 'Orden Aceptada',
         );
     }
 
@@ -45,11 +43,7 @@ class CompletedOrderMail extends Mailable
     public function content(): Content
     {
         try {
-            if ($this->typeRequest == 1) {
-                $request = Request::findOrFail($this->requestId);
-            } elseif ($this->typeRequest == 3) {
-                $request = RequestThermoformed::findOrFail($this->requestId);
-            }
+            $request = RequestThermoformed::findOrFail($this->requestId);
         } catch (\Exception $e) {
             Log::error('Error al cargar la request en CompletedOrderMail: ' . $e->getMessage());
         }

@@ -93,7 +93,7 @@
             <tbody>
                 @forelse($requestsCollection as $request)
                     <tr wire:key='orden-{{ $request->id }}' class="tr">
-                        <td class="font-semibold td">{{ $request->id }}</td>
+                        <td class="font-semibold td">{{ $loop->iteration }}</td>
 
                         @if ($request->type_request == 'Solicitud nacional')
                             <td class="td">

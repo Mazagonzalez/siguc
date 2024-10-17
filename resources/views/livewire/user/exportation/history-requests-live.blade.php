@@ -97,7 +97,7 @@
                         @if ($request->status == 2)
                             <p>Solicitud cancelada</p>
                         @elseif ($request->status == 5)
-                            {{ number_format($request->final_flete) }}
+                            {{ number_format($request->total_final_flete) }}
                         @endif
                     </td>
                     <td>

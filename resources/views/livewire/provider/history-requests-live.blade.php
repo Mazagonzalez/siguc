@@ -63,7 +63,7 @@
 
                         <td class="td">
                             @if ($request->requestExportation?->status == 5)
-                                {{ number_format($request->requestExportation?->final_flete) }}
+                                {{ number_format($request->requestExportation?->total_final_flete) }}
                             @elseif ($request->requestExportation?->status == 2)
                                 <p>Cancelada</p>
                             @endif

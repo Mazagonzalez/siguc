@@ -75,7 +75,7 @@
                 <th class="th">Fecha de entrega</th>
                 <th class="th">Fecha de confirmacion</th>
                 <th class="th">Tiempo de respuesta</th>
-                <th class="th">Flete inicial</th>
+                <th class="th">Flete inicial total</th>
                 <th class="th"></th>
             </tr>
         </thead>
@@ -106,8 +106,8 @@
                     </td>
 
                     <td>
-                        @if ($request->initial_flete)
-                            {{ number_format($request->initial_flete) }}
+                        @if ($request->total_initial_flete)
+                            {{ number_format($request->total_initial_flete) }}
                         @else
                             <p>En espera de aceptacion</p>
                         @endif

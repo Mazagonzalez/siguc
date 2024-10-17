@@ -38,7 +38,7 @@ class RankingLive extends Component
             if ($record->requestExportation) {
                 $provider = $record->requestExportation->provider;
                 $providerData[] = $provider;
-                $providerFleteTotal[$provider] = ($providerFleteTotal[$provider] ?? 0) + $record->requestExportation->final_flete;
+                $providerFleteTotal[$provider] = ($providerFleteTotal[$provider] ?? 0) + $record->requestExportation->total_final_flete;
             }
         }
 

@@ -26,7 +26,7 @@ class DeclineRequestsLive extends Component
     {
         $this->request = $request;
         $this->roleDecline = $roleDecline;
-        $this->proformas = Proforma::where('proforma_id', $request->proforma_id)->get();
+        $this->proformas = Proforma::where('proforma_id', $request->proforma_id)->get();//agregar validacion
     }
 
     public function showModal()
@@ -77,7 +77,7 @@ class DeclineRequestsLive extends Component
         DB::commit();
 
         // Cambia el estado en el EndPoint
-       $objeto = json_encode(2);
+       $objeto = json_encode(0);
 
        if ($this->request->proforma_id) {
            $response = Http::withHeaders([
@@ -87,7 +87,10 @@ class DeclineRequestsLive extends Component
 
         $this->open = false;
         $this->resetRequest();
+        $this->dispatch('request-history');
         $this->dispatch('request');
+        $this->dispatch('request-new');
+        $this->dispatch('request-pending');
     }
 
     public function resetRequest()
