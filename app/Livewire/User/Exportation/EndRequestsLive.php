@@ -5,6 +5,7 @@ namespace App\Livewire\User\Exportation;
 use App\Models\History;
 use Livewire\Component;
 use App\Models\Proforma;
+use Livewire\WithPagination;
 use App\Models\RequestExportation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -12,10 +13,10 @@ use Illuminate\Support\Facades\Http;
 
 class EndRequestsLive extends Component
 {
+    use WithPagination;
+
     public $requests = [];
-
     public $start_date;
-
     public $end_date;
 
     protected $listeners = ['request-end' => 'mount'];

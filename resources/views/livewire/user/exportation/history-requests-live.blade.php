@@ -97,7 +97,7 @@
                             @endif
                         </td>
 
-                        <td>
+                        <td class="td">
                             @if ($request->status == 2)
                                 <p>Solicitud cancelada</p>
                             @elseif ($request->status == 5)

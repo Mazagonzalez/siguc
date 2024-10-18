@@ -3,21 +3,19 @@
 namespace App\Livewire\User\Exportation;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\RequestExportation;
 use Illuminate\Support\Facades\Auth;
 
 class HistoryRequestsLive extends Component
 {
+    use WithPagination;
+
     public $requests = [];
-
     public $start_date;
-
     public $end_date;
-
     public $statu;
-
     public $show_modal_excel = null;
-
     public $option_export = null;
 
     protected $listeners = ['request-history' => 'mount'];

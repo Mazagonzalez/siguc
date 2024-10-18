@@ -97,7 +97,7 @@
                             @endif
                         </td>
 
-                        <td>
+                        <td class="td">
                             {{ number_format($request->total_final_flete) }}
                         </td>
 

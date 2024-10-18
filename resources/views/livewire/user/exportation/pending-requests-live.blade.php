@@ -107,7 +107,7 @@
                             @endif
                         </td>
 
-                        <td>
+                        <td class="td">
                             @if ($request->total_initial_flete)
                                 {{ number_format($request->total_initial_flete) }}
                             @else
