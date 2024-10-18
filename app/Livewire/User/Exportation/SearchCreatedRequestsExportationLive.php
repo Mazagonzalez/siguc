@@ -30,6 +30,10 @@ class SearchCreatedRequestsExportationLive extends Component
     public $date_quotation;
     public $comment;
 
+    //documento de carga
+    public $bocking;
+    public $letterWithdrawal;
+
     public function mount($order)
     {
         $this->order = $order;
@@ -79,6 +83,8 @@ class SearchCreatedRequestsExportationLive extends Component
             'total_gross_weight' => 'required',
             'order_quantity' => 'required',
             'date_quotation' => 'required',
+            'bocking'  => 'required|file|mimes:png,jpg,pdf|max:10240',
+            'letterWithdrawal' => 'nullable|file|mimes:png,jpg,pdf|max:10240',
         ],
         [
             'provider.required' => 'El campo proveedor es obligatorio',
@@ -90,6 +96,13 @@ class SearchCreatedRequestsExportationLive extends Component
             'total_gross_weight.required' => 'El campo peso bruto total es obligatorio',
             'order_quantity.required' => 'El campo cantidad de vehículos es obligatorio',
             'date_quotation.required' => 'El campo fecha de cita es obligatorio',
+            'bocking.required' => 'El campo factura es obligatorio',
+            'bocking.file' => 'El campo factura debe ser un archivo',
+            'bocking.mimes' => 'El campo factura debe ser un archivo de tipo: png, jpg o pdf',
+            'bocking.max' => 'El campo factura no debe pesar más de 10MB',
+            'letterWithdrawal.file' => 'El campo carta de retiro debe ser un archivo',
+            'letterWithdrawal.mimes' => 'El campo carta de retiro debe ser un archivo de tipo: png, jpg o pdf',
+            'letterWithdrawal.max' => 'El campo carta de retiro no debe pesar más de 10MB',
         ]);
 
         DB::beginTransaction();
@@ -179,6 +192,8 @@ class SearchCreatedRequestsExportationLive extends Component
             'date_quotation',
             'order_quantity',
             'comment',
+            'bocking',
+            'letterWithdrawal',
         ]);
 
         $this->resetErrorBag();

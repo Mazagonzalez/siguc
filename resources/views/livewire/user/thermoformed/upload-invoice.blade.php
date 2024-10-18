@@ -14,7 +14,7 @@
                 <div>
                     <span class="title-input">Fecha la entrega</span>
                     <input
-                        type="date"
+                        type="datetime-local"
                         wire:model.live="date_loading"
                         class="w-full input-simple"
                     />
