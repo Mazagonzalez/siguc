@@ -94,7 +94,7 @@ class EndRequestsLive extends Component
             );
         }
 
-        $requests = $items->get();
+        $requests = $items->paginate(5);
 
         return view('livewire.user.exportation.end-requests-live', ['requestsCollection' => $requests]);
     }

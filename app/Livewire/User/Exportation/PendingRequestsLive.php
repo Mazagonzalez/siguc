@@ -63,7 +63,7 @@ class PendingRequestsLive extends Component
             }
         });
 
-        $requests = $items->get();
+        $requests = $items->paginate(5);
 
         return view('livewire.user.exportation.pending-requests-live', ['requestsCollection' => $requests]);
     }

@@ -13,7 +13,7 @@
             $pill = 'bg-indigo-100 text-indigo-500';
             break;
         case 4:
-            $pill = 'bg-white-100 text-emerald-500';
+            $pill = 'bg-cyan-100 text-cyan-500';
             break;
         case 5:
             $pill = 'bg-emerald-100 text-emerald-500';

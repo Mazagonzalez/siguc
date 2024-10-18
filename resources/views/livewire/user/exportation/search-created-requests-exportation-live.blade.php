@@ -110,7 +110,7 @@
                 <div class="gap-3 col lg:w-1/2">
                     <div>
                         <span class="title-input">Documento bocking</span>
-                        <input type="file" class="w-full rounded-lg file-input text-slate-500 file-input-bordered file-input-sm" wire:model='bocking'/>
+                        <input type="file" class="w-full rounded-lg file-input file-input-bordered dark:text-white dark:bg-[#333333] file-input-sm" wire:model='bocking'/>
                         @error('bocking')
                             <span class="err">
                                 {{ $message }}
@@ -120,7 +120,7 @@
 
                     <div>
                         <span class="title-input">documento carta de retiro (opcional)</span>
-                        <input type="file" class="w-full rounded-lg file-input text-slate-500 file-input-bordered file-input-sm" wire:model='letterWithdrawal'/>
+                        <input type="file" class="w-full rounded-lg file-input file-input-bordered dark:text-white dark:bg-[#333333] file-input-sm" wire:model='letterWithdrawal'/>
                         @error('letterWithdrawal')
                             <span class="err">
                                 {{ $message }}

@@ -82,7 +82,7 @@ class HistoryRequestsLive extends Component
             }
         });
 
-        $requests = $items->get();
+        $requests = $items->paginate(5);
 
         return view('livewire.user.exportation.history-requests-live', ['requestsCollection' => $requests]);
     }
