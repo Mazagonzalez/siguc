@@ -5,16 +5,17 @@ namespace App\Livewire\User\National;
 use App\Models\History;
 use App\Models\Request;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class EndRequestsLive extends Component
 {
+    use WithPagination;
+
     public $requests = [];
-
     public $start_date;
-
     public $end_date;
 
     protected $listeners = ['request-end' => 'mount'];
