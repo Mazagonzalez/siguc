@@ -3,11 +3,14 @@
 namespace App\Livewire\User\Thermoformed;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 use App\Models\RequestThermoformed;
 use Illuminate\Support\Facades\Auth;
 
 class PendingRequestsLive extends Component
 {
+    use WithPagination;
+
     public $requests = [];
 
     public $start_date;
@@ -63,7 +66,7 @@ class PendingRequestsLive extends Component
             }
         });
 
-        $requests = $items->get();
+        $requests = $items->paginate(5);
 
         return view('livewire.user.thermoformed.pending-requests-live', ['requestsCollection' => $requests]);
     }
