@@ -93,7 +93,7 @@ class HistoryDashboardLive extends Component
 
         });
 
-        $requests = $items->paginate(8);
+        $requests = $items->paginate(5);
 
         return view('livewire.user.history-dashboard-live', ['requestsCollection' => $requests]);
     }
