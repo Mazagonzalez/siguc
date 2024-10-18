@@ -1,4 +1,4 @@
-<div>
+<div class="col">
     {{-- Filtro --}}
     <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525] my-5">
         <div class="items-center justify-between row" @click="showFilter = !showFilter">
@@ -70,69 +70,73 @@
         </div>
     </div>
 
-    <table class="w-full">
-        <thead>
-            <tr class="tr">
-                <th class="th">Estado</th>
-                <th class="th">Numero de orden</th>
-                <th class="th">Fecha de entrega</th>
-                <th class="th">Fecha de confirmacion</th>
-                <th class="th">Tiempo de respuesta</th>
-                <th class="th"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($requestsCollection as $request)
-                <tr wire:key='orden-{{ $request->id }}' class="tr">
-                    <td class="td">
-                        <x-utils.status status="{{ $request->status }}" />
-                    </td>
+    <div class="min-h-[360px]">
+        <table class="w-full">
+            <thead>
+                <tr class="tr">
+                    <th class="th">Estado</th>
+                    <th class="th">Numero de orden</th>
+                    <th class="th">Fecha de entrega</th>
+                    <th class="th">Fecha de confirmacion</th>
+                    <th class="th">Tiempo de respuesta</th>
+                    <th class="th"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($requestsCollection as $request)
+                    <tr wire:key='orden-{{ $request->id }}' class="tr">
+                        <td class="td">
+                            <x-utils.status status="{{ $request->status }}" />
+                        </td>
 
-                    <td class="td">
-                        @if ($request->id_request_double)
-                            #1 {{ $request->order_number }} <br>
-                            #2 {{ $request->request_double->order_number }}
-                        @else
-                            @if ($request->order_number)
-                                #{{ $request->order_number }}
+                        <td class="td">
+                            @if ($request->id_request_double)
+                                #1 {{ $request->order_number }} <br>
+                                #2 {{ $request->request_double->order_number }}
                             @else
-                                Sin numero de orden
+                                @if ($request->order_number)
+                                    #{{ $request->order_number }}
+                                @else
+                                    Sin numero de orden
+                                @endif
                             @endif
-                        @endif
-                    </td>
+                        </td>
 
-                    <td class="td">{{ $request->date_quotation }}</td>
+                        <td class="td">{{ $request->date_quotation }}</td>
 
-                    <td class="td">
-                        @if ($request->status == '0')
-                            <p>En espera</p>
-                        @else
-                            {{ $request->date_acceptance }}
-                        @endif
+                        <td class="td">
+                            @if ($request->status == '0')
+                                <p>En espera</p>
+                            @else
+                                {{ $request->date_acceptance }}
+                            @endif
 
-                    </td>
+                        </td>
 
-                    <td class="td">
-                        @if ($request->status == '0')
-                            <p>En espera</p>
-                        @else
-                            {{ $request->time_response }}
-                        @endif
-                    </td>
+                        <td class="td">
+                            @if ($request->status == '0')
+                                <p>En espera</p>
+                            @else
+                                {{ $request->time_response }}
+                            @endif
+                        </td>
 
-                    <td class="items-center justify-end gap-2 td row">
-                        @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
+                        <td class="items-center justify-end gap-2 td row">
+                            @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
 
-                        @livewire('user.national.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('reject-request-'.$request->id))
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6">
-                        <p class="py-20 text-center">No tienes solicitudes en proceso</p>
-                    </td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+                            @livewire('user.national.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('reject-request-'.$request->id))
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <x-utils.not-search message="No hay solicitudes finalizadas" colspan="5" py="py-24" />
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    <div class="paginate">
+        {{ $requestsCollection->links('components.utils.paginate') }}
+    </div>
 </div>

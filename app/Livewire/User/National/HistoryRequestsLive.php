@@ -84,7 +84,7 @@ class HistoryRequestsLive extends Component
             }
         });
 
-        $requests = $items->get();
+        $requests = $items->paginate(5);
 
         return view('livewire.user.national.history-requests-live', ['requestsCollection' => $requests]);
     }

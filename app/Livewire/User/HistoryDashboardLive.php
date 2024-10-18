@@ -18,7 +18,7 @@ class HistoryDashboardLive extends Component
     public $show_modal_excel = null;
     public $option_export = null;
     public $dashboard = false;
-    public $i =  0;
+    public $i = 1;
 
     protected $listeners = ['request' => 'mount'];
 
