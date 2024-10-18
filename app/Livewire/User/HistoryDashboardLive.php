@@ -30,10 +30,12 @@ class HistoryDashboardLive extends Component
         ]);
 
 
-        return redirect()->route('export.history', ['start_date' => $this->start_date,
-            'end_date'                                           => $this->end_date,
-            'statu'                                              => $this->statu,
-            'type'                                               => $this->type,]);
+        return redirect()->route('export.history', [
+            'start_date' => $this->start_date,
+            'end_date'   => $this->end_date,
+            'statu'      => $this->statu,
+            'type'       => $this->type,
+        ]);
     }
 
     public function closeModalExport()
