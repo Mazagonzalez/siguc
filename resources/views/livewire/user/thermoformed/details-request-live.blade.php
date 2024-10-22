@@ -12,19 +12,26 @@
         <x-slot name="title">
             <div class="items-center col">
                 <p class="text-xl font-semibold text-center">Detalles de la solicitud de termoformado</p>
-                <x-utils.status status="{{ $request->status }}" />
+                <div class="items-center gap-2 row">
+                    <x-utils.status status="{{ $request->status }}" />
+
+                    @if ($request->status == 3 || $request->status == 4 || $request->status == 5)
+                        <button
+                            wire:click="downloadInvoice"
+                            class="items-center gap-2 px-2 font-semibold text-indigo-500 bg-indigo-100 rounded-full row hover:bg-indigo-200"
+                        >
+                            Descargar Factura
+
+                            <x-icons.download class="size-4 stroke-indigo-500" />
+                        </button>
+                    @endif
+                </div>
             </div>
         </x-slot>
         <x-slot name="content">
             <div class="gap-3 col">
                 <div>
                     <div class="divide-y divide-gray-300 col dark:divide-white/20">
-                        @if ($request->status == 3 || $request->status == 4 || $request->status == 5)
-                            <div class="py-2 col">
-                                <button class="text-base font-semibold" wire:click="downloadInvoice">Descargar Factura</button>
-                            </div>
-                        @endif
-                        
                         @role('User')
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Nombre del proveedor</span>

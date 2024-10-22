@@ -22,7 +22,7 @@ class ConfirmDeliveryLive extends Component
 
     public $completed;
 
-    public $date_loading;
+    public $total_final_flete;
 
     public $delivery_commentary;
 
@@ -43,11 +43,11 @@ class ConfirmDeliveryLive extends Component
     public function store()
     {
         $this->validate([
-            'final_flete' => 'required',
+            'total_final_flete' => 'required',
             'completed' => 'required|file|mimes:png,jpg,pdf|max:10240',
         ],
         [
-            'final_flete.required' => 'El campo flete final es obligatorio',
+            'total_final_flete.required' => 'El campo flete final es obligatorio',
             'completed.required' => 'El campo factura es obligatorio',
             'completed.file' => 'El campo factura debe ser un archivo',
             'completed.mimes' => 'El campo factura debe ser un archivo de tipo: png, jpg o pdf',
@@ -56,7 +56,7 @@ class ConfirmDeliveryLive extends Component
 
         //pendiente codigo azure
         //$this->saveCompleted();
-        $this->final_flete = str_replace('.', '', $this->final_flete);
+        $this->total_final_flete = str_replace('.', '', $this->total_final_flete);
 
         $history = History::where('request_exportation_id', $this->request->id)
                             ->where('type_request', 'Solicitud exportacion')
@@ -64,18 +64,35 @@ class ConfirmDeliveryLive extends Component
 
         DB::beginTransaction();
 
-        $this->request->update([
-            'status' => 4,
-            'final_flete' => $this->final_flete,
-            'delivery_commentary' => $this->delivery_commentary,
-            'date_loading' => $this->date_loading,
-        ]);
-
         foreach ($this->proformas as $proforma) {
             $proforma->update([
                 'status' => 4,
+                //'final_flete' => $this->final_flete,
             ]);
         }
+
+        /*foreach ($this->proformas as $index => $proforma) {
+            if (isset($this->final_flete[$index])) {
+                $proforma->update([
+                    'status' => 4,
+                    'final_flete' => $this->final_flete,
+                ]);
+            } else {
+                $this->addError('errFalta', __('Porfavor llene el valor de cada flete por vehiculo'));
+
+            return;
+            }
+        }*/
+
+        //$proformasTotal = Proforma::where('proforma_id', $this->request->proforma_id)->get();
+
+        //$this->total_final_flete = $proformasTotal->sum('final_flete');
+
+        $this->request->update([
+            'status' => 4,
+            'total_final_flete' => $this->total_final_flete,
+            'delivery_commentary' => $this->delivery_commentary,
+        ]);
 
         $history->update([
             'status' => 4,
@@ -85,7 +102,7 @@ class ConfirmDeliveryLive extends Component
 
         $this->open = false;
         $this->resetRequest();
-        $this->dispatch('request');
+        $this->dispatch('request-pending');
     }
 
     public function saveCompleted()
@@ -131,7 +148,7 @@ class ConfirmDeliveryLive extends Component
     {
         $this->resetErrorBag();
         $this->reset([
-            'final_flete',
+            'total_final_flete',
             'completed',
             'delivery_commentary',
         ]);

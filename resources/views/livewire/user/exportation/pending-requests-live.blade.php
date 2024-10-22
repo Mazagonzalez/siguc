@@ -1,5 +1,4 @@
 <div class="col">
-    {{-- Filtro --}}
     <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525] my-5">
         <div class="items-center justify-between row" @click="showFilter = !showFilter">
             <button class="items-center gap-1 row">
@@ -75,10 +74,10 @@
             <thead>
                 <tr class="tr">
                     <th class="th">Estado</th>
-                    <th class="th">Numero de orden</th>
                     <th class="th">Fecha de entrega</th>
                     <th class="th">Fecha de confirmacion</th>
                     <th class="th">Tiempo de respuesta</th>
+                    <th class="th">Flete inicial total</th>
                     <th class="th"></th>
                 </tr>
             </thead>
@@ -87,19 +86,6 @@
                     <tr wire:key='orden-{{ $request->id }}' class="tr">
                         <td class="td">
                             <x-utils.status status="{{ $request->status }}" />
-                        </td>
-
-                        <td class="td">
-                            @if ($request->id_request_double)
-                                #1 {{ $request->order_number }} <br>
-                                #2 {{ $request->request_double->order_number }}
-                            @else
-                                @if ($request->order_number)
-                                    #{{ $request->order_number }}
-                                @else
-                                    Sin numero de orden
-                                @endif
-                            @endif
                         </td>
 
                         <td class="td">{{ $request->date_quotation }}</td>
@@ -121,10 +107,18 @@
                             @endif
                         </td>
 
-                        <td class="items-center justify-end gap-2 td row">
-                            @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
+                        <td class="td">
+                            @if ($request->total_initial_flete)
+                                {{ number_format($request->total_initial_flete) }}
+                            @else
+                                <p>En espera de aceptacion</p>
+                            @endif
+                        </td>
 
-                            @livewire('user.national.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('reject-request-'.$request->id))
+                        <td class="items-center justify-end gap-2 td row">
+                            @livewire('user.exportation.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
+
+                            @livewire('user.exportation.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('decline-request-'.$request->id))
                         </td>
                     </tr>
                 @empty

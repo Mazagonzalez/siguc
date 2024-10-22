@@ -24,10 +24,12 @@ class Proforma extends Model
         'container_type',
         'date_quotation',
         'comment',
+        'initial_flete',
         'license_plate',
         'driver_name',
         'driver_phone',
         'identification',
+        'final_flete',
         'status',
     ];
 }

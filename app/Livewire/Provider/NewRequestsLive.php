@@ -11,7 +11,7 @@ class NewRequestsLive extends Component
 {
     public $totalRequests = [];
 
-    protected $listeners = ['request' => 'mount'];
+    protected $listeners = ['request-new' => 'mount'];
 
     public function mount()
     {

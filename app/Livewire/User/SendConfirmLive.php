@@ -14,16 +14,11 @@ class SendConfirmLive extends Component
 
     public $mail;
 
-    public $typeRequest;
-
     public $comment;
 
-    /*status 1 = nacional; 2 = exportacion; 3 = termoformado */
-
-    public function mount($request, $typeRequest)
+    public function mount($request)
     {
         $this->request = $request;
-        $this->typeRequest = $typeRequest;
     }
 
     public function showModal()
@@ -41,7 +36,7 @@ class SendConfirmLive extends Component
             'mail.required' => 'El campo correo es obligatorio',
             'mail.email' => 'El campo correo no es válido',
         ]);
-        $mail = new CompletedOrderMail($this->request->id, $this->comment, $this->typeRequest);
+        $mail = new CompletedOrderMail($this->request->id, $this->comment);
         Mail::to($this->mail)->queue($mail);
 
         $this->close();

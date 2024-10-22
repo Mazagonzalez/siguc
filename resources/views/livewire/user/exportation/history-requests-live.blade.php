@@ -1,5 +1,4 @@
 <div class="col">
-    {{-- Filtro --}}
     <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525] my-5">
         <div class="items-center justify-between row" @click="showFilter = !showFilter">
             <button class="items-center gap-1 row">
@@ -29,8 +28,8 @@
                         <p class="title-input">Estado:</p>
                         <select class="w-full input-simple" wire:model.live="statu">
                             <option value="0">Selecciona</option>
-                            <option value="1">Pendiente</option>
-                            <option value="2">Aceptado</option>
+                            <option value="1">Finalizados</option>
+                            <option value="2">Rechazados</option>
                         </select>
                     </div>
                 </div>
@@ -55,8 +54,7 @@
                     </span>
                 </button>
 
-                {{-- export por si futuro --}}
-                {{-- <button wire:click="exportar" class="items-center gap-2 btn-confirm-modal row">
+                {{--<button wire:click="exportar" class="items-center gap-2 btn-confirm-modal row">
                     <x-icons.download class="stroke-white size-5" />
 
                     <span wire:loading.remove wire:target="exportar">
@@ -65,20 +63,20 @@
                     <span wire:loading wire:target="exportar">
                         <x-icons.loading />
                     </span>
-                </button> --}}
+                </button>--}}
             </div>
         </div>
     </div>
+
 
     <div class="min-h-[360px]">
         <table class="w-full">
             <thead>
                 <tr class="tr">
                     <th class="th">Estado</th>
-                    <th class="th">Numero de orden</th>
                     <th class="th">Fecha de entrega</th>
-                    <th class="th">Fecha de confirmacion</th>
-                    <th class="th">Tiempo de respuesta</th>
+                    <th class="th">Fecha de finalizacion</th>
+                    <th class="th">Flete final</th>
                     <th class="th"></th>
                 </tr>
             </thead>
@@ -89,47 +87,31 @@
                             <x-utils.status status="{{ $request->status }}" />
                         </td>
 
-                        <td class="td">
-                            @if ($request->id_request_double)
-                                #1 {{ $request->order_number }} <br>
-                                #2 {{ $request->request_double->order_number }}
-                            @else
-                                @if ($request->order_number)
-                                    #{{ $request->order_number }}
-                                @else
-                                    Sin numero de orden
-                                @endif
-                            @endif
-                        </td>
-
                         <td class="td">{{ $request->date_quotation }}</td>
 
                         <td class="td">
-                            @if ($request->status == '0')
-                                <p>En espera</p>
-                            @else
-                                {{ $request->date_acceptance }}
+                            @if ($request->status == 2)
+                                {{ $request->date_decline }}
+                            @elseif ($request->status == 5)
+                                {{ $request->date_loading }}
                             @endif
-
                         </td>
 
                         <td class="td">
-                            @if ($request->status == '0')
-                                <p>En espera</p>
-                            @else
-                                {{ $request->time_response }}
+                            @if ($request->status == 2)
+                                <p>Solicitud cancelada</p>
+                            @elseif ($request->status == 5)
+                                {{ number_format($request->total_final_flete) }}
                             @endif
                         </td>
 
-                        <td class="items-center justify-end gap-2 td row">
-                            @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
-
-                            @livewire('user.national.decline-requests-live', ['request' => $request, 'roleDecline' => 1], key('reject-request-'.$request->id))
+                        <td>
+                            @livewire('user.exportation.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <x-utils.not-search message="No hay solicitudes finalizadas" colspan="5" py="py-24" />
+                        <x-utils.not-search message="No hay solicitudes" colspan="5" py="py-24" />
                     </tr>
                 @endforelse
             </tbody>

@@ -1,4 +1,4 @@
-<div>
+<div class="col">
     {{-- filtro --}}
     <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525] {{ $dashboard == false ? 'my-5' : 'mb-5' }}">
         <div class="items-center justify-between row" @click="showFilter = !showFilter">
@@ -79,58 +79,88 @@
         </div>
     </div>
 
-    <table class="w-full">
-        <thead>
-            <tr class="tr">
-                <th class="th">Estado</th>
-                <th class="th">Tipo de orden</th>
-                <th class="th">Fecha de entrega</th>
-                <th class="th">Fecha de finalizacion/cancelacion</th>
-                <th class="th"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($requestsCollection as $request)
-                <tr wire:key='orden-{{ $request->id }}' class="tr">
-                    @if ($request->type_request == 'Solicitud nacional')
-                        <td class="td">
-                            <x-utils.status status="{{ $request->requestNational->status }}" />
-                        </td>
-                        <td class="td">{{ $request->type_request }}</td>
-                        <td class="td">{{ $request->requestNational->date_quotation }}</td>
-                        <td class="td">
-                            @if ($request->requestNational->status == 2)
-                                {{ $request->requestNational->date_decline }}
-                            @elseif ($request->requestNational->status == 5)
-                                {{ $request->requestNational->date_loading }}
-                            @endif
-                        </td>
-                        <td class="flex justify-center td">
-                            @livewire('provider.details-request-live', ['request' => $request->requestNational], key('detail-request-'.$request->id))
-                        </td>
-                    @elseif ($request->type_request == 'Solicitud termoformado')
-                        <td class="td">
-                            <x-utils.status status="{{ $request->requestThermoformed->status }}" />
-                        </td>
-                        <td class="td">{{ $request->type_request }}</td>
-                        <td class="td">{{ $request->requestThermoformed->date_quotation }}</td>
-                        <td class="td">
-                            @if ($request->requestThermoformed->status == 2)
-                                {{ $request->requestThermoformed->date_decline }}
-                            @elseif ($request->requestThermoformed->status == 5)
-                                {{ $request->requestThermoformed->date_loading }}
-                            @endif
-                        </td>
-                        <td class="items-center justify-end gap-2 td row">
-                            @livewire('user.thermoformed.details-request-live', ['request' => $request->requestThermoformed], key('detail-request-'.$request->id))
-                        </td>
-                    @endif
+    <div class="min-h-[342px]">
+        <table class="w-full">
+            <thead>
+                <tr class="tr">
+                    <th class="th">#</th>
+                    <th class="th">Estado</th>
+                    <th class="th">Tipo de orden</th>
+                    <th class="th">Fecha de finalizacion / cancelacion</th>
+                    <th class="th"></th>
                 </tr>
-            @empty
-                <tr>
-                    <x-utils.not-search message="No hay solicitudes finalizadas" colspan="5" py="py-24" />
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @forelse($requestsCollection as $request)
+                    <tr wire:key='orden-{{ $request->id }}' class="tr">
+                        <td class="font-semibold td">{{ $i++ }}</td>
+
+                        @if ($request->type_request == 'Solicitud nacional')
+                            <td class="td">
+                                <x-utils.status status="{{ $request->requestNational->status }}" />
+                            </td>
+
+                            <td class="td"><x-utils.type-request type="1" /></td>
+
+                            <td class="td">
+                                @if ($request->requestNational->status == 2)
+                                    {{ $request->requestNational->date_decline }}
+                                @elseif ($request->requestNational->status == 5)
+                                    {{ $request->requestNational->date_loading }}
+                                @endif
+                            </td>
+
+                            <td class="flex justify-center td">
+                                @livewire('provider.details-request-live', ['request' => $request->requestNational], key('detail-request-'.$request->id))
+                            </td>
+                        @elseif ($request->type_request == 'Solicitud exportacion')
+                            <td class="td">
+                                <x-utils.status status="{{ $request->requestExportation->status }}" />
+                            </td>
+
+                            <td class="td"><x-utils.type-request type="2" /></td>
+
+                            <td class="td">
+                                @if ($request->requestExportation->status == 2)
+                                    {{ $request->requestExportation->date_decline }}
+                                @elseif ($request->requestExportation->status == 5)
+                                    {{ $request->requestExportation->date_loading }}
+                                @endif
+                            </td>
+
+                            <td class="items-center justify-end gap-2 td row">
+                                @livewire('user.exportation.details-request-live', ['request' => $request->requestExportation], key('detail-request-'.$request->id))
+                            </td>
+                        @elseif ($request->type_request == 'Solicitud termoformado')
+                            <td class="td">
+                                <x-utils.status status="{{ $request->requestThermoformed->status }}" />
+                            </td>
+
+                            <td class="td"><x-utils.type-request type="3" /></td>
+
+                            <td class="td">
+                                @if ($request->requestThermoformed->status == 2)
+                                    {{ $request->requestThermoformed->date_decline }}
+                                @elseif ($request->requestThermoformed->status == 5)
+                                    {{ $request->requestThermoformed->date_loading }}
+                                @endif
+                            </td>
+
+                            <td class="items-center justify-end gap-2 td row">
+                                @livewire('user.thermoformed.details-request-live', ['request' => $request->requestThermoformed], key('detail-request-'.$request->id))
+                            </td>
+                        @endif
+                    </tr>
+                @empty
+                    <tr>
+                        <x-utils.not-search message="No hay solicitudes finalizadas" colspan="5" py="py-24" />
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    <div class="paginate">
+        {{ $requestsCollection->links('components.utils.paginate') }}
+    </div>
 </div>

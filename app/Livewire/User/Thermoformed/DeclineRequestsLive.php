@@ -67,7 +67,10 @@ class DeclineRequestsLive extends Component
 
         $this->open = false;
         $this->resetRequest();
+        $this->dispatch('request-history');
         $this->dispatch('request');
+        $this->dispatch('request-new');
+        $this->dispatch('request-pending');
     }
 
     public function resetRequest()

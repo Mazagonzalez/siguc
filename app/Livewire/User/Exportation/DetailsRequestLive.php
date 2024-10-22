@@ -16,23 +16,15 @@ class DetailsRequestLive extends Component
 
     public $providers = [];
 
-    public $detailProforma = false;
-
     public function mount(RequestExportation $request)
     {
         $this->request = $request;
-        $provider = Provider::where('user_id', Auth::id())->first();
-        $this->providers = Proforma::where('proforma_id', $this->request->proforma_id)->where('provider_id',$provider->id)->get();
+        $this->providers = Proforma::where('proforma_id', $this->request->proforma_id)->whereIn('status', [3,4,5])->get();
     }
 
     public function showModal()
     {
         $this->open = true;
-    }
-
-    public function activeDetailProforma()
-    {
-        $this->detailProforma = !$this->detailProforma;
     }
 
     public function close()

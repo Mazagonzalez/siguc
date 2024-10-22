@@ -194,7 +194,7 @@
                         <p>N/A</p>
                     </td>
                     <td style="font-weight: 300; text-align: start">
-                        $ {{ $reques->requestExportation->initial_flete }}
+                        $ {{ $reques->requestExportation->total_initial_flete }}
                     </td>
                     <td style="font-weight: 300; text-align: start">
                         $ {{ $reques->requestExportation->final_flete }}

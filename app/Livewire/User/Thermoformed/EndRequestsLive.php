@@ -4,19 +4,22 @@ namespace App\Livewire\User\Thermoformed;
 
 use App\Models\History;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 use App\Models\RequestThermoformed;
 use Illuminate\Support\Facades\Auth;
 
 class EndRequestsLive extends Component
 {
+    use WithPagination;
+
     public $requests = [];
 
     public $start_date;
 
     public $end_date;
 
-    protected $listeners = ['request' => 'mount'];
+    protected $listeners = ['request-end' => 'mount'];
 
     public function confirmDelivery($requestId)
     {
@@ -36,7 +39,8 @@ class EndRequestsLive extends Component
 
         DB::commit();
 
-        $this->dispatch('request');
+        $this->dispatch('request-end');
+        $this->dispatch('request-history');
     }
 
     public function closeModalExport()
@@ -73,7 +77,7 @@ class EndRequestsLive extends Component
             );
         }
 
-        $requests = $items->get();
+        $requests = $items->paginate(5);
 
         return view('livewire.user.thermoformed.end-requests-live', ['requestsCollection' => $requests]);
     }

@@ -26,10 +26,10 @@ return new class extends Migration
             $table->string('vehicle_quantity')->nullable();
             $table->date('date_quotation')->nullable();
             $table->text('comment')->nullable();
-            $table->decimal('initial_flete',60,17)->nullable();
+            $table->decimal('total_initial_flete',60,17)->nullable();
             $table->dateTime('date_acceptance')->nullable();
             $table->string('time_response')->nullable();
-            $table->decimal('final_flete',60,17)->nullable();
+            $table->decimal('total_final_flete',60,17)->nullable();
             $table->text('delivery_commentary')->nullable();
             $table->dateTime('date_loading')->nullable();
             $table->dateTime('date_decline')->nullable();

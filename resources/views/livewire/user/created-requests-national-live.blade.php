@@ -69,7 +69,11 @@
 
                     <div>
                         <span class="title-input">Tipo contenedor</span>
-                        <input wire:model.live="container_type" type="text" class="w-full input-simple"/>
+                        <select name="container_type" id="container_type" class="w-full input-simple" wire:model.live="container_type">
+                            <option value="0">Seleccionar tipo de contenedor</option>
+                            <option value="Contenedor de 40">Contenedor de 40</option>
+                            <option value="Contenedor de 45">Contenedor de 45</option>=
+                        </select>
                         @error('container_type')
                             <span class="err">
                                 {{ $message }}

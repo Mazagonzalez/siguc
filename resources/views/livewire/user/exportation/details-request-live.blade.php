@@ -8,23 +8,30 @@
         <x-icons.info class="size-5 stroke-white" />
     </button>
 
-    <x-dialog-modal wire:model='open' maxWidth='md'>
+    <x-dialog-modal wire:model='open' maxWidth="{{ $request->status != 0 ? '4xl' : 'md' }}" >
         <x-slot name="title">
             <div class="items-center col">
                 <p class="text-xl font-semibold text-center">Detalles de la solicitud de exportacion</p>
-                <x-utils.status status="{{ $request->status }}" />
+                <div class="items-center gap-2 row">
+                    <x-utils.status status="{{ $request->status }}" />
+
+                    @if ($request->status == 3 || $request->status == 4 || $request->status == 5)
+                        <button
+                            wire:click="downloadInvoice"
+                            class="items-center gap-2 px-2 font-semibold text-indigo-500 bg-indigo-100 rounded-full row hover:bg-indigo-200"
+                        >
+                            Descargar Factura
+
+                            <x-icons.download class="size-4 stroke-indigo-500" />
+                        </button>
+                    @endif
+                </div>
             </div>
         </x-slot>
         <x-slot name="content">
-            <div class="gap-3 col">
-                <div>
+            <div class="gap-5 row">
+                <div class="{{ $request->status != 0 ? 'w-1/2' : 'w-full' }}">
                     <div class="divide-y divide-gray-300 col dark:divide-white/20">
-                        @if ($request->status == 3 || $request->status == 4 || $request->status == 5)
-                            <div class="py-2 col">
-                                <button class="text-base font-semibold" wire:click="downloadInvoice">Descargar Factura</button>
-                            </div>
-                        @endif
-
                         @role('User')
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Nombre del proveedor</span>
@@ -79,8 +86,8 @@
                         @if ($request->status != 0 && $request->status != 1 && $request->status != 2)
 
                             <div class="py-2 col">
-                                <span class="text-base font-semibold">Flete inicial</span>
-                                <p class="font-light">{{ number_format($request->initial_flete) }}</p>
+                                <span class="text-base font-semibold">Flete inicial Total</span>
+                                <p class="font-light">{{ number_format($request->total_initial_flete) }}</p>
                             </div>
 
                             <div class="py-2 col">
@@ -115,7 +122,7 @@
                         @if ($request->status == 4 || $request->status == 5)
                             <div class="py-2 col">
                                 <span class="text-base font-semibold">Flete final</span>
-                                <p class="font-light">{{ number_format($request->final_flete) }}</p>
+                                <p class="font-light">{{ number_format($request->total_final_flete) }}</p>
                             </div>
 
                             @if ($request->delivery_commentary)
@@ -132,39 +139,78 @@
                                 <p class="font-light">{{ $request->date_loading }}</p>
                             </div>
                         @endif
-
-                        @if ($request->status != 0 && $request->vehicle_quantity)
-                            <div>
-                                <button wire:click="activeDetailProforma" class="btn-confirm-modal">
-                                    @if ($detailProforma)
-                                        <p class="title-input">Ocultar todos los campos de los vehiculos de la proforma</p>
-                                    @else
-                                        <p class="title-input">Mostrar todos los campos de los vehiculos de la proforma</p>
-                                    @endif
-                                </button>
-                            </div>
-
-                            @if ($detailProforma)
-                                @foreach ($providers as $orderItem)
-                                    <div class="gap-3 col lg:flex-row lg:gap-5">
-                                        <div class="modal-content">
-                                            <span class="title-input">Vehículo {{ $loop->iteration }}</span>
-                                            <h2>Información de los vehiculos</h2>
-                                            <p>Tipo de vehiculo: {{ $orderItem->type_vehicle }}</p>
-                                            <p>Peso neto: {{ $orderItem->net_weight }}</p>
-                                            <p>Peso bruto: {{ $orderItem->gross_weight }}</p>
-                                            <p>Tipo de contenedor: {{ $orderItem->container_type }}</p>
-                                            <p>Nombre del conductor: {{ $orderItem->driver_name }}</p>
-                                            <p>Telefono del conductor: {{ $orderItem->driver_phone }}</p>
-                                            <p>numero de identificacion: {{ $orderItem->identification }}</p>
-                                            <p>Matricula del vehiculo: {{ $orderItem->license_plate }}</p>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                        @endif
                     </div>
                 </div>
+
+                @if ($request->status != 0 && $request->vehicle_quantity)
+                    <div x-data="{ currentSlide: 0, slides: {{ $providers->count() }} }" class="w-1/2">
+                        <div class="items-center justify-between mx-6 mb-10 row">
+                            <button class="btn-info" @click="currentSlide = (currentSlide + {{ $providers->count() - 1 }}) % slides">
+                                <x-icons.arrow class="rotate-90 size-5 stroke-white" />
+                            </button>
+
+                            <p class="text-lg font-semibold">Vehiculo # <span x-text="currentSlide + 1"></span> / {{ $providers->count() }} </p>
+
+                            <button class="btn-info" @click="currentSlide = (currentSlide + 1) % slides">
+                                <x-icons.arrow class="-rotate-90 size-5 stroke-white" />
+                            </button>
+                        </div>
+
+                        @foreach ($providers as $orderItem)
+                            <div
+                                x-transition:enter.duration.500ms
+                                x-show="currentSlide === {{ $loop->index }}"
+                                class="p-5 bg-gray-100 rounded-xl dark:bg-zinc-800 col"
+                                style="display: none;"
+                            >
+                                <div class="py-2 col">
+                                    <span class="text-base font-semibold">Flete inicial</span>
+                                    <p class="font-light">{{ number_format($orderItem->initial_flete) }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="text-base font-semibold">Tipo de vehículo</span>
+                                    <p class="font-light">{{ $orderItem->type_vehicle }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="text-base font-semibold">Peso neto</span>
+                                    <p class="font-light">{{ number_format($orderItem->net_weight) }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="text-base font-semibold">Peso bruto</span>
+                                    <p class="font-light">{{ number_format($orderItem->gross_weight) }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="text-base font-semibold">Tipo de contenedor</span>
+                                    <p class="font-light">{{ $orderItem->container_type }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="text-base font-semibold">Nombre del conductor</span>
+                                    <p class="font-light">{{ $orderItem->driver_name }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="text-base font-semibold">Teléfono del conductor</span>
+                                    <p class="font-light">{{ $orderItem->driver_phone }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="text-base font-semibold">Número de identificación</span>
+                                    <p class="font-light">{{ $orderItem->identification }}</p>
+                                </div>
+
+                                <div class="py-2 col">
+                                    <span class="text-base font-semibold">Matrícula del vehículo</span>
+                                    <p class="font-light">{{ $orderItem->license_plate }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             </div>
         </x-slot>
         <x-slot name="footer">

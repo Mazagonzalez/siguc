@@ -1,8 +1,14 @@
 <div>
     <div class="p-5 card-theme">
-        <p class="mb-4 text-lg font-semibold text-center">
-            Porcentaje de solicitudes
-        </p>
+        <div class="items-center mb-4 col">
+            <p class="text-lg font-semibold text-center">
+                Porcentaje de proveedores
+            </p>
+
+            <div class="px-2 text-xs text-indigo-500 bg-indigo-100 rounded-full w-fit">
+                Solicitudes Finalizadas
+            </div>
+        </div>
 
         @if (count($label) && count($data))
             <div class="w-[70%] mx-auto">

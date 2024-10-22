@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Livewire\User\National;
+namespace App\Livewire\User\Exportation;
 
-use App\Models\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\RequestExportation;
 use Illuminate\Support\Facades\Auth;
 
 class PendingRequestsLive extends Component
@@ -41,7 +41,7 @@ class PendingRequestsLive extends Component
 
     public function render()
     {
-        $items = Request::where('user_id', Auth::id())->whereIn('status', [0, 1])->where('double_order', 0)->orderBy('updated_at', 'desc');
+        $items = RequestExportation::where('user_id', Auth::id())->whereIn('status', [0, 1])->orderBy('updated_at', 'desc');
 
         if (!is_null($this->start_date) and !is_null($this->end_date) and $this->end_date < $this->start_date) {
             $this->addError('start_date', __('La fecha inicial debe ser una fecha anterior o igual a la fecha final.'));
@@ -65,6 +65,6 @@ class PendingRequestsLive extends Component
 
         $requests = $items->paginate(5);
 
-        return view('livewire.user.national.pending-requests-live', ['requestsCollection' => $requests]);
+        return view('livewire.user.exportation.pending-requests-live', ['requestsCollection' => $requests]);
     }
 }

@@ -13,7 +13,7 @@
             $pill = 'bg-indigo-100 text-indigo-500';
             break;
         case 4:
-            $pill = 'bg-white-100 text-emerald-500';
+            $pill = 'bg-cyan-100 text-cyan-500';
             break;
         case 5:
             $pill = 'bg-emerald-100 text-emerald-500';
@@ -21,7 +21,7 @@
     }
 @endphp
 
-<div class="px-2 font-medium rounded-full {{ $pill }}">
+<div class="px-2 w-fit mx-auto font-medium rounded-full {{ $pill }}">
     @if ($status == 0)
         <span>Pendiende</span>
     @elseif ($status == 1)

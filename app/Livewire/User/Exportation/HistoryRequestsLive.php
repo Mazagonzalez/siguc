@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire\User\National;
+namespace App\Livewire\User\Exportation;
 
-use App\Models\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\RequestExportation;
 use Illuminate\Support\Facades\Auth;
 
-class PendingRequestsLive extends Component
+class HistoryRequestsLive extends Component
 {
     use WithPagination;
 
@@ -15,17 +15,34 @@ class PendingRequestsLive extends Component
     public $start_date;
     public $end_date;
     public $statu;
+    public $show_modal_excel = null;
+    public $option_export = null;
 
-    protected $listeners = ['request' => 'mount'];
+    protected $listeners = ['request-history' => 'mount'];
+
+    /*public function exportar()
+    {
+        $this->validate([
+            'start_date' => 'nullable|before_or_equal:end_date',
+            'end_date'   => 'nullable',
+        ]);
+
+
+        return redirect()->route('export.request', ['start_date' => $this->start_date,
+            'end_date'                                           => $this->end_date,
+            'statu'                                              => $this->statu,]);
+    }*/
 
     public function closeModalExport()
     {
         $this->reset([
             'start_date',
             'end_date',
+            'option_export',
             'statu',
         ]);
         $this->resetErrorBag();
+        $this->show_modal_excel = false;
     }
 
     public function resetAllExport()
@@ -41,7 +58,7 @@ class PendingRequestsLive extends Component
 
     public function render()
     {
-        $items = Request::where('user_id', Auth::id())->whereIn('status', [0, 1])->where('double_order', 0)->orderBy('updated_at', 'desc');
+        $items = RequestExportation::where('user_id', Auth::id())->whereIn('status', [2, 5])->orderBy('updated_at', 'desc');
 
         if (!is_null($this->start_date) and !is_null($this->end_date) and $this->end_date < $this->start_date) {
             $this->addError('start_date', __('La fecha inicial debe ser una fecha anterior o igual a la fecha final.'));
@@ -56,15 +73,15 @@ class PendingRequestsLive extends Component
 
         $items->where(function ($query) {
             if ($this->statu == 1) {
-                $query->where('status', 0);
+                $query->where('status', 5);
             }
             if ($this->statu == 2) {
-                $query->orWhere('status', 1);
+                $query->orWhere('status', 2);
             }
         });
 
         $requests = $items->paginate(5);
 
-        return view('livewire.user.national.pending-requests-live', ['requestsCollection' => $requests]);
+        return view('livewire.user.exportation.history-requests-live', ['requestsCollection' => $requests]);
     }
 }

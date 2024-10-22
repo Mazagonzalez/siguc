@@ -43,5 +43,5 @@ export default {
 
     plugins: [require('daisyui'), forms, typography],
 
-    daisyui: { themes: ["corporate"] },
+    daisyui: { themes: ["light"] },
 };

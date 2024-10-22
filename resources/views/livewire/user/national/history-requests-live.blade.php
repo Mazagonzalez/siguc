@@ -1,4 +1,4 @@
-<div>
+<div class="col">
     {{-- filtro --}}
     <div x-data="{ showFilter: false }" class="p-4 rounded-lg cursor-pointer bg-zinc-100 dark:bg-[#252525] {{ $dashboard == false ? 'my-5' : 'mb-5' }}">
         <div class="items-center justify-between row" @click="showFilter = !showFilter">
@@ -69,51 +69,57 @@
         </div>
     </div>
 
-    <table class="w-full">
-        <thead>
-            <tr class="tr">
-                <th class="th">Estado</th>
-                <th class="th">Numero de orden</th>
-                <th class="th">Fecha de entrega</th>
-                <th class="th">Fecha de finalizacion</th>
-                <th class="th"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($requestsCollection as $request)
-                <tr wire:key='orden-{{ $request->id }}' class="tr">
-                    <td class="td">
-                        <x-utils.status status="{{ $request->status }}" />
-                    </td>
-
-                    <td class="td">
-                        @if ($request->id_request_double)
-                            Order #1 {{ $request->order_number }} <br>
-                            Order #2 {{ $request->request_double->order_number }}
-                        @else
-                            Order #1 {{ $request->order_number }}
-                        @endif
-                    </td>
-
-                    <td class="td">{{ $request->date_quotation }}</td>
-
-                    <td class="td">
-                        @if ($request->status == 2)
-                            {{ $request->date_decline }}
-                        @elseif ($request->status == 5)
-                            {{ $request->date_loading }}
-                        @endif
-                    </td>
-
-                    <td class="flex justify-center td">
-                        @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
-                    </td>
+    <div class="min-h-[360px]">
+        <table class="w-full">
+            <thead>
+                <tr class="tr">
+                    <th class="th">Estado</th>
+                    <th class="th">Numero de orden</th>
+                    <th class="th">Fecha de entrega</th>
+                    <th class="th">Fecha de finalizacion</th>
+                    <th class="th"></th>
                 </tr>
-            @empty
-                <tr>
-                    <x-utils.not-search message="No hay solicitudes" colspan="5" py="py-24" />
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @forelse($requestsCollection as $request)
+                    <tr wire:key='orden-{{ $request->id }}' class="tr">
+                        <td class="td">
+                            <x-utils.status status="{{ $request->status }}" />
+                        </td>
+
+                        <td class="td">
+                            @if ($request->id_request_double)
+                                Order #1 {{ $request->order_number }} <br>
+                                Order #2 {{ $request->request_double->order_number }}
+                            @else
+                                Order #1 {{ $request->order_number }}
+                            @endif
+                        </td>
+
+                        <td class="td">{{ $request->date_quotation }}</td>
+
+                        <td class="td">
+                            @if ($request->status == 2)
+                                {{ $request->date_decline }}
+                            @elseif ($request->status == 5)
+                                {{ $request->date_loading }}
+                            @endif
+                        </td>
+
+                        <td class="flex justify-center td">
+                            @livewire('provider.details-request-live', ['request' => $request], key('detail-request-'.$request->id))
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <x-utils.not-search message="No hay solicitudes" colspan="5" py="py-24" />
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+
+    <div class="paginate">
+        {{ $requestsCollection->links('components.utils.paginate') }}
+    </div>
 </div>

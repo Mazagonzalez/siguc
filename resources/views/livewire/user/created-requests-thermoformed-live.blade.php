@@ -53,12 +53,7 @@
 
                 <div>
                     <span class="title-input">Ciudad</span>
-                    <select name="city" id="city" class="w-full input-simple" wire:model.live="city">
-                        <option value="0">Seleccionar la ciudad</option>
-                        <option value="Barranquilla">Barranquilla</option>
-                        <option value="Cali">Cali</option>
-                        <option value="Bogota">Bogota</option>
-                    </select>
+                    <input wire:model.live="city" type="text" class="w-full input-simple"/>
                     @error('city')
                         <span class="err">
                             {{ $message }}

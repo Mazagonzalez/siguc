@@ -23,8 +23,6 @@ class ConfirmDeliveryLive extends Component
 
     public $completed;
 
-    public $date_loading;
-
     public $delivery_commentary;
 
     public function mount($request)
@@ -67,7 +65,6 @@ class ConfirmDeliveryLive extends Component
             'status' => 4,
             'final_flete' => $this->final_flete,
             'delivery_commentary' => $this->delivery_commentary,
-            'date_loading' => $this->date_loading,
         ]);
 
         if ($this->request->id_request_double) {
@@ -76,7 +73,6 @@ class ConfirmDeliveryLive extends Component
                 'status' => 4,
                 'final_flete' => $this->final_flete,
                 'delivery_commentary' => $this->delivery_commentary,
-                'date_loading' => $this->date_loading,
             ]);
         }
 
@@ -88,7 +84,7 @@ class ConfirmDeliveryLive extends Component
 
         $this->open = false;
         $this->resetRequest();
-        $this->dispatch('request');
+        $this->dispatch('request-pending');
     }
 
     public function saveCompleted()

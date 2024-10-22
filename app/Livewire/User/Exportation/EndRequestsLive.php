@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Livewire\User\National;
+namespace App\Livewire\User\Exportation;
 
 use App\Models\History;
-use App\Models\Request;
 use Livewire\Component;
+use App\Models\Proforma;
 use Livewire\WithPagination;
+use App\Models\RequestExportation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -23,43 +24,41 @@ class EndRequestsLive extends Component
     public function confirmDelivery($requestId)
     {
         DB::beginTransaction();
-        $request = Request::find($requestId);
+
+        $request = RequestExportation::find($requestId);
         $request->update([
             'status' => 5,
         ]);
 
-        $history = History::where('request_id', $request->id)
-                            ->where('type_request', 'Solicitud nacional')
+        $history = History::where('request_exportation_id', $request->id)
+                            ->where('type_request', 'Solicitud exportacion')
                             ->first();
+
         $history->update([
             'status' => 5,
         ]);
 
-        if ($request->id_request_double) {
-            $requestDouble = Request::find($request->id_request_double);
-            $requestDouble->update([
+        $proformas = Proforma::where('proforma_id', $request->proforma_id)->get();
+
+        foreach ($proformas as $proforma) {
+            $proforma->update([
                 'status' => 5,
             ]);
         }
 
-        $objeto = json_encode(2);
-
-        if ($requestId) {
-            $response = Http::withHeaders([
-                'Content-Type' => 'application/json',
-            ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $request->order_number, $objeto);
-
-            if ($request->id_request_double) {
-                $response1 = Http::withHeaders([
-                    'Content-Type' => 'application/json',
-                ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $requestDouble->order_number, $objeto);
-            }
-        }
-
         DB::commit();
 
-        $this->dispatch('request-end');
-        $this->dispatch('request-history');
+        // Cambia el estado en el EndPoint
+       $objeto = json_encode(2);
+
+       if ($request->proforma_id) {
+           $response = Http::withHeaders([
+               'Content-Type' => 'application/json',
+           ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/Proforma/' . $request->proforma_id, $objeto);
+       }
+
+       $this->dispatch('request-end');
+       $this->dispatch('request-history');
     }
 
     public function closeModalExport()
@@ -83,7 +82,7 @@ class EndRequestsLive extends Component
 
     public function render()
     {
-        $items = Request::where('user_id', Auth::id())->where('status', 4)->where('double_order', 0)->orderBy('updated_at', 'desc');
+        $items = RequestExportation::where('user_id', Auth::id())->where('status', 4)->orderBy('updated_at', 'desc');
 
         if (!is_null($this->start_date) and !is_null($this->end_date) and $this->end_date < $this->start_date) {
             $this->addError('start_date', __('La fecha inicial debe ser una fecha anterior o igual a la fecha final.'));
@@ -98,6 +97,6 @@ class EndRequestsLive extends Component
 
         $requests = $items->paginate(5);
 
-        return view('livewire.user.national.end-requests-live', ['requestsCollection' => $requests]);
+        return view('livewire.user.exportation.end-requests-live', ['requestsCollection' => $requests]);
     }
 }

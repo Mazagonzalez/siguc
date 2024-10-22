@@ -11,7 +11,7 @@ class PendingRequestsLive extends Component
 {
     public $totalRequests = [];
 
-    protected $listeners = ['request' => 'mount'];
+    protected $listeners = ['request-pending' => 'mount'];
 
     public function mount()
     {

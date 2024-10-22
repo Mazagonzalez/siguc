@@ -4,25 +4,22 @@ namespace App\Livewire\User\National;
 
 use App\Models\Request;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
 
 class HistoryRequestsLive extends Component
 {
+    use WithPagination;
+
     public $requests = [];
-
     public $start_date;
-
     public $end_date;
-
     public $statu;
-
     public $show_modal_excel = null;
-
     public $option_export = null;
-
     public $dashboard = false;
 
-    protected $listeners = ['request' => 'mount'];
+    protected $listeners = ['request-history' => 'mount'];
 
     public function exportar()
     {
@@ -84,7 +81,7 @@ class HistoryRequestsLive extends Component
             }
         });
 
-        $requests = $items->get();
+        $requests = $items->paginate(5);
 
         return view('livewire.user.national.history-requests-live', ['requestsCollection' => $requests]);
     }

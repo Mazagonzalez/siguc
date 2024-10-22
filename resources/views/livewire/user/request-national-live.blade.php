@@ -8,7 +8,7 @@
     />
 
     <div class="gap-3 row">
-        <div class="w-1/3 gap-3 p-4 card-theme col h-fit">
+        <div class="w-[28%] gap-3 p-4 card-theme col h-fit">
             <div class="gap-2 row">
                 <input
                     type="text"
@@ -39,11 +39,9 @@
                 @if ($orders)
                     <div wire:key='orden-{{ $orders['id'] }}' class="w-full text-sm">
                         <div class="py-2 font-semibold border-b border-gray-300 row dark:border-white/20">
-                            <p class="w-[20%]"># Orden</p>
                             <p>Cliente</p>
                         </div>
-                        <div class="items-center py-2 font-light row">
-                            <p class="w-[20%]"># {{ $orders['order_number'] }}</p>
+                        <div class="items-center justify-between py-2 font-light row">
                             <p class="tooltip tooltip-top text-start w-[70%]" data-tip="{{ $orders['target_customer'] }}">
                                 {{ auth()->user()->short($orders['target_customer'], 25) }}
                             </p>
@@ -61,11 +59,11 @@
                     </div>
                 @else
                     @if ($pending === 0)
-                        <x-utils.not-search message="Aun no se ha buscado ninguna orden" />
+                        <x-utils.not-search text="text-sm" message="Aun no se ha buscado ninguna orden" />
                     @elseif ($pending === 1)
-                        <x-utils.not-search message="Esta orden no existe" />
+                        <x-utils.not-search text="text-sm" message="Esta orden no existe" />
                     @elseif ($pending === 2)
-                        <x-utils.not-search message="Esta orden ya existe" />
+                        <x-utils.not-search text="text-sm" message="Esta orden ya existe" />
                     @endif
                 @endif
             </div>
@@ -75,7 +73,7 @@
             </div>
         </div>
 
-        <div>
+        <div class="w-[72%]">
             <div
                 x-data="{
                     typeRequest: 1,
@@ -99,7 +97,7 @@
                 </div>
 
                 <div class="w-full">
-                    <div x-show="typeRequest === 1" x-transition:enter.duration.500ms style="display: none">
+                    <div x-show="typeRequest === 1" x-transition:enter.duration.500ms>
                         @livewire('user.national.pending-requests-live', key('pending-request-'.auth()->user()->id))
                     </div>
 

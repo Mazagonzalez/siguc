@@ -21,6 +21,8 @@ class UploadInvoice extends Component
 
     public $invoice;
 
+    public $date_loading;
+
     public function mount($request)
     {
         $this->request = $request;
@@ -36,9 +38,11 @@ class UploadInvoice extends Component
     public function store()
     {
         $this->validate([
+            'date_loading' => 'required',
             'invoice' => 'required|file|mimes:png,jpg,pdf|max:10240',
         ],
         [
+            'date_loading.required' => 'El campo fecha de carga es obligatorio',
             'invoice.required' => 'El campo factura es obligatorio',
             'invoice.file' => 'El campo factura debe ser un archivo',
             'invoice.mimes' => 'El campo factura debe ser un archivo de tipo: png, jpg o pdf',
@@ -55,6 +59,7 @@ class UploadInvoice extends Component
         DB::beginTransaction();
 
         $this->request->update([
+            'date_loading' => $this->date_loading,
             'status' => 3,
         ]);
 
@@ -66,7 +71,7 @@ class UploadInvoice extends Component
 
         $this->open = false;
         $this->resetRequest();
-        $this->dispatch('request');
+        $this->dispatch('request-pending');
     }
 
     public function saveInvoice()
@@ -76,8 +81,8 @@ class UploadInvoice extends Component
         $filePath = $file->store('temp'); // Almacena el archivo en una carpeta temporal
         $cacheKey = 'invoice_' . $this->request->id;
 
-        // Guardar la ruta del archivo en la caché por 1 hora
-        Cache::put($cacheKey, $filePath, 10800);
+        // Guardar la ruta del archivo en la caché por 5 hora
+        Cache::put($cacheKey, $filePath, 18000);
 
 
         // forma generada por copilot de 0
@@ -131,7 +136,7 @@ class UploadInvoice extends Component
     public function resetRequest()
     {
         $this->resetErrorBag();
-        $this->reset(['invoice']);
+        $this->reset(['invoice', 'date_loading']);
     }
 
     public function close()
