@@ -44,7 +44,7 @@ class EndRequestsLive extends Component
 
         $objeto = json_encode(2);
 
-        if ($requestId) {
+        /*if ($requestId) {
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
             ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $request->order_number, $objeto);
@@ -54,7 +54,7 @@ class EndRequestsLive extends Component
                     'Content-Type' => 'application/json',
                 ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $requestDouble->order_number, $objeto);
             }
-        }
+        }*/
 
         DB::commit();
 

@@ -158,11 +158,11 @@ class SearchCreatedRequestsExportationLive extends Component
        // Cambia el estado en el EndPoint
        $objeto = json_encode(1);
 
-       if ($exportation->proforma_id) {
+       /*if ($exportation->proforma_id) {
            $response = Http::withHeaders([
                'Content-Type' => 'application/json',
            ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/Proforma/' . $exportation->proforma_id, $objeto);
-       }
+       }*/
 
        $this->resetRequest();
        $this->open = false;

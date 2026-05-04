@@ -57,7 +57,7 @@ class CreatedRequestsNationalLive extends Component
     {
         $this->resetErrorBag('searchOrderId');
 
-        if ($this->searchOrderId) {
+        /*if ($this->searchOrderId) {
             $response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $this->searchOrderId);
             if ($response->successful()) {
                 $order = $response->json();
@@ -87,7 +87,7 @@ class CreatedRequestsNationalLive extends Component
             }
         } else {
             $this->resetErrorBag('searchOrderId');
-        }
+        }*/
     }
 
     public function store()
@@ -177,7 +177,7 @@ class CreatedRequestsNationalLive extends Component
         // Cambia el estado en el EndPoint
         $objeto = json_encode(1);
 
-        if ($request->order_number) {
+        /*if ($request->order_number) {
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
             ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $request->order_number, $objeto);
@@ -187,7 +187,7 @@ class CreatedRequestsNationalLive extends Component
                     'Content-Type' => 'application/json',
                 ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $order2->order_number, $objeto);
             }
-        }
+        }*/
 
         $this->resetRequest();
         $this->open = false;

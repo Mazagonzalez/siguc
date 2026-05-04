@@ -34,9 +34,9 @@ class RequestExportationLive extends Component
     }
 
     public function filterOrders() {
-        $response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/Proforma/' . $this->proformaId);
+        //$response = Http::get('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/Proforma/' . $this->proformaId);
 
-        if ($response->successful()) {
+        /*if ($response->successful()) {
             $order = $response->json();
             if (isset($order['statu']) && $order['statu'] == 0) {
                 $this->orders = $order;
@@ -48,7 +48,7 @@ class RequestExportationLive extends Component
         } else {
             $this->orders = [];
             $this->pending = 1;
-        }
+        }*/
     }
 
     public function clear()

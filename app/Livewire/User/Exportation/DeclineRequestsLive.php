@@ -79,11 +79,11 @@ class DeclineRequestsLive extends Component
         // Cambia el estado en el EndPoint
        $objeto = json_encode(0);
 
-       if ($this->request->proforma_id) {
+       /*if ($this->request->proforma_id) {
            $response = Http::withHeaders([
                'Content-Type' => 'application/json',
            ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/Proforma/' . $this->request->proforma_id, $objeto);
-       }
+       }*/
 
         $this->open = false;
         $this->resetRequest();

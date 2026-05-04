@@ -117,7 +117,7 @@ class AcceptRequestLive extends Component
         // Cambia el estado en el EndPoint
         $objeto = json_encode(1);
 
-        if ($this->request->order_number) {
+        /*if ($this->request->order_number) {
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
             ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $this->request->order_number, $objeto);
@@ -127,7 +127,7 @@ class AcceptRequestLive extends Component
                     'Content-Type' => 'application/json',
                 ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $requestDouble->order_number, $objeto);
             }
-        }
+        }*/
 
         $this->open = false;
         $this->resetRequest();

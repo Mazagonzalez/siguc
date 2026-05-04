@@ -51,11 +51,11 @@ class EndRequestsLive extends Component
         // Cambia el estado en el EndPoint
        $objeto = json_encode(2);
 
-       if ($request->proforma_id) {
+       /*if ($request->proforma_id) {
            $response = Http::withHeaders([
                'Content-Type' => 'application/json',
            ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/Proforma/' . $request->proforma_id, $objeto);
-       }
+       }*/
 
        $this->dispatch('request-end');
        $this->dispatch('request-history');

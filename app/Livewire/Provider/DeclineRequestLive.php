@@ -65,7 +65,7 @@ class DeclineRequestLive extends Component
         // Cambia el estado en el EndPoint
         $objeto = json_encode(0);
 
-        if ($this->request->order_number) {
+        /*if ($this->request->order_number) {
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json',
             ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $this->request->order_number, $objeto);
@@ -75,7 +75,7 @@ class DeclineRequestLive extends Component
                     'Content-Type' => 'application/json',
                 ])->patch('https://sigucapi-hahdhuh9dyetd7h6.canadacentral-01.azurewebsites.net/api/OrderData/' . $this->request->request_double->order_number, $objeto);
             }
-        }
+        }*/
 
         $this->open = false;
         $this->resetRequest();
